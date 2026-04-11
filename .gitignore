@@ -1,0 +1,65 @@
+# Build artifacts - Rust
+target/
+Cargo.lock
+
+# Build artifacts - C/C++
+*.o
+*.a
+*.so
+*.out
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+
+# Build artifacts - Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+*.egg
+
+# Build artifacts - Go
+*.test
+vendor/
+
+# Build artifacts - Node / JS
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Build artifacts - Java / JVM
+*.class
+*.jar
+*.war
+target/
+
+# The compiled engine binary (we keep source, not binary)
+engine
+engine.exe
+run_engine
+engine/run.sh.bak
+
+# Game data (managed by orchestrator, not version-controlled here)
+game_data/
+
+# Logs
+*.log
+logs/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
