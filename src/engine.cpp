@@ -1223,7 +1223,7 @@ static int quiesce(Board& b, int alpha, int beta, int ply) {
     }
 
     int stand = (tte && tte->static_eval != 0) ? (int)tte->static_eval : evaluate(b);
-    if (stand >= beta) return beta;
+    if (stand >= beta) return stand;
     if (stand > alpha) alpha = stand;
 
     vector<Move> moves;
@@ -1254,7 +1254,7 @@ static int quiesce(Board& b, int alpha, int beta, int ply) {
         if (score >= beta) {
             tt_store(b.hash, 0, score >= MATE-200 ? score+ply : (score <= -MATE+200 ? score-ply : score),
                      TT_LOWER, m, stand);
-            return beta;
+            return score;
         }
         if (score > alpha) alpha = score;
     }
@@ -1263,7 +1263,7 @@ static int quiesce(Board& b, int alpha, int beta, int ply) {
     if (sstore > MATE-200) sstore += ply;
     else if (sstore < -MATE+200) sstore -= ply;
     tt_store(b.hash, 0, sstore, flag, best_m, stand);
-    return alpha;
+    return best;
 }
 
 static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_null);
@@ -1343,7 +1343,11 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             rep_history.pop_back();
             b = saved;
             if (time_up()) return 0;
-            if (s >= beta) return beta;
+            if (s >= beta) {
+                // Don't return unproven mate scores from null-move
+                if (s > MATE - 200) s = beta;
+                return s;
+            }
         }
     }
 
