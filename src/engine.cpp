@@ -1018,6 +1018,8 @@ static int MAX_PLY = 64;
 
 static Move killers[128][2];
 static int history_h[13][128]; // [piece+6][to]
+// Capture history: [piece+6][to][|captured piece|] — separate from quiet history
+static int capture_hist[13][128][7];
 // Counter-move table: indexed by [prev_piece+6][prev_to]
 static Move counter_move[13][128];
 // Per-ply stack of the move made to reach each ply (ply 0 = "prev move before search")
@@ -1074,7 +1076,9 @@ static int move_score(const Board& b, const Move& m, const Move& tt_best, int pl
     if (m.captured != 0) {
         int victim = abs(m.captured);
         int attacker = abs(b.piece[m.from]);
-        return 100000 + victim * 10 - attacker;
+        // MVV-LVA dominates; capture history is a tiebreaker only
+        int ch = capture_hist[b.piece[m.from] + 6][m.to][victim];
+        return 100000 + victim * 100 - attacker + ch / 1024;
     }
     if (m.promo != 0) return 90000 + abs(m.promo);
     if (killers[ply][0].from == m.from && killers[ply][0].to == m.to) return 80000;
@@ -1477,6 +1481,17 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
                         if (pp != 0) counter_move[pp + 6][prev.to] = m;
                     }
                 }
+            } else if (m.captured != 0) {
+                // Capture history: reward capture that caused cutoff
+                int p = b.piece[m.from];
+                int v = abs(m.captured);
+                capture_hist[p + 6][m.to][v] += depth * depth;
+                if (capture_hist[p + 6][m.to][v] > 1000000) {
+                    for (int i = 0; i < 13; i++)
+                        for (int j = 0; j < 128; j++)
+                            for (int k = 0; k < 7; k++)
+                                capture_hist[i][j][k] /= 2;
+                }
             }
             break;
         } else if (is_quiet) {
@@ -1707,6 +1722,9 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
     // Age history instead of wiping: keeps move-ordering info between searches
     for (int i = 0; i < 13; i++)
         for (int j = 0; j < 128; j++) history_h[i][j] /= 2;
+    for (int i = 0; i < 13; i++)
+        for (int j = 0; j < 128; j++)
+            for (int k = 0; k < 7; k++) capture_hist[i][j][k] /= 2;
     for (int i = 0; i < 13; i++)
         for (int j = 0; j < 128; j++) counter_move[i][j].from = 255;
     for (auto& m : move_stack) { m.from = 255; m.to = 0; m.promo = 0; m.captured = 0; }
