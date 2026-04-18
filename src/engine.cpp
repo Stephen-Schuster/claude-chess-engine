@@ -600,6 +600,27 @@ static int count_attackers(const Board& b, int s, int by) {
 }
 
 static int evaluate(const Board& b) {
+    // Insufficient material: K vs K, K+minor vs K, K+N+N vs K all count as draw.
+    {
+        int wN=0,wB=0,wR=0,wQ=0,wP=0, bN=0,bB=0,bR=0,bQ=0,bP=0;
+        for (int r=0;r<8;r++) for (int f=0;f<8;f++) {
+            int p=b.piece[sq_make(r,f)];
+            switch(p){
+                case PAWN:wP++;break; case KNIGHT:wN++;break; case BISHOP:wB++;break;
+                case ROOK:wR++;break; case QUEEN:wQ++;break;
+                case -PAWN:bP++;break; case -KNIGHT:bN++;break; case -BISHOP:bB++;break;
+                case -ROOK:bR++;break; case -QUEEN:bQ++;break;
+            }
+        }
+        bool w_minor_only = (wR==0 && wQ==0 && wP==0 && (wN+wB)<=1);
+        bool b_minor_only = (bR==0 && bQ==0 && bP==0 && (bN+bB)<=1);
+        bool w_two_knights_only = (wR==0 && wQ==0 && wP==0 && wB==0 && wN==2);
+        bool b_two_knights_only = (bR==0 && bQ==0 && bP==0 && bB==0 && bN==2);
+        if (w_minor_only && b_minor_only) return 0;
+        if (w_two_knights_only && (bN+bB+bR+bQ+bP==0)) return 0;
+        if (b_two_knights_only && (wN+wB+wR+wQ+wP==0)) return 0;
+    }
+
     int mg_w = 0, mg_b = 0;
     int eg_w = 0, eg_b = 0;
 
@@ -1326,17 +1347,37 @@ static void init_book() {
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
+    // Italian
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b", {"g8f6", "f8c5"});
+    add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w", {"e1g1", "c2c3", "b1c3"});
 
     // 1.e4 c5 (Sicilian)
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "g7g6", "e7e6"});
+    // Open Sicilian: 1.e4 c5 2.Nf3 d6 3.d4
+    add("rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
+    // Najdorf intro
+    add("rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "c1e3", "f2f3"});
+
+    // 1.e4 e6 French
+    add("rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "b1d2"});
+    // 1.e4 c6 Caro-Kann
+    add("rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
+    add("rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "e4d5"});
 
     // 1.d4 d5
     add("rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
     // 1.d4 Nf6
     add("rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
-    // QG Declined: 1.d4 d5 2.c4 e6
+    // 1.d4 Nf6 2.c4
+    add("rnbqkb1r/pppppppp/5n2/8/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "g7g6", "c7c5"});
+    // KID: 1.d4 Nf6 2.c4 g6
+    add("rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    // QG: 1.d4 d5 2.c4 e6 3.Nc3
     add("rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "c7c6", "e7e5"});
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"g8f6", "f8e7"});
 }
 
 static Move try_book_move(Board& b) {
