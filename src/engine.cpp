@@ -1337,6 +1337,8 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             if (b.ep != -1) { b.hash ^= zob_ep[b.ep]; b.ep = -1; }
             rep_history.push_back(b.hash);
             int R = 2 + depth / 4;
+            // Extra reduction if static_eval is much above beta
+            if (static_eval - beta > 200) R++;
             int s = -search(b, depth - 1 - R, -beta, -beta + 1, ply + 1, false);
             rep_history.pop_back();
             b = saved;
