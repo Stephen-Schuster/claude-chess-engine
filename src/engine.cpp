@@ -998,12 +998,13 @@ static inline TTEntry* tt_probe(U64 key) {
     return nullptr;
 }
 
-static inline void tt_store(U64 key, int depth, int score, int flag, Move best) {
+static inline void tt_store(U64 key, int depth, int score, int flag, Move best, int static_eval = 0) {
     TTEntry* e = &TT[key & (TT_SIZE - 1)];
     if (e->key != key || e->depth <= depth || flag == TT_EXACT) {
         e->key = key;
         e->depth = (uint8_t)depth;
         e->score = (int16_t)score;
+        e->static_eval = (int16_t)static_eval;
         e->flag = (uint8_t)flag;
         e->best = best;
     }
@@ -1205,18 +1206,34 @@ static int see(Board b_copy, const Move& m) {
 static int quiesce(Board& b, int alpha, int beta, int ply) {
     nodes_searched++;
     if (time_up()) return 0;
-    int stand = evaluate(b);
+
+    int alpha_orig = alpha;
+    // TT probe in qsearch
+    Move tt_best{}; tt_best.from = 255;
+    TTEntry* tte = tt_probe(b.hash);
+    if (tte) {
+        int s = tte->score;
+        if (s > MATE - 200) s -= ply;
+        else if (s < -MATE + 200) s += ply;
+        if (tte->flag == TT_EXACT) return s;
+        if (tte->flag == TT_LOWER && s >= beta) return s;
+        if (tte->flag == TT_UPPER && s <= alpha) return s;
+        tt_best = tte->best;
+    }
+
+    int stand = (tte && tte->static_eval != 0) ? (int)tte->static_eval : evaluate(b);
     if (stand >= beta) return beta;
     if (stand > alpha) alpha = stand;
 
     vector<Move> moves;
     gen_moves(b, moves, true);
-    // sort by MVV-LVA
-    Move dummy{}; dummy.from = 255;
+    // sort by MVV-LVA (with TT move first)
     sort(moves.begin(), moves.end(), [&](const Move& a, const Move& c) {
-        return move_score(b, a, dummy, 0) > move_score(b, c, dummy, 0);
+        return move_score(b, a, tt_best, 0) > move_score(b, c, tt_best, 0);
     });
 
+    int best = stand;
+    Move best_m{}; best_m.from = 255;
     for (const Move& m : moves) {
         // Delta pruning
         if (m.captured != 0) {
@@ -1232,9 +1249,19 @@ static int quiesce(Board& b, int alpha, int beta, int ply) {
         int score = -quiesce(b, -beta, -alpha, ply + 1);
         undo_move(b, m, u);
         if (time_up()) return 0;
-        if (score >= beta) return beta;
+        if (score > best) { best = score; best_m = m; }
+        if (score >= beta) {
+            tt_store(b.hash, 0, score >= MATE-200 ? score+ply : (score <= -MATE+200 ? score-ply : score),
+                     TT_LOWER, m, stand);
+            return beta;
+        }
         if (score > alpha) alpha = score;
     }
+    int flag = (best <= alpha_orig) ? TT_UPPER : TT_EXACT;
+    int sstore = best;
+    if (sstore > MATE-200) sstore += ply;
+    else if (sstore < -MATE+200) sstore -= ply;
+    tt_store(b.hash, 0, sstore, flag, best_m, stand);
     return alpha;
 }
 
@@ -1254,9 +1281,14 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
 
     // TT probe
     Move tt_best{}; tt_best.from = 255;
+    bool tt_hit = false;
+    int tt_static = 0;
     TTEntry* tte = tt_probe(b.hash);
-    if (tte && ply > 0) {
-        if (tte->depth >= depth) {
+    if (tte) {
+        tt_hit = true;
+        tt_static = tte->static_eval;
+        tt_best = tte->best;
+        if (ply > 0 && tte->depth >= depth) {
             int s = tte->score;
             if (s > MATE - 200) s -= ply;
             else if (s < -MATE + 200) s += ply;
@@ -1264,10 +1296,16 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             if (tte->flag == TT_LOWER && s >= beta) return s;
             if (tte->flag == TT_UPPER && s <= alpha) return s;
         }
-        tt_best = tte->best;
     }
 
-    int static_eval = evaluate(b);
+    int static_eval;
+    if (in_chk) {
+        static_eval = 0;
+    } else if (tt_hit && tt_static != 0) {
+        static_eval = tt_static;
+    } else {
+        static_eval = evaluate(b);
+    }
 
     // Null move pruning
     if (do_null && !in_chk && depth >= 3 && ply > 0) {
@@ -1448,7 +1486,7 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
     int store_score = best;
     if (store_score > MATE - 200) store_score += ply;
     else if (store_score < -MATE + 200) store_score -= ply;
-    tt_store(b.hash, depth, store_score, flag, best_move);
+    tt_store(b.hash, depth, store_score, flag, best_move, in_chk ? 0 : static_eval);
 
     return best;
 }

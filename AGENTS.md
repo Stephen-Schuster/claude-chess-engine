@@ -38,6 +38,320 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 0 | 0 |
+| Losses | 1 | 1 |
+| Draws | 0 | 0 |
+
+Total games played: **1**
+
+## Last game
+
+- Result: **Loss**
+- PGN: `game_data/games/game_0001.pgn`
+
+---
+
+## Your #1 goal: maximize wins
+
+Your **only objective** is to maximize wins in the games tracked above.
+Use the game data as a continuous feedback loop:
+
+1. **After every game**, read `game_data/last_game.json` to see what happened —
+   your color, result, move list, engine stderr, and failure reason (if any).
+2. **Track your overall performance** in `game_data/stats.json` (lifetime +
+   last 100 wins/losses/draws).
+3. **Study past PGNs** in `game_data/games/` to find patterns, weaknesses,
+   and areas for improvement.
+4. **Make targeted improvements** based on what the data tells you, then
+   test and commit.
+
+Every change you make should be motivated by improving your results in these
+games.
+
+---
+
+## Testing against Stockfish
+
+A Stockfish installation is available for benchmarking.  Run:
+
+```bash
+test-vs-stockfish              # 5 games, 60s total per side per game
+test-vs-stockfish --games 10   # 10 games
+test-vs-stockfish --time 30    # 30s total per side (whole game)
+test-vs-stockfish --verbose    # show full tracebacks on error
+```
+
+`--time` is the chess-clock budget for the **entire game**, not per
+move.  Each side starts with that many seconds and loses on time if
+the clock runs out.  Pick a value you're willing to wait for: a
+60-second/side game typically finishes in ~2 minutes of wall time.
+
+Use this to measure your engine's strength before and after changes.
+If you can't beat Stockfish, focus on losing less badly (fewer blunders,
+better endgame play, etc.).
+
+---
+
+## Engine contract
+
+- Entry point: `engine/run.sh` (must be executable)
+- Protocol: UCI on stdin / stdout
+- Time control: **15 | 0** (15 minutes each, no increment)
+- Time is managed by the orchestrator via UCI `go wtime ... btime ...`
+
+**Runtime environment.** Your engine runs **inside this container** via
+`docker exec`.  That means any tool available here at development time
+is also available when games are played: the Python venv at
+`/opt/chess-venv`, system `g++`, `stockfish`, `/workspace/engine/*`,
+etc.  Paths like `/opt/chess-venv/bin/python3` and `/workspace/...` are
+valid in `run.sh`.
+
+**If using Python**, use the pre-installed chess venv and pass `-u` to
+avoid stdin buffering deadlocks:
+
+```bash
+# engine/run.sh:
+#!/bin/bash
+exec /opt/chess-venv/bin/python3 -u "$(dirname "$0")/main.py"
+```
+
+The venv at `/opt/chess-venv` has `python-chess` pre-installed.
+
+---
+
+## Game data
+
+All game data lives in `/workspace/game_data/`:
+
+- `game_data/last_game.json` — result and move list of the most recent game
+- `game_data/stats.json` — lifetime and recent score statistics
+- `game_data/games/game_NNNN.pgn` — PGN of every game ever played
+
+Disk budget is 64 GB total. `game_data/last_game.json` includes current disk usage.
+You may delete old PGN files to reclaim space.
+
+---
+
+## Autonomy rule
+
+- Never ask questions.
+- Never wait for user input.
+- Make all decisions independently and continue improving continuously.
+- If you try to pass the conversation back to me, I will just tell you to continue improving your chess engine, so whenever you think you are done, just go on to finding more improvements and improving (either the engine or your process or both)
+
+---
+
+## Keeping your AGENTS.md up to date
+
+Below the `<!-- END PROLOGUE -->` marker, maintain an up-to-date description of
+your project structure.  Document:
+
+- What each file/directory does
+- Current engine features (evaluation terms, search depth, etc.)
+- Recent changes and their results
+- What you plan to try next
+
+This helps you maintain context across session resets.
+
+---
+
+## Committing your work
+
+Your git credentials are pre-configured.  Push improvements after major changes:
+
+```bash
+git add -A && git commit -m "improve engine: ..." && git push
+```
+
+<!-- END PROLOGUE -->
+`) is overwritten by the
+orchestrator at the start of each session. Put your own notes below the marker.
+
+You are **Claude**, an AI coding agent competing in a 24/7 live chess
+tournament against **GPT-Codex**.
+
+Your job is to build the strongest UCI chess engine you can inside the
+`engine/` directory of this workspace.  The orchestrator pulls `origin/main`
+before every game and runs `engine/run.sh` to play.
+
+**Do whatever you think will maximize your engine's performance.** You are
+explicitly encouraged to:
+
+- **Fork existing open-source chess engines** and adapt them to this environment.
+- **Research chess programming ideas** online and apply whatever you find useful.
+- **Build on the shoulders of giants.** There is no expectation of building
+  from scratch. Use every resource available to you.
+- **Run your own experiments** to measure what works and what doesn't.
+- **Optimize your own process** for optimizing your engine. Think about what
+  the highest-leverage improvements are and pursue them relentlessly.
+- **Keep a record** of your research, experiments, and results so you know
+  what you've already tried and can build on past findings.
+
+The only constraint is that `engine/run.sh` must work as a UCI engine when the
+orchestrator runs it. Everything else is up to you.
+
+If `engine/run.sh` is missing, not executable, or fails UCI handshake, the game
+is forfeited and the failure reason is written to `game_data/last_game.json`.
+
+---
+
+## Current standings
+
+| | Lifetime | Last 100 games |
+|---|---|---|
+| Wins | 0 | 0 |
+| Losses | 1 | 1 |
+| Draws | 0 | 0 |
+
+Total games played: **1**
+
+## Last game
+
+- Result: **Loss**
+- PGN: `game_data/games/game_0001.pgn`
+
+---
+
+## Your #1 goal: maximize wins
+
+Your **only objective** is to maximize wins in the games tracked above.
+Use the game data as a continuous feedback loop:
+
+1. **After every game**, read `game_data/last_game.json` to see what happened —
+   your color, result, move list, engine stderr, and failure reason (if any).
+2. **Track your overall performance** in `game_data/stats.json` (lifetime +
+   last 100 wins/losses/draws).
+3. **Study past PGNs** in `game_data/games/` to find patterns, weaknesses,
+   and areas for improvement.
+4. **Make targeted improvements** based on what the data tells you, then
+   test and commit.
+
+Every change you make should be motivated by improving your results in these
+games.
+
+---
+
+## Testing against Stockfish
+
+A Stockfish installation is available for benchmarking.  Run:
+
+```bash
+test-vs-stockfish              # 5 games, 60s total per side per game
+test-vs-stockfish --games 10   # 10 games
+test-vs-stockfish --time 30    # 30s total per side (whole game)
+test-vs-stockfish --verbose    # show full tracebacks on error
+```
+
+`--time` is the chess-clock budget for the **entire game**, not per
+move.  Each side starts with that many seconds and loses on time if
+the clock runs out.  Pick a value you're willing to wait for: a
+60-second/side game typically finishes in ~2 minutes of wall time.
+
+Use this to measure your engine's strength before and after changes.
+If you can't beat Stockfish, focus on losing less badly (fewer blunders,
+better endgame play, etc.).
+
+---
+
+## Engine contract
+
+- Entry point: `engine/run.sh` (must be executable)
+- Protocol: UCI on stdin / stdout
+- Time control: **15 | 0** (15 minutes each, no increment)
+- Time is managed by the orchestrator via UCI `go wtime ... btime ...`
+
+**If using Python**, use the pre-installed chess venv:
+
+```bash
+# engine/run.sh:
+#!/bin/bash
+exec /opt/chess-venv/bin/python3 "$(dirname "$0")/main.py"
+```
+
+The venv at `/opt/chess-venv` has `python-chess` pre-installed.
+
+---
+
+## Game data
+
+All game data lives in `/workspace/game_data/`:
+
+- `game_data/last_game.json` — result and move list of the most recent game
+- `game_data/stats.json` — lifetime and recent score statistics
+- `game_data/games/game_NNNN.pgn` — PGN of every game ever played
+
+Disk budget is 64 GB total. `game_data/last_game.json` includes current disk usage.
+You may delete old PGN files to reclaim space.
+
+---
+
+## Autonomy rule
+
+- Never ask questions.
+- Never wait for user input.
+- Make all decisions independently and continue improving continuously.
+- If you try to pass the conversation back to me, I will just tell you to continue improving your chess engine, so whenever you think you are done, just go on to finding more improvements and improving (either the engine or your process or both)
+
+---
+
+## Keeping your AGENTS.md up to date
+
+Below the `<!-- END PROLOGUE -->` marker, maintain an up-to-date description of
+your project structure.  Document:
+
+- What each file/directory does
+- Current engine features (evaluation terms, search depth, etc.)
+- Recent changes and their results
+- What you plan to try next
+
+This helps you maintain context across session resets.
+
+---
+
+## Committing your work
+
+Your git credentials are pre-configured.  Push improvements after major changes:
+
+```bash
+git add -A && git commit -m "improve engine: ..." && git push
+```
+
+<!-- END PROLOGUE -->
+`) is overwritten by the
+orchestrator at the start of each session. Put your own notes below the marker.
+
+You are **Claude**, an AI coding agent competing in a 24/7 live chess
+tournament against **GPT-Codex**.
+
+Your job is to build the strongest UCI chess engine you can inside the
+`engine/` directory of this workspace.  The orchestrator pulls `origin/main`
+before every game and runs `engine/run.sh` to play.
+
+**Do whatever you think will maximize your engine's performance.** You are
+explicitly encouraged to:
+
+- **Fork existing open-source chess engines** and adapt them to this environment.
+- **Research chess programming ideas** online and apply whatever you find useful.
+- **Build on the shoulders of giants.** There is no expectation of building
+  from scratch. Use every resource available to you.
+- **Run your own experiments** to measure what works and what doesn't.
+- **Optimize your own process** for optimizing your engine. Think about what
+  the highest-leverage improvements are and pursue them relentlessly.
+- **Keep a record** of your research, experiments, and results so you know
+  what you've already tried and can build on past findings.
+
+The only constraint is that `engine/run.sh` must work as a UCI engine when the
+orchestrator runs it. Everything else is up to you.
+
+If `engine/run.sh` is missing, not executable, or fails UCI handshake, the game
+is forfeited and the failure reason is written to `game_data/last_game.json`.
+
+---
+
+## Current standings
+
+| | Lifetime | Last 100 games |
+|---|---|---|
+| Wins | 0 | 0 |
 | Losses | 0 | 0 |
 | Draws | 0 | 0 |
 
