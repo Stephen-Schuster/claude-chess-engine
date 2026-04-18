@@ -828,6 +828,24 @@ static int evaluate(const Board& b) {
                     } else if (own == 0) {
                         if (is_white) mg_w += 8; else mg_b += 8;
                     }
+                    // Rook on 7th rank (relative): bonus when enemy king on 8th or
+                    // there are enemy pawns on the 7th.
+                    int rel_rank = is_white ? r : (7 - r);
+                    if (rel_rank == 6) {
+                        int ek = is_white ? b.king_sq[BLACK] : b.king_sq[WHITE];
+                        int ek_rel = (ek == -1) ? -1 : (is_white ? sq_rank(ek) : 7 - sq_rank(ek));
+                        bool enemy_pawns_on_7th = false;
+                        for (int ff = 0; ff < 8; ff++) {
+                            int q = b.piece[sq_make(r, ff)];
+                            if ((is_white && q == -PAWN) || (!is_white && q == PAWN)) {
+                                enemy_pawns_on_7th = true; break;
+                            }
+                        }
+                        if (ek_rel == 7 || enemy_pawns_on_7th) {
+                            if (is_white) { mg_w += 20; eg_w += 25; }
+                            else          { mg_b += 20; eg_b += 25; }
+                        }
+                    }
                 }
             }
         }
