@@ -1272,6 +1272,15 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
     if (time_up()) return 0;
     if (ply > 0 && (b.halfmove >= 100 || is_repetition(b))) return 0;
 
+    // Mate distance pruning: if we already have a mate bound tighter than the current window,
+    // we can't improve it further.
+    if (ply > 0) {
+        int mating = MATE - ply;
+        int mated = -MATE + ply;
+        if (mating < beta) { beta = mating; if (alpha >= beta) return beta; }
+        if (mated > alpha) { alpha = mated; if (alpha >= beta) return alpha; }
+    }
+
     int alpha_orig = alpha;
     bool is_pv = (beta - alpha > 1);
     bool in_chk = in_check(b, b.side);
