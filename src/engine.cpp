@@ -1652,7 +1652,9 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
     stop_search.store(false);
     nodes_searched = 0;
     memset(killers, 0, sizeof(killers));
-    memset(history_h, 0, sizeof(history_h));
+    // Age history instead of wiping: keeps move-ordering info between searches
+    for (int i = 0; i < 13; i++)
+        for (int j = 0; j < 128; j++) history_h[i][j] /= 2;
     for (int i = 0; i < 13; i++)
         for (int j = 0; j < 128; j++) counter_move[i][j].from = 255;
     for (auto& m : move_stack) { m.from = 255; m.to = 0; m.promo = 0; m.captured = 0; }
