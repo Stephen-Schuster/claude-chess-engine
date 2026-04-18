@@ -908,6 +908,115 @@ static int move_score(const Board& b, const Move& m, const Move& tt_best, int pl
     return history_h[p + 6][m.to];
 }
 
+// Static Exchange Evaluation: returns the expected material gain of the capture.
+// Negative means losing capture.
+static int see_piece_val(int ap) {
+    static const int V[7] = {0, 100, 320, 330, 500, 900, 10000};
+    return V[ap];
+}
+
+// Find the least-valuable attacker of color `by` on square `sq`, and return
+// its from-square; -1 if none. Fills `piece_out` with the signed piece type.
+static int least_valuable_attacker(const Board& b, int sq, int by, int& piece_out) {
+    int sign = (by == WHITE) ? 1 : -1;
+    // Pawn
+    if (by == WHITE) {
+        int a1 = sq - 15, a2 = sq - 17;
+        if (sq_valid(a1) && b.piece[a1] == PAWN) { piece_out = PAWN; return a1; }
+        if (sq_valid(a2) && b.piece[a2] == PAWN) { piece_out = PAWN; return a2; }
+    } else {
+        int a1 = sq + 15, a2 = sq + 17;
+        if (sq_valid(a1) && b.piece[a1] == -PAWN) { piece_out = -PAWN; return a1; }
+        if (sq_valid(a2) && b.piece[a2] == -PAWN) { piece_out = -PAWN; return a2; }
+    }
+    // Knight
+    for (int d : KNIGHT_DIRS) {
+        int t = sq + d;
+        if (sq_valid(t) && b.piece[t] == sign * KNIGHT) { piece_out = sign * KNIGHT; return t; }
+    }
+    // Bishop
+    for (int d : BISHOP_DIRS) {
+        int t = sq + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * BISHOP) { piece_out = sign * BISHOP; return t; }
+                break;
+            }
+            t += d;
+        }
+    }
+    // Rook
+    for (int d : ROOK_DIRS) {
+        int t = sq + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * ROOK) { piece_out = sign * ROOK; return t; }
+                break;
+            }
+            t += d;
+        }
+    }
+    // Queen
+    for (int d : QUEEN_DIRS) {
+        int t = sq + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * QUEEN) { piece_out = sign * QUEEN; return t; }
+                break;
+            }
+            t += d;
+        }
+    }
+    // King
+    for (int d : KING_DIRS) {
+        int t = sq + d;
+        if (sq_valid(t) && b.piece[t] == sign * KING) { piece_out = sign * KING; return t; }
+    }
+    return -1;
+}
+
+// SEE: returns material balance (from attacker's view) of making capture `m`.
+// Negative = losing. Uses iterative swap-off.
+static int see(Board b_copy, const Move& m) {
+    int to = m.to;
+    int gain[32];
+    int d = 0;
+    int attacker_piece = b_copy.piece[m.from];
+    int captured = b_copy.piece[to];
+    gain[d] = see_piece_val(abs(captured));
+    int on_square_val = see_piece_val(abs(attacker_piece));
+    // Handle promotion in initial move
+    if (m.promo != 0) {
+        gain[d] += see_piece_val(abs(m.promo)) - see_piece_val(PAWN);
+        on_square_val = see_piece_val(abs(m.promo));
+    }
+    // Apply the move
+    b_copy.piece[to] = (m.promo != 0) ? m.promo : attacker_piece;
+    b_copy.piece[m.from] = 0;
+    int stm = (attacker_piece > 0) ? BLACK : WHITE;
+    while (true) {
+        int pp;
+        int afrom = least_valuable_attacker(b_copy, to, stm, pp);
+        if (afrom == -1) break;
+        d++;
+        if (d >= 31) break;
+        gain[d] = on_square_val - gain[d - 1];
+        if (max(-gain[d - 1], gain[d]) < 0) break;
+        b_copy.piece[afrom] = 0;
+        b_copy.piece[to] = pp;
+        on_square_val = see_piece_val(abs(pp));
+        stm ^= 1;
+    }
+    while (d > 0) {
+        gain[d - 1] = -max(-gain[d - 1], gain[d]);
+        d--;
+    }
+    return gain[0];
+}
+
 static int quiesce(Board& b, int alpha, int beta, int ply) {
     nodes_searched++;
     if (time_up()) return 0;
@@ -929,6 +1038,8 @@ static int quiesce(Board& b, int alpha, int beta, int ply) {
             int gain = PIECE_VAL[abs(m.captured)];
             if (m.promo != 0) gain += PIECE_VAL[abs(m.promo)] - PIECE_VAL[PAWN];
             if (stand + gain + 200 < alpha) continue;
+            // SEE pruning: skip obviously losing captures
+            if (see(b, m) < 0) continue;
         }
         Undo u;
         make_move(b, m, u);
@@ -1132,6 +1243,89 @@ static bool parse_move(const Board& b, const string& s, Move& out) {
     return false;
 }
 
+// Simple opening book: FEN-prefix (piece placement + side) -> list of UCI moves.
+// We reply with a random well-known move to avoid being too predictable.
+static unordered_map<string, vector<string>> OPENING_BOOK;
+
+static void init_book() {
+    // Key = "<piece_placement> <side>" (first two FEN fields)
+    auto add = [&](const string& key, initializer_list<string> moves) {
+        auto& v = OPENING_BOOK[key];
+        for (auto& m : moves) v.push_back(m);
+    };
+    // As White: popular first moves
+    add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w", {"e2e4", "d2d4", "g1f3", "c2c4"});
+    // As Black response to 1.e4
+    add("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b", {"c7c5", "e7e5", "e7e6", "c7c6"});
+    // After 1.d4
+    add("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b", {"g8f6", "d7d5", "e7e6"});
+    // After 1.Nf3
+    add("rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b", {"g8f6", "d7d5", "c7c5"});
+    // After 1.c4
+    add("rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b", {"e7e5", "g8f6", "c7c5"});
+
+    // 1.e4 e5
+    add("rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
+    add("rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"b8c6", "g8f6"});
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f1b5", "f1c4", "b1c3"});
+    // Ruy Lopez
+    add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
+    add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
+
+    // 1.e4 c5 (Sicilian)
+    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
+    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "g7g6", "e7e6"});
+
+    // 1.d4 d5
+    add("rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
+    // 1.d4 Nf6
+    add("rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
+    // QG Declined: 1.d4 d5 2.c4 e6
+    add("rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "c7c6", "e7e5"});
+}
+
+static Move try_book_move(Board& b) {
+    // Build key
+    string fen;
+    for (int r = 7; r >= 0; r--) {
+        int empty = 0;
+        for (int f = 0; f < 8; f++) {
+            int p = b.piece[sq_make(r, f)];
+            if (p == 0) empty++;
+            else {
+                if (empty) { fen += (char)('0' + empty); empty = 0; }
+                fen += piece_to_char(p);
+            }
+        }
+        if (empty) fen += (char)('0' + empty);
+        if (r > 0) fen += '/';
+    }
+    fen += ' ';
+    fen += (b.side == WHITE) ? 'w' : 'b';
+    auto it = OPENING_BOOK.find(fen);
+    Move none{}; none.from = 255;
+    if (it == OPENING_BOOK.end()) return none;
+    const auto& moves = it->second;
+    if (moves.empty()) return none;
+    // Pick pseudo-randomly (time-seeded)
+    auto now = chrono::steady_clock::now().time_since_epoch().count();
+    int idx = (int)(now % moves.size());
+    Move parsed;
+    // Try the picked move first; if illegal, try the rest.
+    for (int i = 0; i < (int)moves.size(); i++) {
+        int j = (idx + i) % moves.size();
+        if (parse_move(b, moves[j], parsed)) {
+            // Verify legal (not leaving king in check)
+            Undo u;
+            make_move(b, parsed, u);
+            bool ok = !in_check(b, b.side ^ 1);
+            undo_move(b, parsed, u);
+            if (ok) return parsed;
+        }
+    }
+    return none;
+}
+
 static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
     search_start = chrono::steady_clock::now();
     time_limit_ms = time_ms;
@@ -1190,6 +1384,7 @@ int main() {
     cin.tie(nullptr);
     init_zobrist();
     tt_init(64);
+    init_book();
     Board board;
     parse_fen(board, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     rep_history.clear();
@@ -1278,7 +1473,15 @@ int main() {
                     if (ttime < 50) ttime = 50;
                 }
             }
-            Move best = iterative_deepening(board, depth, ttime);
+            // Try opening book first
+            Move best;
+            Move bookm = try_book_move(board);
+            if (bookm.from != 255) {
+                best = bookm;
+                cout << "info string book move" << endl;
+            } else {
+                best = iterative_deepening(board, depth, ttime);
+            }
             if (best.from == 255) {
                 // fallback: pick any legal move
                 vector<Move> moves;
