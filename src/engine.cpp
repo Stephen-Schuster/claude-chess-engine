@@ -1127,7 +1127,19 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
     Move best_move{}; best_move.from = 255;
     int legal = 0;
     int move_count = 0;
+    // Late move pruning limits (index by depth)
+    static const int LMP[7] = {0, 5, 8, 12, 18, 25, 34};
     for (const Move& m : moves) {
+        bool is_quiet = (m.captured == 0 && m.promo == 0);
+        // Late move pruning at low depth for quiet moves
+        if (!in_chk && depth <= 6 && is_quiet && best > -MATE + 200
+            && move_count >= LMP[depth]) {
+            continue;
+        }
+        // SEE pruning for captures at low depth
+        if (depth <= 4 && m.captured != 0 && best > -MATE + 200) {
+            if (see(b, m) < -50 * depth) continue;
+        }
         Undo u;
         make_move(b, m, u);
         if (in_check(b, b.side ^ 1)) { undo_move(b, m, u); continue; }
@@ -1138,9 +1150,11 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         // LMR
         int new_depth = depth - 1;
         int reduction = 0;
-        bool is_quiet = (m.captured == 0 && m.promo == 0);
         if (depth >= 3 && move_count > 3 && is_quiet && !in_chk) {
-            reduction = 1 + (move_count > 6 ? 1 : 0);
+            // base reduction grows with depth and move count
+            reduction = 1;
+            if (move_count > 6) reduction = 2;
+            if (depth >= 6 && move_count > 12) reduction = 3;
         }
         if (legal == 1) {
             score = -search(b, new_depth, -beta, -alpha, ply + 1, true);
