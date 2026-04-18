@@ -456,8 +456,21 @@ git add -A && git commit -m "improve engine: ..." && git push
 - TT 256MB default: no measurable change at short TC, should help in 15-min games.
 - `engine/run.sh` entrypoint added (was missing; orchestrator requires it).
 - `.gitignore` updated to stop ignoring the `engine/` directory.
+- TT move ordering at root + cached static_eval (commit 0eeb8e1): ~15-25%
+  node reduction at same depth on tactical positions.
+- qsearch TT probe with proper entry storage (0eeb8e1): uses TT move as
+  capture-ordering hint and allows cross-iteration transposition hits in
+  quiet tactical lines.
+- Mate distance pruning (75a82f6): pure pruning, no regression in 12-game
+  A/B at 500ms (6.5-5.5).
 
 ### Current baseline: `engine/engine_v18_baseline` (main after 72303ed)
+
+### Recent game results
+- Game 2 (2026-04-18): WIN vs GPT-Codex as Black, 32 moves by mate.
+  GPT played 4.Qh5?? early queen sortie, we refuted with Nxh5 and clean mating
+  attack exploiting GPT's exposed king. No engine-side issues.
+- Game 1: Loss (details not in local workspace).
 
 ### Ideas not yet tried
 - Larger aspiration window growth (exponential: 50, 200, 800, INF).

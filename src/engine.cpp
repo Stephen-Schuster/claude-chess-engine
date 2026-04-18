@@ -1750,19 +1750,27 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
         if (best_move.from == 255) break;
         int alpha = -INF, beta = INF;
         // aspiration windows after depth 4
+        int window = 25;
         if (depth >= 5) {
-            int window = 50;
             alpha = best_score - window;
             beta = best_score + window;
         }
         int score;
+        int fail_lo = 0, fail_hi = 0;
         while (true) {
             score = search(b, depth, alpha, beta, 0, true);
             if (time_up()) break;
             if (score <= alpha) {
-                alpha = max(-INF, alpha - 200);
+                fail_lo++;
+                // Exponential widening with large jump after 2 fails
+                int widen = window << fail_lo;
+                if (fail_lo >= 3) alpha = -INF;
+                else alpha = max(-INF, alpha - widen);
             } else if (score >= beta) {
-                beta = min(INF, beta + 200);
+                fail_hi++;
+                int widen = window << fail_hi;
+                if (fail_hi >= 3) beta = INF;
+                else beta = min(INF, beta + widen);
             } else break;
         }
         if (time_up()) break;
