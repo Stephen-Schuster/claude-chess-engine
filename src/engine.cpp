@@ -914,6 +914,31 @@ static int evaluate(const Board& b) {
 
     int mg = mg_w - mg_b;
     int eg = eg_w - eg_b;
+
+    // Mop-up evaluation: in low-material endgames, encourage winning side to drive
+    // losing king to the edge/corner and bring own king close.
+    if (phase <= 6 && wk != -1 && bk != -1) {
+        int mat_diff = eg; // signed from white's view
+        if (abs(mat_diff) > 300) {
+            int strong_k, weak_k;
+            int sign;
+            if (mat_diff > 0) { strong_k = wk; weak_k = bk; sign = 1; }
+            else              { strong_k = bk; weak_k = wk; sign = -1; }
+            int wkr = sq_rank(weak_k), wkf = sq_file(weak_k);
+            // Distance from weak king to center (Chebyshev)
+            int cent_dist = max(abs(wkr - 3) - (wkr > 3 ? 0 : 1),
+                                abs(wkf - 3) - (wkf > 3 ? 0 : 1));
+            if (cent_dist < 0) cent_dist = 0;
+            // Simpler: distance to nearest corner via manhattan-to-edge
+            int edge = min(min(wkr, 7 - wkr), min(wkf, 7 - wkf));
+            // King-king Chebyshev distance
+            int skr = sq_rank(strong_k), skf = sq_file(strong_k);
+            int kk_dist = max(abs(skr - wkr), abs(skf - wkf));
+            int bonus = (7 - edge) * 12 + (7 - kk_dist) * 8;
+            eg += sign * bonus;
+        }
+    }
+
     int score = (mg * phase + eg * (24 - phase)) / 24;
 
     // Tempo
@@ -1456,6 +1481,49 @@ static void init_book() {
     add("rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "c7c6", "e7e5"});
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"g8f6", "f8e7"});
+
+    // 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O
+    add("r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8e7", "b7b5"});
+    // Nimzo-Indian: 1.d4 Nf6 2.c4 e6 3.Nc3 Bb4
+    add("rnbqkb1r/pppppppp/5n2/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"e7e6", "g7g6", "c7c5"});
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2", "a2a3"});
+    // Queens Gambit Declined: 1.d4 d5 2.c4 e6
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    // QGA: 1.d4 d5 2.c4 dxc4
+    add("rnbqkbnr/ppp1pppp/8/8/2pP4/8/PP2PPPP/RNBQKBNR w", {"g1f3", "e2e3", "e2e4"});
+    // Slav: 1.d4 d5 2.c4 c6
+    add("rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"g1f3", "b1c3"});
+    add("rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b", {"g8f6", "e7e6"});
+    // Grünfeld: 1.d4 Nf6 2.c4 g6 3.Nc3 d5
+    add("rnbqkb1r/pppppp1p/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"d7d5", "f8g7"});
+    add("rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w", {"c4d5", "g1f3", "c1f4"});
+    // English: 1.c4 e5
+    add("rnbqkbnr/pppp1ppp/8/4p3/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    add("rnbqkbnr/pppp1ppp/8/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR b", {"g8f6", "b8c6"});
+    // English: 1.c4 Nf6
+    add("rnbqkb1r/pppppppp/5n2/8/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3", "g1f3", "d2d4"});
+    // Reti: 1.Nf3 d5 2.c4
+    add("rnbqkbnr/ppp1pppp/8/3p4/2P5/5N2/PP1PPPPP/RNBQKB1R b", {"e7e6", "c7c6", "d5c4"});
+    // London System: 1.d4 d5 2.Nf3 Nf6 3.Bf4
+    add("rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b", {"c7c5", "e7e6"});
+    // Scandinavian: 1.e4 d5
+    add("rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w", {"e4d5"});
+    add("rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b", {"d8d5", "g8f6"});
+    // Alekhine: 1.e4 Nf6
+    add("rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"e4e5", "b1c3"});
+    // Pirc/Modern: 1.e4 d6
+    add("rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
+    add("rnbqkbnr/ppp1pppp/3p4/8/3PP3/8/PPP2PPP/RNBQKBNR b", {"g8f6", "g7g6"});
+    // 1.e4 g6
+    add("rnbqkbnr/pppppp1p/6p1/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
+    // Sicilian Open 2...Nc6: 1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4
+    add("r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
+    // Sicilian Dragon: 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6
+    add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
+    // French Winawer: 1.e4 e6 2.d4 d5 3.Nc3 Bb4
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"f8b4", "g8f6", "d5e4"});
+    // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
+    add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
 }
 
 static Move try_book_move(Board& b) {
