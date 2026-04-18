@@ -40,6 +40,7 @@ target/
 # itself tracked (it contains run.sh).
 /engine/engine
 /engine/engine_v*
+/engine/engine_current*
 engine.exe
 run_engine
 engine/run.sh.bak
