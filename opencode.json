@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "{env:OPENCODE_MODEL}",
+  "agent": {
+    "build": {
+      "variant": "{env:OPENCODE_VARIANT}"
+    },
+    "plan": {
+      "variant": "{env:OPENCODE_VARIANT}"
+    }
+  },
+  "autoupdate": false,
+  "share": "disabled",
+  "permission": "allow",
+  "server": {
+    "hostname": "0.0.0.0",
+    "port": 4096
+  }
+}

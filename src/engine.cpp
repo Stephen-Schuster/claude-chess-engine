@@ -553,11 +553,77 @@ static inline int pst_index(int sq, int is_white) {
     else return (7 - r) * 8 + f;
 }
 
+// Count attacks by `by` on square s (cheap version used only for eval)
+static int count_attackers(const Board& b, int s, int by) {
+    int sign = (by == WHITE) ? 1 : -1;
+    int n = 0;
+    if (by == WHITE) {
+        int a1 = s - 15, a2 = s - 17;
+        if (sq_valid(a1) && b.piece[a1] == PAWN) n++;
+        if (sq_valid(a2) && b.piece[a2] == PAWN) n++;
+    } else {
+        int a1 = s + 15, a2 = s + 17;
+        if (sq_valid(a1) && b.piece[a1] == -PAWN) n++;
+        if (sq_valid(a2) && b.piece[a2] == -PAWN) n++;
+    }
+    for (int d : KNIGHT_DIRS) {
+        int t = s + d;
+        if (sq_valid(t) && b.piece[t] == sign * KNIGHT) n++;
+    }
+    for (int d : KING_DIRS) {
+        int t = s + d;
+        if (sq_valid(t) && b.piece[t] == sign * KING) n++;
+    }
+    for (int d : BISHOP_DIRS) {
+        int t = s + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * BISHOP || p == sign * QUEEN) n++;
+                break;
+            }
+            t += d;
+        }
+    }
+    for (int d : ROOK_DIRS) {
+        int t = s + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * ROOK || p == sign * QUEEN) n++;
+                break;
+            }
+            t += d;
+        }
+    }
+    return n;
+}
+
 static int evaluate(const Board& b) {
     int mg_w = 0, mg_b = 0;
     int eg_w = 0, eg_b = 0;
-    int material = 0;
-    int npm = 0; // non-pawn material for phase
+
+    // Pawn file counts and rank extremes for pawn-structure terms.
+    // pawns_files[color][file] = count; w_most_advanced[file] = highest rank
+    int pawns_files[2][8] = {{0}};
+    int w_most_adv[8], b_least_adv[8];
+    for (int f = 0; f < 8; f++) { w_most_adv[f] = -1; b_least_adv[f] = 8; }
+
+    for (int r = 0; r < 8; r++) {
+        for (int f = 0; f < 8; f++) {
+            int s = sq_make(r, f);
+            int p = b.piece[s];
+            if (p == PAWN) { pawns_files[WHITE][f]++; if (r > w_most_adv[f]) w_most_adv[f] = r; }
+            else if (p == -PAWN) { pawns_files[BLACK][f]++; if (r < b_least_adv[f]) b_least_adv[f] = r; }
+        }
+    }
+
+    // Mobility counts (pseudo-legal) for bishops, knights, rooks, queens.
+    int mob_w = 0, mob_b = 0;
+    // King-zone attack score for king safety
+    int king_attack_units[2] = {0, 0};
+    int wk = b.king_sq[WHITE], bk = b.king_sq[BLACK];
+
     for (int r = 0; r < 8; r++) {
         for (int f = 0; f < 8; f++) {
             int s = sq_make(r, f);
@@ -565,25 +631,112 @@ static int evaluate(const Board& b) {
             if (p == 0) continue;
             int ap = abs(p);
             int is_white = p > 0;
+            int us_color = is_white ? WHITE : BLACK;
+            int them_color = us_color ^ 1;
             int idx = pst_index(s, is_white);
             int val = PIECE_VAL[ap];
             int pst_mg = 0, pst_eg = 0;
             switch (ap) {
-                case PAWN: pst_mg = pst_eg = PST_PAWN[idx]; break;
-                case KNIGHT: pst_mg = pst_eg = PST_KNIGHT[idx]; npm += val; break;
-                case BISHOP: pst_mg = pst_eg = PST_BISHOP[idx]; npm += val; break;
-                case ROOK: pst_mg = pst_eg = PST_ROOK[idx]; npm += val; break;
-                case QUEEN: pst_mg = pst_eg = PST_QUEEN[idx]; npm += val; break;
-                case KING: pst_mg = PST_KING_MG[idx]; pst_eg = PST_KING_EG[idx]; break;
+                case PAWN:   pst_mg = pst_eg = PST_PAWN[idx]; break;
+                case KNIGHT: pst_mg = pst_eg = PST_KNIGHT[idx]; break;
+                case BISHOP: pst_mg = pst_eg = PST_BISHOP[idx]; break;
+                case ROOK:   pst_mg = pst_eg = PST_ROOK[idx]; break;
+                case QUEEN:  pst_mg = pst_eg = PST_QUEEN[idx]; break;
+                case KING:   pst_mg = PST_KING_MG[idx]; pst_eg = PST_KING_EG[idx]; break;
             }
             if (is_white) { mg_w += val + pst_mg; eg_w += val + pst_eg; }
-            else { mg_b += val + pst_mg; eg_b += val + pst_eg; }
+            else          { mg_b += val + pst_mg; eg_b += val + pst_eg; }
+
+            // Pawn structure extras
+            if (ap == PAWN) {
+                int file = f;
+                // Doubled pawn (penalty if >=2 of same color on this file, count the extras)
+                if (pawns_files[us_color][file] >= 2) {
+                    if (is_white) { mg_w -= 10; eg_w -= 20; }
+                    else          { mg_b -= 10; eg_b -= 20; }
+                }
+                // Isolated pawn: no friendly pawn on adjacent files
+                bool iso = true;
+                if (file > 0 && pawns_files[us_color][file-1] > 0) iso = false;
+                if (file < 7 && pawns_files[us_color][file+1] > 0) iso = false;
+                if (iso) {
+                    if (is_white) { mg_w -= 12; eg_w -= 15; }
+                    else          { mg_b -= 12; eg_b -= 15; }
+                }
+                // Passed pawn: no enemy pawn in front on this or adjacent files
+                bool passed = true;
+                int files_to_check[3] = {file-1, file, file+1};
+                if (is_white) {
+                    for (int ff : files_to_check) {
+                        if (ff < 0 || ff > 7) continue;
+                        if (pawns_files[BLACK][ff] > 0 && b_least_adv[ff] > r) { passed = false; break; }
+                    }
+                    if (passed) {
+                        static const int PP_MG[8] = {0, 5, 10, 20, 35, 60, 100, 0};
+                        static const int PP_EG[8] = {0, 10, 20, 40, 70, 120, 200, 0};
+                        mg_w += PP_MG[r]; eg_w += PP_EG[r];
+                    }
+                } else {
+                    for (int ff : files_to_check) {
+                        if (ff < 0 || ff > 7) continue;
+                        if (pawns_files[WHITE][ff] > 0 && w_most_adv[ff] < r) { passed = false; break; }
+                    }
+                    if (passed) {
+                        static const int PP_MG[8] = {0, 100, 60, 35, 20, 10, 5, 0};
+                        static const int PP_EG[8] = {0, 200, 120, 70, 40, 20, 10, 0};
+                        mg_b += PP_MG[r]; eg_b += PP_EG[r];
+                    }
+                }
+            } else if (ap == KNIGHT) {
+                int m = 0;
+                for (int d : KNIGHT_DIRS) {
+                    int t = s + d;
+                    if (!sq_valid(t)) continue;
+                    int tp = b.piece[t];
+                    if (tp == 0 || (tp > 0 ? WHITE : BLACK) == them_color) m++;
+                }
+                int bonus = (m - 4) * 4;
+                if (is_white) { mg_w += bonus; eg_w += bonus; }
+                else          { mg_b += bonus; eg_b += bonus; }
+            } else if (ap == BISHOP || ap == ROOK || ap == QUEEN) {
+                const int* dirs; int nd;
+                if (ap == BISHOP) { dirs = BISHOP_DIRS; nd = 4; }
+                else if (ap == ROOK) { dirs = ROOK_DIRS; nd = 4; }
+                else { dirs = QUEEN_DIRS; nd = 8; }
+                int m = 0;
+                for (int i = 0; i < nd; i++) {
+                    int d = dirs[i];
+                    int t = s + d;
+                    while (sq_valid(t)) {
+                        int tp = b.piece[t];
+                        if (tp == 0) { m++; }
+                        else {
+                            if ((tp > 0 ? WHITE : BLACK) == them_color) m++;
+                            break;
+                        }
+                        t += d;
+                    }
+                }
+                int weight = (ap == BISHOP) ? 4 : (ap == ROOK) ? 3 : 1;
+                int bonus = (m - 6) * weight;
+                if (is_white) { mg_w += bonus; eg_w += bonus; }
+                else          { mg_b += bonus; eg_b += bonus; }
+
+                // Rook on open/half-open file
+                if (ap == ROOK) {
+                    int own = pawns_files[us_color][f];
+                    int opp = pawns_files[them_color][f];
+                    if (own == 0 && opp == 0) {
+                        if (is_white) mg_w += 15; else mg_b += 15;
+                    } else if (own == 0) {
+                        if (is_white) mg_w += 8; else mg_b += 8;
+                    }
+                }
+            }
         }
     }
-    int mg = mg_w - mg_b;
-    int eg = eg_w - eg_b;
-    // phase: 0 (endgame) to 24 (opening)
-    // ref: knight=1, bishop=1, rook=2, queen=4, total=24
+
+    // Phase calc
     int phase = 0;
     for (int r = 0; r < 8; r++) for (int f = 0; f < 8; f++) {
         int p = abs(b.piece[sq_make(r,f)]);
@@ -592,7 +745,6 @@ static int evaluate(const Board& b) {
         else if (p == QUEEN) phase += 4;
     }
     if (phase > 24) phase = 24;
-    int score = (mg * phase + eg * (24 - phase)) / 24;
 
     // Bishop pair
     int wb = 0, bb = 0;
@@ -600,11 +752,67 @@ static int evaluate(const Board& b) {
         if (b.piece[i] == BISHOP) wb++;
         else if (b.piece[i] == -BISHOP) bb++;
     }
-    if (wb >= 2) score += 30;
-    if (bb >= 2) score -= 30;
+    if (wb >= 2) { mg_w += 25; eg_w += 50; }
+    if (bb >= 2) { mg_b += 25; eg_b += 50; }
+
+    // King safety: penalize enemy pieces attacking squares around king (midgame only).
+    // Count attackers on the 3x3 (minus king sq) around each king.
+    auto king_zone_score = [&](int ksq, int enemy) -> int {
+        int units = 0;
+        for (int dr = -1; dr <= 1; dr++) {
+            for (int df = -1; df <= 1; df++) {
+                int t = ksq + dr * 16 + df;
+                if (!sq_valid(t)) continue;
+                int cnt = count_attackers(b, t, enemy);
+                units += cnt;
+            }
+        }
+        // Missing pawn shield in front of king
+        int krank = sq_rank(ksq), kfile = sq_file(ksq);
+        int own = enemy ^ 1;
+        int shield_penalty = 0;
+        for (int df = -1; df <= 1; df++) {
+            int ff = kfile + df;
+            if (ff < 0 || ff > 7) continue;
+            bool has = false;
+            if (own == WHITE) {
+                for (int dr = 1; dr <= 2; dr++) {
+                    int rr = krank + dr;
+                    if (rr < 0 || rr > 7) continue;
+                    if (b.piece[sq_make(rr, ff)] == PAWN) { has = true; break; }
+                }
+            } else {
+                for (int dr = 1; dr <= 2; dr++) {
+                    int rr = krank - dr;
+                    if (rr < 0 || rr > 7) continue;
+                    if (b.piece[sq_make(rr, ff)] == -PAWN) { has = true; break; }
+                }
+            }
+            if (!has) shield_penalty += 12;
+        }
+        return units * 8 + shield_penalty;
+    };
+
+    if (wk != -1) {
+        int danger = king_zone_score(wk, BLACK);
+        mg_w -= danger;
+    }
+    if (bk != -1) {
+        int danger = king_zone_score(bk, WHITE);
+        mg_b -= danger;
+    }
+
+    int mg = mg_w - mg_b;
+    int eg = eg_w - eg_b;
+    int score = (mg * phase + eg * (24 - phase)) / 24;
 
     // Tempo
     score += (b.side == WHITE) ? 10 : -10;
+
+    // 50-move rule scaling
+    if (b.halfmove > 80) {
+        score = score * (100 - b.halfmove) / 20;
+    }
 
     return (b.side == WHITE) ? score : -score;
 }
