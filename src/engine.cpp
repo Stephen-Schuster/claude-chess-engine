@@ -1246,6 +1246,7 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
     if (ply > 0 && (b.halfmove >= 100 || is_repetition(b))) return 0;
 
     int alpha_orig = alpha;
+    bool is_pv = (beta - alpha > 1);
     bool in_chk = in_check(b, b.side);
     if (in_chk) depth++; // check extension
 
@@ -1370,6 +1371,8 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             int di = min(depth, 63);
             int mi = min(move_count, 63);
             reduction = LMR_TABLE[di][mi];
+            // PV nodes reduce less
+            if (is_pv) reduction = max(0, reduction - 1);
             // History-based adjustment: good history => reduce less; bad => reduce more
             int piece_signed = b.piece[m.to]; // after make_move, moved piece at m.to
             int hist = history_h[piece_signed + 6][m.to];
