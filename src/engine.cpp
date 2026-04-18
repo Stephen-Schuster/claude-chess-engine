@@ -599,6 +599,50 @@ static int count_attackers(const Board& b, int s, int by) {
     return n;
 }
 
+// Piece-type-weighted attackers on a square. Weights roughly follow standard king-danger tables.
+// Pawn=1, Knight=2, Bishop=2, Rook=3, Queen=5. Returns (weight_sum, attacker_count) packed.
+static void weighted_attackers(const Board& b, int s, int by, int& weight, int& count) {
+    int sign = (by == WHITE) ? 1 : -1;
+    weight = 0; count = 0;
+    if (by == WHITE) {
+        int a1 = s - 15, a2 = s - 17;
+        if (sq_valid(a1) && b.piece[a1] == PAWN) { weight += 1; count++; }
+        if (sq_valid(a2) && b.piece[a2] == PAWN) { weight += 1; count++; }
+    } else {
+        int a1 = s + 15, a2 = s + 17;
+        if (sq_valid(a1) && b.piece[a1] == -PAWN) { weight += 1; count++; }
+        if (sq_valid(a2) && b.piece[a2] == -PAWN) { weight += 1; count++; }
+    }
+    for (int d : KNIGHT_DIRS) {
+        int t = s + d;
+        if (sq_valid(t) && b.piece[t] == sign * KNIGHT) { weight += 2; count++; }
+    }
+    for (int d : BISHOP_DIRS) {
+        int t = s + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * BISHOP) { weight += 2; count++; }
+                else if (p == sign * QUEEN) { weight += 5; count++; }
+                break;
+            }
+            t += d;
+        }
+    }
+    for (int d : ROOK_DIRS) {
+        int t = s + d;
+        while (sq_valid(t)) {
+            int p = b.piece[t];
+            if (p != 0) {
+                if (p == sign * ROOK) { weight += 3; count++; }
+                else if (p == sign * QUEEN) { weight += 5; count++; }
+                break;
+            }
+            t += d;
+        }
+    }
+}
+
 static int evaluate(const Board& b) {
     // Insufficient material: K vs K, K+minor vs K, K+N+N vs K all count as draw.
     {
@@ -811,19 +855,23 @@ static int evaluate(const Board& b) {
     // King safety: penalize enemy pieces attacking squares around king (midgame only).
     // Count attackers on the 3x3 (minus king sq) around each king.
     auto king_zone_score = [&](int ksq, int enemy) -> int {
-        int units = 0;
+        int total_weight = 0;
+        int total_count = 0;
         for (int dr = -1; dr <= 1; dr++) {
             for (int df = -1; df <= 1; df++) {
                 int t = ksq + dr * 16 + df;
                 if (!sq_valid(t)) continue;
-                int cnt = count_attackers(b, t, enemy);
-                units += cnt;
+                int w = 0, c = 0;
+                weighted_attackers(b, t, enemy, w, c);
+                total_weight += w;
+                total_count += c;
             }
         }
         // Missing pawn shield in front of king
         int krank = sq_rank(ksq), kfile = sq_file(ksq);
         int own = enemy ^ 1;
         int shield_penalty = 0;
+        int missing = 0;
         for (int df = -1; df <= 1; df++) {
             int ff = kfile + df;
             if (ff < 0 || ff > 7) continue;
@@ -841,9 +889,18 @@ static int evaluate(const Board& b) {
                     if (b.piece[sq_make(rr, ff)] == -PAWN) { has = true; break; }
                 }
             }
-            if (!has) shield_penalty += 12;
+            if (!has) { shield_penalty += 14; missing++; }
         }
-        return units * 8 + shield_penalty;
+        // Danger grows quadratically with attacker weight, but only when 2+ attackers present.
+        int danger = 0;
+        if (total_count >= 2) {
+            danger = total_weight * total_weight / 4 + total_weight * 3;
+        } else {
+            danger = total_weight * 2;
+        }
+        // Exposed king (many missing pawns) amplifies attacker danger
+        if (missing >= 2 && total_count >= 1) danger += total_weight * 4;
+        return danger + shield_penalty;
     };
 
     if (wk != -1) {
@@ -1178,6 +1235,14 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         }
     }
 
+    // Internal Iterative Deepening: if no TT move at deeper depths, do a shallow search to get one.
+    if (tt_best.from == 255 && depth >= 5 && !in_chk) {
+        search(b, depth - 2, alpha, beta, ply, false);
+        TTEntry* tte2 = tt_probe(b.hash);
+        if (tte2) tt_best = tte2->best;
+        if (time_up()) return 0;
+    }
+
     vector<Move> moves;
     gen_moves(b, moves, false);
     // order
@@ -1217,6 +1282,14 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             reduction = 1;
             if (move_count > 6) reduction = 2;
             if (depth >= 6 && move_count > 12) reduction = 3;
+            // History-based adjustment: good history => reduce less; bad => reduce more
+            int piece_signed = b.piece[m.to]; // after make_move, the moved piece is at m.to
+            int hist = history_h[piece_signed + 6][m.to];
+            if (hist > 8000) reduction = max(0, reduction - 1);
+            else if (hist < 0) reduction += 1;
+            // don't reduce below 0, don't reduce past the remaining depth
+            if (reduction < 0) reduction = 0;
+            if (reduction >= new_depth) reduction = max(0, new_depth - 1);
         }
         if (legal == 1) {
             score = -search(b, new_depth, -beta, -alpha, ply + 1, true);
@@ -1251,6 +1324,11 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
                 }
             }
             break;
+        } else if (is_quiet) {
+            // Decay history for quiet moves that failed low, so bad-history discourages LMR stays accurate
+            int p = b.piece[m.from];
+            history_h[p + 6][m.to] -= depth;
+            if (history_h[p + 6][m.to] < -100000) history_h[p + 6][m.to] = -100000;
         }
     }
 
