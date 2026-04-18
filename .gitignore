@@ -36,8 +36,10 @@ dist/
 *.war
 target/
 
-# The compiled engine binary (we keep source, not binary)
-engine
+# The compiled engine binary (we keep source, not binary). Keep the engine/ dir
+# itself tracked (it contains run.sh).
+/engine/engine
+/engine/engine_v*
 engine.exe
 run_engine
 engine/run.sh.bak
