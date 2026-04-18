@@ -1392,7 +1392,39 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
     Move best_move{}; best_move.from = 255;
     int best_score = 0;
 
-    for (int depth = 1; depth <= max_depth; depth++) {
+    // Always do depth 1 without time check so we always have a legal move.
+    {
+        long long saved = time_limit_ms;
+        time_limit_ms = 0; // disable time cutoff during depth 1
+        int score = search(b, 1, -INF, INF, 0, true);
+        time_limit_ms = saved;
+        TTEntry* tte = tt_probe(b.hash);
+        if (tte && tte->best.from != 255) {
+            best_move = tte->best;
+            best_score = score;
+        } else {
+            // No TT entry (stalemate/mate). Fall back to any legal move.
+            vector<Move> mv;
+            gen_moves(b, mv, false);
+            for (const Move& m : mv) {
+                Undo u;
+                make_move(b, m, u);
+                bool ok = !in_check(b, b.side ^ 1);
+                undo_move(b, m, u);
+                if (ok) { best_move = m; break; }
+            }
+        }
+        auto now = chrono::steady_clock::now();
+        auto elapsed = chrono::duration_cast<chrono::milliseconds>(now - search_start).count();
+        cout << "info depth 1 score cp " << score << " nodes " << nodes_searched
+             << " time " << elapsed;
+        if (best_move.from != 255) cout << " pv " << move_to_uci(best_move);
+        cout << endl;
+    }
+
+    for (int depth = 2; depth <= max_depth; depth++) {
+        // If no best move (stalemate/mate), stop iterating.
+        if (best_move.from == 255) break;
         int alpha = -INF, beta = INF;
         // aspiration windows after depth 4
         if (depth >= 5) {
@@ -1410,7 +1442,7 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
                 beta = min(INF, beta + 200);
             } else break;
         }
-        if (time_up() && depth > 1) break;
+        if (time_up()) break;
 
         TTEntry* tte = tt_probe(b.hash);
         if (tte && tte->best.from != 255) {
@@ -1427,7 +1459,7 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
 
         // Early exit if we found mate
         if (abs(score) > MATE - 200) break;
-        // time cutoff: if used > 40% of time, next iter likely won't finish
+        // time cutoff: if used > 50% of time, next iter likely won't finish
         if (time_ms > 0 && elapsed * 2 > time_ms) break;
     }
     return best_move;
@@ -1559,7 +1591,7 @@ int main() {
                     undo_move(board, m, u);
                 }
             }
-            cout << "bestmove " << move_to_uci(best) << endl;
+            cout << "bestmove " << (best.from == 255 ? "0000" : move_to_uci(best)) << endl;
         } else if (tok == "quit") {
             break;
         } else if (tok == "stop") {
