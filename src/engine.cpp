@@ -1457,8 +1457,14 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
         }
         auto now = chrono::steady_clock::now();
         auto elapsed = chrono::duration_cast<chrono::milliseconds>(now - search_start).count();
-        cout << "info depth 1 score cp " << score << " nodes " << nodes_searched
-             << " time " << elapsed;
+        cout << "info depth 1";
+        if (abs(score) > MATE - 200) {
+            int mate_in = (score > 0) ? (MATE - score + 1) / 2 : -(MATE + score) / 2;
+            cout << " score mate " << mate_in;
+        } else {
+            cout << " score cp " << score;
+        }
+        cout << " nodes " << nodes_searched << " time " << elapsed;
         if (best_move.from != 255) cout << " pv " << move_to_uci(best_move);
         cout << endl;
     }
@@ -1493,8 +1499,14 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
 
         auto now = chrono::steady_clock::now();
         auto elapsed = chrono::duration_cast<chrono::milliseconds>(now - search_start).count();
-        cout << "info depth " << depth << " score cp " << score
-             << " nodes " << nodes_searched
+        cout << "info depth " << depth;
+        if (abs(score) > MATE - 200) {
+            int mate_in = (score > 0) ? (MATE - score + 1) / 2 : -(MATE + score) / 2;
+            cout << " score mate " << mate_in;
+        } else {
+            cout << " score cp " << score;
+        }
+        cout << " nodes " << nodes_searched
              << " time " << elapsed
              << " pv " << move_to_uci(best_move) << endl;
 
@@ -1511,7 +1523,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     init_zobrist();
-    tt_init(64);
+    tt_init(128);
     init_book();
     Board board;
     parse_fen(board, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
@@ -1526,12 +1538,13 @@ int main() {
         if (tok == "uci") {
             cout << "id name ClaudeEngine 1.0" << endl;
             cout << "id author Claude" << endl;
-            cout << "option name Hash type spin default 64 min 1 max 1024" << endl;
+            cout << "option name Hash type spin default 128 min 1 max 1024" << endl;
             cout << "uciok" << endl;
         } else if (tok == "isready") {
             cout << "readyok" << endl;
         } else if (tok == "ucinewgame") {
-            tt_init(64);
+            // Just clear TT contents, not reallocate.
+            for (auto& e : TT) e = TTEntry{};
             parse_fen(board, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             rep_history.clear();
             rep_history.push_back(board.hash);
