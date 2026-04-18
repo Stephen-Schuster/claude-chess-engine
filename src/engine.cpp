@@ -1752,7 +1752,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     init_zobrist();
-    tt_init(128);
+    tt_init(256);
     init_book();
     init_lmr_table();
     Board board;
