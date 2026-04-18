@@ -998,6 +998,10 @@ static int MAX_PLY = 64;
 
 static Move killers[128][2];
 static int history_h[13][128]; // [piece+6][to]
+// Counter-move table: indexed by [prev_piece+6][prev_to]
+static Move counter_move[13][128];
+// Per-ply stack of the move made to reach each ply (ply 0 = "prev move before search")
+static Move move_stack[130];
 
 static atomic<bool> stop_search{false};
 static chrono::steady_clock::time_point search_start;
@@ -1039,6 +1043,18 @@ static int move_score(const Board& b, const Move& m, const Move& tt_best, int pl
     if (m.promo != 0) return 90000 + abs(m.promo);
     if (killers[ply][0].from == m.from && killers[ply][0].to == m.to) return 80000;
     if (killers[ply][1].from == m.from && killers[ply][1].to == m.to) return 70000;
+    // Counter-move bonus
+    if (ply > 0) {
+        const Move& prev = move_stack[ply];
+        if (prev.from != 255) {
+            // piece that made the prev move is now at prev.to
+            int pp = b.piece[prev.to];
+            if (pp != 0) {
+                const Move& cm = counter_move[pp + 6][prev.to];
+                if (cm.from == m.from && cm.to == m.to && cm.promo == m.promo) return 65000;
+            }
+        }
+    }
     int p = b.piece[m.from];
     return history_h[p + 6][m.to];
 }
@@ -1260,6 +1276,15 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         }
     }
 
+    // Forward futility pruning flag: at shallow depth if static_eval + margin <= alpha,
+    // we can skip quiet moves that can't raise alpha.
+    bool futile = false;
+    int futility_margin = 0;
+    if (!in_chk && depth <= 3 && ply > 0 && abs(alpha) < MATE - 200) {
+        futility_margin = 90 + 80 * depth;
+        if (static_eval + futility_margin <= alpha) futile = true;
+    }
+
     // Internal Iterative Deepening: if no TT move at deeper depths, do a shallow search to get one.
     if (tt_best.from == 255 && depth >= 5 && !in_chk) {
         search(b, depth - 2, alpha, beta, ply, false);
@@ -1288,6 +1313,10 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
             && move_count >= LMP[depth]) {
             continue;
         }
+        // Forward futility pruning: skip quiet moves that can't raise alpha at shallow depth
+        if (futile && is_quiet && move_count > 0 && best > -MATE + 200) {
+            continue;
+        }
         // SEE pruning for captures at low depth
         if (depth <= 4 && m.captured != 0 && best > -MATE + 200) {
             if (see(b, m) < -50 * depth) continue;
@@ -1298,6 +1327,7 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         legal++;
         move_count++;
         rep_history.push_back(b.hash);
+        move_stack[ply + 1] = m;
         int score;
         // LMR
         int new_depth = depth - 1;
@@ -1346,6 +1376,14 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
                     for (int i = 0; i < 13; i++)
                         for (int j = 0; j < 128; j++)
                             history_h[i][j] /= 2;
+                }
+                // Counter-move: reply to previous move
+                if (ply > 0) {
+                    const Move& prev = move_stack[ply];
+                    if (prev.from != 255) {
+                        int pp = b.piece[prev.to];
+                        if (pp != 0) counter_move[pp + 6][prev.to] = m;
+                    }
                 }
             }
             break;
@@ -1575,6 +1613,9 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
     nodes_searched = 0;
     memset(killers, 0, sizeof(killers));
     memset(history_h, 0, sizeof(history_h));
+    for (int i = 0; i < 13; i++)
+        for (int j = 0; j < 128; j++) counter_move[i][j].from = 255;
+    for (auto& m : move_stack) { m.from = 255; m.to = 0; m.promo = 0; m.captured = 0; }
 
     Move best_move{}; best_move.from = 255;
     int best_score = 0;
