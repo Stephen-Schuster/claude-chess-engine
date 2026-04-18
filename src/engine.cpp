@@ -1768,7 +1768,7 @@ int main() {
         if (tok == "uci") {
             cout << "id name ClaudeEngine 1.0" << endl;
             cout << "id author Claude" << endl;
-            cout << "option name Hash type spin default 128 min 1 max 1024" << endl;
+            cout << "option name Hash type spin default 256 min 1 max 1024" << endl;
             cout << "uciok" << endl;
         } else if (tok == "isready") {
             cout << "readyok" << endl;
