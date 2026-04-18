@@ -219,6 +219,7 @@ static inline bool in_check(const Board& b, int side) {
 
 // Generate pseudo-legal moves for side to move
 static void gen_moves(const Board& b, vector<Move>& out, bool captures_only = false) {
+    out.reserve(64);
     int us = b.side;
     int them = us ^ 1;
     int sign = (us == WHITE) ? 1 : -1;
@@ -1367,12 +1368,10 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         if (static_eval + futility_margin <= alpha) futile = true;
     }
 
-    // Internal Iterative Deepening: if no TT move at deeper depths, do a shallow search to get one.
-    if (tt_best.from == 255 && depth >= 5 && !in_chk) {
-        search(b, depth - 2, alpha, beta, ply, false);
-        TTEntry* tte2 = tt_probe(b.hash);
-        if (tte2) tt_best = tte2->best;
-        if (time_up()) return 0;
+    // Internal Iterative Reduction: if no TT move at deeper depths, reduce depth
+    // instead of doing a full shallow search. Cheaper and usually similar strength.
+    if (tt_best.from == 255 && depth >= 4 && !in_chk) {
+        depth--;
     }
 
     vector<Move> moves;
