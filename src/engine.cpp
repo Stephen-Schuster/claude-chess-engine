@@ -1021,6 +1021,22 @@ static Move counter_move[13][128];
 // Per-ply stack of the move made to reach each ply (ply 0 = "prev move before search")
 static Move move_stack[130];
 
+// Log-based LMR reduction table: LMR_TABLE[depth][move_count]
+static int LMR_TABLE[64][64];
+
+static void init_lmr_table() {
+    for (int d = 0; d < 64; d++) {
+        for (int m = 0; m < 64; m++) {
+            if (d == 0 || m == 0) { LMR_TABLE[d][m] = 0; continue; }
+            // Classic formula: 0.75 + log(d)*log(m)/2.25
+            double r = 0.75 + log((double)d) * log((double)m) / 2.25;
+            int ir = (int)r;
+            if (ir < 0) ir = 0;
+            LMR_TABLE[d][m] = ir;
+        }
+    }
+}
+
 static atomic<bool> stop_search{false};
 static chrono::steady_clock::time_point search_start;
 static long long time_limit_ms = 0;
@@ -1350,16 +1366,19 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         // LMR
         int new_depth = depth - 1;
         int reduction = 0;
-        if (depth >= 3 && move_count > 3 && is_quiet && !in_chk) {
-            // base reduction grows with depth and move count
-            reduction = 1;
-            if (move_count > 6) reduction = 2;
-            if (depth >= 6 && move_count > 12) reduction = 3;
+        if (depth >= 3 && move_count > 1 && is_quiet && !in_chk) {
+            int di = min(depth, 63);
+            int mi = min(move_count, 63);
+            reduction = LMR_TABLE[di][mi];
             // History-based adjustment: good history => reduce less; bad => reduce more
-            int piece_signed = b.piece[m.to]; // after make_move, the moved piece is at m.to
+            int piece_signed = b.piece[m.to]; // after make_move, moved piece at m.to
             int hist = history_h[piece_signed + 6][m.to];
             if (hist > 8000) reduction = max(0, reduction - 1);
             else if (hist < 0) reduction += 1;
+            // Don't reduce killer moves as aggressively
+            if ((killers[ply][0].from == m.from && killers[ply][0].to == m.to) ||
+                (killers[ply][1].from == m.from && killers[ply][1].to == m.to))
+                reduction = max(0, reduction - 1);
             // don't reduce below 0, don't reduce past the remaining depth
             if (reduction < 0) reduction = 0;
             if (reduction >= new_depth) reduction = max(0, new_depth - 1);
@@ -1730,6 +1749,7 @@ int main() {
     init_zobrist();
     tt_init(128);
     init_book();
+    init_lmr_table();
     Board board;
     parse_fen(board, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     rep_history.clear();
