@@ -1768,6 +1768,8 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
         cout << endl;
     }
 
+    Move prev_best{}; prev_best.from = 255;
+    int stable_count = 0;
     for (int depth = 2; depth <= max_depth; depth++) {
         // If no best move (stalemate/mate), stop iterating.
         if (best_move.from == 255) break;
@@ -1800,6 +1802,13 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
 
         TTEntry* tte = tt_probe(b.hash);
         if (tte && tte->best.from != 255) {
+            if (prev_best.from == tte->best.from && prev_best.to == tte->best.to
+                && prev_best.promo == tte->best.promo) {
+                stable_count++;
+            } else {
+                stable_count = 0;
+            }
+            prev_best = tte->best;
             best_move = tte->best;
             best_score = score;
         }
@@ -1819,8 +1828,14 @@ static Move iterative_deepening(Board& b, int max_depth, long long time_ms) {
 
         // Early exit if we found mate
         if (abs(score) > MATE - 200) break;
-        // time cutoff: if used > 50% of time, next iter likely won't finish
-        if (time_ms > 0 && elapsed * 2 > time_ms) break;
+        // Adaptive time cutoff:
+        //   - If best move has been stable >=4 iterations, stop at 30% of time.
+        //   - If unstable (changed in last iter), allow up to 70% of time.
+        //   - Otherwise default 50% threshold.
+        if (time_ms > 0) {
+            long long pct = (stable_count >= 4) ? 30 : (stable_count == 0 ? 70 : 50);
+            if (elapsed * 100 > time_ms * pct) break;
+        }
     }
     return best_move;
 }
