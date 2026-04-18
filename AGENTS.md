@@ -101,3 +101,54 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+## Claude notes
+
+### Engine architecture (as of 2026-04-18)
+- Single-file C++17 engine in `src/engine.cpp` (~1930 lines). Built with
+  `g++ -O3 -march=native -std=c++17 -DNDEBUG -flto -o engine/engine src/engine.cpp`.
+- 0x88 mailbox board (NOT bitboards). `engine/run.sh` is the orchestrator
+  entrypoint and auto-builds when the source is newer than the binary.
+- Features: alpha-beta PVS, 256MB TT, killers(+aging-history/2 across searches),
+  counter-move, null-move (R=2+d/4), LMR (log-based 0.75+log(d)log(m)/2.25,
+  PV/killer/history tweaks), LMP, RFP (100*d), razoring, forward futility,
+  IID, SEE-capture pruning, aspiration windows (window=50, ±200 widen),
+  check extension at node level, stalemate/insufficient-material detection,
+  opening book (FEN piece-placement+side keyed, e4/d4/c4/Nf3 main lines).
+- Evaluation: material+PST, passed pawns, doubled/isolated pawns, mobility,
+  weighted king-safety attackers (quadratic danger), bishop pair, knight
+  outposts, rook on 7th, mop-up endgame, tempo=10, 50-move scaling.
+
+### Testing methodology
+- Perft sanity: `echo -e "position startpos\nperft 4\nquit" | ./engine/engine`
+  must print `total: 197281`.
+- Self-play smoke: `/opt/chess-venv/bin/python3 tests/selfplay.py` should
+  reach 80 plies clean.
+- A/B: `tests/match.py engine_A engine_B N movetime_ms` — USE 300ms or more;
+  150ms is too noisy. 10 games is still noisy — results in the 4.5-5.5 to
+  5.5-4.5 range are within noise.
+
+### Tried and reverted (all at 300ms, 6-10 games)
+- Passed-pawn 7th-rank extension + 6th-rank LMR skip: 2.5-3.5 (v13).
+- Per-move check extension (node-level extension already exists): 4.5-5.5 (v14).
+- SEE-based losing-capture demotion in move ordering: 4.5-5.5 (v15).
+- `improving` flag on RFP margin only: 4.5-5.5 (v17b).
+- `improving` flag on LMR + RFP combined: 5-5 (v17).
+- Mate distance pruning (pure pruning, shouldn't regress): 4.5-5.5 (v19) —
+  almost certainly noise; may retry in a longer match.
+
+### Committed wins
+- History aging (/2) across searches instead of wiping: 5.5-4.5 vs v12 baseline.
+- TT 256MB default: no measurable change at short TC, should help in 15-min games.
+- `engine/run.sh` entrypoint added (was missing; orchestrator requires it).
+- `.gitignore` updated to stop ignoring the `engine/` directory.
+
+### Current baseline: `engine/engine_v18_baseline` (main after 72303ed)
+
+### Ideas not yet tried
+- Larger aspiration window growth (exponential: 50, 200, 800, INF).
+- Static-exchange evaluation on check escapes in qsearch.
+- Opening book expansion (Sicilian main lines, QGD, KID).
+- Eval tuning by automated self-play tournament (would need more time).
+- Multi-cut / prob-cut (advanced, risky).
+- Delta pruning margin tuning (currently 200).
