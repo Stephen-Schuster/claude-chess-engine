@@ -698,6 +698,38 @@ static int evaluate(const Board& b) {
                 int bonus = (m - 4) * 4;
                 if (is_white) { mg_w += bonus; eg_w += bonus; }
                 else          { mg_b += bonus; eg_b += bonus; }
+                // Outpost: knight on rank 4-6 (for white) defended by own pawn and not attackable by enemy pawns.
+                int home_rank = is_white ? r : 7 - r;
+                if (home_rank >= 3 && home_rank <= 5) {
+                    // Defended by own pawn?
+                    int behind_l = is_white ? s - 17 : s + 17;
+                    int behind_r = is_white ? s - 15 : s + 15;
+                    int own_pawn = is_white ? PAWN : -PAWN;
+                    bool defended = (sq_valid(behind_l) && b.piece[behind_l] == own_pawn) ||
+                                    (sq_valid(behind_r) && b.piece[behind_r] == own_pawn);
+                    if (defended) {
+                        // Not attackable by enemy pawn (no enemy pawn on adjacent file that can reach)
+                        bool attackable = false;
+                        for (int df = -1; df <= 1; df += 2) {
+                            int ff = f + df;
+                            if (ff < 0 || ff > 7) continue;
+                            if (is_white) {
+                                for (int rr = r + 1; rr <= 7; rr++) {
+                                    if (b.piece[sq_make(rr, ff)] == -PAWN) { attackable = true; break; }
+                                }
+                            } else {
+                                for (int rr = r - 1; rr >= 0; rr--) {
+                                    if (b.piece[sq_make(rr, ff)] == PAWN) { attackable = true; break; }
+                                }
+                            }
+                            if (attackable) break;
+                        }
+                        if (!attackable) {
+                            if (is_white) { mg_w += 20; eg_w += 15; }
+                            else          { mg_b += 20; eg_b += 15; }
+                        }
+                    }
+                }
             } else if (ap == BISHOP || ap == ROOK || ap == QUEEN) {
                 const int* dirs; int nd;
                 if (ap == BISHOP) { dirs = BISHOP_DIRS; nd = 4; }
@@ -1116,6 +1148,15 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         if (static_eval - 100 * depth >= beta) return static_eval;
     }
 
+    // Razoring: at low depth, if eval + big margin < alpha, go directly to qsearch
+    if (!in_chk && depth <= 3 && ply > 0 && abs(alpha) < MATE - 200) {
+        int margin = 200 + 100 * depth;
+        if (static_eval + margin < alpha) {
+            int q = quiesce(b, alpha - margin, alpha - margin + 1, ply);
+            if (q + margin < alpha) return q;
+        }
+    }
+
     vector<Move> moves;
     gen_moves(b, moves, false);
     // order
@@ -1476,15 +1517,22 @@ int main() {
             }
             long long ttime = 0;
             if (movetime > 0) {
-                ttime = movetime - 50;
+                ttime = movetime - 30;
             } else {
                 long long mytime = (board.side == WHITE) ? wtime : btime;
                 long long myinc = (board.side == WHITE) ? winc : binc;
                 if (mytime > 0) {
-                    int mtg = movestogo > 0 ? movestogo : 30;
-                    ttime = mytime / mtg + myinc - 50;
-                    if (ttime > mytime / 2) ttime = mytime / 2;
-                    if (ttime < 50) ttime = 50;
+                    // Adaptive time allocation
+                    int mtg = movestogo > 0 ? movestogo : 25;
+                    // Use 1/mtg of remaining time plus ~80% of increment.
+                    ttime = mytime / mtg + (myinc * 4) / 5;
+                    // Don't use more than 1/3 of time on one move, with a buffer.
+                    long long max_use = mytime / 3;
+                    if (ttime > max_use) ttime = max_use;
+                    // Emergency: if very low on time, play fast.
+                    if (mytime < 2000) ttime = mytime / 10;
+                    ttime -= 30; // safety margin for communication
+                    if (ttime < 20) ttime = 20;
                 }
             }
             // Try opening book first
