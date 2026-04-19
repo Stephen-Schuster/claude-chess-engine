@@ -1226,33 +1226,41 @@ static int least_valuable_attacker(const Board& b, int sq, int by, int& piece_ou
 
 // SEE: returns material balance (from attacker's view) of making capture `m`.
 // Negative = losing. Uses iterative swap-off.
-static int see(Board b_copy, const Move& m) {
+// Mutates b.piece[] temporarily but restores all changes before returning.
+static int see(Board& b, const Move& m) {
     int to = m.to;
     int gain[32];
     int d = 0;
-    int attacker_piece = b_copy.piece[m.from];
-    int captured = b_copy.piece[to];
+    int attacker_piece = b.piece[m.from];
+    int captured = b.piece[to];
     gain[d] = see_piece_val(abs(captured));
     int on_square_val = see_piece_val(abs(attacker_piece));
-    // Handle promotion in initial move
     if (m.promo != 0) {
         gain[d] += see_piece_val(abs(m.promo)) - see_piece_val(PAWN);
         on_square_val = see_piece_val(abs(m.promo));
     }
-    // Apply the move
-    b_copy.piece[to] = (m.promo != 0) ? m.promo : attacker_piece;
-    b_copy.piece[m.from] = 0;
+    // Track squares we've modified so we can restore
+    int cleared_sqs[32];
+    int cleared_vals[32];
+    int nc = 0;
+    // Apply move: clear from, overwrite to
+    cleared_sqs[nc] = m.from; cleared_vals[nc] = attacker_piece; nc++;
+    cleared_sqs[nc] = to;     cleared_vals[nc] = captured;       nc++;
+    b.piece[m.from] = 0;
+    b.piece[to] = (m.promo != 0) ? m.promo : attacker_piece;
     int stm = (attacker_piece > 0) ? BLACK : WHITE;
     while (true) {
         int pp;
-        int afrom = least_valuable_attacker(b_copy, to, stm, pp);
+        int afrom = least_valuable_attacker(b, to, stm, pp);
         if (afrom == -1) break;
         d++;
         if (d >= 31) break;
         gain[d] = on_square_val - gain[d - 1];
         if (max(-gain[d - 1], gain[d]) < 0) break;
-        b_copy.piece[afrom] = 0;
-        b_copy.piece[to] = pp;
+        // Remove the attacker, place it on `to`
+        if (nc < 32) { cleared_sqs[nc] = afrom; cleared_vals[nc] = b.piece[afrom]; nc++; }
+        b.piece[afrom] = 0;
+        b.piece[to] = pp;
         on_square_val = see_piece_val(abs(pp));
         stm ^= 1;
     }
@@ -1260,6 +1268,8 @@ static int see(Board b_copy, const Move& m) {
         gain[d - 1] = -max(-gain[d - 1], gain[d]);
         d--;
     }
+    // Restore
+    for (int i = nc - 1; i >= 0; i--) b.piece[cleared_sqs[i]] = cleared_vals[i];
     return gain[0];
 }
 
