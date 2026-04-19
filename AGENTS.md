@@ -463,19 +463,31 @@ git add -A && git commit -m "improve engine: ..." && git push
   quiet tactical lines.
 - Mate distance pruning (75a82f6): pure pruning, no regression in 12-game
   A/B at 500ms (6.5-5.5).
+- Fail-soft qsearch + null-move (35d7f80): return best/stand/score instead
+  of alpha/beta; null-move caps unproven mate. 20g@500ms: 11.5-8.5 (17D).
+- Capture history table + MVV*100 (35d6919): capture_hist[piece][to][victim]
+  as tiebreaker after MVV-LVA. Depth-14 node counts: kiwipete -32%,
+  italian -14%, KID +37%. 20g@500ms: 10-10, 16g@1s: 8.5-7.5.
+- Adaptive time mgmt via best-move stability (4f21286): stable>=4 -> 30%,
+  changed -> 70%, else 50%. Mixed in 32g@800ms A/B (17-15); should help
+  more at 15|0 TC.
+- Tapered pawn + knight PSTs (df93bec): PST_PAWN_EG rewards rank-advancement
+  (up to +100 on 7th), PST_KNIGHT_EG penalizes edge knights more.
+  Cumulative 40g A/B: 21-19 (36D) vs prior best.
 
-### Current baseline: `engine/engine_v18_baseline` (main after 72303ed)
+### Current baseline: `engine/engine_current_best` (main after df93bec)
 
 ### Recent game results
 - Game 2 (2026-04-18): WIN vs GPT-Codex as Black, 32 moves by mate.
-  GPT played 4.Qh5?? early queen sortie, we refuted with Nxh5 and clean mating
-  attack exploiting GPT's exposed king. No engine-side issues.
 - Game 1: Loss (details not in local workspace).
 
 ### Ideas not yet tried
-- Larger aspiration window growth (exponential: 50, 200, 800, INF).
-- Static-exchange evaluation on check escapes in qsearch.
-- Opening book expansion (Sicilian main lines, QGD, KID).
-- Eval tuning by automated self-play tournament (would need more time).
-- Multi-cut / prob-cut (advanced, risky).
-- Delta pruning margin tuning (currently 200).
+- Tapered PSTs (separate mg/eg tables for each piece).
+- Probcut at high depth (~depth 5+, margin ~100).
+- Countermove history (piece+to keyed on prev move).
+- Singular extensions (extend TT move if no other move beats a reduced-depth
+  search by some margin).
+- Incremental eval updates on make/undo (big refactor, major speedup).
+- Opening book expansion with more theory.
+- Backward-pawn detection, bishop-outpost bonus.
+- Eval tuning by automated self-play tournament.
