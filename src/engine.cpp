@@ -1744,6 +1744,12 @@ static void init_book() {
     // 1.e4 c6 Caro-Kann
     add("rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
     add("rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "e4d5"});
+    // Caro-Kann Advance: 1.e4 c6 2.d4 d5 3.e5 -> 3...Bf5 (main, NOT 3...e6 which blocks bishop)
+    add("rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b", {"c8f5", "c7c5"});
+    // After 3...Bf5 4.Nf3 (main) or 4.Nc3 or 4.h4
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP2PPP/RNBQKBNR w", {"g1f3", "b1c3", "h2h4", "c2c3"});
+    // Caro-Kann Exchange: 3.exd5 cxd5
+    add("rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PPP2PPP/RNBQKBNR b", {"c6d5"});
 
     // 1.d4 d5
     add("rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
