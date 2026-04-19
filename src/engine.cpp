@@ -1790,6 +1790,29 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b", {"b8c6", "f8d6"});
     // Petroff Four Knights transposition: 3.Nc3 Nc6 (sane development)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
+
+    // Sicilian Kan/Taimanov/Scheveningen - addresses game 18 collapse
+    // 1.e4 c5 2.Nf3 e6 -> 3.d4 (main)
+    add("rnbqkbnr/pp1p1ppp/4p3/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4", "b1c3"});
+    // 3.d4 cxd4 (forced best)
+    add("rnbqkbnr/pp1p1ppp/4p3/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R b", {"c5d4"});
+    // 4.Nxd4 - main Black choices: a6 (Kan), Nc6 (Taimanov), Nf6 (Sicilian Four Knights)
+    // AVOID 4...Bb4? and any early ...Kf8 nonsense
+    add("rnbqkbnr/pp1p1ppp/4p3/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "a7a6", "b8c6"});
+    // 4...Nf6 5.Nc3 - main line, develop with d6 (Scheveningen), avoid 5...Bb4
+    add("rnbqkb1r/pp1p1ppp/4pn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d7d6", "b8c6", "a7a6"});
+    // 5...d6 6.Be2 / 6.f3 / 6.g4 - develop naturally
+    add("rnbqkb1r/pp3ppp/3ppn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "g2g4", "c1e3"});
+    // 6.Be2 Be7 (solid Scheveningen setup)
+    add("rnbqkb1r/pp3ppp/3ppn2/8/3NP3/2N5/PPP1BPPP/R1BQK2R b", {"f8e7", "a7a6"});
+    // 4...a6 5.Nc3 (Kan)
+    add("rnbqkbnr/1p1p1ppp/p3p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d8c7", "g8f6", "b7b5"});
+    // Kan 5...Qc7 6.Bd3 (main)
+    add("rnb1kbnr/1pqp1ppp/p3p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1d3", "f1e2", "g2g3"});
+    // 4...Nc6 5.Nc3 (Taimanov)
+    add("r1bqkbnr/pp1p1ppp/2n1p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d8c7", "g8f6", "a7a6"});
+    // Taimanov 5...Qc7 6.Be3 / 6.Be2 / 6.g3
+    add("r1b1kbnr/ppqp1ppp/2n1p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "g2g3"});
 }
 
 static Move try_book_move(Board& b) {
