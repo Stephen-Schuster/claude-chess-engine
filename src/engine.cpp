@@ -1796,8 +1796,31 @@ static void init_book() {
     add("r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
     // Sicilian Dragon: 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6
     add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
-    // French Winawer: 1.e4 e6 2.d4 d5 3.Nc3 Bb4
-    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"f8b4", "g8f6", "d5e4"});
+    // French: 1.e4 e6 2.d4 d5 3.Nc3 -- Black choices: Nf6 (Classical), Bb4 (Winawer), dxe4 (Rubinstein)
+    // AVOID any knight-to-edge nonsense; Classical main is 3...Nf6 4.e5 Nfd7 (NOT Ne4).
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"g8f6", "f8b4", "d5e4"});
+    // French Classical: 3...Nf6 -> 4.e5 (Steinitz) or 4.Bg5 (Classical main) or 4.exd5
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR w", {"e4e5", "c1g5", "e4d5"});
+    // 3...Nf6 4.e5 -> 4...Nfd7 (FORCED best; prevents Ne4?? game 20 disaster)
+    add("rnbqkb1r/ppp2ppp/4pn2/3pP3/3P4/2N5/PPP2PPP/R1BQKBNR b", {"f6d7"});
+    // 4.e5 Nfd7 -> 5.f4 (main Steinitz) or 5.Nce2 or 5.Nf3
+    add("rnbqkb1r/pppn1ppp/4p3/3pP3/3P4/2N5/PPP2PPP/R1BQKBNR w", {"f2f4", "b1e2", "g1f3"});
+    // 5.f4 c5 (main response)
+    add("rnbqkb1r/pppn1ppp/4p3/3pP3/3P1P2/2N5/PPP3PP/R1BQKBNR b", {"c7c5"});
+    // 5.f4 c5 6.Nf3 (main)
+    add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N5/PPP3PP/R1BQKBNR w", {"g1f3"});
+    // 6.Nf3 Nc6 (develop)
+    add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N2N2/PPP3PP/R1BQKB1R b", {"b8c6"});
+    // French Classical 4.Bg5 -> 4...Be7 (main) or 4...dxe4 (Burn) or 4...Bb4 (MacCutcheon)
+    add("rnbqkb1r/ppp2ppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"f8e7", "d5e4", "f8b4"});
+    // French Winawer: 3...Bb4
+    add("rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w", {"e4e5", "a2a3", "e4d5"});
+    // French Winawer 4.e5 c5 (classical)
+    add("rnbqk1nr/ppp2ppp/4p3/3pP3/1b1P4/2N5/PPP2PPP/R1BQKBNR b", {"c7c5"});
+    // French Exchange: 3...Nf6 4.exd5 exd5 5.Nf3
+    add("rnbqkb1r/ppp2ppp/5n2/3p4/3P4/2N5/PPP2PPP/R1BQKBNR w", {"g1f3", "c1g5", "f1d3"});
+    // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4
+    add("rnbqkbnr/ppp2ppp/4p3/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"b8d7", "g8f6"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
 
