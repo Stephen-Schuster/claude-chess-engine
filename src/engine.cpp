@@ -487,6 +487,28 @@ static const int PST_PAWN[64] = {
     50, 50, 50, 50, 50, 50, 50, 50,
      0,  0,  0,  0,  0,  0,  0,  0
 };
+// Pawn endgame: reward advancement heavily (passed pawns + king-pawn endings)
+static const int PST_PAWN_EG[64] = {
+     0,  0,  0,  0,  0,  0,  0,  0,
+     0,  0,  0,  0,  0,  0,  0,  0,
+    10, 10, 10, 10, 10, 10, 10, 10,
+    15, 15, 15, 15, 15, 15, 15, 15,
+    30, 30, 30, 30, 30, 30, 30, 30,
+    60, 60, 60, 60, 60, 60, 60, 60,
+   100,100,100,100,100,100,100,100,
+     0,  0,  0,  0,  0,  0,  0,  0
+};
+// Knight endgame: penalize edge knights even more; centralization matters in eg
+static const int PST_KNIGHT_EG[64] = {
+   -58,-38,-13,-28,-31,-27,-63,-99,
+   -25, -8,-25, -2, -9,-25,-24,-52,
+   -24,-20, 10,  9, -1, -9,-19,-41,
+   -17,  3, 22, 22, 22, 11,  8,-18,
+   -18, -6, 16, 25, 16, 17,  4,-18,
+   -23, -3, -1, 15, 10, -3,-20,-22,
+   -42,-20,-10, -5, -2,-20,-23,-44,
+   -29,-51,-23,-15,-22,-18,-50,-64
+};
 static const int PST_KNIGHT[64] = {
    -50,-40,-30,-30,-30,-30,-40,-50,
    -40,-20,  0,  5,  5,  0,-20,-40,
@@ -703,8 +725,8 @@ static int evaluate(const Board& b) {
             int val = PIECE_VAL[ap];
             int pst_mg = 0, pst_eg = 0;
             switch (ap) {
-                case PAWN:   pst_mg = pst_eg = PST_PAWN[idx]; break;
-                case KNIGHT: pst_mg = pst_eg = PST_KNIGHT[idx]; break;
+                case PAWN:   pst_mg = PST_PAWN[idx];   pst_eg = PST_PAWN_EG[idx]; break;
+                case KNIGHT: pst_mg = PST_KNIGHT[idx]; pst_eg = PST_KNIGHT_EG[idx]; break;
                 case BISHOP: pst_mg = pst_eg = PST_BISHOP[idx]; break;
                 case ROOK:   pst_mg = pst_eg = PST_ROOK[idx]; break;
                 case QUEEN:  pst_mg = pst_eg = PST_QUEEN[idx]; break;
