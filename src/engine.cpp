@@ -1760,6 +1760,26 @@ static void init_book() {
     add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"f8b4", "g8f6", "d5e4"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
+
+    // Petroff Defense: 1.e4 e5 2.Nf3 Nf6
+    // Note: avoid 3...Qe7?! and 3...Nxe4?? (game 8 disaster). Correct: 3...d6.
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f3e5", "b1c3"});
+    // After 3.Nxe5 -> 3...d6!
+    add("rnbqkb1r/pppp1ppp/5n2/4N3/4P3/8/PPPP1PPP/RNBQKB1R b", {"d7d6"});
+    // After 3...d6 -> 4.Nf3
+    add("rnbqkb1r/ppp2ppp/3p1n2/4N3/4P3/8/PPPP1PPP/RNBQKB1R w", {"e5f3"});
+    // After 4.Nf3 -> 4...Nxe4
+    add("rnbqkb1r/ppp2ppp/3p1n2/8/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"f6e4"});
+    // After 4...Nxe4 -> 5.d4 (or 5.Nc3, 5.Qe2)
+    add("rnbqkb1r/ppp2ppp/3p4/8/4n3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4", "b1c3", "d1e2"});
+    // After 5.d4 -> 5...d5 (main line)
+    add("rnbqkb1r/ppp2ppp/3p4/8/3Pn3/5N2/PPP2PPP/RNBQKB1R b", {"d6d5"});
+    // After 5...d5 -> 6.Bd3 (main line)
+    add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/5N2/PPP2PPP/RNBQKB1R w", {"f1d3"});
+    // After 6.Bd3 -> 6...Nc6 or 6...Bd6
+    add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b", {"b8c6", "f8d6"});
+    // Petroff Four Knights transposition: 3.Nc3 Nc6 (sane development)
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
 }
 
 static Move try_book_move(Board& b) {
