@@ -529,6 +529,17 @@ static const int PST_BISHOP[64] = {
    -10,  0,  0,  0,  0,  0,  0,-10,
    -20,-10,-10,-10,-10,-10,-10,-20
 };
+// Bishop endgame: similar but with tighter edges and better centralization
+static const int PST_BISHOP_EG[64] = {
+   -14,-21,-11, -8, -7, -9,-17,-24,
+    -8, -4,  7,-12, -3,-13, -4,-14,
+     2, -8,  0, -1, -2,  6,  0,  4,
+    -3,  9, 12,  9, 14, 10,  3,  2,
+    -6,  3, 13, 19,  7, 10, -3, -9,
+   -12, -3,  8, 10, 13,  3, -7,-15,
+   -14,-18, -7, -1,  4, -9,-15,-27,
+   -23, -9,-23, -5, -9,-16, -5,-17
+};
 static const int PST_ROOK[64] = {
      0,  0,  5, 10, 10,  5,  0,  0,
     -5,  0,  0,  0,  0,  0,  0, -5,
@@ -538,6 +549,17 @@ static const int PST_ROOK[64] = {
     -5,  0,  0,  0,  0,  0,  0, -5,
      5, 10, 10, 10, 10, 10, 10,  5,
      0,  0,  0,  0,  0,  0,  0,  0
+};
+// Rook endgame: bonuses for 7th rank and central files remain useful; values slightly larger
+static const int PST_ROOK_EG[64] = {
+    -9,  2,  3, -1, -5,-13,  4,-20,
+    -6, -6,  0,  2, -9, -9,-11, -3,
+    -4,  0, -5, -1, -7,-12, -8,-16,
+     3,  5,  8,  4, -5, -6, -8,-11,
+     4,  3, 13,  1,  2,  1, -1,  2,
+     7,  7,  7,  5,  4, -3, -5, -3,
+    11, 13, 13, 11,  -3,  3,  8,  3,
+    13, 10, 18, 15, 12, 12,  8,  5
 };
 static const int PST_QUEEN[64] = {
    -20,-10,-10, -5, -5,-10,-10,-20,
@@ -727,8 +749,8 @@ static int evaluate(const Board& b) {
             switch (ap) {
                 case PAWN:   pst_mg = PST_PAWN[idx];   pst_eg = PST_PAWN_EG[idx]; break;
                 case KNIGHT: pst_mg = PST_KNIGHT[idx]; pst_eg = PST_KNIGHT_EG[idx]; break;
-                case BISHOP: pst_mg = pst_eg = PST_BISHOP[idx]; break;
-                case ROOK:   pst_mg = pst_eg = PST_ROOK[idx]; break;
+                case BISHOP: pst_mg = PST_BISHOP[idx]; pst_eg = PST_BISHOP_EG[idx]; break;
+                case ROOK:   pst_mg = PST_ROOK[idx];   pst_eg = PST_ROOK_EG[idx]; break;
                 case QUEEN:  pst_mg = pst_eg = PST_QUEEN[idx]; break;
                 case KING:   pst_mg = PST_KING_MG[idx]; pst_eg = PST_KING_EG[idx]; break;
             }
