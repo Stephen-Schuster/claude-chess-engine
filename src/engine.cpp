@@ -1382,6 +1382,42 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         if (static_eval - 100 * depth >= beta) return static_eval;
     }
 
+    // ProbCut: at high depth, look for a capture that fails high at reduced depth
+    // against a raised beta. If found, we can likely cut. Standard technique.
+    if (!in_chk && depth >= 6 && ply > 0 && abs(beta) < MATE - 200
+        && !(tt_hit && tte->depth >= depth - 3 && tte->score < beta + 150)) {
+        int raised_beta = beta + 150;
+        if (raised_beta < MATE - 200) {
+            vector<Move> moves;
+            gen_moves(b, moves, true); // captures only
+            sort(moves.begin(), moves.end(), [&](const Move& a, const Move& c) {
+                return move_score(b, a, tt_best, ply) > move_score(b, c, tt_best, ply);
+            });
+            for (const Move& m : moves) {
+                if (m.captured == 0) continue;
+                // Require clearly-winning capture by SEE
+                if (see(b, m) < 50) continue;
+                Undo u;
+                make_move(b, m, u);
+                if (in_check(b, b.side ^ 1)) { undo_move(b, m, u); continue; }
+                rep_history.push_back(b.hash);
+                move_stack[ply + 1] = m;
+                // Quick qsearch verification first
+                int score = -quiesce(b, -raised_beta, -raised_beta + 1, ply + 1);
+                // If qsearch already beats raised_beta, do reduced search to confirm
+                if (score >= raised_beta) {
+                    score = -search(b, depth - 4, -raised_beta, -raised_beta + 1, ply + 1, true);
+                }
+                rep_history.pop_back();
+                undo_move(b, m, u);
+                if (time_up()) return 0;
+                if (score >= raised_beta) {
+                    return score; // fail-soft probcut
+                }
+            }
+        }
+    }
+
     // Razoring: at low depth, if eval + big margin < alpha, go directly to qsearch
     if (!in_chk && depth <= 3 && ply > 0 && abs(alpha) < MATE - 200) {
         int margin = 200 + 100 * depth;
