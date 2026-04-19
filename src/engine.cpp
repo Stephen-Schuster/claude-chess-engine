@@ -571,6 +571,17 @@ static const int PST_QUEEN[64] = {
    -10,  0,  0,  0,  0,  0,  0,-10,
    -20,-10,-10, -5, -5,-10,-10,-20
 };
+// Queen endgame: centralization matters a lot; reward active queen
+static const int PST_QUEEN_EG[64] = {
+    -9,-18,-14,-20,  0,-19,-30,-42,
+   -14, 14, -5,  1,  6, -8,-14,-16,
+    -6,  4,  8,  9, 17, 10, 20,  8,
+     3, 18, 15, 33, 33, 21, 34, 24,
+    -2, 20, 14, 33, 26, 28, 27, 27,
+    -7,-13, 10,  2,  6,  9, 12,  9,
+   -18,-20,-23,-14,-14,-25,-30,-34,
+   -26,-26,-30,-39,-18,-30,-25,-33
+};
 static const int PST_KING_MG[64] = {
     20, 30, 10,  0,  0, 10, 30, 20,
     20, 20,  0,  0,  0,  0, 20, 20,
@@ -751,7 +762,7 @@ static int evaluate(const Board& b) {
                 case KNIGHT: pst_mg = PST_KNIGHT[idx]; pst_eg = PST_KNIGHT_EG[idx]; break;
                 case BISHOP: pst_mg = PST_BISHOP[idx]; pst_eg = PST_BISHOP_EG[idx]; break;
                 case ROOK:   pst_mg = PST_ROOK[idx];   pst_eg = PST_ROOK_EG[idx]; break;
-                case QUEEN:  pst_mg = pst_eg = PST_QUEEN[idx]; break;
+                case QUEEN:  pst_mg = PST_QUEEN[idx];  pst_eg = PST_QUEEN_EG[idx]; break;
                 case KING:   pst_mg = PST_KING_MG[idx]; pst_eg = PST_KING_EG[idx]; break;
             }
             if (is_white) { mg_w += val + pst_mg; eg_w += val + pst_eg; }
