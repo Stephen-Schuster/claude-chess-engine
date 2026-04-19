@@ -980,10 +980,40 @@ static int evaluate(const Board& b) {
     if (wk != -1) {
         int danger = king_zone_score(wk, BLACK);
         mg_w -= danger;
+        // Uncastled-king / lost-castling-rights penalty.
+        // White king not on g1/c1 (i.e. hasn't castled) and has no castle rights
+        // on the relevant side(s) means committed to a central/wandering king.
+        int wkr = sq_rank(wk), wkf = sq_file(wk);
+        bool w_castled = (wkr == 0 && (wkf == 6 || wkf == 2));
+        if (!w_castled) {
+            int rights = b.castle & 3; // WK=1, WQ=2
+            if (rights == 0) {
+                // Lost all castling rights without castling.
+                // Extra penalty if king is on a central file (d/e/f).
+                int pen = 22;
+                if (wkf >= 3 && wkf <= 5) pen += 10;
+                mg_w -= pen;
+            } else if (rights != 3) {
+                // Only one castling side remaining
+                mg_w -= 8;
+            }
+        }
     }
     if (bk != -1) {
         int danger = king_zone_score(bk, WHITE);
         mg_b -= danger;
+        int bkr = sq_rank(bk), bkf = sq_file(bk);
+        bool b_castled = (bkr == 7 && (bkf == 6 || bkf == 2));
+        if (!b_castled) {
+            int rights = (b.castle >> 2) & 3; // BK=4->bit0, BQ=8->bit1
+            if (rights == 0) {
+                int pen = 22;
+                if (bkf >= 3 && bkf <= 5) pen += 10;
+                mg_b -= pen;
+            } else if (rights != 3) {
+                mg_b -= 8;
+            }
+        }
     }
 
     int mg = mg_w - mg_b;
