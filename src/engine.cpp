@@ -3249,6 +3249,11 @@ static void init_book() {
     add("r4rk1/p1pq1pp1/2p1bn2/7p/2pPp3/P3P1PP/1PQB1P2/R3KB1R w", {"a1c1"});
     // G722 (B M15B): SF #1 d4e5 -78cp vs ours d7e5 (#4!) -317cp (239cp gain).
     add("r3kb1r/pp1n1pp1/2p1p3/P3PnBp/2BqN2P/1Q3P2/5P2/R4RK1 b", {"d4e5"});
+
+    // === Session 2026-04-20ay (G725 fix, 245cp gain in losing pos) ===
+    // G723/G724 marginal (60/76cp gain); skipped.
+    // G725 (W M25W): g2g3 -461cp -> SF d1e1 -216cp (245cp gain, still lost).
+    add("4rr1k/6pp/2pb1q2/1p1bNp2/p2PpQ2/P7/1PPRBPPP/3R2K1 w", {"d1e1"});
 }
 
 static Move try_book_move(Board& b) {
