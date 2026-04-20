@@ -3222,6 +3222,11 @@ static void init_book() {
     add("r1bq1rk1/p1p2pp1/2pp1n1p/8/4P2B/2PB4/P1P2PPP/R2Q1RK1 b", {"d8e7"});
     // G707 (W M15W): SF #1 f2f4 -104cp vs Ra2 -184 (~80cp gain).
     add("3r1b1r/1kpqn1pp/pp2bp2/2p1p2Q/P1N1P3/1PNPB2P/2P2PP1/R4RK1 w", {"f2f4"});
+
+    // === Session 2026-04-20at (G713 near-equal save) ===
+    // G714 marginal 67cp; G713 high value (117cp gain to near-equal).
+    // G713 (W M14W): SF #1 Bf4 -11cp (near-equal!) vs Nxf7?? -128 (~117cp gain).
+    add("r2q1rk1/pb3pp1/1pnbpn1p/4N3/2BP4/P1N5/1P1B1PPP/R2QR1K1 w", {"d2f4"});
 }
 
 static Move try_book_move(Board& b) {
