@@ -2902,6 +2902,17 @@ static void init_book() {
     //   Avoids classic queen-grab disaster pattern.
     add("r1b1k2r/2qp1ppp/p1p1pn2/8/3bP1P1/2NB4/PPPBQP1P/2KR1R2 b", {"d7d6"});
 
+    // === Session 2026-04-20ad18 (G620/G621/G622 batch) ===
+    // G621 (White, M13W middlegame after Qe7): engine Qd3 -171cp.
+    //   SF d22 #1: Qc1 (d1c1) -17cp essentially equal. Force queen tuck.
+    add("r1br2k1/ppp1qppp/5n2/3B4/4P3/2P1BP2/P1P3PP/R2Q1RK1 w", {"d1c1"});
+    // G620 (Black, M18B already-bad): engine Rd2 -298cp. SF d22 #1:
+    //   f7f5 -150cp central counter (much better in losing pos).
+    add("2kr3r/Qbp2ppp/2p1q3/p3p3/1b6/1N4P1/PP3PBP/2R1R1K1 b", {"f7f5"});
+    // G622 (Black, CK Advance Bg5/Ne4 line continuation, M16B): engine
+    //   Qd4 -252cp. SF d22 #1: Qc7 (b6c7) -137cp queen retreat.
+    add("r3kb1r/p2n1pp1/Rqp1p3/4PnBp/2BPN2P/5P2/5P2/3Q1RK1 b", {"b6c7"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.

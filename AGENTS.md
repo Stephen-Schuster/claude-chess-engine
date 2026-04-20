@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 591 | 97 |
+| Losses | 593 | 97 |
 | Draws | 18 | 3 |
 
-Total games played: **622**
+Total games played: **624**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0622.pgn`
+- PGN: `game_data/games/game_0624.pgn`
 
 ---
 
@@ -182,6 +182,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
 
 
 
@@ -1077,6 +1079,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 ### Session 2026-04-20ad17 (G618 queen-grab fix)
 - G618 (Black, Sicilian-like O-O-O setup M12B): Qxh2?? pawn-grab -203cp
   -> SF d6 (d7d6) -133cp solid development. Avoids classic queen-grab.
+
+### Session 2026-04-20ad18 (G620/G621/G622 batch)
+- G621 (White, M13W): Qd3?? -171cp -> SF Qc1 (d1c1) -17cp essentially
+  equal queen tuck.
+- G620 (Black, M18B already-bad): Rd2 -298cp -> SF f7f5 -150cp central
+  counter.
+- G622 (Black, CK Advance Bg5/Ne4 cont. M16B): Qd4?? -252cp -> SF Qc7
+  (b6c7) -137cp queen retreat.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame
