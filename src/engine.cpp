@@ -3424,6 +3424,14 @@ static void init_book() {
     // G808 DRAW as Black (28th lifetime draw); G806 marginal 48cp skipped.
     // G807 (W M21W): f4h6 -348cp -> SF f4h2 -208cp (140cp gain, losing pos).
     add("1brqr1k1/pb3pp1/1p5p/4Np1n/3P1B2/2N4P/PP1Q1PP1/2RR2K1 w", {"f4h2"});
+
+    // === Session 2026-04-20bz (G809/G810/G811 batch: 3 fixes, ~405cp gain) ===
+    // G809 (W M24W): d1d6 -423cp -> SF f5f4 -311cp (112cp gain, losing pos).
+    add("2r3k1/5pp1/2qp1n1p/p1p1rQ2/N3P3/pP5P/2P2PP1/3RR1K1 w", {"f5f4"});
+    // G810 (B M8B): d7d6 -59cp -> SF g7g6 +9cp (**engine has advantage!**) 68cp gain.
+    add("r1b1kb1r/p1ppqppp/2p5/3nP3/8/6P1/PPP1QP1P/RNB1KB1R b", {"g7g6"});
+    // G811 (W M40W): g4f3 -389cp -> SF b5b6 -164cp (225cp gain, losing pos).
+    add("6k1/4Bpp1/1p5p/1R2P3/2bP2K1/5r2/8/8 w", {"b5b6"});
 }
 
 static Move try_book_move(Board& b) {
