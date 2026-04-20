@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 428 | 96 |
-| Draws | 14 | 4 |
+| Losses | 445 | 97 |
+| Draws | 14 | 3 |
 
-Total games played: **455**
+Total games played: **472**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0455.pgn`
+- PGN: `game_data/games/game_0472.pgn`
 
 ---
 
@@ -182,6 +182,23 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -610,6 +627,17 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20aa (games 452-455 cleanup)
+- **Bug caught**: G453 "fix" from prior session added illegal move `b5c5`
+  (bishop cannot move sideways). Analysis had claimed +399cp but verified
+  SF only gives +4cp. Entry silently failed parse_move and was harmless, but
+  reverted anyway. Debug scaffolding in parse_move/try_book_move removed.
+- G455 (English 14.Qxb7 ... 16.Qxa8?? queen-blunder): SF confirms 16.f3
+  (-70cp, #2, close to h4 -63cp) vs Qxa8 losing queen for rook+piece.
+  Booked f2f3, verified it fires from the FEN.
+- **Lesson**: always verify SF scores at depth>=18 with MultiPV AND
+  sanity-check move legality with python-chess before adding book entries.
 
 ### Session 2026-04-20z (games 396-400 + Taimanov backfix)
 - **Taimanov backfix**: finally added book for g382 Taimanov Sicilian 5...a6
