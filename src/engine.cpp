@@ -1760,7 +1760,8 @@ static void init_book() {
 
     // 1.e4 c5 (Sicilian)
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
-    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "g7g6", "e7e6"});
+    // Drop g7g6 (Hyperaccelerated) - we lack Accelerated Dragon theory coverage (game 242 disaster)
+    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "e7e6"});
     // Open Sicilian: 1.e4 c5 2.Nf3 d6 3.d4
     add("rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
     // Najdorf intro
@@ -2009,6 +2010,10 @@ static void init_book() {
     add("r1bqkb1r/ppp2ppp/4pn2/8/3P4/2P2N2/PP3PPP/R1BQKB1R b", {"c7c5", "f8e7", "f8d6", "b7b6"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
+    // CK 3.Nc3 Black reply: 3...dxe4 (main) -- avoid 3...e6 drifty hybrid (game 246)
+    add("rnbqkbnr/pp2pppp/2p5/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"d5e4"});
+    // CK 3.Nc3 e6 4.Bd3 dxe4 5.Nxe4 (game 246): Black plays ...Nf6/Nd7, NEVER Qxd4 (Nf3->Neg5->Bg6+ mating attack)
+    add("rnbqkbnr/pp3ppp/2p1p3/8/3PN3/3B4/PPP2PPP/R1BQK1NR b", {"g8f6", "b8d7", "g8e7"});
 
     // Petroff Defense: 1.e4 e5 2.Nf3 Nf6
     // Note: avoid 3...Qe7?! and 3...Nxe4?? (game 8 disaster). Correct: 3...d6.
