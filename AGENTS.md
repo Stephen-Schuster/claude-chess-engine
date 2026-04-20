@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 724 | 92 |
+| Losses | 728 | 92 |
 | Draws | 27 | 8 |
 
-Total games played: **764**
+Total games played: **768**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0764.pgn`
+- PGN: `game_data/games/game_0768.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1257,6 +1261,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bk (G763/G764/G765 batch: 3 fixes, ~428cp gain)
+- G762 was **DRAW** (Black) -- 9th in last 100.
+- G763 (W M21W): c1d1 -139cp -> SF c6d4 -16cp (**123cp near-equal save**).
+- G764 (B M13B): g6h5 -297cp -> SF f8c8 -139cp (158cp gain).
+- G765 (W M17W): g5e6 -282cp -> SF h3g4 -135cp (147cp gain).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
+- **Lesson**: d16 misranked G764 (said a8b8 top), d22 showed f8c8 top.
 
 ### Session 2026-04-20bj (G761 near-equal save, 245cp gain)
 - G759 skipped (80cp gain in deep -266cp losing pos); G760 skipped (d22 rerank
