@@ -2853,6 +2853,22 @@ static void init_book() {
     //   f3g5 (Ng5) -113cp. SF d22 #1: f3e5 (Ne5) -1cp (equal!).
     add("r1bq1r1k/ppp1n1pp/3b4/5p2/2BPp3/5N2/PPP2PPP/R1BQ1RK1 w", {"f3e5"});
 
+    // === Session 2026-04-20ad13 (G604/G605/G606/G608 batch) ===
+    // G604 (Black, CK Advance Bb4 line, M11B): engine played Bxc3?? -192cp.
+    //   SF d22 #1: Nd5 (b6d5) +44cp (favors Black actually). Force Nd5
+    //   centralizing knight instead of giving up bishop pair.
+    add("r2qk1nr/pp3pp1/1np1p3/4P2p/Pb1P2bP/2N2N2/1P2BPP1/R1BQ1RK1 b", {"b6d5"});
+    // G605 (White, post Be4 Bg4 pin, M11W): engine played Qe3 -76cp.
+    //   SF d22 #1: Bxc6 (e4c6) -10cp (equal-ish). Force trade liquidating pin.
+    add("r4rk1/pppq1ppp/2nb4/4p3/4B1b1/3P1N2/PPP2PPP/R1B1QRK1 w", {"e4c6"});
+    // G606 (Black, French Tarrasch-like Nf4 line, M18B): engine played Qd8
+    //   -132cp. SF d22 #1: Qa5+ (b6a5) -80cp checking active.
+    add("r5k1/pp1n1pp1/1q2p3/3pPb2/3P1N1b/P3B3/1P3PP1/2QBK2R b", {"b6a5"});
+    // G608 (Black, French Burn-like 7.Be7 sac, M7B): engine played Qxe7
+    //   -145cp. SF d22 #1: Kxe7 (e8e7) -88cp; loses castling but better
+    //   than queen-recapture exposing diagonal. Note already-bad position.
+    add("rnbqk2r/pp1nBppp/4p3/2ppP3/3P3P/2N5/PPP2PP1/R2QKBNR b", {"e8e7"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.

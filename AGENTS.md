@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 577 | 96 |
+| Losses | 581 | 96 |
 | Draws | 18 | 4 |
 
-Total games played: **608**
+Total games played: **612**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0608.pgn`
+- PGN: `game_data/games/game_0612.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1033,6 +1037,16 @@ git add -A && git commit -m "improve engine: ..." && git push
   (h2h3) 0cp equal kicking Bg4.
 - G603 (White, Italian-like opening M13W): Ng5?? -113cp -> SF Ne5 (f3e5)
   -1cp equal.
+
+### Session 2026-04-20ad13 (G604/G605/G606/G608 batch)
+- G604 (Black, CK Advance Bb4 line M11B): Bxc3?? -192cp -> SF Nd5 (b6d5)
+  +44cp centralize knight, keep bishop pair.
+- G605 (White, post Be4 Bg4 pin M11W): Qe3?? -76cp -> SF Bxc6 (e4c6)
+  -10cp liquidates pin.
+- G606 (Black, French Tarrasch-like Nf4 M18B): Qd8?? -132cp -> SF Qa5+
+  (b6a5) -80cp active check.
+- G608 (Black, French Burn 7.Be7 sac M7B): Qxe7?? -145cp -> SF Kxe7
+  (e8e7) -88cp; loses castling but better.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame
