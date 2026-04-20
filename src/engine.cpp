@@ -1765,6 +1765,16 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "f8c5"});
     // 4...Nf6 5.Nc3 (Four Knights Scotch) -> ...Bb4 main, or ...Bc5
     add("r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"f8b4", "f8c5"});
+    // 5...Bb4: White's main is 6.Nxc6 bxc6 7.Bd3 d5 8.exd5 cxd5 9.O-O (equal).
+    //   Games 291/293: engine drifted into 7.Bg5/7.Qd4 losing plans. Book the mainline.
+    add("r1bqk2r/pppp1ppp/2n2n2/8/1b1NP3/2N5/PPP2PPP/R1BQKB1R w", {"d4c6"});
+    add("r1bqk2r/p1pp1ppp/2p2n2/8/1b2P3/2N5/PPP2PPP/R1BQKB1R w", {"f1d3", "f1d3", "f1d3", "d1d3"});
+    // After 7.Bd3 -> Black's main: 7...d5 8.exd5 cxd5 9.O-O O-O (symmetric, equal).
+    add("r1bqk2r/p1pp1ppp/2p2n2/8/1b2P3/2NB4/PPP2PPP/R1BQK2R b", {"d7d5", "e8g8"});
+    add("r1bqk2r/p1p2ppp/2p2n2/3p4/1b2P3/2NB4/PPP2PPP/R1BQK2R w", {"e4d5"});
+    add("r1bqk2r/p1p2ppp/2p2n2/3P4/1b6/2NB4/PPP2PPP/R1BQK2R b", {"c6d5"});
+    add("r1bqk2r/p1p2ppp/5n2/3p4/1b6/2NB4/PPP2PPP/R1BQK2R w", {"e1g1"});
+    add("r1bqk2r/p1p2ppp/5n2/3p4/1b6/2NB4/PPP2PPP/R1BQ1RK1 b", {"e8g8"});
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
@@ -2015,12 +2025,14 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/4pn2/6B1/3PN3/8/PPP2PPP/R2QKBNR b", {"f8e7", "b8d7"});
     // 5.Nxe4 Be7 6.Bxf6 Bxf6 (recapture with bishop)
     add("rnbqk2r/ppp1bppp/4pB2/8/3PN3/8/PPP2PPP/R2QKBNR b", {"e7f6"});
-    // 6.Bxf6 Bxf6 7.Nf3 -> 7...O-O main
-    add("rnbqk2r/ppp2ppp/4pb2/8/3PN3/5N2/PPP2PPP/R2QKB1R b", {"e8g8", "b8d7"});
+    // 6.Bxf6 Bxf6 7.Nf3 -> 7...O-O main (strongly prefer over Nd7 which led to game 292 loss)
+    add("rnbqk2r/ppp2ppp/4pb2/8/3PN3/5N2/PPP2PPP/R2QKB1R b", {"e8g8", "e8g8", "e8g8", "b8d7"});
     // 7.Nf3 O-O 8.Qd2 (game 286) or 8.Bd3 or 8.c3 -> 8...b6 fianchetto main, or 8...Nd7 9.c3 c5
     add("rnbq1rk1/ppp2ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/R3KB1R b", {"b7b6", "b8d7"});
-    // 8.Qd2 Nd7 9.O-O-O -> 9...c5! challenge center. NEVER 9...Be7?? retreating (game 286).
-    add("r1bq1rk1/pppn1ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/2KR1B1R b", {"c7c5"});
+    // 8.Qd2 Nd7 9.O-O-O (game 292): avoid 9...c5?? which allows 10.Nxf6+ Nxf6 11.dxc5 Qxd2+ 12.Nxd2
+    //   Ng4 13.Ne4 f5 14.h3 fxe4 15.hxg4 losing the knight. Better: 9...b6 fianchetto, or 9...a6/Qe7.
+    //   Leave this node unbooked so search picks (likely Qe7 keeping center tension).
+    // Upstream: reduce likelihood of reaching this position by strongly preferring 7.Nf3 O-O (line 2019).
     // 4.Bg5 Be7 -> 5.e5 Nfd7 (Classical Steinitz transposition)
     add("rnbqk2r/ppp1bppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R2QKBNR w", {"e4e5"});
     // 5.f4 c5 6.Nf3 (main)

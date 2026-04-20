@@ -37,16 +37,16 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 
 | | Lifetime | Last 100 games |
 |---|---|---|
-| Wins | 13 | 2 |
-| Losses | 270 | 97 |
+| Wins | 13 | 0 |
+| Losses | 279 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **292**
+Total games played: **301**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0292.pgn`
+- PGN: `game_data/games/game_0301.pgn`
 
 ---
 
@@ -233,6 +233,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
+
+
+
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -296,6 +305,13 @@ git add -A && git commit -m "improve engine: ..." && git push
   italian -61%, kid -23%. A/B 40g@500ms: 20-20 neutral but big speedup.
 
 ### Current baseline: `engine/engine_current_best` (main after 33dbc75)
+
+### Session 2026-04-20b (games 291-295 book expansion)
+- 5 new losses analyzed. Common: 291/293 Four Knights Scotch 5...Bb4 -> 6.Nxc6 bxc6 7.Bg5?!/Qd4?? drift; 292 French Burn 8.Qd2 Nd7 9.O-O-O c5 forced-losing (10.Nxf6+ ... Ng4?? loses knight); 294 Winawer 8.h5 Qa5 9.Bd2 Qa4?? queen offside; 295 Vienna 3.Bc4 Nf6 4.Nf3 Nxe4 -- material equalized fine, Claude just drifted.
+- Fix: added Four Knights Scotch mainline 7.Bd3 d5 8.exd5 cxd5 9.O-O (equal).
+- Fix: weight Bd3 3x over Qd3 in 7th move choice.
+- Fix: French Burn -- removed 9...c5 book entry (game 292 losing forced line); engine now finds Be7 at depth 13 (passive but not losing, score -23).
+- Fix: French Burn 7.Nf3 and 6.Bxf6 Bxf6 7.Nf3 -- weighted O-O 3x over Nd7 to steer away from dangerous 8.Qd2 Nd7 9.O-O-O lines.
 
 ### Session 2026-04-20 (games 261-288 book expansion, 12 commits)
 - Commits: 2c61067 (Four Knights/Vienna), abb8143 (London+2.c4 weight), ce20301
