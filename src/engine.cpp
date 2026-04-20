@@ -3156,6 +3156,25 @@ static void init_book() {
     add("r5k1/ppp2ppp/2q3r1/8/5B2/3P2Q1/PPP1bPPP/R3R1K1 w", {"g3h3"});  // G661 -11 vs Qg6 -106 (95cp gain)
     add("3rr1k1/pp1q1ppp/2n5/3np3/6b1/B1P3P1/P1QPNPBP/1R2R1K1 w", {"c2b3"});  // G659 -97 vs Qd3 ~-171
     add("r1b1kb1r/ppp2ppp/1qn1p3/8/3P4/2PB1N2/PP1B1PPP/R2QK2R b", {"a7a5"});  // G662 -157 vs Qxb2 -232
+
+    // === Session 2026-04-20al (G666-G674 batch, 8 fixes) ===
+    // (G669/G675/G677/G679 already losing -200+cp; G676 was DRAW.)
+    // G673 (W M12W): SF #1 c4e5 +20cp -- engine has advantage.
+    add("2r1k2r/pp1qbppp/2n1pn2/8/2Np1B2/6P1/PP2PPBP/R2Q1RK1 w", {"c4e5"});  // G673 +20 vs Bxc6 -55
+    // G674 (B M10B): SF #1 O-O-O +15cp -- equal.
+    add("r3k1nr/pp1nbpp1/1qp1p3/4PbBp/2BP3P/2N5/PP1QNPP1/R3K2R b", {"e8c8"});  // G674 +15 vs Bxg5 -76
+    // G667 (W M11W): SF #1 castle -7cp.
+    add("r2q1rk1/pp3ppp/2n2n2/2Pp3b/1b6/2NBPN1P/PP1B1PP1/R2QK2R w", {"e1g1"});  // G667 -7 vs g4 -67
+    // G672 (B M14B): Qd7 -67 vs exf5 -152 (85cp gain).
+    add("r2q1rk1/ppp1b1pp/2n1bp2/2Pp4/3P4/2P2N2/P3BPPP/R1BQ1RK1 b", {"d8d7"});  // G672
+    // G666 (B M11B): Rad8 -96 vs g5 -203 (107cp).
+    add("r4rk1/pppb1pp1/2nbpq1p/8/3P4/2P2N2/PPB2PPP/R1BQR1K1 b", {"a8d8"});  // G666
+    // G671 (W M14W): Be1 -67 vs a3 -176 (109cp).
+    add("r1b1r1k1/pp1nqp1p/2pb4/3p2p1/3Pn3/1QNBPN1P/PP1B1PP1/2RR2K1 w", {"d2e1"});  // G671
+    // G670 (B M19B): Nce5 -145 vs Nb4 -267 (122cp). Bad pos but big gain.
+    add("r3r1k1/p1pqbp1p/1pn1b1p1/3P4/2P5/3BB2P/P2N1PP1/1R1Q1RK1 b", {"c6e5"});  // G670
+    // G668 (B M17B): Rfe8 -126 vs Rd7 -190 (64cp).
+    add("1r1q1rk1/ppp1bppp/2n1bn2/6B1/3P4/P1N2N1P/1PB2PP1/R2QR1K1 b", {"f8e8"});  // G668
 }
 
 static Move try_book_move(Board& b) {

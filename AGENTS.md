@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 645 | 97 |
-| Draws | 20 | 3 |
+| Losses | 651 | 96 |
+| Draws | 21 | 4 |
 
-Total games played: **678**
+Total games played: **685**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0678.pgn`
+- PGN: `game_data/games/game_0685.pgn`
 
 ---
 
@@ -182,6 +182,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
 
 
 
@@ -1171,6 +1178,20 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20al (G666-G674 batch: 8 book fixes + 1 DRAW)
+- **G676 DRAW** (Black, French Tarrasch 3.Nd2 c5): forced perpetual via
+  Nc6+/Na7+ shuffling. 3rd draw in last 100.
+- G669/G675/G677/G679 already losing -200+cp; not booked.
+- G673 (W M12W): Bxc6 -55cp -> SF c4e5 (+20cp) **engine has advantage!**
+- G674 (B M10B): Bxg5 -76cp -> SF e8c8 (+15cp) **equal!**
+- G667 (W M11W): g4 -67cp -> SF e1g1 (-7cp) just castle (60cp gain).
+- G672 (B M14B): exf5 -152cp -> SF d8d7 (-67cp) (85cp gain).
+- G666 (B M11B): g5 -203cp -> SF a8d8 (-96cp) develop rook (107cp gain).
+- G671 (W M14W): a3 -176cp -> SF d2e1 (-67cp) regroup bishop (109cp gain).
+- G670 (B M19B): Nb4 -267cp -> SF c6e5 (-145cp) (122cp gain, bad pos).
+- G668 (B M17B): Rd7 -190cp -> SF f8e8 (-126cp) (64cp gain).
+- All verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20ak (search: history malus)
 - Added history malus on beta cutoffs in `search()` (~lines 1635, 1659, 1722).
