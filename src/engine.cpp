@@ -2891,6 +2891,11 @@ static void init_book() {
     //   SF d22 #1: Bd3 (f5d3) -94cp blocks rook + activates bishop.
     add("3r1k2/pb3p2/5p2/3p1B2/1b3P2/1Pp3NP/P1Pr2P1/3R1RK1 w", {"f5d3"});
 
+    // === Session 2026-04-20ad16 (G617) ===
+    // G617 (White, QID-like middlegame, M14W): engine Qc2 -202cp.
+    //   SF d22 #1: Qe2 (d1e2) -38cp. Force solid queen development.
+    add("r2q1rk1/pb1nbppp/1p2p3/8/3P4/P1BB1N2/1P3PPP/2RQ1RK1 w", {"d1e2"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
