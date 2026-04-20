@@ -3181,6 +3181,15 @@ static void init_book() {
     add("r2qk1nr/pp1nb3/2p1p3/4Pp2/3P2p1/2N1BPPp/PP2Q3/2KR2NR b", {"g4f3"});  // G682 -64 vs Bg5 -167 (103cp)
     add("2r2bk1/pq1n1ppp/2r1p2P/3p2P1/5B2/2NR1Q2/PPP2P2/2K1R3 w", {"c1b1"});  // G683 -88 vs O-O -146 (58cp)
     add("R7/5ppk/4pb2/8/1r5P/1n4B1/1P2RP1P/3r1BK1 w", {"a8f8"});  // G685 -142 vs f3 -316 (174cp)
+
+    // === Session 2026-04-20an (G688/G689/G690 batch) ===
+    // (G686/G687 marginal gain; G691 already lost.)
+    // G688 (B M27B): SF #1 e6f5 -57cp vs Rh5 -284 (227cp gain).
+    add("6k1/2p2pp1/2p1b2p/p3r3/R1P4P/4BP2/P1P2KP1/8 b", {"e6f5"});
+    // G689 (W M9W): SF #1 f3d4 -33cp vs O-O-O -113 (80cp gain).
+    add("r1bq1rk1/pp3ppp/2n2n2/2Pp4/1b6/1QN1BN2/PP2PPPP/R3KB1R w", {"f3d4"});
+    // G690 (B M11B): SF #1 g8h6 +11cp -- engine has advantage! vs Qb6 -72 (83cp gain).
+    add("r3k1nr/pp1nbpp1/2p1p3/q3P1Bp/2BPN1bP/5N2/PP3PP1/R2Q1K1R b", {"g8h6"});
 }
 
 static Move try_book_move(Board& b) {

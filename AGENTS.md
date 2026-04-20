@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 657 | 96 |
-| Draws | 21 | 4 |
+| Losses | 662 | 97 |
+| Draws | 21 | 3 |
 
-Total games played: **691**
+Total games played: **696**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0691.pgn`
+- PGN: `game_data/games/game_0696.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1184,6 +1189,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20an (G688/G689/G690 batch: 3 book fixes, 390cp total)
+- G686/G687 marginal (<80cp); G691 already lost; not booked.
+- G688 (B M27B): Rh5 -284cp -> SF e6f5 (-57cp) **227cp gain** (rook EG).
+- G689 (W M9W): O-O-O -113cp -> SF f3d4 (-33cp) 80cp gain (queenside castle
+  was the blunder vs central knight maneuver).
+- G690 (B M11B): Qb6 -72cp -> SF g8h6 (+11cp) **engine has advantage** with
+  knight development (83cp gain).
+- All verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20am (G682/G683/G685 batch: 3 book fixes)
 - G680/G684 already losing -200+cp; G681 was DRAW; not booked.
