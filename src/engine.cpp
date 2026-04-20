@@ -3539,6 +3539,12 @@ static void init_book() {
     // G859 only 72cp in deep-losing pos; skipped.
     // G860 (B M15B): d8b6 -231cp -> SF d8e8 -41cp (**190cp near-equal save**).
     add("r2q1k1r/pp2bppp/5n2/2p5/Q1Bn4/8/PP2NPPP/R1B1R1K1 b", {"d8e8"});
+
+    // === Session 2026-04-20cr (G861/G862 batch: 2 fixes, ~211cp gain) ===
+    // G861 (W M9W Italian-ish): e2e3 -71cp -> SF a2a3 **0cp (fully equal!)** 71cp near-equal save.
+    add("r1bqk2r/pp3ppp/2n1pn2/2b5/2Np4/5NP1/PP2PPBP/R1BQ1RK1 w", {"a2a3"});
+    // G862 (B M15B): e7f6 -265cp -> SF e6f5 -125cp (140cp gain, losing pos).
+    add("1r1q1rk1/ppp1bp1p/2n1b3/2Pp2p1/3P4/2P2N1P/P3BPP1/R1BQ1RK1 b", {"e6f5"});
 }
 
 static Move try_book_move(Board& b) {
