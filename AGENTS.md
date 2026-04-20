@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 760 | 94 |
-| Draws | 27 | 6 |
+| Losses | 763 | 95 |
+| Draws | 27 | 5 |
 
-Total games played: **800**
+Total games played: **803**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0800.pgn`
+- PGN: `game_data/games/game_0803.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1293,6 +1296,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bv (G799/G800 batch: 2 fixes, ~276cp gain)
+- G798 d22 only 11cp loss (d16 misranked); skipped. **Lesson again**: d16 unreliable.
+- G799 (W M26W): f1e3 -237cp -> SF f1d2 -155cp (82cp gain, losing pos).
+- G800 (B M30B): g8f8 -683cp -> SF a8a6 -489cp (194cp gain, deep lost pos).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20bu (G795/G796/G797 batch: 3 fixes, ~407cp gain)
 - G795 (W M18W): c2b3 -377cp -> SF c2b2 -197cp (180cp gain, losing pos).
