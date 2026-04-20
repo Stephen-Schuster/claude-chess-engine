@@ -3529,6 +3529,11 @@ static void init_book() {
     // G854 was our 14th lifetime WIN (+1 in last 100, Black vs CK Advance).
     // G855 (W M27W): c1c7 -486cp rook blunder -> SF f1f7 -65cp (**421cp gain**, near-playable).
     add("3r1k2/1Q2bp2/4p1q1/8/8/4P2r/PP4B1/2R2RK1 w", {"f1f7"});
+
+    // === Session 2026-04-20cp (G857 near-equal save, 78cp gain) ===
+    // G858 only 68cp at d22 (d16 misranked); skipped.
+    // G857 (W M19W): h2h3 -105cp -> SF e1e4 -27cp (78cp near-equal save).
+    add("3r2k1/p1p1qppp/1p2b3/7r/2PB4/5P2/PQP3PP/R3R1K1 w", {"e1e4"});
 }
 
 static Move try_book_move(Board& b) {
