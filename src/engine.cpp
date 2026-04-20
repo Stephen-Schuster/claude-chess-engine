@@ -3112,6 +3112,13 @@ static void init_book() {
     // G644 (B Pirc-like M15B): h6f5?? -122cp -> SF d7b6 (-59cp) better
     //   knight reroute.
     add("r2qk2r/pp1nbp2/2p1p2n/4P1p1/3P3p/2NQ2P1/PP2NP2/1KBR3R b", {"d7b6"});
+
+    // === Session 2026-04-20ah (G646-G649 batch) ===
+    // (G645 already losing, not booked.)
+    add("r4rk1/1p3ppb/2p1p3/q3P1Pp/p1PP1P1N/8/P3Q1P1/2R1R1K1 b", {"f8d8"});  // G646
+    add("rnb1k2r/pp3pp1/5q1p/2pp4/1b1P4/1QN2N2/PP2PPPP/R3KB1R w", {"d4c5"});  // G647
+    add("r1br2k1/pp3pbp/2pq1np1/P3p3/3PP3/4BN1P/1PQ2PP1/RN3RK1 b", {"f6d7"});  // G648
+    add("4r1k1/2p2ppp/1pp5/3nN3/P3p1b1/2BP3q/P1PQ1P2/R4RK1 w", {"f2f4"});  // G649
 }
 
 static Move try_book_move(Board& b) {
