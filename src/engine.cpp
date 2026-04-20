@@ -2707,7 +2707,10 @@ static void init_book() {
     // AVOID 4...Bb4? and any early ...Kf8 nonsense
     add("rnbqkbnr/pp1p1ppp/4p3/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "a7a6", "b8c6"});
     // 4...Nf6 5.Nc3 - main line, develop with d6 (Scheveningen), avoid 5...Bb4
-    add("rnbqkb1r/pp1p1ppp/4pn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d7d6", "b8c6", "a7a6"});
+    // G518 (Black, draw via perpetual but engine's 5...a6 was -123cp; SF top
+    //   5...Nc6 -51cp, 5...d6 -62cp). Removed a7a6; Nc6 is also dup-booked
+    //   at line 2175 - both fine, ensures Nc6 main + d6 fallback.
+    add("rnbqkb1r/pp1p1ppp/4pn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d7d6", "b8c6"});
     // 5...d6 6.Be2 / 6.f3 / 6.g4 - develop naturally
     add("rnbqkb1r/pp3ppp/3ppn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "g2g4", "c1e3"});
     // 6.Be2 Be7 (solid Scheveningen setup)
@@ -2736,6 +2739,35 @@ static void init_book() {
     //   (game 382 path). Force 9...Be7 (SF top -34cp, solid) NOT 9...d4 (engine's
     //   choice, not in SF top-4, structurally bad).
     add("r1bqkb1r/5ppp/p1p1pn2/3p4/4P3/2NB4/PPP2PPP/R1BQR1K1 b", {"f8e7"});
+
+    // === Session 2026-04-20ad2 (games 510-521 fixes) ===
+    // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
+    //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
+    add("r1bqkb1r/pp1ppp1p/2n2np1/1Bp5/4P3/2N2N2/PPPP1PPP/R1BQ1RK1 b", {"f8g7"});
+    // G516 (Black, Najdorf 6.Be3 e5 7.Nb3 Be6 8.f3 Nbd7 9.Qd2 -- wait actual
+    //   pos M11B): SF d22 top moves all -86 to -98cp, very close. Engine's
+    //   11...Bxb3?! was -145cp (gives up bishop pair AND develops opp pieces).
+    //   Force 11...Be7 (-86cp top).
+    add("r2qkb1r/1p3ppp/p1npbn2/4p3/4P3/1NN2Q1P/PPPB1PP1/2KR1B1R b", {"f8e7"});
+    // G521 (White, Catalan/QID move order: 1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2
+    //   Bb4+ 5.Bd2 Be7 6.Nf3 O-O 7.??): engine played 7.c5?? (-99cp) vs SF
+    //   top 7.O-O (+14cp). Position arose because Black's 4...Bb4+ wasn't
+    //   booked (only 4...d5 dxc4 was). Book the chain.
+    // After 4.Bg2 -- already books Be7/dxc4 (line 2268). Add Bb4+ to options.
+    // (Don't replace existing - just add cover for Bb4+ continuation.)
+    // 4...Bb4+ -> 5.Bd2 (SF top +19cp, slightly better than Nbd2 +22cp but
+    //   already trained for Bd2 via Bogo move-order at line 2247).
+    add("rnbqk2r/ppp2ppp/4pn2/3p4/1bPP4/6P1/PP2PPBP/RNBQK1NR w", {"c1d2"});
+    // 5.Bd2 Be7 (retreat, transposes toward Closed Catalan). Force.
+    add("rnbqk2r/ppp2ppp/4pn2/3p4/1b1P4/6P1/PP1BPPBP/RN1QK1NR b", {"b4e7"});
+    // 5...Be7 6.Nf3 (main development)
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP1BPPBP/RN1QK1NR w", {"g1f3"});
+    // 6.Nf3 -> Black: Nbd7 (SF top -10), O-O (-16), c6 (-18). All playable.
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R b", {"b8d7", "e8g8", "c7c6"});
+    // 6...O-O 7.O-O (FIX G521: was 7.c5 -99cp); SF top +14cp.
+    add("rnbq1rk1/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1"});
+    // 6...Nbd7 7.O-O similarly main
+    add("r1bqk2r/pppnbppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1"});
 }
 
 static Move try_book_move(Board& b) {

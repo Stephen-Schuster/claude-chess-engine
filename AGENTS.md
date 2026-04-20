@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 492 | 98 |
-| Draws | 15 | 2 |
+| Losses | 505 | 97 |
+| Draws | 16 | 3 |
 
-Total games played: **520**
+Total games played: **534**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0520.pgn`
+- PGN: `game_data/games/game_0534.pgn`
 
 ---
 
@@ -182,6 +182,20 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -921,3 +935,24 @@ git add -A && git commit -m "improve engine: ..." && git push
 - **G507** (English 1.c4 e5 g3 Bb4): M25W blunder. Post our session-y/z/aa
   fixes, this opening cluster is mostly book-stable through M10; remaining
   losses are middlegame/endgame technique.
+
+### Session 2026-04-20ad2 (games 510-521: 11L, 1D)
+- G518 **DRAW** (Sicilian Najdorf 6.e5 Ng8): perpetual save.
+- **G518 dedup bug** (Black Sicilian Najdorf): position
+  `rnbqkb1r/pp1p1ppp/4pn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b` was double-booked at
+  lines 2175 (`b8c6` only) and 2710 (which appended `d7d6, b8c6, a7a6`).
+  Engine picked losing `a7a6` (-123cp). Fix: removed `a7a6` from line 2710.
+- **G512** (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
+  (-152cp) vs SF top 5...Bg7 (-65cp). Booked Bg7.
+- **G516** (Black, Najdorf 6.Be3 Najdorf-English): engine 11...Bxb3?! gave up
+  bishop pair (-145cp). Booked 11...Be7 (-86cp).
+- **G521** (White, Catalan 4.Bg2 Bb4+ move-order): position arose from rare
+  4...Bb4+ (vs booked 4...Be7/dxc4). Engine searched and chose 7.c5?? (-99cp)
+  vs SF top 7.O-O (+14cp). Booked entire 4...Bb4+ chain through M7W:
+  5.Bd2, 5...Be7, 6.Nf3, 6...{Nbd7,O-O,c6}, 7.O-O.
+- **G519 false positive**: d16 analyzer flagged 13.Ng5 as -100cp loss but
+  d22 SF says 13.Ng5 is actually #1 (+65cp). Loss was deep middlegame
+  17.Qg4? blunder, not book-fixable. Italian 4-Kts Nxe4 gambit (G497/G505/
+  G519) is now a search/eval issue, NOT a book gap.
+- Other losses (G510/G511/G513/G514/G515/G517/G520) all M18-M44 deep
+  middlegame/endgame technique, not book-fixable.
