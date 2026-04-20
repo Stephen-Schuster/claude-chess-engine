@@ -2019,6 +2019,13 @@ static void init_book() {
     add("rnbqkbnr/pppppp1p/6p1/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
     // Sicilian Open 2...Nc6: 1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4
     add("r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
+    // Rossolimo: 1.e4 c5 2.Nf3 Nc6 3.Bb5 -- main Black reply: 3...g6 (fianchetto)
+    //   Game 308 played 3...Nd4?! which is Nimzowitsch (tricky but dubious).
+    //   Game 300 also Nd4?! lost. Prefer 3...g6 main line.
+    add("r1bqkbnr/pp1ppppp/2n5/1Bp5/4P3/5N2/PPPP1PPP/RNBQK2R b", {"g7g6", "e7e6", "g7g6"});
+    add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b1c3", "e1g1", "c2c3"});
+    add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8g7", "g8f6"});
+    add("r1bqk1nr/pp1pppbp/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 w", {"c2c3", "b1c3"});
     // Sicilian Dragon: 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6
     add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
     // Hyperaccelerated Dragon: 4.Nxd4 g6 -> 5.Nc3 (main) not Bb5+ gambit.
