@@ -2129,6 +2129,11 @@ static void init_book() {
     //   Engine played 10.g4?! (not in SF top-5, weakens kingside, lost to Bg6/Bxg6/Nc6 counter).
     //   SF top 10.dxc5 (-7cp, equal). Book it.
     add("rn1q1rk1/pp3ppp/5n2/2pp3b/1b1P4/2NBPN1P/PP1B1PP1/R2QK2R w", {"d4c5"});
+    // G451 (White, Ruy Exchange aggressive line after 5...Bg4 6.h3 h5 7.d3 Qf6 8.Nbd2 g5
+    //   9.Nc4 Bxf3 10.Qxf3 Qxf3 11.gxf3 f6 12.Be3 Ne7 13.d4 Ng6 14.dxe5 b5):
+    //   Engine played 15.exf6?? hanging the Nc4 knight to bxc4, lost piece and game.
+    //   SF top 15.Nd2 (+1cp, retreats knight before it's forked). Book it.
+    add("r3kb1r/2p5/p1p2pn1/1p2P1pp/2N1P3/4BP1P/PPP2P2/R4RK1 w", {"c4d2"});
     // G421 (White, Catalan Open 5.Nc3 move order): position
     //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
     //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
