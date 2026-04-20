@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 741 | 94 |
+| Losses | 744 | 94 |
 | Draws | 27 | 6 |
 
-Total games played: **781**
+Total games played: **784**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0781.pgn`
+- PGN: `game_data/games/game_0784.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1274,6 +1277,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bp (G779/G781 batch: 2 near-equal saves, ~164cp gain)
+- G780 marginal (53cp at d22); skipped.
+- G779 (W M13W): g2c6 -86cp -> SF d4e5 -5cp (81cp near-equal save).
+- G781 (W M18W): a3b2 -121cp -> SF g2g3 -38cp (83cp near-equal save).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20bo (G776/G777/G778 batch: 3 fixes, ~665cp gain!)
 - G778 (B M7B): b8c6 -562cp -> SF h7h6 -84cp (**478cp massive near-equal save**).
