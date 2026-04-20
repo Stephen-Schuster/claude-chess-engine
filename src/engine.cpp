@@ -1708,14 +1708,20 @@ static void init_book() {
         auto& v = OPENING_BOOK[key];
         for (auto& m : moves) v.push_back(m);
     };
-    // As White: popular first moves
-    add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w", {"e2e4", "d2d4", "g1f3", "c2c4"});
+    // As White: popular first moves (prefer 1.e4/1.d4 — more theory-backed for us)
+    add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w", {"e2e4", "d2d4", "e2e4", "d2d4", "c2c4"});
     // As Black response to 1.e4
     add("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b", {"c7c5", "e7e5", "e7e6", "c7c6"});
     // After 1.d4
     add("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b", {"g8f6", "d7d5", "e7e6"});
     // After 1.Nf3
     add("rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b", {"g8f6", "d7d5", "c7c5"});
+    // 1.Nf3 d5 -> 2.d4 (transpose to QP), 2.c4 (Reti), 2.g3
+    add("rnbqkbnr/ppp1pppp/8/3p4/8/5N2/PPPPPPPP/RNBQKB1R w", {"d2d4", "c2c4", "g2g3"});
+    // 1.Nf3 Nf6 -> 2.c4 (Reti/English), 2.d4, 2.g3
+    add("rnbqkb1r/pppppppp/5n2/8/8/5N2/PPPPPPPP/RNBQKB1R w", {"c2c4", "d2d4", "g2g3"});
+    // 1.Nf3 c5 -> 2.c4, 2.e4 (transpose Sicilian), 2.g3
+    add("rnbqkbnr/pp1ppppp/8/2p5/8/5N2/PPPPPPPP/RNBQKB1R w", {"c2c4", "e2e4", "g2g3"});
     // After 1.c4
     add("rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b", {"e7e5", "g8f6", "c7c5"});
 
