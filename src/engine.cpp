@@ -2883,6 +2883,14 @@ static void init_book() {
     //   SF d22 #1: Qd1 (b3d1) -187cp retreat. Pos already losing but better.
     add("r4r1k/1pp3pp/3b4/p4q2/3n2N1/1Q3P2/PP1B2PP/1R3RK1 w", {"b3d1"});
 
+    // === Session 2026-04-20ad15 (G613/G614 batch) ===
+    // G614 (Black, M17B Bc7-attack pos): engine Nxc4 -142cp. SF d22 #1:
+    //   Rac8 (a8c8) +26cp activate rook before recapture.
+    add("r4rk1/p1B3pp/bnp5/2bp4/2P5/1PN3P1/P4PBP/R4RK1 b", {"a8c8"});
+    // G613 (White, M25W complex middlegame): engine Re1 -200cp.
+    //   SF d22 #1: Bd3 (f5d3) -94cp blocks rook + activates bishop.
+    add("3r1k2/pb3p2/5p2/3p1B2/1b3P2/1Pp3NP/P1Pr2P1/3R1RK1 w", {"f5d3"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
