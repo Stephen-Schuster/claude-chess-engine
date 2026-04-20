@@ -3287,6 +3287,13 @@ static void init_book() {
     add("r4rk1/pp2ppbp/3pbnp1/q6P/3BP1P1/2N2P2/PPPQ4/R3KB1R b", {"h7h6"});
     // G741 (W M17W): f1g2 -225cp -> SF f1c4 -83cp (142cp gain to near-equal).
     add("rr4k1/p1pq1ppn/2p1b2p/8/2pPp1P1/P3P2P/1PQB1P2/2R1KB1R w", {"f1c4"});
+
+    // === Session 2026-04-20be (G744/G746 batch: 2 fixes, ~224cp gain) ===
+    // G743/G745 marginal (68-78cp gain); skipped.
+    // G744 (B M16B): f8e8 -354cp -> SF b8e8 -240cp (114cp gain, losing pos).
+    add("1r3rk1/pb3ppp/5n2/q1p5/2Pp1B2/3B2QP/P1P2PP1/R3R1K1 b", {"b8e8"});
+    // G746 (B M8B): d8b6 -174cp -> SF e8g8 -64cp (110cp gain near-equal, just castle).
+    add("r1bqk2r/pp2ppbp/2p3p1/2p1P3/6n1/2N2N2/PPPP1PPP/R1BQR1K1 b", {"e8g8"});
 }
 
 static Move try_book_move(Board& b) {
