@@ -2175,6 +2175,10 @@ static void init_book() {
     add("rnbqk2r/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1", "d1c2"});
     add("rnbqk2r/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1Q1RK1 b", {"e8g8"});
     add("rnbq1rk1/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1Q1RK1 w", {"d1c2", "b1c3"});
+    // G447 (White, Semi-Slav 1.d4 Nf6 2.Nf3 d5 3.c4 c6 4.Nc3 e6): engine played
+    //   5.c5?! (not top-5, releases tension prematurely) then 6.cxb6 and drifted.
+    //   SF top 5.Bg5 (+34cp) developing with pressure. Book it.
+    add("rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c1g5"});
     // Catalan: 1.d4 Nf6 2.c4 e6 3.g3 d5 -> 4.Bg2 (main)
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w", {"f1g2", "g1f3"});
     // 4.Bg2 -> 4...Be7 (Closed Catalan) or 4...dxc4 (Open Catalan)
@@ -2600,6 +2604,9 @@ static void init_book() {
     // 7.O-O O-O 8.c4 -> 8...c6 FORCED. G436: engine played 8...Nc6?? (not in SF top-5)
     //   and after 9.cxd5 every Black move loses 400+cp. SF top 8...c6 (-38cp, equal-ish).
     add("rnbq1rk1/ppp2ppp/3b4/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c7c6"});
+    // G450: 8...c6 9.Re1 -> 9...Re8 (SF top -29cp). Engine played 9...Bb4 10.Nc3 Nxc3
+    //   11.bxc3 Bxc3?? 12.Bxh7+! Greek gift, mated in 14. Force Re8.
+    add("rnbq1rk1/pp3ppp/2pb4/3p4/2PPn3/3B1N2/PP3PPP/RNBQR1K1 b", {"f8e8"});
     // Petroff Four Knights transposition: 3.Nc3 Nc6 (sane development)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
 
