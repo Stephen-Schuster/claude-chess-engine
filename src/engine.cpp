@@ -2913,6 +2913,15 @@ static void init_book() {
     //   Qd4 -252cp. SF d22 #1: Qc7 (b6c7) -137cp queen retreat.
     add("r3kb1r/p2n1pp1/Rqp1p3/4PnBp/2BPN2P/5P2/5P2/3Q1RK1 b", {"b6c7"});
 
+    // === Session 2026-04-20ad19 (G623/G624 batch) ===
+    // G624 (Black, French Advance-like with Qxb2 grabbed pawn, M14B):
+    //   engine a7a5 -141cp. SF d22 #1: h6 (h7h6) 0cp completely equal!
+    //   Force h6 luft to defuse h5 pawn pressure.
+    add("r1b1k2r/pp2nppp/2n1p3/3pP2P/2pP4/2P2N2/1qPB1PP1/R2QKB1R b", {"h7h6"});
+    // G623 (White, M19W middlegame post-d6 pawn): engine d2d4 (Rd4) -199cp.
+    //   SF d22 #1: Nd4 (b3d4) -106cp (better in losing pos).
+    add("r4rk1/pp1b1ppp/3P1b2/8/n7/1N4P1/P2R1PBP/R1B3K1 w", {"b3d4"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
