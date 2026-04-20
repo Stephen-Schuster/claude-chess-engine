@@ -1792,6 +1792,10 @@ static void init_book() {
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7"});
     // Caro-Kann Advance 4.Nd2 (rare; game 256 loss) -> 4...e6 main
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPPN1PPP/R1BQKBNR b", {"e7e6", "b8d7"});
+    // 4.Nd2 e6 5.Nb3 (game 274) -> 5...Nd7 (main, support e6; avoid 5...a5?? drift)
+    add("rn1qkbnr/pp3ppp/2p1p3/3pPb2/3P4/1N6/PPP2PPP/R1BQKBNR b", {"b8d7", "h7h6"});
+    // 5.Nb3 Nd7 6.Nf3 -> 6...Ne7 (main, preps ...Nc6 and supports Bf5 vs Nh4)
+    add("r2qkbnr/pp1n1ppp/2p1p3/3pPb2/3P4/1N3N2/PPP2PPP/R1BQKB1R b", {"g8e7", "f8e7", "h7h6"});
     // Caro-Kann Advance 4.Be2 -> 4...e6 or 4...Nd7
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP1BPPP/RNBQK1NR b", {"e7e6", "b8d7"});
     // Caro-Kann Advance 4.Bd3 (exchanges) -> 4...Bxd3 5.Qxd3 e6
@@ -2032,6 +2036,10 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/5N2/PPP2PPP/RNBQKB1R w", {"f1d3"});
     // After 6.Bd3 -> 6...Nc6 or 6...Bd6
     add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b", {"b8c6", "f8d6"});
+    // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
+    add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8", "b8c6"});
+    // 7.O-O O-O 8.c4 -> 8...c6 (main, support d5) or 8...Nc6
+    add("rnbq1rk1/ppp2ppp/3b4/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c7c6", "b8c6"});
     // Petroff Four Knights transposition: 3.Nc3 Nc6 (sane development)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
 
