@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 312 | 99 |
+| Losses | 314 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **335**
+Total games played: **337**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0335.pgn`
+- PGN: `game_data/games/game_0337.pgn`
 
 ---
 
@@ -182,6 +182,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
 
 
 
@@ -425,6 +427,16 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Game 334 (French Burn Black, 5...Nbd7): post-book disaster at move 14
   Qxg2?? pawn-grab. Weight 5...Be7 3x over 5...Nbd7 to reduce reaching the
   Nbd7 structure.
+
+### Session 2026-04-20m (games 335-336)
+- Game 335 (Catalan White, 3.g3 Bb4+ 4.Bd2 Be7): engine out of book at
+  move 5, chose 5.Nc3 instead of main 5.Bg2. Drifted to endgame loss.
+  Fix: added 3.g3 Bb4+ direct-order book tree: 4.Bd2, then 4...Be7 5.Bg2
+  (NOT 5.Nc3), plus 5...d5 6.Nf3 transpose to Catalan main.
+- Game 336 (French Classical Black, 5.e5 Nfd7 6.h4): engine chose 6...Bxg5?!
+  7.hxg5 Qxg5 (SF -73cp, Alekhine-Chatard tactical mess). After 8.Nh3 Qh4
+  9.g3 Qe7 10.Qg4 Kf8 king displaced, mated in 23. Fix: force 6...h6 main
+  (-54cp safest) or 6...c5.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).

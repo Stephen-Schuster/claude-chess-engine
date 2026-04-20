@@ -1962,6 +1962,14 @@ static void init_book() {
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c1g5", "c1f4"});
     // 1.d4 Nf6 2.c4 e6 3.g3 -> 3...d5 (Catalan main) or 3...Bb4+
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/6P1/PP2PP1P/RNBQKBNR b", {"d7d5", "f8b4", "c7c5"});
+    // 3.g3 Bb4+ (Bogo-Catalan) -> 4.Bd2 (main) or 4.Nd2
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/6P1/PP2PP1P/RNBQKBNR w", {"c1d2", "b1d2"});
+    // 3.g3 Bb4+ 4.Bd2 -> 4...Be7 (retreat, main), Bxd2+, a5, Qe7
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/6P1/PP1BPP1P/RN1QKBNR b", {"b4e7", "b4d2", "a7a5"});
+    // 3.g3 Bb4+ 4.Bd2 Be7 -> 5.Bg2 (main Catalan development), NOT 5.Nc3 (game 335 drifted).
+    add("rnbqk2r/ppppbppp/4pn2/8/2PP4/6P1/PP1BPP1P/RN1QKBNR w", {"f1g2"});
+    // 5.Bg2 d5 -> 6.Nf3 main (transposes to Catalan main lines)
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP1BPPBP/RN1QK1NR w", {"g1f3"});
     // Catalan: 1.d4 Nf6 2.c4 e6 3.g3 d5 -> 4.Bg2 (main)
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w", {"f1g2", "g1f3"});
     // 4.Bg2 -> 4...Be7 (Closed Catalan) or 4...dxc4 (Open Catalan)
@@ -2175,6 +2183,10 @@ static void init_book() {
     add("rnbqk2r/ppp1bppp/4pn2/3pP1B1/3P4/2N5/PPP2PPP/R2QKBNR b", {"f6d7"});
     // 5.e5 Nfd7 6.Bxe7 Qxe7 (Classical Steinitz)
     add("rnbqk2r/pppnbppp/4p3/3pP1B1/3P4/2N5/PPP2PPP/R2QKBNR w", {"g5e7", "h2h4", "f2f4"});
+    // 5.e5 Nfd7 6.h4 (Alekhine-Chatard Attack) -> 6...h6! main (-54cp; safest).
+    // Game 336 lost with 6...Bxg5 7.hxg5 Qxg5 8.Nh3 Qh4 9.g3 Qe7 10.Qg4 Kf8 -- king
+    // displaced, crushed in 23 moves. Avoid Bxg5 (-73cp, tactical minefield).
+    add("rnbqk2r/pppnbppp/4p3/3pP1B1/3P3P/2N5/PPP2PP1/R2QKBNR b", {"h7h6", "h7h6", "c7c5"});
     add("rnbqk2r/pppnBppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR b", {"d8e7"});
     add("rnb1k2r/pppnqppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR w", {"f2f4", "g1f3"});
     // 5.f4 c5 6.Nf3 (main)
