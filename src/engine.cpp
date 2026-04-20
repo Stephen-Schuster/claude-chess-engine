@@ -1844,6 +1844,9 @@ static void init_book() {
     add("r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w", {"c2c3", "b1c3", "e1g1"});
     // 5.Nc3 d6 6.O-O (game 271 path) -> Black often Na5 trading LSB; we prepare Bb3 defense
     add("r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQK2R b", {"d7d6", "a7a6", "e8g8"});
+    // After 5.Nc3 d6 (White move 6): force 6.O-O (SF +0cp, solid). NOT 6.Na4
+    //   (SF +4cp but trades off active Bc4, game 365: engine lost slowly).
+    add("r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQK2R w", {"e1g1"});
     // 5.Nc3 d6 6.O-O (Black to move)
     add("r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 b", {"e8g8", "a7a6", "c6a5"});
     // 6.O-O Na5 (game 271) -> 7.Bb3! preserving bishop, NOT letting 7.Bg5 Nxc4 (we get c4 doubled pawns + hole)
@@ -1921,6 +1924,11 @@ static void init_book() {
     // After 7.Bxc4: force 7...Nd7 (-18cp main). Game 360: engine picked 7...Be7
     //   then 8.Be2 c5?? 9.Bb5+ Nd7 10.d5! crushing (-42cp forced). Nd7 avoids this entirely.
     add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2BP3P/2N5/PP3PP1/R1BQK1NR b", {"b8d7"});
+    // 7.Bxc4 Nd7 -> 8.Nf3 Bg4! (SF top -4cp). Game 370: engine played 8...Be7
+    //   then Nh6 Bg4 kingside-castled into Qxb2 disaster. Bg4 develops with tempo.
+    add("r2qkbnr/pp1n1pp1/2p1p3/4Pb1p/2BP3P/2N2N2/PP3PP1/R1BQK2R b", {"f5g4"});
+    // 8...Bg4 9.Be2 -> 9...Ne7 (SF top +3cp, best setup for Black).
+    add("r2qkbnr/pp1n1pp1/2p1p3/4P2p/3P2bP/2N2N2/PP2BPP1/R1BQK2R b", {"g8e7"});
     // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6

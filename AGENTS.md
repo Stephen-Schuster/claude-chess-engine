@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 351 | 98 |
-| Draws | 11 | 2 |
+| Losses | 355 | 97 |
+| Draws | 12 | 3 |
 
-Total games played: **375**
+Total games played: **380**
 
 ## Last game
 
-- Result: **Loss**
-- PGN: `game_data/games/game_0375.pgn`
+- Result: **Draw**
+- PGN: `game_data/games/game_0380.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -530,6 +535,25 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20u (games 364-375, FIRST DRAW via perpetual!)
+- Game 371 **DRAW** (White, Scotch 4-Kts `4.d4 exd4 5.Nxd4 Bb4 6.Nxc6 bxc6
+  7.Bd3 d5 8.exd5 O-O 9.O-O cxd5 10.Qf3`): engine found perpetual check
+  Qc8+/Qh3+ against GPT-Codex! Same opening as games 367/371/374; only
+  371 held. The line `10.Qf3 Bg4 11.Qg3 c5 12.Bg5 Bxc3 13.bxc3 c4` reaches
+  balanced position where perpetual is possible. Keep this in book.
+- Game 367/374 (same opening): lost in endgame via technique, not fixable
+  in book (`10.h3` SF +12cp, `10.Bg5`/`10.Qf3` both +4cp).
+- Game 368 (Hyper-accel Dragon 5.Be3 move order before Nc3): engine chose
+  `5...Nf6 6.Nc3 e5?!` queen-grab disaster. NOTE: already auto-fixed by my
+  game-362 commit (c95600b). Engine now plays `6...Bg7` transposing.
+- Game 370 (CK Advance): engine at `8.Nf3` picked `8...Be7` (SF #2 -21cp),
+  then drifted. Fix: force `8...Bg4` (SF top -4cp) then `9.Be2 Ne7`.
+- Game 365 (Italian 4.d3 Bc5 5.Nc3 d6): engine played SF-top 6.Na4 but
+  traded off active Bc4; slow endgame loss. Fix: force `6.O-O` (SF +0cp,
+  solid alternative) to avoid the Na4-Bb6-Nxb6 trade pattern.
+- Games 364/366/369/372/373/375: out-of-book middlegame/endgame tactical
+  or strategic losses, not cleanly book-fixable.
 
 ### Session 2026-04-20q (eval: uncastled-king penalty boosted)
 - Discovered eval systematically underestimates queen-grab/king-in-center
