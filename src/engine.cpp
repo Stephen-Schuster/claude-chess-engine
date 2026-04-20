@@ -2933,6 +2933,15 @@ static void init_book() {
     //   SF d22 #1: Qc2 (b3c2) -204cp queen retreat (better in losing pos).
     add("r2qr1k1/pp3pp1/2pb1n1p/3p4/P2Pn1bP/1QNBPN2/1P3PP1/R1B2RK1 w", {"b3c2"});
 
+    // === Session 2026-04-20ad21 (G628/G629 batch) ===
+    // G629 (White, M20W queen-vs-queen middlegame): engine Qxa4 -85cp.
+    //   SF d22 #1: Rfd1 (f1d1) -20cp essentially equal! Force rook
+    //   activation instead of queen sortie.
+    add("3rk3/pp2bprp/4p3/8/6P1/1Q1qP2P/PP4B1/R4RK1 w", {"f1d1"});
+    // G628 (Black, M13B already-bad): engine c6 +207cp opens diagonals.
+    //   SF d22 #1: h6 (h7h6) +141cp luft.
+    add("r1bq1rk1/ppp1bppp/5n2/n2P4/8/2NB1N2/PP3PPP/R1BQR1K1 b", {"h7h6"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.

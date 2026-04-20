@@ -1106,6 +1106,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G627 (White, M15W already-losing): Qxb7 -355cp -> SF Qc2 (b3c2) -204cp
   retreat.
 
+### Session 2026-04-20ad21 (G628/G629 batch)
+- G629 (White, M20W queen middlegame): Qxa4 -85cp -> SF Rfd1 (f1d1)
+  -20cp essentially equal! Force rook activation.
+- G628 (Black, M13B already-bad): c6 +207cp -> SF h6 (h7h6) +141cp luft.
+
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame
   collapses (M11-M49); two clear book gaps found.
