@@ -1783,6 +1783,14 @@ static void init_book() {
     add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8b4", "c6d4", "f8c5"});
     // 4.Bb5 Nd4 -> 5.Bc4 (main, NOT 5.O-O which got us into passive 6.Be2 game 261)
     add("r1bqkb1r/pppp1ppp/5n2/1B2p3/3nP3/2N2N2/PPPP1PPP/R1BQK2R w", {"f1c4", "f3d4", "b5a4"});
+    // G413 (White): 5.Nxd4 exd4 6.Nd5?! Nxd5 exd5 Qe7+ -> queen trade into
+    //   losing endgame, engine drifted and lost. SF top 6.e5! (+8cp).
+    //   Continues 6...dxc3 7.exf6 Qxf6 8.dxc3 (slightly better structure).
+    add("r1bqkb1r/pppp1ppp/5n2/1B6/3pP3/2N5/PPPP1PPP/R1BQK2R w", {"e4e5"});
+    add("r1bqkb1r/pppp1ppp/5n2/1B2P3/3p4/2N5/PPPP1PPP/R1BQK2R b", {"d4c3"});
+    add("r1bqkb1r/pppp1ppp/5n2/1B2P3/8/2p5/PPPP1PPP/R1BQK2R w", {"e5f6"});
+    add("r1bqkb1r/pppp1ppp/5P2/1B6/8/2p5/PPPP1PPP/R1BQK2R b", {"d8f6"});
+    add("r1b1kb1r/pppp1ppp/5q2/1B6/8/2p5/PPPP1PPP/R1BQK2R w", {"d2c3"});
     // 4.Bb5 Nd4 5.Bc4 -> 5...Bc5 (main) or 5...Nxf3+
     add("r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8c5", "d4f3", "b7b5"});
     // 4.Bb5 Bb4 -> 5.O-O (main symmetric Four Knights)
@@ -2061,6 +2069,14 @@ static void init_book() {
     add("r2qkb1r/pp1b1ppp/2n1pn2/4N3/2pp4/N5P1/PP2PPBP/R1BQ1RK1 w", {"a3c4"});
     add("2rqkb1r/pp1b1ppp/2n1pn2/4N3/2Np4/6P1/PP2PPBP/R1BQ1RK1 w", {"c1f4"});
     add("2rqk2r/pp1bbppp/2n1pn2/4N3/2Np1B2/6P1/PP2PPBP/R2Q1RK1 w", {"e5d7"});
+    // G415 (White, Catalan Open IQP via 4.g3 c5 5.cxd5 exd5 6.Nc3 Nc6 7.Bg2
+    //   cxd4 8.Nxd4 Bc5): engine played 9.Nxc6?? (SF #2 +17cp) trading off
+    //   active Nd4 -- opponent gained attack and mated move 38. Force 9.Nb3!
+    //   (SF top +43cp, retreats knight preserving IQP pressure).
+    //   Continue: 9.Nb3 Bb4 10.O-O Bxc3 11.bxc3.
+    add("r1bqk2r/pp3ppp/2n2n2/2bp4/3N4/2N3P1/PP2PPBP/R1BQK2R w", {"d4b3"});
+    add("r1bqk2r/pp3ppp/2n2n2/2bp4/8/1NN3P1/PP2PPBP/R1BQK2R b", {"c5b4"});
+    add("r1bqk2r/pp3ppp/2n2n2/3p4/1b6/1NN3P1/PP2PPBP/R1BQK2R w", {"e1g1"});
     // After 5.Bd2 -> 5...Be7 (retreat, main) or Bxd2+ or a5.
     // 5...Be7 -> 6.Bg2 (main Catalan development). NOT 6.Nc3 which after c5 gave Black
     // comfortable counterplay (game 325 lost).
