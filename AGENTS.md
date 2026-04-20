@@ -37,16 +37,16 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 
 | | Lifetime | Last 100 games |
 |---|---|---|
-| Wins | 13 | 0 |
-| Losses | 809 | 95 |
-| Draws | 29 | 5 |
+| Wins | 14 | 1 |
+| Losses | 810 | 94 |
+| Draws | 30 | 5 |
 
-Total games played: **851**
+Total games played: **854**
 
 ## Last game
 
-- Result: **Loss**
-- PGN: `game_data/games/game_0851.pgn`
+- Result: **Win**
+- PGN: `game_data/games/game_0854.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1344,6 +1347,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cn (G850/G851 batch + G852 DRAW; 2 fixes, ~174cp)
+- **G852 DRAW** as Black -- matches stats (6th draw in last 100).
+- G850 (B M16B): c6c5 -378cp -> SF b4e7 -288cp (90cp gain, losing pos).
+- G851 (W M12W): e3a7 -275cp -> SF c3c4 -191cp (84cp gain, losing pos).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20cm (G847/G848/G849 batch: 3 fixes, ~503cp gain)
 - G847 (W M15W): c1c7 -163cp -> SF d6b4 **+7cp (fully equal!)** 170cp
