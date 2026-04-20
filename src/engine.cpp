@@ -3125,6 +3125,14 @@ static void init_book() {
     add("r1b1kb1r/p2p1ppp/2p1p3/3nP3/4N3/2PB4/Pq1B1PPP/R2QK2R b", {"b2a3"});  // G650 -51 vs Be7 -146
     add("7k/p1rbqpp1/1p5p/4r3/2pNP3/R1P4P/P4PP1/2Q1R1K1 w", {"c1f4"});  // G651 -96 vs f3 -185
     add("1R6/1pr2pk1/p5p1/6P1/4rPK1/3R2P1/P7/8 b", {"e4e7"});  // G652 -25 vs Ra4 -100
+
+    // === Session 2026-04-20aj (G658-G662 batch) ===
+    // (G654/G655/G656/G657 already losing -200+cp; G663 no big blunder.)
+    add("r2qk3/pp2bpp1/2p1p3/3nP2p/3P2rP/2N2QP1/PP2NP2/2KR3R b", {"d5c3"});  // G658 -44 vs Kf8 -89
+    add("r2q1rk1/pp3ppb/2p1p3/4P1Pp/N1nP1Q1N/8/PP3PP1/2RR2K1 b", {"c4b6"});  // G660 -48 vs b5 -77
+    add("r5k1/ppp2ppp/2q3r1/8/5B2/3P2Q1/PPP1bPPP/R3R1K1 w", {"g3h3"});  // G661 -11 vs Qg6 -106 (95cp gain)
+    add("3rr1k1/pp1q1ppp/2n5/3np3/6b1/B1P3P1/P1QPNPBP/1R2R1K1 w", {"c2b3"});  // G659 -97 vs Qd3 ~-171
+    add("r1b1kb1r/ppp2ppp/1qn1p3/8/3P4/2PB1N2/PP1B1PPP/R2QK2R b", {"a7a5"});  // G662 -157 vs Qxb2 -232
 }
 
 static Move try_book_move(Board& b) {

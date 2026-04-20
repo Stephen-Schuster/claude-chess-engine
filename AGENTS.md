@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 627 | 98 |
-| Draws | 18 | 2 |
+| Losses | 639 | 97 |
+| Draws | 19 | 3 |
 
-Total games played: **658**
+Total games played: **671**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0658.pgn`
+- PGN: `game_data/games/game_0671.pgn`
 
 ---
 
@@ -182,6 +182,19 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1151,6 +1164,16 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20aj (G658-G662 batch: 5 book fixes)
+- G654/G655/G656/G657/G664/G665 all -200+cp losing positions, not booked.
+  G663 no big blunder.
+- G661 (W M17W): g3g6 -106cp -> SF g3h3 (-11cp) **95cp gain, near-equal!**
+- G658 (B M16B): e8f8 -89cp -> SF d5c3 (-44cp) knight trade.
+- G660 (B M19B): b7b5 -77cp -> SF c4b6 (-48cp) knight retreat.
+- G659 (W M15W): c2d3 -171cp -> SF c2b3 (-97cp) queen tuck.
+- G662 (B M10B): b6b2?? -232cp queen-grab -> SF a7a5 (-157cp) better.
+- All verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20ai (G650-G652 batch: 3 book fixes)
 - G653 already losing -304cp at all options, not booked.
