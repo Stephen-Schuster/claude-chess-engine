@@ -2777,6 +2777,15 @@ static void init_book() {
     //   position. Force Bxg5 (-21cp top, sac line holds).
     add("r2qk2r/pp2bpp1/1np1p2n/4P1Bp/3P3P/2NB1Q2/PP3PP1/2R2RK1 b", {"e7g5"});
 
+    // === Session 2026-04-20ad5 (G553 Nimzo Rubinstein M14W) ===
+    // G553 (White, Nimzo 4.e3 O-O 5.Bd3 d5 6.cxd5 exd5 7.Ne2 Re8 8.a3 Bd6
+    //   9.Qb3 b6 10.O-O c5 11.Bb5 c4 12.Qa4 Bd7 13.b3 a6): engine played
+    //   13...a6 14.bxc4?? (-296cp d24) vs SF top 14.Bxd7 (-39cp d24).
+    //   bxc4 opens b-file for Black's queen and loses bishop pair tempo.
+    //   Engine reached M14W via SF-top moves throughout (only -30cp drift
+    //   from M7 to M13), so this position recurs. Force Bxd7.
+    add("rn1qr1k1/3b1ppp/pp1b1n2/1B1p4/Q1pP4/PPN1P3/4NPPP/R1B2RK1 w", {"b5d7"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
