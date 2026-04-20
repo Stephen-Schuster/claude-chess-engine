@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 757 | 94 |
+| Losses | 760 | 94 |
 | Draws | 27 | 6 |
 
-Total games played: **797**
+Total games played: **800**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0797.pgn`
+- PGN: `game_data/games/game_0800.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1290,6 +1293,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bu (G795/G796/G797 batch: 3 fixes, ~407cp gain)
+- G795 (W M18W): c2b3 -377cp -> SF c2b2 -197cp (180cp gain, losing pos).
+- G796 (B M11B): b6c4 -84cp -> SF c8a6 **0cp (fully equal!)** 84cp gain.
+- G797 (W M21W): f2f3 -239cp -> SF b4b5 -96cp (143cp gain, losing pos).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20bt (G792/G793/G794 batch: 3 fixes, ~406cp gain)
 - G792 (B M18B): h7h5 -389cp -> SF f7c7 -175cp (214cp gain, losing pos).
