@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 613 | 98 |
+| Losses | 618 | 98 |
 | Draws | 18 | 2 |
 
-Total games played: **644**
+Total games played: **649**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0644.pgn`
+- PGN: `game_data/games/game_0649.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1137,6 +1142,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ag (G637/G639/G641-G644 batch: 6 book fixes)
+- G638/G640 already losing -300+cp at all options, not booked.
+- G637 (W M26W): d2d6?? -226cp rook sortie -> SF h2h4 (-116cp).
+- G639 (W Catalan-like M11W): f3d2?? -125cp -> SF e1g1 (-52cp).
+- G641 (W Sicilian-Maroczy M15W): d1a4?? -114cp -> SF b5d6 (-37cp).
+- G642 (B M26B): a5b7?? -186cp -> SF c6c5 (-17 equal!).
+- G643 (W M16W): d4d5?? -227cp -> SF c3c4 (-69cp).
+- G644 (B Pirc-like M15B): h6f5?? -122cp -> SF d7b6 (-59cp).
 
 ### Session 2026-04-20ae (eval: passed-pawn endgame fixes)
 - **First eval (non-book) change in many sessions.** Audit revealed engine

@@ -3096,6 +3096,22 @@ static void init_book() {
     //   -208cp bishop trade gives White attack. SF top a8c8 (-121) keeps
     //   pieces, contests c-file.
     add("r2qk2r/1p2bpp1/p2pbn1p/4p3/4P1PP/2N2P2/PPPB1Q1R/2KR1B2 b", {"a8c8"});
+
+    // === Session 2026-04-20ag (G637/G639/G641-G644 batch) ===
+    // (G638/G640 already losing, not booked.)
+    // G637 (W M26W middlegame): d2d6?? -226cp rook sortie -> SF h2h4 (-116cp).
+    add("1r3rk1/p6p/1p2pb2/nB4p1/4Pp2/PbN3P1/1P1R1P1P/R1B3K1 w", {"h2h4"});
+    // G639 (W Catalan-like M11W): f3d2?? -125cp passive knight -> SF e1g1 (-52).
+    add("rn1q1rk1/ppp3pp/5np1/3p4/1b1P2P1/2N1PN1P/PP3P2/R1BQK2R w", {"e1g1"});
+    // G641 (W Sicilian-Maroczy M15W): d1a4?? queen sortie -> SF b5d6 (-37).
+    add("2rq1rk1/pb3pp1/1pnbpn1p/1N6/2BP4/P3BN2/1P3PPP/2RQ1RK1 w", {"b5d6"});
+    // G642 (B M26B): a5b7?? knight retreat -> SF c6c5 (-17 equal!) breaks open.
+    add("r1r3k1/p4p2/2p1p3/np2Ppq1/3P3p/1P5R/2Q1NPP1/4R1K1 b", {"c6c5"});
+    // G643 (W M16W): d4d5?? loses tempo -> SF c3c4 (-69cp).
+    add("2rqr1k1/pp1b1pp1/1nn4p/4p3/3PB3/2PQ2P1/PB2NP1P/3R1RK1 w", {"c3c4"});
+    // G644 (B Pirc-like M15B): h6f5?? -122cp -> SF d7b6 (-59cp) better
+    //   knight reroute.
+    add("r2qk2r/pp1nbp2/2p1p2n/4P1p1/3P3p/2NQ2P1/PP2NP2/1KBR3R b", {"d7b6"});
 }
 
 static Move try_book_move(Board& b) {
