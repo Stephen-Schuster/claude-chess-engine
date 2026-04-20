@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 14 | 1 |
-| Losses | 810 | 94 |
-| Draws | 30 | 5 |
+| Losses | 814 | 95 |
+| Draws | 30 | 4 |
 
-Total games played: **854**
+Total games played: **858**
 
 ## Last game
 
-- Result: **Win**
-- PGN: `game_data/games/game_0854.pgn`
+- Result: **Loss**
+- PGN: `game_data/games/game_0858.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1347,6 +1351,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20co (G855 massive near-equal save, 421cp gain)
+- **G854 was our 14th lifetime WIN** (+1 in last 100, Black side vs CK
+  Advance). Stats: 14W / 811L / 30D lifetime; 1W / 94L / 5D last 100.
+- G853 d22 only 48cp gain; G856 d22 only 19cp gain (d16 misranked); skipped.
+- G855 (W M27W): c1c7 -486cp rook sortie -> SF f1f7 -65cp (**421cp gain,
+  near-playable**). Biggest single-fix gain since session bm.
+- Verified at SF d22 MultiPV=4; fires from FEN.
 
 ### Session 2026-04-20cn (G850/G851 batch + G852 DRAW; 2 fixes, ~174cp)
 - **G852 DRAW** as Black -- matches stats (6th draw in last 100).

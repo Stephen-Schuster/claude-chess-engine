@@ -3523,6 +3523,12 @@ static void init_book() {
     add("r1b2rk1/p5p1/1pp1p2p/4p3/PbP1N3/1P3P2/2P1K1PP/R1BR4 b", {"b4e7"});
     // G851 (W M12W): e3a7 -275cp -> SF c3c4 -191cp (84cp gain, losing pos).
     add("r1b1kb1r/pp1p2pp/2p1qp2/Q3p3/8/2P1BN2/PPP2PPP/R3R1K1 w", {"c3c4"});
+
+    // === Session 2026-04-20co (G855 massive near-equal save, 421cp) ===
+    // G853 only 48cp at d22; G856 only 19cp at d22; skipped.
+    // G854 was our 14th lifetime WIN (+1 in last 100, Black vs CK Advance).
+    // G855 (W M27W): c1c7 -486cp rook blunder -> SF f1f7 -65cp (**421cp gain**, near-playable).
+    add("3r1k2/1Q2bp2/4p1q1/8/8/4P2r/PP4B1/2R2RK1 w", {"f1f7"});
 }
 
 static Move try_book_move(Board& b) {
