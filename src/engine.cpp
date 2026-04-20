@@ -3457,6 +3457,11 @@ static void init_book() {
     add("r1b2rk1/ppp2pp1/2nbpq1p/8/3P3P/2PB1N2/PP2QPP1/R1B1K2R b", {"f6d8"});
     // G823 (W M10W): d1b3 -54cp -> SF d2d4 +6cp (**60cp near-equal save, fully equal!**)
     add("rnbq1rk1/pp3ppp/8/3np3/8/2P3P1/P2PNPBP/R1BQK2R w", {"d2d4"});
+
+    // === Session 2026-04-20ce (G826 fix, 85cp gain in losing pos) ===
+    // G824 55cp skip; G825 same FEN as G823 (already fixed). Data confirms cd fix.
+    // G826 (B M14B): g7g5 -167cp -> SF c7c5 -82cp (85cp gain, losing pos).
+    add("r2q1rk1/p1p2pp1/1p1bpn1p/1b6/3P3B/2P2N2/PPB2PPP/R2QR1K1 b", {"c7c5"});
 }
 
 static Move try_book_move(Board& b) {
