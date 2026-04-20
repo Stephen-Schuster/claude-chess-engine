@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 772 | 95 |
+| Losses | 773 | 95 |
 | Draws | 28 | 5 |
 
-Total games played: **813**
+Total games played: **814**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0813.pgn`
+- PGN: `game_data/games/game_0814.pgn`
 
 ---
 
@@ -182,6 +182,7 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
 
 
 
@@ -1306,6 +1307,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ca (G812/G813 batch: 2 fixes, ~151cp near-equal saves)
+- G814 d22 only 28cp gain (d16 misranked); skipped.
+- G812 (B M9B): d5b4 -101cp -> SF f7f6 -20cp (**81cp near-equal save**).
+- G813 (W M14W): c3a4 -109cp -> SF f1d1 -39cp (70cp near-equal save).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20bz (G809/G810/G811 batch: 3 fixes, ~405cp gain)
 - G809 (W M24W): d1d6 -423cp -> SF f5f4 -311cp (112cp gain, losing pos).
