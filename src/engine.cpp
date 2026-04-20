@@ -1937,6 +1937,12 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
     // 4.Nf3 d5 5.g3 Be7 -> 5.Bg2 (main Closed Catalan)
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
+    // 4.Nf3 d5 5.g3 Bb4+ (Bogo-Catalan) -> 5.Bd2 (main; also Nbd2 possible)
+    add("rnbqk2r/ppp2ppp/4pn2/3p4/1bPP4/5NP1/PP2PP1P/RNBQKB1R w", {"c1d2"});
+    // After 5.Bd2 -> 5...Be7 (retreat, main) or Bxd2+ or a5.
+    // 5...Be7 -> 6.Bg2 (main Catalan development). NOT 6.Nc3 which after c5 gave Black
+    // comfortable counterplay (game 325 lost).
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP1BPP1P/RN1QKB1R w", {"f1g2"});
     // Semi-Tarrasch 4...c5 -> 5.cxd5 (main) or 5.e3. Game 311 played 5.cxd5 cxd4 6.dxe6?? disaster.
     add("rnbqkb1r/pp3ppp/4pn2/2pp4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c4d5", "e2e3"});
     // After 5.cxd5 Black's main: 5...Nxd5 (main Semi-Tarrasch); 5...cxd4 is side line that engine

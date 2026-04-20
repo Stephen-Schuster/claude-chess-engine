@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 302 | 99 |
+| Losses | 303 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **325**
+Total games played: **326**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0325.pgn`
+- PGN: `game_data/games/game_0326.pgn`
 
 ---
 
@@ -266,6 +266,7 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -371,6 +372,14 @@ git add -A && git commit -m "improve engine: ..." && git push
   Black has strong Qd4 attack. Keep only 4.g3 and 4.e3.
 - Game 318 (Najdorf Maroczy White): long endgame technique loss, not
   cleanly book-fixable.
+
+### Session 2026-04-20i (games 323-325 Catalan followup)
+- Game 323 (Catalan White, another `Nf3 d5 g3 dxc4` transposition): already
+  fixed by 2026-04-20h commit -- engine now plays 5.Bg2.
+- Game 325 (Catalan White with Bogo 4...Bb4+): book Bd2 response, then after
+  5...Be7 force 6.Bg2 (was 6.Nc3?! which allowed 7.c5 b6 structure Black won).
+- Game 324 (Najdorf/Maroczy White with 5.c4): long positional loss similar
+  to game 318, not cleanly book-fixable.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
