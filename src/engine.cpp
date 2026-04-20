@@ -1913,6 +1913,10 @@ static void init_book() {
     add("r1bqk2r/ppp2ppp/3p1n2/n1b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w", {"c4b3"});
     // 7.Bb3 Nxb3 8.axb3 -> Black O-O or Be6
     add("r1bqk2r/ppp2ppp/3p1n2/n1b1p3/4P3/1BNP1N2/PPP2PPP/R1BQ1RK1 b", {"a5b3", "e8g8"});
+    // G441 (White, Italian Na5 line after 6.Nc3 Na5 7.Bb3 a6): engine played 8.Bg5?!
+    //   (not in SF top-5, gives up bishop pair after Bxf6) then 9.Bxf6 and lost. Similar
+    //   to G329 pattern. SF top 8.h3 (+7cp) prevents Bg4 pin. Book h3.
+    add("r1bqk2r/1pp2ppp/p2p1n2/n1b1p3/4P3/1BNP1N2/PPP2PPP/R1BQ1RK1 w", {"h2h3"});
 
     // 1.e4 c5 (Sicilian): prefer Open 2.Nf3 - our 2.Nc3 Closed Sicilian coverage
     // is thin (game 279 loss after 2.Nc3 Nc6 3.Nf3 e5 4.Bc4 drift).
@@ -2117,6 +2121,14 @@ static void init_book() {
     add("r2qkb1r/pp1b1ppp/2n1pn2/4N3/2pp4/N5P1/PP2PPBP/R1BQ1RK1 w", {"a3c4"});
     add("2rqkb1r/pp1b1ppp/2n1pn2/4N3/2Np4/6P1/PP2PPBP/R1BQ1RK1 w", {"c1f4"});
     add("2rqk2r/pp1bbppp/2n1pn2/4N3/2Np1B2/6P1/PP2PPBP/R2Q1RK1 w", {"e5d7"});
+    // G443 (White, Catalan Open same line through 9...Bd7, W to move):
+    //   Engine played 10.Rc1?! (SF #2 -10cp) then slow drift and loss.
+    //   SF top 10.O-O (+29cp). Book it.
+    add("r2qk2r/pppb1ppp/2n1p3/8/QnpP4/2N2NP1/PP2PPBP/R3K2R w", {"e1g1"});
+    // G445 (White, QGD 4.Nc3 Bb4 5.e3 O-O 6.cxd5 exd5 7.Bd3 Bg4 8.h3 Bh5 9.Bd2 c5):
+    //   Engine played 10.g4?! (not in SF top-5, weakens kingside, lost to Bg6/Bxg6/Nc6 counter).
+    //   SF top 10.dxc5 (-7cp, equal). Book it.
+    add("rn1q1rk1/pp3ppp/5n2/2pp3b/1b1P4/2NBPN1P/PP1B1PP1/R2QK2R w", {"d4c5"});
     // G421 (White, Catalan Open 5.Nc3 move order): position
     //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
     //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
@@ -2446,6 +2458,10 @@ static void init_book() {
     //   leading to Nxf6+ Qxf6 9.Bd3 Bb7 10.Ng5! g6 11.O-O-O kingside attack
     //   -- crushed in 36 moves. Nd7 (-38cp #2) acceptable backup.
     add("rnbq1rk1/ppp2ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/R3KB1R b", {"f6e7", "f6e7", "f6e7", "b8d7"});
+    // G446: 7.Nf3 O-O 8.Bc4 Nc6 9.c3 Be7 10.Qe2 -> Black to move. Engine played 10...Na5?!
+    //   (SF #2 -126cp) then crushed by W h4/g4/Ng3/Nh5 kingside attack, mated move 26.
+    //   SF top 10...Bd6 (-117cp) keeping piece active. Book Bd6.
+    add("r1bq1rk1/ppp1bppp/2n1p3/8/2BPN3/2P2N2/PP2QPPP/R3K2R b", {"e7d6"});
     // 8.Qd2 Nd7 9.O-O-O (game 292): avoid 9...c5?? which allows 10.Nxf6+ Nxf6 11.dxc5 Qxd2+ 12.Nxd2
     //   Ng4 13.Ne4 f5 14.h3 fxe4 15.hxg4 losing the knight. Better: 9...b6 fianchetto, or 9...a6/Qe7.
     //   Leave this node unbooked so search picks (likely Qe7 keeping center tension).
@@ -2463,6 +2479,14 @@ static void init_book() {
     add("rnbqk2r/pppnbppp/4p3/3pP1B1/3P3P/2N5/PPP2PP1/R2QKBNR b", {"h7h6", "h7h6", "c7c5"});
     add("rnbqk2r/pppnBppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR b", {"d8e7"});
     add("rnb1k2r/pppnqppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR w", {"f2f4", "g1f3"});
+    // G444: 6.h4 h6 7.Bxe7 Qxe7 8.f4 -> Black to move. Engine played 8...Qb4?! (SF not top-5)
+    //   then 9.a3 Qb6 10.b4 a6 11.Na4 Qc6 12.c3 b5 13.Nc5 ... slow disaster. SF top 8...a6
+    //   (-60cp), side ...O-O (-68cp). Book both.
+    add("rnb1k2r/pppnqpp1/4p2p/3pP3/3P1P1P/2N5/PPP3P1/R2QKBNR b", {"a7a6", "a7a6", "e8g8"});
+    // After 6.h4 h6 -> White's main is 7.Bxe7 (game 444). Also Be3 / Qd2.
+    add("rnbqk2r/pppnbpp1/4p2p/3pP1B1/3P3P/2N5/PPP2PP1/R2QKBNR w", {"g5e7"});
+    // After 7.Bxe7 Qxe7, W to move. Engine should play 8.f4 or 8.Nf3 (both played at top).
+    add("rnb1k2r/pppnqpp1/4p2p/3pP3/3P3P/2N5/PPP2PP1/R2QKBNR w", {"f2f4", "g1f3"});
     // 5.f4 c5 6.Nf3 (main)
     add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N5/PPP3PP/R1BQKBNR w", {"g1f3"});
     // 6.Nf3 Nc6 (develop)
