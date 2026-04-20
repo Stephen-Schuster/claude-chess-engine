@@ -1748,6 +1748,19 @@ static void init_book() {
     add("rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b", {"c8f5", "c7c5"});
     // After 3...Bf5 4.Nf3 (main) or 4.Nc3 or 4.h4
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP2PPP/RNBQKBNR w", {"g1f3", "b1c3", "h2h4", "c2c3"});
+    // Caro-Kann Advance 4.h4 (Bayonet/Shirov) -> 4...h5!? or 4...h6 (avoid 4...e6 5.g4 disaster)
+    //   Main line is 4...h5 stopping g4; alternatives 4...h6, 4...Nd7.
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P3P/8/PPP2PP1/RNBQKBNR b", {"h7h5", "h7h6"});
+    // 4.h4 h5 -> 5.c4 (main), 5.Bd3 Bxd3, 5.Nf3
+    add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/3P3P/8/PPP2PP1/RNBQKBNR w", {"c2c4", "f1d3", "g1f3"});
+    // 4.h4 h5 5.c4 -> 5...e6 (solid) or 5...Nd7
+    add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR w", {"b1c3", "g1f3"});
+    // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2N5/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7", "a7a6"});
+    // Caro-Kann Advance 4.c3 (Van der Wiel) -> 4...e6 main
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2P5/PP3PPP/RNBQKBNR b", {"e7e6", "h7h6"});
+    // Caro-Kann Advance 4.Nf3 -> 4...e6 (main) or 4...Nd7
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7"});
     // Caro-Kann Exchange: 3.exd5 cxd5
     add("rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PPP2PPP/RNBQKBNR b", {"c6d5"});
 
@@ -1779,11 +1792,38 @@ static void init_book() {
     // Grünfeld: 1.d4 Nf6 2.c4 g6 3.Nc3 d5
     add("rnbqkb1r/pppppp1p/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"d7d5", "f8g7"});
     add("rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w", {"c4d5", "g1f3", "c1f4"});
-    // English: 1.c4 e5
+    // English: 1.c4 e5 (Reversed Sicilian)
     add("rnbqkbnr/pppp1ppp/8/4p3/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    // 1.c4 e5 2.Nc3 -> main Black replies: Nf6 (main), Nc6 (Keres)
     add("rnbqkbnr/pppp1ppp/8/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR b", {"g8f6", "b8c6"});
+    // 1.c4 e5 2.Nc3 Nf6 -> 3.Nf3 (main), 3.g3 (fianchetto), 3.e4 (Kingscrusher)
+    //   AVOID 3.Nd5? which just loses tempo (game 245).
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g1f3", "g2g3"});
+    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (main Four Knights English)
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R b", {"b8c6", "e5e4"});
+    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3 or 4.d4
+    //   After 4.g3, common Black reply ...d5
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "d2d4", "e2e3"});
+    // 1.c4 e5 2.Nc3 Nc6 (Keres)
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g2g3", "g1f3"});
+    // 1.c4 e5 2.Nc3 Nc6 3.g3 -> 3...g6 or 3...Nf6 or 3...Bc5
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/2N3P1/PP1PPP1P/R1BQKBNR b", {"g7g6", "g8f6", "f8c5"});
+    // English: 1.c4 c5 (Symmetrical)
+    add("rnbqkbnr/pp1ppppp/8/2p5/2P5/8/PP1PPPPP/RNBQKBNR w", {"g1f3", "b1c3", "g2g3"});
+    // 1.c4 c5 2.Nc3 -> 2...Nc6 or 2...Nf6 or 2...g6
+    add("rnbqkbnr/pp1ppppp/8/2p5/2P5/2N5/PP1PPPPP/R1BQKBNR b", {"b8c6", "g8f6", "g7g6"});
+    // 1.c4 c5 2.Nf3 -> 2...Nf6 or 2...Nc6
+    add("rnbqkbnr/pp1ppppp/8/2p5/2P5/5N2/PP1PPPPP/RNBQKB1R b", {"g8f6", "b8c6", "g7g6"});
+    // English: 1.c4 e6 (transposes to QGD or Nimzo paths)
+    add("rnbqkbnr/pppp1ppp/4p3/8/2P5/8/PP1PPPPP/RNBQKBNR w", {"g1f3", "b1c3", "d2d4"});
+    // English: 1.c4 c6 (Caro-Kann-like / Slav setup)
+    add("rnbqkbnr/pp1ppppp/2p5/8/2P5/8/PP1PPPPP/RNBQKBNR w", {"d2d4", "g1f3", "e2e4"});
+    // English: 1.c4 g6 (Modern)
+    add("rnbqkbnr/pppppp1p/6p1/8/2P5/8/PP1PPPPP/RNBQKBNR w", {"d2d4", "g1f3", "b1c3", "e2e4"});
     // English: 1.c4 Nf6
     add("rnbqkb1r/pppppppp/5n2/8/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3", "g1f3", "d2d4"});
+    // 1.c4 Nf6 2.Nc3 -> 2...e5 (transposes), 2...e6, 2...c5, 2...g6
+    add("rnbqkb1r/pppppppp/5n2/8/2P5/2N5/PP1PPPPP/R1BQKBNR b", {"e7e5", "e7e6", "g7g6", "c7c5"});
     // Reti: 1.Nf3 d5 2.c4
     add("rnbqkbnr/ppp1pppp/8/3p4/2P5/5N2/PP1PPPPP/RNBQKB1R b", {"e7e6", "c7c6", "d5c4"});
     // London System: 1.d4 d5 2.Nf3 Nf6 3.Bf4
