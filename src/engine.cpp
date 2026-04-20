@@ -2059,6 +2059,15 @@ static void init_book() {
     //   Game 308 played 3...Nd4?! which is Nimzowitsch (tricky but dubious).
     //   Game 300 also Nd4?! lost. Prefer 3...g6 main line.
     add("r1bqkbnr/pp1ppppp/2n5/1Bp5/4P3/5N2/PPPP1PPP/RNBQK2R b", {"g7g6", "e7e6", "g7g6"});
+    // White faces 3...Nd4 (Nimzowitsch, games 300/308): 4.Nxd4 cxd4 5.O-O (main) or 5.c3.
+    //   SF: 5.c3 a6 6.Ba4 is slightly better. Don't rush 5.c3 e5 6.cxd4 where game 308 drifted.
+    add("r1bqkbnr/pp1ppppp/8/1Bp5/3nP3/5N2/PPPP1PPP/RNBQK2R w", {"f3d4"});
+    add("r1bqkbnr/pp1ppppp/8/1Bp5/3NP3/8/PPPP1PPP/RNBQK2R b", {"c5d4"});
+    add("r1bqkbnr/pp1ppppp/8/1B6/3pP3/8/PPPP1PPP/RNBQK2R w", {"c2c3", "e1g1"});
+    add("r1bqkbnr/pp1ppppp/8/1B6/3pP3/2P5/PP1P1PPP/RNBQK2R b", {"a7a6"});
+    add("r1bqkbnr/1p1ppppp/p7/1B6/3pP3/2P5/PP1P1PPP/RNBQK2R w", {"b5a4"});
+    // 6.Ba4 -> standard response ...b5 7.Bc2 Nf6 8.cxd4 (SF +55cp).
+    add("r1bqkbnr/1p1ppppp/p7/8/B2pP3/2P5/PP1P1PPP/RNBQK2R b", {"b7b5"});
     add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b1c3", "e1g1", "c2c3"});
     add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8g7", "g8f6"});
     add("r1bqk1nr/pp1pppbp/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 w", {"c2c3", "b1c3"});
