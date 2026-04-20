@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 281 | 99 |
+| Losses | 283 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **303**
+Total games played: **305**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0303.pgn`
+- PGN: `game_data/games/game_0305.pgn`
 
 ---
 
@@ -244,6 +244,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -319,6 +321,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - 6 more losses. 296 CK vs 2.c4 Qxd5?! queen harassed; 297 Sicilian positional squeeze; 298 French Burn with OLD binary before fix; 299/301 English middlegame blunders; 300 Rossolimo Black Qxb2?? piece trap.
 - Fix: added Caro-Kann Accelerated Panov book: 1.e4 c6 2.c4 d5 3.cxd5 cxd5 4.exd5 Nf6! (not Qxd5) 5.Nc3 Nxd5 6.d4 Nc6/g6/Bf5 (transpose to Panov-Botvinnik).
 - Games 297/299/300/301 are middlegame tactical blunders (queen grab b2, Nxc5 blunder, Nd5 trap) that book can't prevent.
+
+### Session 2026-04-20d (games 302-303 -- Sicilian Qxd4 and Berlin gaps)
+- 302 Black: Ruy Lopez 3...Nf6 4.O-O -> played Bb4?! then crushed kingside.
+- 303 White: Sicilian 2...d6 3.d4 cxd4 4.Qxd4?! (search picked this; book had no entry). Queen harassed, lost to bishop pin.
+- Fix: book 4.Nxd4 mainline for Sicilian 2...d6 3.d4 cxd4, plus Najdorf/Dragon/Classical branches.
+- Fix: book Berlin 3...Nf6 4.O-O Nxe4 5.d4 Nd6 6.Bxc6 bxc6 (Berlin endgame main line).
 
 ### Session 2026-04-20 (games 261-288 book expansion, 12 commits)
 - Commits: 2c61067 (Four Knights/Vienna), abb8143 (London+2.c4 weight), ce20301

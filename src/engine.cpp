@@ -1778,6 +1778,13 @@ static void init_book() {
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
+    // Berlin Defense: 3...Nf6 -> 4.O-O (main) -- Black plays 4...Nxe4 (Berlin main)
+    //   not 4...Bb4?! (game 302) or Bc5. Book the main 5.d4 Nd6 line.
+    add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"e1g1", "d2d3"});
+    add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f6e4", "f8e7", "f8c5"});
+    add("r1bqkb1r/pppp1ppp/2n5/1B2p3/4n3/5N2/PPPP1PPP/RNBQ1RK1 w", {"d2d4"});
+    add("r1bqkb1r/pppp1ppp/2n5/1B2p3/3Pn3/5N2/PPP2PPP/RNBQ1RK1 b", {"e4d6", "e5d4"});
+    add("r1bqkb1r/pppp1ppp/2nn4/1B2p3/3P4/5N2/PPP2PPP/RNBQ1RK1 w", {"b5c6"});
     // Italian
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b", {"g8f6", "f8c5"});
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w", {"e1g1", "c2c3", "b1c3"});
@@ -1803,6 +1810,14 @@ static void init_book() {
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "e7e6"});
     // Open Sicilian: 1.e4 c5 2.Nf3 d6 3.d4
     add("rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
+    // After 3.d4 cxd4: MUST play 4.Nxd4 (not Qxd4 which exposes queen to ...Nc6 tempo).
+    //   Game 303 lost with 4.Qxd4 Nc6 5.Qa4 g6 6.Bb5 ...bishop-pin disaster.
+    add("rnbqkbnr/pp2pppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w", {"f3d4"});
+    // 4.Nxd4 Nf6 (main) or g6 (Dragon) or a6 (Najdorf)
+    add("rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "a7a6", "g7g6"});
+    // 4.Nxd4 Nf6 5.Nc3 (main) -> Black's Najdorf/Dragon/Classical branching
+    add("rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w", {"b1c3"});
+    add("rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"a7a6", "g7g6", "b8c6"});
     // Najdorf intro
     add("rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "c1e3", "f2f3"});
     // Sicilian 2.Nf3 d6 3.d4 cxd4 4.Nxd4 e5 (rare Sveshnikov-ish sideline; game 282):
