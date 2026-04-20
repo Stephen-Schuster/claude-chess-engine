@@ -1786,6 +1786,11 @@ static void init_book() {
     add("rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
     // Najdorf intro
     add("rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "c1e3", "f2f3"});
+    // Sicilian 2.Nf3 d6 3.d4 cxd4 4.Nxd4 e5 (rare Sveshnikov-ish sideline; game 282):
+    // 5.Nb5 is the main theoretical move (threatens Nd6+); 5.Bb5+ (game 282)
+    // surrenders bishop pair. After 5.Nb5 a6 6.Nd6+ Bxd6 7.Qxd6 Qe7 +/=.
+    add("rnbqkbnr/pp3ppp/3p4/4p3/3NP3/8/PPP2PPP/RNBQKB1R w", {"d4b5"});
+    add("rnbqkbnr/1p3ppp/p2p4/1N2p3/4P3/8/PPP2PPP/RNBQKB1R w", {"b5d6"});
 
     // 1.e4 e6 French
     add("rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
