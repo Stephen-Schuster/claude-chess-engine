@@ -3312,6 +3312,13 @@ static void init_book() {
     add("r4r2/pp2pk2/3pbnpQ/q7/3BP1P1/2N2P2/PPP5/2KR1B2 b", {"f8h8"});
     // G754 (B M9B): b8c6 -369cp -> SF b2e5 -134cp (235cp gain).
     add("rnb1kb1r/1p3ppp/p2ppn2/8/2P1P3/1N1BB3/Pq3PPP/RN1Q1RK1 b", {"b2e5"});
+
+    // === Session 2026-04-20bi (G755/G757 batch: 2 fixes, ~319cp gain) ===
+    // G756 marginal (66cp); skipped.
+    // G755 (W M16W): g2c6 -317cp -> SF f1d1 -124cp (193cp gain, losing pos).
+    add("2rqr1k1/pp3pp1/2n2n2/2B1p2p/2P3b1/3P2P1/P1Q1NPBP/R4RK1 w", {"f1d1"});
+    // G757 (W M12W): f1d1 -294cp -> SF g1h1 -168cp (126cp gain).
+    add("r1b1r1k1/ppp2ppp/3q1n2/3pb3/4P3/1BN2P2/PPP1Q1PP/R1B2RK1 w", {"g1h1"});
 }
 
 static Move try_book_move(Board& b) {

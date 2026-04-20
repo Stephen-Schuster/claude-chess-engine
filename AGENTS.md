@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 719 | 92 |
+| Losses | 722 | 92 |
 | Draws | 26 | 8 |
 
-Total games played: **758**
+Total games played: **761**
 
 ## Last game
 
-- Result: **Draw**
-- PGN: `game_data/games/game_0758.pgn`
+- Result: **Loss**
+- PGN: `game_data/games/game_0761.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1251,6 +1254,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bi (G755/G757 batch: 2 fixes, ~319cp gain)
+- G756 marginal (66cp gain); skipped.
+- G755 (W M16W): g2c6 -317cp -> SF f1d1 -124cp (193cp gain, losing pos).
+- G757 (W M12W): f1d1 -294cp -> SF g1h1 -168cp (126cp gain).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
+- **Lesson again**: d16 misranked G755 (said h2h3 top) -- d22 showed f1d1 top.
+- G758 was **DRAW** (8th in last 100).
 
 ### Session 2026-04-20bh (G752/G754 batch: 2 fixes, ~387cp gain)
 - G753 marginal (68cp gain); skipped.
