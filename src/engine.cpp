@@ -1863,6 +1863,13 @@ static void init_book() {
     // After 9.O-O cxd5 10.h3 (SF main, prevents ...Bg4 pins)
     add("r1bq1rk1/p1p2ppp/2p2n2/3P4/1b6/2NB4/PPP2PPP/R1BQ1RK1 b", {"c6d5"});
     add("r1bq1rk1/p4ppp/2p2n2/3p4/1b6/2NB4/PPP2PPP/R1BQ1RK1 w", {"h2h3"});
+    // G431: alt move order 7.Bd3 O-O 8.O-O d5 9.exd5 cxd5 reaches position with
+    //   only c7+d5 pawns (not c6+d5). SF top 10.h3 (+16cp); engine played 10.Bf4
+    //   then 11.Bg5 (SF #5 -13cp) slow endgame loss. Force 10.h3 main.
+    add("r1bq1rk1/p1p2ppp/5n2/3p4/1b6/2NB4/PPP2PPP/R1BQ1RK1 w", {"h2h3"});
+    // After 10.h3, Black develops; if 10.Bf4 c5 reached, force 11.Be5 (SF top +8cp)
+    //   PV: Bxe5 Be6 12.h3 Ba5 13.Qf3 Bc7 14.Bxc7 Qxc7 (roughly equal).
+    add("r1bq1rk1/p4ppp/5n2/2pp4/1b3B2/2NB4/PPP2PPP/R2Q1RK1 w", {"f4e5"});
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
@@ -2323,7 +2330,13 @@ static void init_book() {
     add("rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b", {"d7d5", "g7g6", "e7e6", "c7c5"});
     // 1.d4 Nf6 2.Nf3 d5 -> 3.c4 (transpose to QGD) or 3.Bf4 (London) or 3.g3 (Catalan-ish)
     //   Prefer 3.c4 to stay in mainline theory rather than drift into shapeless London.
-    add("rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w", {"c2c4", "c2c4", "c1f4", "g2g3"});
+    add("rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w", {"c2c4", "c2c4", "c2c4", "c1f4"});
+    // G433: after 3.g3 c5 (symmetric attack) force 4.c4 (SF top +11cp).
+    //   Engine played 4.e3 (SF #5 -27cp) then drifted, lost.
+    add("rnbqkb1r/pp2pppp/5n2/2pp4/3P4/5NP1/PPP1PP1P/RNBQKB1R w", {"c2c4"});
+    // After 4.c4 dxc4 -> 5.Qa4+ (regain pawn, SF main +11cp). Black replies Qd7.
+    add("rnbqkb1r/pp2pppp/5n2/2p5/2pP4/5NP1/PPP1PP1P/RNBQKB1R w", {"d1a4"});
+    add("rnbqkb1r/pp2pppp/5n2/2p5/Q1pP4/5NP1/PPP1PP1P/RNB1KB1R b", {"d8d7"});
     // Scandinavian: 1.e4 d5
     add("rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w", {"e4d5"});
     add("rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b", {"d8d5", "g8f6"});
@@ -2534,7 +2547,7 @@ static void init_book() {
     // Petroff 6.Bd3 Nc6 7.O-O Be7 8.c4 -> 8...Nb4 (best, -42cp) or 8...Nf6. AVOID 8...Bg4
     // which drifts into slow loss (game 326: 8...Bg4 9.Nc3 Nxc3 10.bxc3 O-O 11.h3 Be6
     // 12.cxd5 Bxd5 13.Nh2 Qd6 ... eventually 15.c4 Bxg2?? blunder).
-    add("r1bqk2r/ppp1bppp/2n5/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c6b4", "c6b4", "e4f6"});
+    add("r1bqk2r/ppp1bppp/2n5/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c6b4", "c6b4", "c6b4", "c6b4", "e4f6"});
     // After 8...Nb4 -> 9.cxd5 Nxd3 (capture bishop, main)
     add("r1bqk2r/ppp1bppp/8/3P4/1n1Pn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"b4d3"});
     // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
@@ -2564,8 +2577,12 @@ static void init_book() {
     //   then 7.Re1 Qc7 8.Nf3 Nc6 9.h3 O-O 10.Qe2 Ne5 11.Nxe5 Bxe5 -- position
     //   was already -71cp by move 8 when 6...Bd6 started drift. Force 5...Nf6
     //   then 6...d6 (Scheveningen structure, SF #2 -58cp) instead of Bd6.
-    add("rnbqkbnr/1p1p1ppp/p3p3/8/3NP3/3B4/PPP2PPP/RNBQK2R b", {"g8f6"});
-    add("rnbqkb1r/1p1p1ppp/p3pn2/8/3NP3/3B4/PPP2PPP/RNBQ1RK1 b", {"d7d6", "e6e5"});
+    // G432: 5.Bd3 Qc7 is SF top (-43cp); Nf6 is -57cp. Weight Qc7 3x over Nf6.
+    add("rnbqkbnr/1p1p1ppp/p3p3/8/3NP3/3B4/PPP2PPP/RNBQK2R b", {"d8c7", "d8c7", "d8c7", "g8f6"});
+    add("rnbqkb1r/1p1p1ppp/p3pn2/8/3NP3/3B4/PPP2PPP/RNBQ1RK1 b", {"d7d6"});
+    // G432: 5.Bd3 Nf6 6.O-O Qc7 7.Qe2 -> force 7...d6 (SF top -66cp). Engine
+    //   played 7...Bd6 8.Kh1 Nc6 9.Nxc6 dxc6 10.f4 e5 structurally lost.
+    add("rnb1kb1r/1pqp1ppp/p3pn2/8/3NP3/3B4/PPP1QPPP/RNB2RK1 b", {"d7d6"});
     // 5.Bd3 Nf6 6.Nc3 -> 6...d6 SF top (-39cp).
     add("rnbqkb1r/1p1p1ppp/p3pn2/8/3NP3/2NB4/PPP2PPP/R1BQK2R b", {"d7d6"});
     // Kan 5...Qc7 6.Bd3 (main)
