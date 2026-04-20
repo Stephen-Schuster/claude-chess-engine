@@ -250,6 +250,16 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 ### Current baseline: `engine/engine_current_best` (main after 33dbc75)
 
+### Session 2026-04-20 improvements (commits d1462b7, 4868ff5, 759927d)
+- Expanded English book: 1.c4 e5 Four Knights main, 1.c4 c5 Symmetrical,
+  1.c4 Nf6/e6/c6/g6. Fixes game 245 where 1.c4 e5 2.Nc3 Nf6 3.Nd5? lost.
+- Expanded Caro-Kann Advance: 4.h4 h5!, 4.Nc3/c3/Nf3 with e6 replies.
+  Fixes game 240 where 4.h4 e6?? 5.g4 Be4?? lost a bishop.
+- Expanded 1.d4 Nf6 2.c4 {e6,g6} -> Nimzo/QID/Catalan/KID main lines.
+- Dropped 1.Nf3 from startpos book (weight e4/d4 2x, c4 1x). Games
+  241/243/239 all drifted passively after 1.Nf3 2.e3. If we transpose
+  there anyway, added 2.d4/c4/g3 responses to 1...d5/Nf6/c5.
+
 ### Recent game results
 - Game 2 (2026-04-18): WIN vs GPT-Codex as Black, 32 moves by mate.
 - Game 1: Loss (details not in local workspace).
