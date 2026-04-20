@@ -1779,9 +1779,10 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
     // Berlin Defense: 3...Nf6 -> 4.O-O (main) -- Black plays 4...Nxe4 (Berlin main)
-    //   not 4...Bb4?! (game 302) or Bc5. Book the main 5.d4 Nd6 line.
+    //   not 4...Bb4?! (game 302) or 4...Bc5 (Classical Deferred gives +57cp to White,
+    //   game 310 lost after 5.Nxe5 Nxe5 6.d4). Main: 4...Nxe4 or solid 4...Be7.
     add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"e1g1", "d2d3"});
-    add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f6e4", "f8e7", "f8c5"});
+    add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f6e4", "f8e7"});
     add("r1bqkb1r/pppp1ppp/2n5/1B2p3/4n3/5N2/PPPP1PPP/RNBQ1RK1 w", {"d2d4"});
     add("r1bqkb1r/pppp1ppp/2n5/1B2p3/3Pn3/5N2/PPP2PPP/RNBQ1RK1 b", {"e4d6", "e5d4"});
     add("r1bqkb1r/pppp1ppp/2nn4/1B2p3/3P4/5N2/PPP2PPP/RNBQ1RK1 w", {"b5c6"});
@@ -1902,8 +1903,15 @@ static void init_book() {
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"g8f6", "f8e7"});
 
-    // 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O
-    add("r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8e7", "b7b5"});
+    // 1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O -> 5...Be7 (Closed Ruy, main).
+    //   NOT 5...b5 (Norwegian side line, game 312 lost after 6.Bb3 Bd6?! drift).
+    add("r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8e7"});
+    // 5...Be7 -> 6.Re1 (main) / 6.d3 (Martinez) / 6.Bxc6 (Exchange deferred)
+    add("r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 w", {"f1e1", "d2d3"});
+    // 6.Re1 -> 6...b5 7.Bb3 d6 8.c3 (Closed main)
+    add("r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 b", {"b7b5"});
+    add("r1bqk2r/2ppbppp/p1n2n2/1p2p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 w", {"a4b3"});
+    add("r1bqk2r/2ppbppp/p1n2n2/1p2p3/4P3/1B3N2/PPPP1PPP/RNBQR1K1 b", {"d7d6"});
     // Nimzo-Indian: 1.d4 Nf6 2.c4 e6 3.Nc3 Bb4
     add("rnbqkb1r/pppppppp/5n2/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"e7e6", "g7g6", "c7c5"});
     // 1.d4 Nf6 2.c4 e6 -> White's 3rd move (Nimzo 3.Nc3 / Queen's Indian 3.Nf3 / Catalan 3.g3)
@@ -1914,6 +1922,13 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w", {"b1c3", "g2g3"});
     // After 4.Nc3 -> 4...Be7 (QGD main) or 4...Bb4 (Ragozin) or 4...c5 (Semi-Tarrasch)
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b", {"f8e7", "f8b4", "c7c5"});
+    // Semi-Tarrasch 4...c5 -> 5.cxd5 (main) or 5.e3. Game 311 played 5.cxd5 cxd4 6.dxe6?? disaster.
+    add("rnbqkb1r/pp3ppp/4pn2/2pp4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c4d5", "e2e3"});
+    // After 5.cxd5 Black's main: 5...Nxd5 (main Semi-Tarrasch); 5...cxd4 is side line that engine
+    // mishandled in game 311. Book mainline continuation.
+    add("rnbqkb1r/pp3ppp/4p3/2pn4/3P4/2N2N2/PP2PPPP/R1BQKB1R w", {"e2e4", "g2g3", "e2e3"});
+    // If Black deviates with 5...cxd4, our response must be 6.Qxd4 (+35cp SF), NOT 6.dxe6 (game 311).
+    add("rnbqkb1r/pp3ppp/4pn2/3P4/3p4/2N2N2/PP2PPPP/R1BQKB1R w", {"d1d4"});
     // QGD 4.Nc3 Be7 5.Bg5 (main) or 5.Bf4
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c1g5", "c1f4"});
     // 1.d4 Nf6 2.c4 e6 3.g3 -> 3...d5 (Catalan main) or 3...Bb4+
@@ -1926,7 +1941,9 @@ static void init_book() {
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3"});
     // 4.Bg2 dxc4 -> 5.Nf3 (regain pawn later)
     add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3", "d1a4"});
-    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2", "a2a3"});
+    // Move 4 for White: drop 4.a3 (Saemisch) -- doubles c-pawns and engine
+    // drifts in the imbalanced middlegame (games 313/315).
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2"});
     // Nimzo 4.e3 (Rubinstein) -> Black: O-O (main, game 305/307), c5 (Huebner), b6, d5
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N1P3/PP3PPP/R1BQKBNR b", {"e8g8", "c7c5", "b7b6", "d7d5"});
     // Nimzo 4.e3 O-O -> 5.Nf3 (main) or 5.Bd3 (Reshevsky). Avoid 5.a3 Bxc3 bxc3 which doubles pawns.

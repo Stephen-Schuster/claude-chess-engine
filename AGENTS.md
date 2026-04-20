@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 293 | 99 |
+| Losses | 296 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **315**
+Total games played: **318**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0315.pgn`
+- PGN: `game_data/games/game_0318.pgn`
 
 ---
 
@@ -256,6 +256,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -331,6 +334,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 - 6 more losses. 296 CK vs 2.c4 Qxd5?! queen harassed; 297 Sicilian positional squeeze; 298 French Burn with OLD binary before fix; 299/301 English middlegame blunders; 300 Rossolimo Black Qxb2?? piece trap.
 - Fix: added Caro-Kann Accelerated Panov book: 1.e4 c6 2.c4 d5 3.cxd5 cxd5 4.exd5 Nf6! (not Qxd5) 5.Nc3 Nxd5 6.d4 Nc6/g6/Bf5 (transpose to Panov-Botvinnik).
 - Games 297/299/300/301 are middlegame tactical blunders (queen grab b2, Nxc5 blunder, Nd5 trap) that book can't prevent.
+
+### Session 2026-04-20g (games 310-315 book cleanup)
+- 6 new losses. 3 Black vs Ruy Lopez (310/312/314), 3 White (311 Semi-Tarrasch,
+  313/315 Nimzo Saemisch).
+- Fix: removed 4.a3 (Saemisch) from Nimzo options -- engine drifts in the
+  doubled-c-pawn middlegame (games 313/315).
+- Fix: added Semi-Tarrasch 4.Nc3 c5 5.cxd5 mainline; after 5...cxd4 (sideline
+  that confused engine in game 311), force 6.Qxd4 (+35cp) not 6.dxe6??.
+- Fix: removed 4...Bc5 from Berlin -- gives White +57cp after 5.Nxe5 Nxe5 6.d4
+  (game 310 disaster). Keep only 4...Nxe4 and 4...Be7.
+- Fix: removed 5...b5 (Norwegian) from Closed Ruy -- not main, engine drifts.
+  Added Closed main line through 8.c3.
 
 ### Session 2026-04-20f (English 3.g3 Bb4 tactical fix, game 301)
 - Game 301: 1.c4 e5 2.Nc3 Nf6 3.g3 Bb4 4.Nd5?? Nxd5 5.cxd5 O-O 6.a3 Ba5
