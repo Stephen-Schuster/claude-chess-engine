@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 700 | 94 |
+| Losses | 705 | 94 |
 | Draws | 24 | 6 |
 
-Total games played: **737**
+Total games played: **742**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0737.pgn`
+- PGN: `game_data/games/game_0742.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1230,6 +1235,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bc (G734/G736 batch: 2 fixes, ~441cp gain!)
+- G735/G737 marginal in deep losses; skipped.
+- G734 (B M15B): f5d4 -285cp -> SF b4b6 -64cp **near-equal save, 221cp gain**.
+  d16 misranked b4a5 #1; d22 found b4b6 the true top.
+- G736 (B M17B): f6d7 -399cp -> SF b7b5 -179cp (220cp gain).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20bb (G732/G733 batch: 2 fixes, ~247cp gain)
 - G731 marginal (~65cp gain); skipped.
