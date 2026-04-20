@@ -3215,6 +3215,13 @@ static void init_book() {
     // G704 (B M7B Petroff): SF #1 O-O -44cp vs Nc6 -113 (~70cp gain).
     // Pre-existing entry at line 2841 had {e8g8, b8c6}; RNG picked losing b8c6.
     // Removed b8c6 from that entry (force O-O only). No new add needed here.
+
+    // === Session 2026-04-20as (G706/G707 batch + G708 DRAW) ===
+    // G708 was DRAW; G709 ours already SF #3 (10cp behind top), skipped.
+    // G706 (B M11B): SF #1 Qe7 -96cp vs Re8 -183 (~87cp gain).
+    add("r1bq1rk1/p1p2pp1/2pp1n1p/8/4P2B/2PB4/P1P2PPP/R2Q1RK1 b", {"d8e7"});
+    // G707 (W M15W): SF #1 f2f4 -104cp vs Ra2 -184 (~80cp gain).
+    add("3r1b1r/1kpqn1pp/pp2bp2/2p1p2Q/P1N1P3/1PNPB2P/2P2PP1/R4RK1 w", {"f2f4"});
 }
 
 static Move try_book_move(Board& b) {

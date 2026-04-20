@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 672 | 95 |
+| Losses | 676 | 95 |
 | Draws | 23 | 5 |
 
-Total games played: **708**
+Total games played: **712**
 
 ## Last game
 
-- Result: **Draw**
-- PGN: `game_data/games/game_0708.pgn`
+- Result: **Loss**
+- PGN: `game_data/games/game_0712.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1201,6 +1205,17 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20as (G706/G707 fixes + G708 DRAW)
+- **G708 DRAW** -- 5th draw in last 100. Black side. Trend continues
+  (G681, G703, G708 = 3 draws in ~30 games; engine defensive shuffles work).
+- G709 ours was already SF #3 (only 10cp behind top); skipped.
+- G706 (B M11B): Re8 -183cp -> SF d8e7 (-96cp) 87cp gain.
+- G707 (W M15W): Ra2 -184cp -> SF f2f4 (-104cp) 80cp gain.
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
+- Also ran `/tmp/scan_dups.py` -- found 7 duplicate FEN entries in book,
+  6 are benign (same/equivalent moves listed twice). G704 was the only
+  true bug (losing move RNG-picked).
 
 ### Session 2026-04-20ar (G704 Petroff dedup fix)
 - G704 (B M7B Petroff Classical 6.Bd3 Bd6 7.O-O): existing book entry at
