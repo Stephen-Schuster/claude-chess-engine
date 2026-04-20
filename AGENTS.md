@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 303 | 99 |
+| Losses | 306 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **326**
+Total games played: **329**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0326.pgn`
+- PGN: `game_data/games/game_0329.pgn`
 
 ---
 
@@ -267,6 +267,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -380,6 +383,17 @@ git add -A && git commit -m "improve engine: ..." && git push
   5...Be7 force 6.Bg2 (was 6.Nc3?! which allowed 7.c5 b6 structure Black won).
 - Game 324 (Najdorf/Maroczy White with 5.c4): long positional loss similar
   to game 318, not cleanly book-fixable.
+
+### Session 2026-04-20j (game 326 Petroff deepening)
+- Game 326 (Petroff Black after my 7...Be7 fix): Book ended at move 8 in
+  `6.Bd3 Nc6 7.O-O Be7 8.c4` where engine chose 8...Bg4 (-60cp per SF)
+  leading to slow 30-move loss with 15...Bxg2?? blunder at end.
+- Stockfish analysis of the key position shows Petroff is inherently -40 to
+  -50cp for Black by move 8; can't make it equal, only avoid worse options.
+- Fix: book `7...Be7 8.c4` -> {Nb4, Nb4, Nf6} (both -42cp, 60/40 weighted
+  toward Nb4 which has cleaner concrete line).
+- Fix: book `8...Nb4 9.cxd5` -> 9...Nxd3 10.Qxd3 Qxd5 (simplifying line
+  that reaches roughly -30cp, very drawable in practice).
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).

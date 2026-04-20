@@ -2256,6 +2256,12 @@ static void init_book() {
     add("r1bqkb1r/ppp2ppp/2n5/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"f8e7"});
     // Petroff 6.Bd3 Be7 7.O-O -> 7...Nc6 (main)
     add("rnbqk2r/ppp1bppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"b8c6"});
+    // Petroff 6.Bd3 Nc6 7.O-O Be7 8.c4 -> 8...Nb4 (best, -42cp) or 8...Nf6. AVOID 8...Bg4
+    // which drifts into slow loss (game 326: 8...Bg4 9.Nc3 Nxc3 10.bxc3 O-O 11.h3 Be6
+    // 12.cxd5 Bxd5 13.Nh2 Qd6 ... eventually 15.c4 Bxg2?? blunder).
+    add("r1bqk2r/ppp1bppp/2n5/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c6b4", "c6b4", "e4f6"});
+    // After 8...Nb4 -> 9.cxd5 Nxd3 (capture bishop, main)
+    add("r1bqk2r/ppp1bppp/8/3P4/1n1Pn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"b4d3"});
     // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
     add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8", "b8c6"});
     // 7.O-O O-O 8.c4 -> 8...c6 (main, support d5) or 8...Nc6
