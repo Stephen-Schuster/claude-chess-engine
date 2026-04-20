@@ -1924,6 +1924,13 @@ static void init_book() {
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3 or 4.d4
     //   After 4.g3, common Black reply ...d5
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "d2d4", "e2e3"});
+    // 4.g3 -> Black: d5 (main central challenge), Bc5, Bb4 (pin, game 289), g6
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2NP1/PP1PPP1P/R1BQKB1R b", {"d7d5", "f8c5", "f8b4", "g7g6"});
+    // 4.g3 Bb4 -> 5.Nd5! (main: attacks Bb4, kick or trade favorably) or 5.Bg2.
+    // NEVER allow ...e4 and ...Bxc3 doubled pawns (game 289 disaster).
+    add("r1bqk2r/pppp1ppp/2n2n2/4p3/1bP5/2N2NP1/PP1PPP1P/R1BQKB1R w", {"c3d5"});
+    // 4.g3 d5 5.cxd5 Nxd5 6.Bg2 (main Reversed Dragon)
+    add("r1bqkb1r/ppp2ppp/2n5/3np3/8/2N2NP1/PP1PPPBP/R1BQK2R b", {"c6b4", "d5b6", "c8e6"});
     // 1.c4 e5 2.Nc3 Nc6 (Keres)
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g2g3", "g1f3"});
     // 1.c4 e5 2.Nc3 Nc6 3.g3 -> 3...g6 or 3...Nf6 or 3...Bc5
