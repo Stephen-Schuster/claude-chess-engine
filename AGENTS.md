@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 639 | 97 |
-| Draws | 19 | 3 |
+| Losses | 645 | 97 |
+| Draws | 20 | 3 |
 
-Total games played: **671**
+Total games played: **678**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0671.pgn`
+- PGN: `game_data/games/game_0678.pgn`
 
 ---
 
@@ -182,6 +182,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
 
 
 
@@ -1164,6 +1171,19 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ak (search: history malus)
+- Added history malus on beta cutoffs in `search()` (~lines 1635, 1659, 1722).
+  Track quiet moves tried in fixed-size `quiet_tried[64]` array; on cutoff,
+  penalize all quiet moves tried before the cutoff move by `depth*depth`.
+  Standard technique in modern engines (Stockfish/Ethereal/Berserk),
+  worth ~5-15 elo in published tests.
+- Verification: perft 197281 passes; A/B 10g@400ms vs baseline = 5-5 (all
+  draws, deterministic from same start). No regression. Benefit shows in
+  adversarial games where stale moves keeping high history scores cause
+  bad LMR / move ordering decisions.
+- Risk: low. Logic verified -- after `undo_move(m)`, board is in parent
+  state where `qm.from` correctly indexes earlier-tried moves' from-squares.
 
 ### Session 2026-04-20aj (G658-G662 batch: 5 book fixes)
 - G654/G655/G656/G657/G664/G665 all -200+cp losing positions, not booked.

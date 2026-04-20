@@ -1630,6 +1630,9 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
     Move best_move{}; best_move.from = 255;
     int legal = 0;
     int move_count = 0;
+    // Track quiet moves tried (for history malus on cutoff)
+    Move quiet_tried[64];
+    int n_quiet_tried = 0;
     // Late move pruning limits (index by depth)
     static const int LMP[7] = {0, 5, 8, 12, 18, 25, 34};
     for (const Move& m : moves) {
@@ -1652,6 +1655,10 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
         if (in_check(b, b.side ^ 1)) { undo_move(b, m, u); continue; }
         legal++;
         move_count++;
+        // Track quiet moves for history malus on cutoff (cap at 64)
+        if (is_quiet && n_quiet_tried < 64) {
+            quiet_tried[n_quiet_tried++] = m;
+        }
         rep_history.push_back(b.hash);
         move_stack[ply + 1] = m;
         int score;
@@ -1707,6 +1714,22 @@ static int search(Board& b, int depth, int alpha, int beta, int ply, bool do_nul
                     for (int i = 0; i < 13; i++)
                         for (int j = 0; j < 128; j++)
                             history_h[i][j] /= 2;
+                }
+                // History malus: penalize quiet moves tried before this cutoff.
+                // Modern engines do this -- prevents stale moves from keeping high
+                // scores when they consistently fail to produce cutoffs.
+                // Last entry in quiet_tried[] is the cutoff move itself, skip it.
+                int malus = depth * depth;
+                for (int qi = 0; qi < n_quiet_tried - 1; qi++) {
+                    const Move& qm = quiet_tried[qi];
+                    int qp = b.piece[qm.from];
+                    history_h[qp + 6][qm.to] -= malus;
+                    if (history_h[qp + 6][qm.to] < -1000000) {
+                        for (int i = 0; i < 13; i++)
+                            for (int j = 0; j < 128; j++)
+                                history_h[i][j] /= 2;
+                        break;
+                    }
                 }
                 // Counter-move: reply to previous move
                 if (ply > 0) {
