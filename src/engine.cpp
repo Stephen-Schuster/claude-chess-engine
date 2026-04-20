@@ -1808,6 +1808,14 @@ static void init_book() {
     // White's 8th: SF prefers g3; all ~equal. Accept any.
     // After 8.g3 d6 9.c4 Nb6 10.Bg2 Bb7 11.O-O -> Black plays 11...dxe5 (SF -56cp)
     add("r3kb1r/pbp1qppp/1npp4/4P3/2P5/6P1/PP2QPBP/RNB2RK1 b", {"d6e5"});
+    // Scotch Mieses 5.Nxc6 bxc6 6.Bd3 (game 390 path, Black): NOT the 6.e5 Mieses
+    //   main. Best is 6...d5 (SF -5cp) nearly equal. Engine played d5 naturally.
+    //   Then 7.exd5 cxd5 8.O-O Be7 9.h3 O-O 10.Re1 -> force 10...c5! (SF -2cp)
+    //   NOT 10...Bb4 (-30cp, game 390 disaster with Nc3 c5 Qf3 Bxc3 Rb8 Be3 c4
+    //   Bf1 Rb2 losing rook for bishop).
+    add("r1bqkb1r/p1pp1ppp/2p2n2/8/4P3/3B4/PPP2PPP/RNBQK2R b", {"d7d5"});
+    add("r1bqkb1r/p1p2ppp/5n2/3p4/8/3B4/PPP2PPP/RNBQ1RK1 b", {"f8e7"});
+    add("r1bq1rk1/p1p1bppp/5n2/3p4/8/3B3P/PPP2PP1/RNBQR1K1 b", {"c7c5"});
     // 4...Nf6 5.Nc3 (Four Knights Scotch) -> ...Bb4 main, or ...Bc5
     add("r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"f8b4", "f8c5"});
     // 5...Bb4: White's main is 6.Nxc6 bxc6 7.Bd3 d5 8.exd5 cxd5 9.O-O (equal).
@@ -1939,6 +1947,10 @@ static void init_book() {
     add("r2qkbnr/pp1n1pp1/2p1p3/4Pb1p/2BP3P/2N2N2/PP3PP1/R1BQK2R b", {"f5g4"});
     // 8...Bg4 9.Be2 -> 9...Ne7 (SF top +3cp, best setup for Black).
     add("r2qkbnr/pp1n1pp1/2p1p3/4P2p/3P2bP/2N2N2/PP2BPP1/R1BQK2R b", {"g8e7"});
+    // 8...Bg4 9.Bg5 (game 388): force 9...Be7! (SF top -2cp, near equal)
+    //   NOT 9...Qb6 (-47cp, led to 10.O-O Bxf3 11.Qxf3 Ne7 12.Rad1 Nf5 13.Rfe1
+    //   Qxb2 poisoned pawn disaster).
+    add("r2qkbnr/pp1n1pp1/2p1p3/4P1Bp/2BP2bP/2N2N2/PP3PP1/R2QK2R b", {"f8e7"});
     // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
@@ -2152,6 +2164,11 @@ static void init_book() {
     //   6.Nxc6 bxc6 which gave Black strong Qd4 attack (game 321 lost).
     //   Weight g3 3x over e3 -- g3 has deeper book coverage; e3 led to game 385 disaster.
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "g2g3", "g2g3", "e2e3"});
+    // 4.e3 d5 (game 387): force 5.cxd5! (SF top +26cp, not 5.d4 +5cp which led
+    //   to positional grind loss in game 387).
+    add("r1bqkb1r/ppp2ppp/2n2n2/3pp3/2P5/2N1PN2/PP1PPPPP/R1BQKB1R w", {"c4d5"});
+    // After 5.cxd5 Nxd5 6.Bb5 (SF top +6cp, pin/pressure)
+    add("r1bqkb1r/ppp2ppp/2n2n2/3Pp3/8/2N1PN2/PP1P1PPP/R1BQKB1R b", {"f6d5"});
     // 4.e3 Bb4 (game 385 path) -> 5.Qc2 (SF top +5cp) NOT 5.Qb3 (-3cp, led to
     //   disaster after 5...d6 6.d4 a5 7.d5?? Bxc3+ losing).
     //   After 5.Qc2 main Black is 5...Bxc3 6.Qxc3 or 5...O-O 6.a3.

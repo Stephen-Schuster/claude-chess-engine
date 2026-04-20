@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 365 | 97 |
+| Losses | 370 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **390**
+Total games played: **395**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0390.pgn`
+- PGN: `game_data/games/game_0395.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -545,6 +550,20 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20x (games 386-390)
+- Game 387 (English 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 4.e3 d5, White): engine played
+  5.d4 (SF #2, +5cp) then grind loss. Fix: force 5.cxd5! (SF top +26cp); book
+  5...Nxd5 6.Bb5 continuation.
+- Game 388 (CK Advance 5.c4 dxc4 line, Black): post my session-t fix engine
+  reached 8.Nf3 Bg4 9.Bg5, then chose 9...Qb6?? (-47cp) leading to 10.O-O
+  Bxf3 Ne7/Qxb2 pawn-grab disaster. Fix: force 9...Be7 (SF top -2cp).
+- Game 390 (Scotch Mieses 5.Nxc6 bxc6 6.Bd3, Black): not the 6.e5 Mieses main
+  line but a sideline. Engine went naturally `d5 exd5 cxd5 O-O Be7 h3 O-O`
+  reaching move 10 with Re1. Then played 10...Bb4?! (-30cp) vs SF top c5
+  (-2cp). Book the full line 6...d5, 7...cxd5, 8...Be7, 10...c5.
+- Games 386 (French + Codex's weird 5.Ke2) and 389 (Catalan grind) not
+  cleanly book-fixable -- post-book middlegame/endgame technique losses.
 
 ### Session 2026-04-20w (games 384-385)
 - Game 384 (Scotch 4.Nxd4 Bc5, Black): engine played 7...Ne5?? (SF -64cp)
