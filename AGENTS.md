@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 572 | 96 |
+| Losses | 577 | 96 |
 | Draws | 18 | 4 |
 
-Total games played: **603**
+Total games played: **608**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0603.pgn`
+- PGN: `game_data/games/game_0608.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1020,6 +1025,14 @@ git add -A && git commit -m "improve engine: ..." && git push
   losing to Nf4/Rxh2 mate -> SF Nb3 (d2b3) -61cp. Avoids pawn-grab disaster.
 - G590 (Black, Sicilian Taimanov-like Ne4/Bb4+/Ne3 M13B): Nxf1?? -123cp ->
   SF f7f5 -57cp central counter.
+
+### Session 2026-04-20ad12 (G596/G601/G603 batch)
+- G596 (Black, French-like Qh5/Bd3 attack M10B): g7g6?? -272cp -> SF Ng6
+  (e7g6) -169cp blocks better.
+- G601 (White, post-queen-trade middlegame M14W): Qc4+?? -87cp -> SF h3
+  (h2h3) 0cp equal kicking Bg4.
+- G603 (White, Italian-like opening M13W): Ng5?? -113cp -> SF Ne5 (f3e5)
+  -1cp equal.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

@@ -2841,6 +2841,18 @@ static void init_book() {
     //   Forces central counter-pressure instead of allowing Nd6+ skewer.
     add("r1b2rk1/p2p1ppp/1qp1p3/4P3/1bP1NP2/3Qn3/PP1B2PP/2R1KB1R b", {"f7f5"});
 
+    // === Session 2026-04-20ad12 (G596/G601/G603 batch) ===
+    // G596 (Black, French Tarrasch-like Qh5/Bd3 attack, M10B): position
+    //   already -165cp but engine's g7g6?? worsens to -272cp. SF d22 #1:
+    //   Ng6 (e7g6) -169cp blocks better than g6 weakening dark squares.
+    add("rnb2rk1/pp2nppp/4p3/2ppP2Q/q2P4/P1PB4/2PB1PPP/R3K1NR b", {"e7g6"});
+    // G601 (White, post-queen-trade middlegame, M14W): engine played
+    //   b4c4 (Qc4+) -87cp. SF d22 #1: h2h3 0cp (equal!) kicking Bg4.
+    add("r2q1rk1/pp4pp/2p5/4bp2/1Q2B1b1/3P4/PPP2PPP/R1B2RK1 w", {"h2h3"});
+    // G603 (White, Italian-like opening with Bc4/Nf3, M13W): engine played
+    //   f3g5 (Ng5) -113cp. SF d22 #1: f3e5 (Ne5) -1cp (equal!).
+    add("r1bq1r1k/ppp1n1pp/3b4/5p2/2BPp3/5N2/PPP2PPP/R1BQ1RK1 w", {"f3e5"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
