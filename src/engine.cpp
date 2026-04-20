@@ -1816,7 +1816,19 @@ static void init_book() {
     add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "b1d2"});
     // 1.e4 c6 Caro-Kann
     add("rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
-    add("rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "e4d5"});
+    // 1.e4 c6 2.c4 (Accelerated Panov, game 296): 2...d5 main, then 3.cxd5 cxd5 4.exd5 Nf6!
+    //   (NOT 4...Qxd5?! which game 296 played -- queen gets harassed by Nc3, Be2, d4 etc).
+    //   After 4...Nf6 5.Nc3 Nxd5 6.d4 transposes to Panov-Botvinnik, equal.
+    add("rnbqkbnr/pp1ppppp/2p5/8/2P1P3/8/PP1P1PPP/RNBQKBNR b", {"d7d5", "e7e5"});
+    add("rnbqkbnr/pp2pppp/2p5/3p4/2P1P3/8/PP1P1PPP/RNBQKBNR w", {"c4d5", "e4d5", "e4e5"});
+    add("rnbqkbnr/pp2pppp/2p5/3P4/4P3/8/PP1P1PPP/RNBQKBNR b", {"c6d5"});
+    add("rnbqkbnr/pp2pppp/8/3p4/4P3/8/PP1P1PPP/RNBQKBNR w", {"e4d5"});
+    add("rnbqkbnr/pp2pppp/8/3P4/8/8/PP1P1PPP/RNBQKBNR b", {"g8f6"});
+    add("rnbqkb1r/pp2pppp/5n2/3P4/8/8/PP1P1PPP/RNBQKBNR w", {"b1c3", "f1b5", "d1a4"});
+    add("rnbqkb1r/pp2pppp/5n2/3P4/8/2N5/PP1P1PPP/R1BQKBNR b", {"f6d5"});
+    add("rnbqkb1r/pp2pppp/8/3n4/8/2N5/PP1P1PPP/R1BQKBNR w", {"d2d4"});
+    add("rnbqkb1r/pp2pppp/8/3n4/3P4/2N5/PP3PPP/R1BQKBNR b", {"b8c6", "g7g6", "c8f5"});
+    add("rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "e4d5"});
     // Caro-Kann Advance: 1.e4 c6 2.d4 d5 3.e5 -> 3...Bf5 (main, NOT 3...e6 which blocks bishop)
     add("rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b", {"c8f5", "c7c5"});
     // After 3...Bf5 4.Nf3 (main) or 4.Nc3 or 4.h4

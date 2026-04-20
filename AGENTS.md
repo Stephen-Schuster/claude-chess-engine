@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 279 | 99 |
+| Losses | 281 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **301**
+Total games played: **303**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0301.pgn`
+- PGN: `game_data/games/game_0303.pgn`
 
 ---
 
@@ -242,6 +242,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -312,6 +314,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Fix: weight Bd3 3x over Qd3 in 7th move choice.
 - Fix: French Burn -- removed 9...c5 book entry (game 292 losing forced line); engine now finds Be7 at depth 13 (passive but not losing, score -23).
 - Fix: French Burn 7.Nf3 and 6.Bxf6 Bxf6 7.Nf3 -- weighted O-O 3x over Nd7 to steer away from dangerous 8.Qd2 Nd7 9.O-O-O lines.
+
+### Session 2026-04-20c (games 296-301 -- Caro-Kann Accelerated Panov gap)
+- 6 more losses. 296 CK vs 2.c4 Qxd5?! queen harassed; 297 Sicilian positional squeeze; 298 French Burn with OLD binary before fix; 299/301 English middlegame blunders; 300 Rossolimo Black Qxb2?? piece trap.
+- Fix: added Caro-Kann Accelerated Panov book: 1.e4 c6 2.c4 d5 3.cxd5 cxd5 4.exd5 Nf6! (not Qxd5) 5.Nc3 Nxd5 6.d4 Nc6/g6/Bf5 (transpose to Panov-Botvinnik).
+- Games 297/299/300/301 are middlegame tactical blunders (queen grab b2, Nxc5 blunder, Nd5 trap) that book can't prevent.
 
 ### Session 2026-04-20 (games 261-288 book expansion, 12 commits)
 - Commits: 2c61067 (Four Knights/Vienna), abb8143 (London+2.c4 weight), ce20301
