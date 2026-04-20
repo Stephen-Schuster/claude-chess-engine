@@ -2021,6 +2021,14 @@ static void init_book() {
     add("r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"d2d4"});
     // Sicilian Dragon: 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6
     add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
+    // Hyperaccelerated Dragon: 4.Nxd4 g6 -> 5.Nc3 (main) not Bb5+ gambit.
+    //   Game 306: engine drifted with 5.Be3 e5?! Ng4 Bg5 Qb6 Bh4 Be6 h3 Qxb2?? queen-grab disaster.
+    //   Book Yugoslav Attack main: 5.Nc3 Bg7 (or Nf6) 6.Be3 Nf6 7.f3 O-O 8.Qd2 Nc6 9.Bc4.
+    add("rnbqkbnr/pp2pp1p/3p2p1/8/3NP3/8/PPP2PPP/RNBQKB1R w", {"b1c3"});
+    add("rnbqkbnr/pp2pp1p/3p2p1/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"f8g7", "g8f6"});
+    add("rnbqk1nr/pp2ppbp/3p2p1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2"});
+    add("rnbqk1nr/pp2ppbp/3p2p1/8/3NP3/2N1B3/PPP2PPP/R2QKB1R b", {"g8f6"});
+    add("rnbqk2r/pp2ppbp/3p1np1/8/3NP3/2N1B3/PPP2PPP/R2QKB1R w", {"f2f3", "f1e2"});
     // French: 1.e4 e6 2.d4 d5 3.Nc3 -- Black choices: Nf6 (Classical), Bb4 (Winawer), dxe4 (Rubinstein)
     // AVOID any knight-to-edge nonsense; Classical main is 3...Nf6 4.e5 Nfd7 (NOT Ne4).
     // French 3.Nc3: prefer 3...Nf6 (Classical/Steinitz) over 3...Bb4 (Winawer)
