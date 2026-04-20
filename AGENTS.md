@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 680 | 95 |
+| Losses | 681 | 95 |
 | Draws | 23 | 5 |
 
-Total games played: **716**
+Total games played: **717**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0716.pgn`
+- PGN: `game_data/games/game_0717.pgn`
 
 ---
 
@@ -182,6 +182,7 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
 
 
 
@@ -1209,6 +1210,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20au (G715 near-equal save)
+- G716 marginal (71cp gain in losing pos); skipped.
+- G715 (W M11W): Be3 -88cp -> SF h2h3 (-8cp) **near-equal**, ~80cp gain.
+- Two consecutive sessions (at, au) found near-equal-saving book fixes
+  (G713/G715) -- engine entering middlegame at -88 to -128 vs SF -8 to -15.
+  Suggests opening play is generally OK but enters tactical positions where
+  it picks plausible-looking moves that lose ~80-120cp.
 
 ### Session 2026-04-20at (G713 near-equal save)
 - G714 marginal (67cp gain in losing pos); skipped.
