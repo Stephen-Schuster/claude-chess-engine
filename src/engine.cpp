@@ -1836,6 +1836,9 @@ static void init_book() {
     add("r2qkbnr/pp1n1ppp/2p1p3/3pPb2/3P4/1N3N2/PPP2PPP/R1BQKB1R b", {"g8e7", "f8e7", "h7h6"});
     // Caro-Kann Advance 4.Be2 -> 4...e6 or 4...Nd7
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP1BPPP/RNBQK1NR b", {"e7e6", "b8d7"});
+    // 4.Be2 e6 5.Nf3 -> 5...Nd7 (natural dev), 5...c5 (central break), 5...Ne7.
+    // NEVER 5...Bb4+ (game 290: checks, 6.c3 Ba5 misplaces bishop). Keep bishops on main diagonals.
+    add("rn1qkbnr/pp3ppp/2p1p3/3pPb2/3P4/5N2/PPP1BPPP/RNBQK2R b", {"b8d7", "c7c5", "g8e7"});
     // Caro-Kann Advance 4.Bd3 (exchanges) -> 4...Bxd3 5.Qxd3 e6
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/3B4/PPP2PPP/RNBQK1NR b", {"f5d3"});
     // Caro-Kann Exchange: 3.exd5 cxd5
