@@ -3236,6 +3236,11 @@ static void init_book() {
     // === Session 2026-04-20av (G717 fix, 162cp gain) ===
     // G717 (W M17W): SF #1 g2g4 -61cp vs Rd2 -223 (~162cp gain).
     add("r5k1/ppp2ppp/2p5/7b/3R4/P1P4P/1PP2PPK/R1B2r2 w", {"g2g4"});
+
+    // === Session 2026-04-20aw (G718 critical fix, 398cp gain!) ===
+    // G719 deep loss skipped; G718 high value (398cp gain to near-equal).
+    // G718 (B M14B): SF #1 Nxd2! -34cp (near-equal!) vs Ng3?? -432 (398cp gain).
+    add("r3k2r/p1pp1ppp/b1p5/4P3/2P1n2q/1P4P1/PB1Q1P1P/R3KB1R b", {"e4d2"});
 }
 
 static Move try_book_move(Board& b) {
