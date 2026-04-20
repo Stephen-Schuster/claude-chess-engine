@@ -1747,6 +1747,26 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR b", {"g8f6", "f8c5"});
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // 3.Bc4 Nf6 4.Nf3 -> transposes to Italian (handled by Italian book)
+    // Italian Four Knights via 2.Nc3 Nc6 3.Bc4 Nf6 4.Nf3 -> Black's response.
+    // Game 359: was out of book, picked sound 4...Nxe4 (SF #1, +4cp) then
+    //   after forced 5.Nxe4 d5 6.Bd3 dxe4 7.Bxe4 Bd6 engine played 8.Bxc6+?
+    //   (SF #5, -32cp) instead of main 8.d4 (-7cp). Slow collapse to move 45.
+    // Weight Nxe4 heavily (SF +4cp) over Bc5 (-14cp). Drop Be7 (-34cp).
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R b", {"f6e4", "f6e4", "f6e4", "f8c5"});
+    // 4...Nxe4 5.Nxe4 forced (SF top)
+    add("r1bqkb1r/pppp1ppp/2n5/4p3/2B1n3/2N2N2/PPPP1PPP/R1BQK2R w", {"c3e4"});
+    // 5.Nxe4 d5 forced (SF only reasonable)
+    add("r1bqkb1r/pppp1ppp/2n5/4p3/2B1N3/5N2/PPPP1PPP/R1BQK2R b", {"d7d5"});
+    // 6.Bd3 forced (SF main +17 vs Bxd5 -124)
+    add("r1bqkb1r/ppp2ppp/2n5/3pp3/2B1N3/5N2/PPPP1PPP/R1BQK2R w", {"c4d3"});
+    // 6...dxe4 forced (SF +17)
+    add("r1bqkb1r/ppp2ppp/2n5/3pp3/4N3/3B1N2/PPPP1PPP/R1BQK2R b", {"d5e4"});
+    // 7.Bxe4 forced (SF -21 vs alternatives -510)
+    add("r1bqkb1r/ppp2ppp/2n5/4p3/4p3/3B1N2/PPPP1PPP/R1BQK2R w", {"d3e4"});
+    // 7...Bd6 main (SF +15)
+    add("r1bqkb1r/ppp2ppp/2n5/4p3/4B3/5N2/PPPP1PPP/R1BQK2R b", {"f8d6"});
+    // 8.d4 (SF -7, main). NEVER Bxc6+ (game 359 loss).
+    add("r1bqk2r/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQK2R w", {"d2d4", "d2d3", "e1g1"});
     // 3.Bc4 Bc5 -> 4.Nf3 (transposes to Italian)
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)

@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 336 | 99 |
+| Losses | 340 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **359**
+Total games played: **363**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0359.pgn`
+- PGN: `game_data/games/game_0363.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -486,6 +490,15 @@ git add -A && git commit -m "improve engine: ..." && git push
   (SF -56cp) to recapture cleanly instead of entering queen-in-center line.
 - Games 351, 353 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame drift) not
   book-fixable; game 355 (Catalan Bogo drift post move 13) same.
+
+### Session 2026-04-20s (game 359 Italian 4 Knights Nxe4 gambit book)
+- Game 359 (White, 1.e4 e5 2.Nc3 Nc6 3.Bc4 Nf6 4.Nf3): out of book at
+  move 4. Engine's search picked sound 4...Nxe4 (SF #1, +4cp for W) but
+  then at move 8 chose 8.Bxc6+? (SF #5, -32cp) instead of main 8.d4
+  (-7cp). Slow 45-move collapse.
+- Fix: booked the entire forced gambit line 4...Nxe4 5.Nxe4 d5 6.Bd3
+  dxe4 7.Bxe4 Bd6 8.d4 (SF main -7cp). Heavy weight on Nxe4 vs Bc5
+  (80/20), dropped Be7 which was -34cp.
 
 ### Session 2026-04-20q (eval: uncastled-king penalty boosted)
 - Discovered eval systematically underestimates queen-grab/king-in-center
