@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 588 | 97 |
+| Losses | 591 | 97 |
 | Draws | 18 | 3 |
 
-Total games played: **619**
+Total games played: **622**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0619.pgn`
+- PGN: `game_data/games/game_0622.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1070,6 +1073,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ### Session 2026-04-20ad16 (G617)
 - G617 (White, QID-like M14W): Qc2 -202cp -> SF Qe2 (d1e2) -38cp solid
   queen development.
+
+### Session 2026-04-20ad17 (G618 queen-grab fix)
+- G618 (Black, Sicilian-like O-O-O setup M12B): Qxh2?? pawn-grab -203cp
+  -> SF d6 (d7d6) -133cp solid development. Avoids classic queen-grab.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

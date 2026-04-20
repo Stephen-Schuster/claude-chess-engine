@@ -2896,6 +2896,12 @@ static void init_book() {
     //   SF d22 #1: Qe2 (d1e2) -38cp. Force solid queen development.
     add("r2q1rk1/pb1nbppp/1p2p3/8/3P4/P1BB1N2/1P3PPP/2RQ1RK1 w", {"d1e2"});
 
+    // === Session 2026-04-20ad17 (G618) ===
+    // G618 (Black, Sicilian-like O-O-O setup, M12B): engine played Qxh2??
+    //   pawn-grab -203cp. SF d22 #1: d6 (d7d6) -133cp solid development.
+    //   Avoids classic queen-grab disaster pattern.
+    add("r1b1k2r/2qp1ppp/p1p1pn2/8/3bP1P1/2NB4/PPPBQP1P/2KR1R2 b", {"d7d6"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
