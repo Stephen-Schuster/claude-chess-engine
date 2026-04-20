@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 355 | 97 |
+| Losses | 358 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **380**
+Total games played: **383**
 
 ## Last game
 
-- Result: **Draw**
-- PGN: `game_data/games/game_0380.pgn`
+- Result: **Loss**
+- PGN: `game_data/games/game_0383.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -535,6 +538,18 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20v (games 376-380, 2nd draw in Alekhine Nf7+ perpetual)
+- Game 380 **DRAW** (Black, Alekhine Defense 4 Pawns Attack): opponent forced
+  perpetual with Nf7+/Nh6+ shuffling. Good survival result.
+- Game 378 (CK Advance Black, 5.c4 dxc4 line): engine played 8...Bxb1??
+  (trading bishop for knight) then Qxa2?? poisoned pawn. Fix: weight 5...e6
+  (-10cp) 3x over 5...dxc4 (-22cp). Book 8.Be2 -> 8...Ne7 (SF top -24cp).
+- Game 376 (CK Advance): already fixed by commit cea9656 (engine now plays
+  Bg4 instead of Ne7 at move 8).
+- Game 377 (Ruy Exchange Black, 5...f6 variation): out-of-book trade, slow
+  endgame loss.
+- Game 379 (Catalan Bogo-Indian White): out of book at 7.Qc2, drift.
 
 ### Session 2026-04-20u (games 364-375, FIRST DRAW via perpetual!)
 - Game 371 **DRAW** (White, Scotch 4-Kts `4.d4 exd4 5.Nxd4 Bb4 6.Nxc6 bxc6

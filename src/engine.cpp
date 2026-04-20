@@ -1912,7 +1912,12 @@ static void init_book() {
     add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/3P3P/8/PPP2PP1/RNBQKBNR w", {"c2c4", "f1d3", "g1f3"});
     // 4.h4 h5 5.c4 (black to move) -> 5...e6 main (-17cp) or 5...dxc4 (-27cp). Game 328 played
     // 5...Nd7?! (not in SF top-3) then drifted to middlegame blunder 11...Bxc3.
-    add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR b", {"e7e6", "d5c4"});
+    // 4.h4 h5 5.c4: SF top is 5...e6 (-10cp), dxc4 (-22cp) is playable but
+    //   leads to 8.Be2 Bxb1?? disaster (game 378) or slow losses. Weight e6 3x.
+    add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR b", {"e7e6", "e7e6", "e7e6", "d5c4"});
+    // 5.c4 dxc4 6.Bxc4 e6 7.Nf3 Nd7 8.Be2 (retreat): force 8...Ne7 (SF top -24cp).
+    //   Game 378: engine played 8...Bxb1?? trading bishop for knight, then Qxa2?? lost.
+    add("r2qkbnr/pp1n1pp1/2p1p3/4Pb1p/3P3P/5N2/PP2BPP1/RNBQK2R b", {"g8e7"});
     // 4.h4 h5 5.c4 e6 -> 6.Nc3 or 6.Nf3 (both playable)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR w", {"b1c3", "g1f3"});
     // Games 352/354/356: all reached 6.Nc3 and Black was out of book.
