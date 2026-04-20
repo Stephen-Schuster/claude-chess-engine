@@ -2308,6 +2308,13 @@ static void init_book() {
     add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b1c3", "e1g1", "c2c3"});
     add("r1bqkbnr/pp1ppp1p/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8g7", "g8f6"});
     add("r1bqk1nr/pp1pppbp/2n3p1/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 w", {"c2c3", "b1c3"});
+    // Rossolimo exchange line (game 410 Black): 4.O-O Bg7 5.Bxc6 dxc6 6.d3 Nf6
+    //   7.a4 O-O 8.h3 -- engine played 8...Nd7 (SF #3 -43cp) then drifted to
+    //   12...c4 13.Qd2 Ne5 14.Nxe5 piece loss, mated move 39. Force 8...e5!
+    //   (SF top -39cp, grabs center and prepares counterplay). Book a few plies.
+    add("r1bq1rk1/pp2ppbp/2p2np1/2p5/P3P3/3P1N1P/1PP2PP1/RNBQ1RK1 b", {"e7e5"});
+    // After 8...e5, White often plays Be3 or Nc3; book Black's ...c4 response
+    add("r1bq1rk1/pp3pbp/2p2np1/2p1p3/P3P3/3PBN1P/1PP2PP1/RN1Q1RK1 b", {"c5c4"});
     // Sicilian Dragon: 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 g6
     add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
     // Hyperaccelerated Dragon: 4.Nxd4 g6 -> 5.Nc3 (main) not Bb5+ gambit.
