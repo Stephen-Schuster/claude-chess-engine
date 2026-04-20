@@ -1741,6 +1741,26 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w", {"g1f3", "f1c4"});
     // 2.Nc3 Nc6 3.Nf3 -> 3...Nf6 transposing
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"g8f6"});
+    // G527 (White, opponent played 3...Bc5 not Nf6): force forcing 4.Nxe5!
+    //   (SF #1 +52cp, wins center; opp gets Bxe5 minor-piece line)
+    add("r1bqk1nr/pppp1ppp/2n5/2b1p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w", {"f3e5"});
+    // 4.Nxe5 Nxe5 forced
+    add("r1bqk1nr/pppp1ppp/2n5/2b1N3/4P3/2N5/PPPP1PPP/R1BQKB1R b", {"c6e5"});
+    // 5.d4! main (forks Bc5 + N) -- SF top
+    add("r1bqk1nr/pppp1ppp/8/2b1n3/4P3/2N5/PPPP1PPP/R1BQKB1R w", {"d2d4"});
+    // 5.d4 -> Bd6 (Black retreats, SF top)
+    add("r1bqk1nr/pppp1ppp/8/2b1n3/3PP3/2N5/PPP2PPP/R1BQKB1R b", {"c5d6"});
+    // 6.dxe5 forced
+    add("r1bqk1nr/pppp1ppp/3b4/4n3/3PP3/2N5/PPP2PPP/R1BQKB1R w", {"d4e5"});
+    // 6...Bxe5 forced
+    add("r1bqk1nr/pppp1ppp/3b4/4P3/4P3/2N5/PPP2PPP/R1BQKB1R b", {"d6e5"});
+    // 7.Bc4 (main developing move; SF top)
+    add("r1bqk1nr/pppp1ppp/8/4b3/4P3/2N5/PPP2PPP/R1BQKB1R w", {"f1c4"});
+    // 7.Bc4 Nf6 (main)
+    add("r1bqk1nr/pppp1ppp/8/4b3/2B1P3/2N5/PPP2PPP/R1BQK2R b", {"g8f6"});
+    // G527 M8W FIX: engine played Ne2?? (-36cp) instead of SF top c1e3/e1g1/c4d3 (+24-27cp).
+    // Force 8.O-O (clear & developing) over Be3 (which has the e5c3 trade line).
+    add("r1bqk2r/pppp1ppp/5n2/4b3/2B1P3/2N5/PPP2PPP/R1BQK2R w", {"e1g1", "c1e3"});
     // Vienna 2.Nc3 Nc6 3.Bc4 -> 3...Nf6 (main) or 3...Bc5; after 3...Nf6 our
     // sensible move is 4.Nf3 transposing to Italian Four Knights (avoids
     // 4.d3 Na5?! 5.Bg5 disaster of game 285 where Na5xBb3 cost the bishop).
