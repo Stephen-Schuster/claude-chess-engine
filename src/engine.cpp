@@ -2026,6 +2026,22 @@ static void init_book() {
     //   pair, lost kingside after hxg5 and king-walk).
     add("r2qkbnr/pp1n1pp1/2p1p3/4PbBp/2BP3P/2N5/PP3PP1/R2QK1NR b", {"f8e7"});
     add("r2qk1nr/pp1nbpp1/2p1p3/4PbBp/2BP3P/2N5/PP1Q1PP1/R3K1NR b", {"d8b6"});
+    // G500: 8.Bg5 Be7 9.Qd2 Qb6 10.Nf3 -> 10...Bxg5 (SF top -2cp, book-forced trade).
+    add("r3k1nr/pp1nbpp1/1qp1p3/4PbBp/2BP3P/2N2N2/PP1Q1PP1/R3K2R b", {"e7g5"});
+    // G500: 10...Bxg5 11.Qxg5 -> 11...Qxb2! (SF #1 d22, 0cp — grabs pawn safely).
+    //   Engine naturally played Qxb2. Then 12.O-O -> 12...Ne7! (SF #1 d22 +9cp
+    //   for Black, best development). Engine instead played 12...g6?? (-22cp) then
+    //   13...Qb6?? (-117cp vs SF top 13...Nb6 -34cp) and lost.
+    add("r3k1nr/pp1n1pp1/1qp1p3/4PbQp/2BP3P/2N2N2/PP3PP1/R3K2R b", {"b6b2"});
+    add("r3k1nr/pp1n1pp1/2p1p3/4PbQp/2BP3P/2N2N2/Pq3PP1/R4RK1 b", {"g8e7"});
+    // After 12...Ne7, both 13.Rac1 and 13.Rfc1 are played by White. Force 13...Nb6
+    //   (SF top -34cp for the game's actual 13.Rac1 line).
+    add("r3k2r/pp1nnpp1/2p1p3/4PbQp/2BP3P/2N2N2/Pq3PP1/R1R3K1 b", {"d7b6"});  // Rac1
+    add("r3k2r/pp1nnpp1/2p1p3/4PbQp/2BP3P/2N2N2/Pq3PP1/R4RK1 b", {"d7b6"});   // Rfc1
+    // G502 (CK Advance 8.Be2 variation): after 7.Bxc4 Nd7 8.Be2?! engine chose
+    //   8...Bb4?! (not in SF top 4, ~-80cp) and lost. Force 8...Ne7 (SF top -11cp,
+    //   develops kingside knight and prepares ...Ng6 or castle).
+    add("r2qkbnr/pp1n1pp1/2p1p3/4Pb1p/3P3P/2N5/PP2BPP1/R1BQK1NR b", {"g8e7"});
     // Game 402: same 8.Bg5 Be7 structure but Codex played 9.Nf3 (not 9.Qd2).
     //   Engine picked 9...Qb6?? (poisoned pawn -- 10.O-O Qxb2 11.Rc1 and crushed).
     //   SF top: 9...Bg4 (-2cp, near equal, pins the knight).
@@ -2105,6 +2121,12 @@ static void init_book() {
     // 4.Nf3 d5 5.g3 dxc4 -> 5.Bg2! (main Open Catalan, regain pawn later with Qa4+ or Ne5).
     // ABSOLUTELY NOT 5.Qa4+?? Nbd7 6.Nc3 a6 7.Qxc4 b5 queen chased (game 319).
     add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
+    // G501 (White, Catalan Open 5.Bg2 a6): engine played 6.Ne5 (SF #2 +28cp) then
+    //   6...Bb4+ 7.Nc3 Nd5 8.Bd2 b5 9.Nxd5?? (-78cp vs SF top 9.O-O +21cp).
+    //   Force 6.O-O (SF #1 +33cp) to avoid the complicated Ne5 lines entirely.
+    //   Then 6...b5 -> 7.Ne5! (SF top +69cp, huge — Black's b5 is premature).
+    add("rnbqkb1r/1pp2ppp/p3pn2/8/2pP4/5NP1/PP2PPBP/RNBQK2R w", {"e1g1"});
+    add("rnbqkb1r/2p2ppp/p3pn2/1p6/2pP4/5NP1/PP2PPBP/RNBQ1RK1 w", {"f3e5"});
     // 4.Nf3 d5 5.g3 Be7 -> 5.Bg2 (main Closed Catalan)
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
     // 4.Nf3 d5 5.g3 Bb4+ (Bogo-Catalan) -> 5.Bd2 (main; also Nbd2 possible)

@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 481 | 98 |
-| Draws | 14 | 2 |
+| Losses | 492 | 98 |
+| Draws | 15 | 2 |
 
-Total games played: **508**
+Total games played: **520**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0508.pgn`
+- PGN: `game_data/games/game_0520.pgn`
 
 ---
 
@@ -182,6 +182,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -883,3 +895,29 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G498 (Petroff Black, Classical main line): every Black move from M4B
   onward is -30 to -150cp; slow 75-move grind. Inherent to Petroff.
   Not book-fixable.
+
+### Session 2026-04-20ad (games 500-509: CK Advance + Catalan Open clusters)
+- **Cluster 1**: CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7 (5 games
+  in last 30: 482/492/494/500/502). Two distinct lines:
+  - **G500**: 8.Bg5 Be7 9.Qd2 Qb6 10.Nf3 (book ended) -- engine drifted to
+    Bxg5/Qxg5 trade then 12...g6?? + 13...Qb6?? blunders. SF says 11...Qxb2
+    is actually #1 (0cp, safe pawn grab) and 12...Ne7 13...Nb6 holds equal.
+    Booked the entire forced line through M13B for both Rac1/Rfc1 variants.
+  - **G502**: 8.Be2?! engine chose 8...Bb4?! (not in SF top 4, ~-80cp).
+    Force 8...Ne7 (SF top -11cp).
+- **Cluster 2**: Catalan Open 1.d4 Nf6 2.c4 e6 3.Nf3 d5 4.g3 dxc4 5.Bg2
+  (G501/G503 in last 9 games as White).
+  - **G501** (5...a6): engine played 6.Ne5 (SF #2 +28cp) then 9.Nxd5??
+    (-78cp vs SF top 9.O-O +21cp). Force 6.O-O (SF #1 +33cp) and after
+    6...b5 force 7.Ne5 (+69cp).
+  - **G503** (5...Bb4+): engine played correct 6.Bd2 (SF #1 +45cp) but
+    blundered M18W with 18.Nc4 (-228cp vs SF Nb5 -95cp). Deep middlegame,
+    not book-fixable.
+- **G497** (Italian 4-Kts Nxe4 gambit W): recurred at G505 essentially.
+  Position at M12W has all moves losing 467+cp at d22. Search/eval issue,
+  not book.
+- **G504** (Scotch Game Black): M16B blunder Bxe6 vs fxe6 (-93cp). Single
+  move, deep middlegame, not high-leverage to book.
+- **G507** (English 1.c4 e5 g3 Bb4): M25W blunder. Post our session-y/z/aa
+  fixes, this opening cluster is mostly book-stable through M10; remaining
+  losses are middlegame/endgame technique.
