@@ -3414,6 +3414,11 @@ static void init_book() {
     add("r5k1/pppqbr1p/2n1bp2/2Pp4/3P4/2P2NB1/P3B1PP/R2Q1RK1 b", {"a8f8"});
     // G803 (W M19W): e2c4 -306cp -> SF e2g4 -189cp (117cp gain, losing pos).
     add("r5k1/p1p2ppp/2p1q3/3n2P1/2pPp3/PrB1P2P/1P2QP2/R3K2R w", {"e2g4"});
+
+    // === Session 2026-04-20bx (G804 near-equal save, 127cp gain) ===
+    // G805 deep lost endgame -3385cp; skipped.
+    // G804 (B M10B): e7b4 -166cp -> SF d8d5 -39cp (**127cp near-equal save**).
+    add("r1bq1rk1/ppp1bppp/2n1p3/8/3PN2P/5N2/PPPQ1PP1/2KR1B1R b", {"d8d5"});
 }
 
 static Move try_book_move(Board& b) {
