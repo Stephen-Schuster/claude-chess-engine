@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 516 | 98 |
+| Losses | 521 | 98 |
 | Draws | 16 | 2 |
 
-Total games played: **545**
+Total games played: **550**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0545.pgn`
+- PGN: `game_data/games/game_0550.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -946,6 +951,19 @@ git add -A && git commit -m "improve engine: ..." && git push
 - **G507** (English 1.c4 e5 g3 Bb4): M25W blunder. Post our session-y/z/aa
   fixes, this opening cluster is mostly book-stable through M10; remaining
   losses are middlegame/endgame technique.
+
+### Session 2026-04-20ad3 (G528 CK Advance Bxg5 sacrifice)
+- **G528** (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7 8.Bg5
+  Be7 9.Nf3 Bg4 10.O-O Nh6 11.Bd3 Nb6 12.Rc1): engine played 12...Bxf3
+  then 13...Qxd4?? -87cp pawn-grab disaster, mated M50. SF d22: 12...Bxg5!
+  (0cp, equal) sacrifice -- if 13.hxg5 Qxg5 regains material. Booked Bxg5
+  at both M12B (Rc1 line) and M13B (Qxf3 line) FENs.
+- **False positives confirmed**: G519 Italian 4-Kts Nxe4 (d22 says 13.Ng5
+  is +65cp #1, loss was M17 Qg4? -- search/eval issue not book). G525
+  Catalan Open (engine played SF #1 through M9, deep middlegame collapse).
+- **Pattern**: dominant remaining failure mode is engine reaching
+  equal/slightly-worse middlegame from book then collapsing tactically.
+  Book fixes have diminishing returns; would need search/eval work.
 
 ### Session 2026-04-20ad2 (games 510-521: 11L, 1D)
 - G518 **DRAW** (Sicilian Najdorf 6.e5 Ng8): perpetual save.

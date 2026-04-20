@@ -2760,6 +2760,17 @@ static void init_book() {
     //   choice, not in SF top-4, structurally bad).
     add("r1bqkb1r/5ppp/p1p1pn2/3p4/4P3/2NB4/PPP2PPP/R1BQR1K1 b", {"f8e7"});
 
+    // === Session 2026-04-20ad3 (G528 CK Advance Bxg5 sacrifice fix) ===
+    // G528 (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7 8.Bg5
+    //   Be7 9.Nf3 Bg4 10.O-O Nh6 11.Bd3 Nb6 12.Rc1): engine played 12...Bxf3?!
+    //   then 13...Qxd4?? -87cp pawn-grab disaster, mated move 50.
+    //   SF d22: 12...Bxg5! (0cp, equal) sacrifice -- if 13.hxg5 Qxg5 wins back.
+    //   Force Bxg5 at M12B.
+    add("r2qk2r/pp2bpp1/1np1p2n/4P1Bp/3P2bP/2NB1N2/PP3PP1/2RQ1RK1 b", {"e7g5"});
+    // Also book M13B in case opp avoids Rc1: 11.Bd3 Nb6 12.??.??.13.Qxf3
+    //   position. Force Bxg5 (-21cp top, sac line holds).
+    add("r2qk2r/pp2bpp1/1np1p2n/4P1Bp/3P3P/2NB1Q2/PP3PP1/2R2RK1 b", {"e7g5"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
