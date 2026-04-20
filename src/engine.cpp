@@ -1968,8 +1968,10 @@ static void init_book() {
     // Grünfeld: 1.d4 Nf6 2.c4 g6 3.Nc3 d5
     add("rnbqkb1r/pppppp1p/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"d7d5", "f8g7"});
     add("rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w", {"c4d5", "g1f3", "c1f4"});
-    // English: 1.c4 e5 (Reversed Sicilian)
-    add("rnbqkbnr/pppp1ppp/8/4p3/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    // English: 1.c4 e5 (Reversed Sicilian) -> 2.Nc3 ONLY (main).
+    // NOT 2.Nf3 which allows 2...e4 3.Nd4 sharp lines where engine drifts
+    // (games 255, 259, 299 all losses after 2.Nf3 e4).
+    add("rnbqkbnr/pppp1ppp/8/4p3/2P5/8/PP1PPPPP/RNBQKBNR w", {"b1c3"});
     // 1.c4 e5 2.Nc3 -> main Black replies: Nf6 (main), Nc6 (Keres)
     add("rnbqkbnr/pppp1ppp/8/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR b", {"g8f6", "b8c6"});
     // 1.c4 e5 2.Nc3 Nf6 -> 3.Nf3 (main), 3.g3 (fianchetto), 3.e4 (Kingscrusher)
