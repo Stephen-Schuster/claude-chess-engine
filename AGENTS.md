@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 561 | 97 |
-| Draws | 17 | 3 |
+| Losses | 566 | 96 |
+| Draws | 18 | 4 |
 
-Total games played: **591**
+Total games played: **597**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0591.pgn`
+- PGN: `game_data/games/game_0597.pgn`
 
 ---
 
@@ -182,6 +182,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
 
 
 
@@ -992,6 +998,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - **G507** (English 1.c4 e5 g3 Bb4): M25W blunder. Post our session-y/z/aa
   fixes, this opening cluster is mostly book-stable through M10; remaining
   losses are middlegame/endgame technique.
+
+### Session 2026-04-20ad9-ad10 (G577 + G580)
+- **G577** (White, Ruy Exchange 4.Bxc6 dxc6 5.O-O Bg4 6.h3 h5 7.d3 Qf6
+  ... M10W): engine played Qd1?? -158cp. SF d22 #1: Nc4 (d2c4). Booked.
+- **G580** (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7
+  8.Nge2 Be7 9.Bf4 Bxh4 10.Bd3 Bxd3 11.Qxd3): engine played 11...g5??
+  -100cp then Rxh4 sac collapse. SF d22 #1: Be7 retreat (+15cp). Booked.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

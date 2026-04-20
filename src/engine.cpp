@@ -2811,6 +2811,20 @@ static void init_book() {
     //   exchange and avoids the dubious Nb3-Nxc5 line. Force axb4.
     add("r1bq1rk1/pp1p1ppp/5n2/2p5/1nPNp3/P5P1/1P1PPP1P/R1BQKB1R w", {"a3b4"});
 
+    // === Session 2026-04-20ad9 (G577 Ruy Exchange Bg4 h5 line M10W Nc4) ===
+    // G577 (White, Ruy Exchange 4.Bxc6 dxc6 5.O-O Bg4 6.h3 h5 7.d3 Qf6
+    //   8.Nbd2 Ne7 9.Qe2 Ng6): engine played 10.Qd1?? (-158cp d22)
+    //   retreating queen vs SF top 10.Nc4 (-27cp). Booking M10W Nc4.
+    //   Engine reached this position via SF-top/near-top moves through
+    //   M9W, so position recurs.
+    add("r3kb1r/1pp2pp1/p1p2qn1/4p2p/4P1b1/3P1N1P/PPPNQPP1/R1B2RK1 w", {"d2c4"});
+
+    // === Session 2026-04-20ad10 (G580 CK Advance M11B Be7 retreat) ===
+    // G580 (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7 8.Nge2
+    //   Be7 9.Bf4 Bxh4 10.Bd3 Bxd3 11.Qxd3): engine played 11...g5?? then
+    //   Rxh4 sac collapse. SF d22 #1: Be7 retreat (+15cp), engine -100cp.
+    add("r2qk1nr/pp1n1pp1/2p1p3/4P2p/3P1B1b/2NQ4/PP2NPP1/R3K2R b", {"h4e7"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
