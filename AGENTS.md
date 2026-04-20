@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 328 | 99 |
+| Losses | 333 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **351**
+Total games played: **356**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0351.pgn`
+- PGN: `game_data/games/game_0356.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -467,6 +472,22 @@ git add -A && git commit -m "improve engine: ..." && git push
   f1, slow collapse, mated move 76.
 - Fix: booked 8...O-O -> 9.O-O (SF +16cp main). Then 9...cxd5 10.h3 to
   prevent ...Bg4 pin.
+
+### Session 2026-04-20q (eval: uncastled-king penalty boosted)
+- Discovered eval systematically underestimates queen-grab/king-in-center
+  collapse pattern (games 338/340/341/342/348): engine rates Black down
+  80-200cp while SF says -300+. Move-by-move trace of game 348:
+  engine's eval drifted from SF by 60-220cp across moves 10-17.
+- Root cause: uncastled-king penalty (22cp + 10cp central-file bonus)
+  is ~3x too small. In real middlegames a stuck-in-center king with
+  no rights is 80-150cp bad, not 30cp.
+- Fix: bumped penalty from 22/+10 to 40/+25 (max 65cp). Single-side
+  right lost: 8 -> 12cp. Sanity tests on 6 diverse positions show small
+  eval shifts (≤30cp) in normal middlegames and clear correction on the
+  disaster position (g348: -64 -> -172 vs SF -309). Perft unchanged.
+- Risk: may slightly over-discourage aggressive king-walks (e.g., Kxf7
+  recaptures) but castled positions unaffected. Endgames unaffected via
+  phase taper.
 
 ### Session 2026-04-20o (games 338-344 queen-grab pattern + English 3.g3 d5)
 - **Recurring pattern (games 338, 340, 341, 342)**: Black's queen grabs b2

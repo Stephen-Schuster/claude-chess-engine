@@ -990,12 +990,15 @@ static int evaluate(const Board& b) {
             if (rights == 0) {
                 // Lost all castling rights without castling.
                 // Extra penalty if king is on a central file (d/e/f).
-                int pen = 22;
-                if (wkf >= 3 && wkf <= 5) pen += 10;
+                // Games 340/341/342/348: king stuck in center while opponent
+                // attacks; eval was 100+ cp too optimistic vs SF. Boosted to
+                // reflect real danger of uncastled king in middlegame.
+                int pen = 40;
+                if (wkf >= 3 && wkf <= 5) pen += 25;
                 mg_w -= pen;
             } else if (rights != 3) {
                 // Only one castling side remaining
-                mg_w -= 8;
+                mg_w -= 12;
             }
         }
     }
@@ -1007,11 +1010,11 @@ static int evaluate(const Board& b) {
         if (!b_castled) {
             int rights = (b.castle >> 2) & 3; // BK=4->bit0, BQ=8->bit1
             if (rights == 0) {
-                int pen = 22;
-                if (bkf >= 3 && bkf <= 5) pen += 10;
+                int pen = 40;
+                if (bkf >= 3 && bkf <= 5) pen += 25;
                 mg_b -= pen;
             } else if (rights != 3) {
-                mg_b -= 8;
+                mg_b -= 12;
             }
         }
     }
