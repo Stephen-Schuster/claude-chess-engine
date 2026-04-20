@@ -1979,6 +1979,24 @@ static void init_book() {
     // 4.Bg2 dxc4 -> 5.Nf3! (main Open Catalan, regain pawn later) -- SF +36cp.
     // Dropped 5.Qa4+ (+18cp, worse; also related to game 319/331 Qa4+ disasters).
     add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3"});
+    // Catalan Open: ...Bg2 dxc4 Nf3 (above covers same FEN) - now Black reply
+    // ...Bg2 dxc4 Nf3 -> Black's main: Nc6 (Open Classical), a6 (Open Romanishin), Bb4+, c5
+    // (c5 already booked at line 1960 region for game 331).
+    // 5...Nc6 6.Qa4! (SF +48cp, best) -- chases the pawn
+    add("r1bqkb1r/ppp2ppp/2n1pn2/8/2pP4/5NP1/PP2PPBP/RNBQK2R w", {"d1a4"});
+    // 6.Qa4 -> Black: Bb4+ (main), Bd7, a6
+    add("r1bqkb1r/ppp2ppp/2n1pn2/8/Q1pP4/5NP1/PP2PPBP/RNB1K2R b", {"f8b4", "c8d7", "a7a6"});
+    // 6...Bb4+ 7.Bd2! (SF +40cp best, better than Nc3 -12 or Nbd2 -39)
+    add("r1bqk2r/ppp2ppp/2n1pn2/8/QbpP4/5NP1/PP2PPBP/RNB1K2R w", {"c1d2"});
+    // 7.Bd2 -> Black: Nd5 (main, -10cp), Bd6, Bxd2+
+    add("r1bqk2r/ppp2ppp/2n1pn2/8/QbpP4/5NP1/PP1BPPBP/RN2K2R b", {"f6d5"});
+    // 7...Nd5 8.Bxb4! (best +23cp per SF; a4b5 +26 but complicated)
+    add("r1bqk2r/ppp2ppp/2n1p3/3n4/QbpP4/5NP1/PP1BPPBP/RN2K2R w", {"d2b4"});
+    add("r1bqk2r/ppp2ppp/2n1p3/3n4/QBpP4/5NP1/PP2PPBP/RN2K2R b", {"d5b4"});
+    // 9.Nc3! (SF +39cp, best; game 337 played 9.O-O +28cp drifted to loss)
+    add("r1bqk2r/ppp2ppp/2n1p3/8/QnpP4/5NP1/PP2PPBP/RN2K2R w", {"b1c3"});
+    // 9.Nc3 Bd7 (best, -16cp for Black) -> 10.?
+    add("r1bqk2r/ppp2ppp/2n1p3/8/QnpP4/2N2NP1/PP2PPBP/R3K2R b", {"c8d7", "a7a6"});
     // Move 4 for White: drop 4.a3 (Saemisch) -- doubles c-pawns and engine
     // drifts in the imbalanced middlegame (games 313/315).
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2"});

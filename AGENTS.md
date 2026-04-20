@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 314 | 99 |
+| Losses | 317 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **337**
+Total games played: **340**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0337.pgn`
+- PGN: `game_data/games/game_0340.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -437,6 +440,14 @@ git add -A && git commit -m "improve engine: ..." && git push
   7.hxg5 Qxg5 (SF -73cp, Alekhine-Chatard tactical mess). After 8.Nh3 Qh4
   9.g3 Qe7 10.Qg4 Kf8 king displaced, mated in 23. Fix: force 6...h6 main
   (-54cp safest) or 6...c5.
+
+### Session 2026-04-20n (game 337 Catalan Open deepening)
+- Game 337 (Catalan Open White, `d4 Nf6 c4 e6 g3 d5 Nf3 dxc4 Bg2 Nc6 Qa4`):
+  engine out of book at move 9 and chose 9.O-O (+28cp) instead of 9.Nc3
+  (+39cp). Slow drift to rook endgame loss.
+- Fix: booked Catalan Open 5...Nc6 mainline through move 9:
+  * 6.Qa4! (SF +48), then Black Bb4+/Bd7/a6
+  * 6...Bb4+ 7.Bd2 Nd5 8.Bxb4 Nxb4 9.Nc3! (forcing the SF top choice)
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
