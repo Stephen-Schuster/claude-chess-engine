@@ -3443,6 +3443,12 @@ static void init_book() {
     // === Session 2026-04-20cb (G815 near-equal save, 126cp gain) ===
     // G815 (W M17W): d3h7?? -162cp -> SF b1e1 -36cp (126cp near-equal save).
     add("rn2b1k1/p1p2pp1/1p1p1q1p/8/2PP4/3B1N2/P1Q2PPP/1R4K1 w", {"b1e1"});
+
+    // === Session 2026-04-20cc (G816/G818 batch: 2 fixes, ~489cp gain!) ===
+    // G816 (B M12B): f7f6 -248cp -> SF a8b8 -56cp (**192cp near-equal save**).
+    add("r3kb1r/p2nnpp1/B1p1p3/1p2PbBp/P2P3P/5N2/1q1N1PP1/R2Q1RK1 b", {"a8b8"});
+    // G818 (B M11B): e8g8 -360cp -> SF e8c8 -63cp (**297cp near-equal save**).
+    add("r3k2r/ppqbnppp/2n1p3/2ppP2P/3P2Q1/P1P2N2/2PB1PP1/R3KB1R b", {"e8c8"});
 }
 
 static Move try_book_move(Board& b) {

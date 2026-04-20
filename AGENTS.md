@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 776 | 95 |
-| Draws | 28 | 5 |
+| Losses | 782 | 96 |
+| Draws | 28 | 4 |
 
-Total games played: **817**
+Total games played: **823**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0817.pgn`
+- PGN: `game_data/games/game_0823.pgn`
 
 ---
 
@@ -182,6 +182,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
 
 
 
@@ -1310,6 +1316,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cc (G816/G818 batch: 2 fixes, ~489cp gain!)
+- G817 only 58cp gain, G819 only 71cp gain in deep-losing pos; skipped.
+- G816 (B M12B): f7f6 -248cp -> SF a8b8 -56cp (**192cp near-equal save**).
+- G818 (B M11B): e8g8 -360cp -> SF e8c8 -63cp (**297cp near-equal save**).
+  Castling into Qxh7 attack vs queenside for safety.
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20cb (G815 near-equal save, 126cp gain)
 - Recurring-blunder investigation dead-end: my `find_repeat_blunders.py`
