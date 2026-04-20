@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 3 |
-| Losses | 223 | 93 |
-| Draws | 9 | 4 |
+| Losses | 240 | 94 |
+| Draws | 9 | 3 |
 
-Total games played: **245**
+Total games played: **262**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0245.pgn`
+- PGN: `game_data/games/game_0262.pgn`
 
 ---
 
@@ -186,6 +186,23 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -250,19 +267,28 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 ### Current baseline: `engine/engine_current_best` (main after 33dbc75)
 
-### Session 2026-04-20 improvements (commits d1462b7, 4868ff5, 759927d)
+### Session 2026-04-20 improvements (commits d1462b7, 4868ff5, 759927d, 000cc69, abbb81b)
 - Expanded English book: 1.c4 e5 Four Knights main, 1.c4 c5 Symmetrical,
   1.c4 Nf6/e6/c6/g6. Fixes game 245 where 1.c4 e5 2.Nc3 Nf6 3.Nd5? lost.
-- Expanded Caro-Kann Advance: 4.h4 h5!, 4.Nc3/c3/Nf3 with e6 replies.
-  Fixes game 240 where 4.h4 e6?? 5.g4 Be4?? lost a bishop.
+- Expanded Caro-Kann Advance: 4.h4 h5!, 4.Nc3/c3/Nf3/Nd2/Be2/Bd3 with e6/Nd7
+  replies. Fixes games 240 (4.h4 e6??), 256 (4.Nd2 c5?? gap).
 - Expanded 1.d4 Nf6 2.c4 {e6,g6} -> Nimzo/QID/Catalan/KID main lines.
+  Added Catalan 4.Bg2 Be7/dxc4 + French Rubinstein Qxf6 line with 6.Nf3.
+  Fixes games 247 (Catalan 4.e3??) and 248 (Rubinstein drift).
 - Dropped 1.Nf3 from startpos book (weight e4/d4 2x, c4 1x). Games
-  241/243/239 all drifted passively after 1.Nf3 2.e3. If we transpose
-  there anyway, added 2.d4/c4/g3 responses to 1...d5/Nf6/c5.
+  241/243/239 all drifted passively after 1.Nf3 2.e3.
+- 1.c4 e5 2.Nf3 e4 3.Nd4 Nc6 -> now routes 4.Nc2 instead of losing 4.Nxc6
+  (games 255, 259). 1.c4 e5 2.Nf3 also adds 2...Nc6/Nf6 transpositions.
+- French Tarrasch 3.Nd2 coverage (game 260): 3...Nf6/c5, and critically
+  after 3...c5 4.exd5 recommends 4...exd5 (not Qxd5 which got mated).
+- QGD 1.d4 Nf6 2.c4 e6 3.Nf3 d5: now plays 4.Nc3 or 4.g3 instead of
+  passive 4.e3 (game 257).
 
 ### Recent game results
-- Game 2 (2026-04-18): WIN vs GPT-Codex as Black, 32 moves by mate.
-- Game 1: Loss (details not in local workspace).
+- Games 255-260: 0W/6L (games 245-254 also losses). Opponent GPT-Codex
+  is materially stronger; focus has shifted to closing book gaps
+  (low-risk, directly preventable) since A/B self-play is near-
+  deterministic and Stockfish benchmarks aren't informative.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
