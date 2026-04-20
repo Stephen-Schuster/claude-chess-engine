@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 804 | 95 |
+| Losses | 807 | 95 |
 | Draws | 29 | 5 |
 
-Total games played: **846**
+Total games played: **849**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0846.pgn`
+- PGN: `game_data/games/game_0849.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1339,6 +1342,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cl (G844/G845 batch: 2 fixes, ~278cp, losing positions)
+- G843 only 60cp; G846 only 79cp; skipped.
+- G844 (B M16B): f6e4 -289cp -> SF d4c6 -183cp (106cp gain, losing pos).
+- G845 (W M17W): b7c8 -330cp -> SF b7f3 -158cp (172cp gain, losing pos).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20ck (G839/G840/G841 batch: 3 fixes, ~516cp gain)
 - G842 false positive (our e7h4 IS SF d22 #1); skipped.
