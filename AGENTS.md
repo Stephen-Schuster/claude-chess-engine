@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 651 | 96 |
+| Losses | 657 | 96 |
 | Draws | 21 | 4 |
 
-Total games played: **685**
+Total games played: **691**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0685.pgn`
+- PGN: `game_data/games/game_0691.pgn`
 
 ---
 
@@ -182,6 +182,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
 
 
 
@@ -1178,6 +1184,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20am (G682/G683/G685 batch: 3 book fixes)
+- G680/G684 already losing -200+cp; G681 was DRAW; not booked.
+- G682 (B M17B): Bxg5 -167cp -> SF g4f3 (-64cp) **103cp gain**.
+- G683 (W M22W): O-O -146cp -> SF c1b1 (-88cp) 58cp gain (king tuck).
+- G685 (W M29W): f3 -316cp -> SF a8f8 (-142cp) 174cp gain (lost pos but big).
+- All verified at SF d22 MultiPV=4; all fire from FEN. **Caught bug:** initial
+  edits used full FEN strings (with castling/halfmove fields) for keys --
+  book uses only piece-placement+side. Fixed before deploy.
 
 ### Session 2026-04-20al (G666-G674 batch: 8 book fixes + 1 DRAW)
 - **G676 DRAW** (Black, French Tarrasch 3.Nd2 c5): forced perpetual via

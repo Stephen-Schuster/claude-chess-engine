@@ -3175,6 +3175,12 @@ static void init_book() {
     add("r3r1k1/p1pqbp1p/1pn1b1p1/3P4/2P5/3BB2P/P2N1PP1/1R1Q1RK1 b", {"c6e5"});  // G670
     // G668 (B M17B): Rfe8 -126 vs Rd7 -190 (64cp).
     add("1r1q1rk1/ppp1bppp/2n1bn2/6B1/3P4/P1N2N1P/1PB2PP1/R2QR1K1 b", {"f8e8"});  // G668
+
+    // === Session 2026-04-20am (G682-G685 batch) ===
+    // (G680/G684 already losing, mostly skipped; G681 was DRAW.)
+    add("r2qk1nr/pp1nb3/2p1p3/4Pp2/3P2p1/2N1BPPp/PP2Q3/2KR2NR b", {"g4f3"});  // G682 -64 vs Bg5 -167 (103cp)
+    add("2r2bk1/pq1n1ppp/2r1p2P/3p2P1/5B2/2NR1Q2/PPP2P2/2K1R3 w", {"c1b1"});  // G683 -88 vs O-O -146 (58cp)
+    add("R7/5ppk/4pb2/8/1r5P/1n4B1/1P2RP1P/3r1BK1 w", {"a8f8"});  // G685 -142 vs f3 -316 (174cp)
 }
 
 static Move try_book_move(Board& b) {
