@@ -1800,8 +1800,8 @@ static void init_book() {
 
     // 1.d4 d5
     add("rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
-    // 1.d4 Nf6
-    add("rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "g1f3"});
+    // 1.d4 Nf6 -- prefer 2.c4 (mainline) over 2.Nf3 (London-ish; game 263 drifted).
+    add("rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w", {"c2c4", "c2c4", "c2c4", "g1f3"});
     // 1.d4 Nf6 2.c4
     add("rnbqkb1r/pppppppp/5n2/8/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "g7g6", "c7c5"});
     // KID: 1.d4 Nf6 2.c4 g6
@@ -1901,6 +1901,18 @@ static void init_book() {
     add("rnbqkbnr/ppp1pppp/8/3p4/2P5/5N2/PP1PPPPP/RNBQKB1R b", {"e7e6", "c7c6", "d5c4"});
     // London System: 1.d4 d5 2.Nf3 Nf6 3.Bf4
     add("rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b", {"c7c5", "e7e6"});
+    // London 3...c5 -> 4.e3 (main, NOT 4.Nc3 which allowed ...cxd4 5.Qxd4 in game 263)
+    add("rnbqkb1r/pp2pppp/5n2/2pp4/3P1B2/5N2/PPP1PPPP/RN1QKB1R w", {"e2e3", "c2c3"});
+    // London 3...c5 4.e3 -> 4...Nc6 or 4...e6 or 4...cxd4
+    add("rnbqkb1r/pp2pppp/5n2/2pp4/3P1B2/4PN2/PPP2PPP/RN1QKB1R b", {"b8c6", "e7e6", "c5d4"});
+    // London after 1.d4 Nf6 2.Nf3 d5 3.Bf4 (transposed) -- same FEN as above, already covered.
+    // London 3...e6 -> 4.e3 (main)
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R w", {"e2e3"});
+    // 1.d4 Nf6 2.Nf3 -> 2...d5 (Queen's pawn game) or 2...g6 (KID) or 2...e6
+    add("rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b", {"d7d5", "g7g6", "e7e6", "c7c5"});
+    // 1.d4 Nf6 2.Nf3 d5 -> 3.c4 (transpose to QGD) or 3.Bf4 (London) or 3.g3 (Catalan-ish)
+    //   Prefer 3.c4 to stay in mainline theory rather than drift into shapeless London.
+    add("rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w", {"c2c4", "c2c4", "c1f4", "g2g3"});
     // Scandinavian: 1.e4 d5
     add("rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w", {"e4d5"});
     add("rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b", {"d8d5", "g8f6"});
