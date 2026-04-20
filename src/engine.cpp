@@ -3376,6 +3376,14 @@ static void init_book() {
     // G785/G786/G787 all marginal/deep-losing at d22; skipped.
     // G788 (B M23B): c5d4 -351cp -> SF g8g7 -21cp (**330cp near-equal save**).
     add("2r2rk1/pp2qp2/4p1p1/P1pnP1P1/3P2pR/R7/1P1Q1P1N/6K1 b", {"g8g7"});
+
+    // === Session 2026-04-20bs (G789/G790/G791 batch: 3 fixes, ~289cp gain) ===
+    // G789 (W M19W): f3g5 -273cp -> SF f1e1 -187cp (86cp gain, losing pos).
+    add("5r1k/p3q1pp/3b4/2r5/3Qp1b1/5N2/PPP2PPP/R1B2RK1 w", {"f1e1"});
+    // G790 (B M18B): f5g4 -189cp -> SF c4b6 -71cp (**118cp near-equal save**).
+    add("r2qk2r/pp3pp1/2p1p3/4PbP1/2nP4/2N2NPp/PP2QP2/2R1R1K1 b", {"c4b6"});
+    // G791 (W M7W): f3e5 -124cp -> SF d2d3 -39cp (**85cp near-equal save**).
+    add("r1bqkbnr/1pp3pp/p4p2/2p1p3/4P3/2N2N2/PPPP1PPP/R1BQ1RK1 w", {"d2d3"});
 }
 
 static Move try_book_move(Board& b) {
