@@ -3305,6 +3305,13 @@ static void init_book() {
     // G751 (W M16W): f1g2 -199cp -> SF f1c4 -54cp (145cp gain near-equal).
     // Very similar position to G721 but Rc1 already played; different FEN.
     add("rr4k1/p1pq1pp1/2p1bn2/7p/2pPp3/P3P1PP/1PQB1P2/2R1KB1R w", {"f1c4"});
+
+    // === Session 2026-04-20bh (G752/G754 batch: 2 fixes, ~387cp gain) ===
+    // G753 marginal (68cp gain); skipped.
+    // G752 (B M16B): e6a2 -321cp -> SF f8h8 -169cp (152cp gain).
+    add("r4r2/pp2pk2/3pbnpQ/q7/3BP1P1/2N2P2/PPP5/2KR1B2 b", {"f8h8"});
+    // G754 (B M9B): b8c6 -369cp -> SF b2e5 -134cp (235cp gain).
+    add("rnb1kb1r/1p3ppp/p2ppn2/8/2P1P3/1N1BB3/Pq3PPP/RN1Q1RK1 b", {"b2e5"});
 }
 
 static Move try_book_move(Board& b) {
