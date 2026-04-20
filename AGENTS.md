@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 581 | 96 |
+| Losses | 583 | 96 |
 | Draws | 18 | 4 |
 
-Total games played: **612**
+Total games played: **614**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0612.pgn`
+- PGN: `game_data/games/game_0614.pgn`
 
 ---
 
@@ -182,6 +182,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
 
 
 
@@ -1047,6 +1049,14 @@ git add -A && git commit -m "improve engine: ..." && git push
   (b6a5) -80cp active check.
 - G608 (Black, French Burn 7.Be7 sac M7B): Qxe7?? -145cp -> SF Kxe7
   (e8e7) -88cp; loses castling but better.
+
+### Session 2026-04-20ad14 (G609/G610/G611/G612 batch)
+- G612 (Black, CK Advance Bg5/Ne4 M10B): Qb6?? -87cp -> SF Qa5+ (d8a5)
+  -22cp active check.
+- G611 (White, complex middlegame Ne3 fork M20W): Bxe3?? -216cp -> SF
+  gxf5 (g4f5) -113cp.
+- G610 (Black, M21B already-losing): Rd8 -340cp -> SF h5h4 -146cp.
+- G609 (White, M20W already-losing): Qxb7 -223cp -> SF Qd1 (b3d1) -187cp.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

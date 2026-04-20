@@ -2869,6 +2869,20 @@ static void init_book() {
     //   than queen-recapture exposing diagonal. Note already-bad position.
     add("rnbqk2r/pp1nBppp/4p3/2ppP3/3P3P/2N5/PPP2PP1/R2QKBNR b", {"e8e7"});
 
+    // === Session 2026-04-20ad14 (G609/G610/G611/G612 batch) ===
+    // G612 (Black, CK Advance Bg5/Ne4 line, M10B): engine played Qb6 -87cp.
+    //   SF d22 #1: Qa5+ (d8a5) -22cp active check.
+    add("r2qk1nr/pp1nbpp1/2p1p3/4P1Bp/2BPN1bP/5N2/PP3PP1/R2QK2R b", {"d8a5"});
+    // G611 (White, complex middlegame Ne3 fork pos, M20W): engine played
+    //   Bxe3 -216cp. SF d22 #1: gxf5 (g4f5) -113cp.
+    add("2r2rk1/pb3ppp/1p2pq2/5n2/2BP2P1/P2QnN2/1P1B1P1P/2R1R1K1 w", {"g4f5"});
+    // G610 (Black, English/QGD-like middlegame already losing, M21B):
+    //   engine Rd8 -340cp. SF d22 #1: h5h4 -146cp better defense.
+    add("2r3k1/pppq1p2/2n2b2/2Pp2pp/3P4/P1PQRNBP/5PP1/6K1 b", {"h5h4"});
+    // G609 (White, post-Nd4 attack, M20W): engine Qxb7 -223cp grabbing pawn.
+    //   SF d22 #1: Qd1 (b3d1) -187cp retreat. Pos already losing but better.
+    add("r4r1k/1pp3pp/3b4/p4q2/3n2N1/1Q3P2/PP1B2PP/1R3RK1 w", {"b3d1"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
