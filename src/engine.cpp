@@ -3445,10 +3445,18 @@ static void init_book() {
     add("rn2b1k1/p1p2pp1/1p1p1q1p/8/2PP4/3B1N2/P1Q2PPP/1R4K1 w", {"b1e1"});
 
     // === Session 2026-04-20cc (G816/G818 batch: 2 fixes, ~489cp gain!) ===
+    // G817 only 58cp gain, G819 only 71cp gain in deep-losing pos; skipped.
     // G816 (B M12B): f7f6 -248cp -> SF a8b8 -56cp (**192cp near-equal save**).
     add("r3kb1r/p2nnpp1/B1p1p3/1p2PbBp/P2P3P/5N2/1q1N1PP1/R2Q1RK1 b", {"a8b8"});
     // G818 (B M11B): e8g8 -360cp -> SF e8c8 -63cp (**297cp near-equal save**).
     add("r3k2r/ppqbnppp/2n1p3/2ppP2P/3P2Q1/P1P2N2/2PB1PP1/R3KB1R b", {"e8c8"});
+
+    // === Session 2026-04-20cd (G820/G823 batch: 2 fixes, ~394cp gain) ===
+    // G821 only 74cp in deep-losing pos; G822 only 34cp; skipped.
+    // G820 (B M10B): c8d7 -447cp -> SF f6d8 -113cp (**334cp gain**) queen retreat.
+    add("r1b2rk1/ppp2pp1/2nbpq1p/8/3P3P/2PB1N2/PP2QPP1/R1B1K2R b", {"f6d8"});
+    // G823 (W M10W): d1b3 -54cp -> SF d2d4 +6cp (**60cp near-equal save, fully equal!**)
+    add("rnbq1rk1/pp3ppp/8/3np3/8/2P3P1/P2PNPBP/R1BQK2R w", {"d2d4"});
 }
 
 static Move try_book_move(Board& b) {
