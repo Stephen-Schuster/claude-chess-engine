@@ -3332,6 +3332,11 @@ static void init_book() {
     add("r4rk1/pp2ppbp/3pbnp1/q6P/3BP1P1/P1N2P2/1PPQ4/R3KB1R b", {"f8c8"});
     // G765 (W M17W): g5e6 -282cp -> SF h3g4 -135cp (147cp gain).
     add("r2q1rk1/pp4p1/1bn2np1/3p2N1/6p1/1QN1P2P/PP1B1P2/2R2RK1 w", {"h3g4"});
+
+    // === Session 2026-04-20bl (G768 near-equal save, 125cp gain) ===
+    // G766/G767 marginal (75cp/38cp gain at d22); skipped.
+    // G768 (B M10B): d8a5 -176cp -> SF h6f5 -51cp (125cp gain near-equal).
+    add("r1bq1rk1/pp2ppbp/2p3pn/2p1P3/4N3/5N1P/PPPP1PP1/R1BQR1K1 b", {"h6f5"});
 }
 
 static Move try_book_move(Board& b) {
