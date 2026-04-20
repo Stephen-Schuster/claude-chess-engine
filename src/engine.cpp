@@ -2139,6 +2139,29 @@ static void init_book() {
     //   14.Qxb7 Bd3 15.Qxc6 Qe7): Engine played 16.Qxa8?? Rxa8 losing queen for rook+piece.
     //   SF top 16.f3! (-15cp, supports Bg2 and prevents Bxg2 tactics). Book it.
     add("r3r1k1/2p1qppp/2Q5/2b5/p1P5/P2bP1P1/1P1P1PBP/R1B1K2R w", {"f2f3"});
+    // G456 (Black, CK Advance 4.h4 h5 5.c4 dxc4 6.Bxc4 e6 7.Nc3 Nd7 8.Nge2):
+    //   Engine played 8...b5?? (-84cp) vs SF top 8...Be7 (-26cp). Book Be7.
+    add("r2qkbnr/pp1n1pp1/2p1p3/4Pb1p/2BP3P/2N5/PP2NPP1/R1BQK2R b", {"f8e7"});
+    // G460 (Black, French Classical 4.Bg5 dxe4 5.Nxe4 Be7 6.Bxf6 Bxf6 7.Nf3 Nd7
+    //   8.Qd2 O-O 9.O-O-O): Engine played 9...Nb6?? (-122cp) vs SF top 9...b6
+    //   (-36cp). Book b7b6.
+    add("r1bq1rk1/pppn1ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/2KR1B1R b", {"b7b6"});
+    // G466 (Black, Sicilian 2.Nf3 e6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3): Engine played
+    //   5...a6 (-125cp) vs SF top 5...Nc6 (-39cp, Taimanov/Four Knights main).
+    //   Book Nc6.
+    add("rnbqkb1r/pp1p1ppp/4pn2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"b8c6"});
+    // G462/G458 (Black, Petroff 4...Nxe4 5.d4 d5 6.Bd3 Be7 7.O-O Nc6 8.c4 Nb4
+    //   9.Be2 O-O 10.a3 Nc6 11.cxd5 Qxd5 12.Nc3 Nxc3 13.bxc3): Engine played
+    //   13...Qa5 (-93cp) vs SF top 13...Nxa5 wait- 13...Na5 (c6a5, -33cp). Book c6a5.
+    add("r1b2rk1/ppp1bppp/2n5/3q4/3P4/P1P2N2/4BPPP/R1BQ1RK1 b", {"c6a5"});
+    // G468 (Black, French Classical 4.Bg5 Be7 5.e5 Nfd7 6.h4 h6 7.Bxe7 Qxe7
+    //   8.f4 O-O 9.g4 fxe5?! wait- actually 9...f6 10.exf6): Engine played
+    //   10...Nxf6 (-149cp) vs SF top 10...Qxf6 (-93cp). Book Qxf6.
+    add("rnb2rk1/pppnq1p1/4pP1p/3p4/3P1PPP/2N5/PPP5/R2QKBNR b", {"e7f6"});
+    // G470 (Black, Sicilian Dragon English Attack 6.Be3 Bg7 7.f3 a6 8.Qd2 Nbd7
+    //   9.g4): Engine castled 9...O-O (-181cp) vs SF top 9...b5 (-104cp). Book b5.
+    //   (Position is already inferior; b5 is the accepted sharp defense.)
+    add("r1bqk2r/1p1nppbp/p2p1np1/8/3NP1P1/2N1BP2/PPPQ3P/R3KB1R b", {"b7b5"});
     // G421 (White, Catalan Open 5.Nc3 move order): position
     //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
     //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
