@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 358 | 97 |
+| Losses | 365 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **383**
+Total games played: **390**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0383.pgn`
+- PGN: `game_data/games/game_0390.pgn`
 
 ---
 
@@ -182,6 +182,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
 
 
 
@@ -538,6 +545,16 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20w (games 384-385)
+- Game 384 (Scotch 4.Nxd4 Bc5, Black): engine played 7...Ne5?? (SF -64cp)
+  allowing Qh4/Bh2 sacs, crushed in 41 moves. Fix: dropped 4...Bc5 from book
+  (force 4...Nf6 only, SF -10 vs Bc5's -28). Also booked fallback 5.Nb3 ->
+  5...Bb6 if Bc5 reached via search transposition.
+- Game 385 (English 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 4.e3 Bb4, White): out of
+  book at W9. Engine played 9.Qb3 (-12cp) then 11.d4 and 13.d5?? losing
+  collapse. Fix: booked 5.Qc2 (SF top +5cp) as main, plus Qb3-branch
+  6.Be2 fallback. Also weighted 4.g3 3x over 4.e3 (g3 has deeper coverage).
 
 ### Session 2026-04-20v (games 376-380, 2nd draw in Alekhine Nf7+ perpetual)
 - Game 380 **DRAW** (Black, Alekhine Defense 4 Pawns Attack): opponent forced

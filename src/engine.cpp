@@ -1792,8 +1792,13 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f1b5", "f1c4", "b1c3"});
     // Scotch Gambit defense: 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 (game 276): NEVER 4...Qh4?? (Nb5 wins c7/queen)
-    //   Main: 4...Nf6 (Schmidt) or 4...Bc5 (Classical). Both solid.
-    add("r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "f8c5"});
+    //   Main: 4...Nf6 (Schmidt Variation, SF top -10cp).
+    //   Dropped 4...Bc5 (SF -28cp): game 384 after 5.Nb3 Bb4+ 6.c3 Bd6 7.Bd3 engine
+    //   played Ne5?? allowing Qh4 attack, crushed. Nf6 is cleaner.
+    add("r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6"});
+    // If Scotch Classical 4...Bc5 reached anyway (via transposition), handle 5.Nb3 with Bb6 main
+    // (Bb4+ scored -42cp vs Bb6 -25cp, tempo-losing check into White's development).
+    add("r1bqk1nr/pppp1ppp/2n5/2b5/4P3/1N6/PPP2PPP/RNBQKB1R b", {"c5b6"});
     // Scotch Mieses: 4.Nxd4 Nf6 5.Nxc6 bxc6 6.e5 (game 350 path as Black).
     //   Main: 6...Qe7 (-12cp), forces 7.Qe2 Nd5 (main, -14cp).
     // Game 350: engine reached 11.O-O then played 11...Qxe5?! (-89 vs dxe5 -56).
@@ -2143,9 +2148,17 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/8/2PNp3/8/PP1PPPPP/RNBQKB1R w", {"d4c2", "e2e3", "b1c3"});
     // 1.c4 e5 2.Nf3 Nc6 -> 3.Nc3 (transpose to Four Knights) or 3.d4
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/5N2/PP1PPPPP/RNBQKB1R w", {"b1c3", "d2d4", "e2e3"});
-    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3. AVOID 4.d4 exd4 5.Nxd4 Bb4
+    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main, weighted 3x) or 4.e3. AVOID 4.d4 exd4 5.Nxd4 Bb4
     //   6.Nxc6 bxc6 which gave Black strong Qd4 attack (game 321 lost).
-    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "e2e3"});
+    //   Weight g3 3x over e3 -- g3 has deeper book coverage; e3 led to game 385 disaster.
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "g2g3", "g2g3", "e2e3"});
+    // 4.e3 Bb4 (game 385 path) -> 5.Qc2 (SF top +5cp) NOT 5.Qb3 (-3cp, led to
+    //   disaster after 5...d6 6.d4 a5 7.d5?? Bxc3+ losing).
+    //   After 5.Qc2 main Black is 5...Bxc3 6.Qxc3 or 5...O-O 6.a3.
+    add("r1bqk2r/pppp1ppp/2n2n2/4p3/1bP5/2N1PN2/PP1P1PPP/R1BQKB1R w", {"d1c2", "f1e2"});
+    // If 5.Qb3 reached via search anyway, after 5...d6 force 6.Be2 (SF top -2cp)
+    //   not 6.d4 (-15cp) which led to the d5?? collapse in game 385.
+    add("r1bqk2r/ppp2ppp/2np1n2/4p3/1bP5/1QN1PN2/PP1P1PPP/R1B1KB1R w", {"f1e2"});
     // 4.g3 -> Black: d5 (main central challenge), Bc5, Bb4 (pin, game 289), g6
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2NP1/PP1PPP1P/R1BQKB1R b", {"d7d5", "f8c5", "f8b4", "g7g6"});
     // English 2.Nc3 Nf6 3.g3 Bb4 (no ...Nc6) -> 4.Bg2! NOT 4.Nd5?? which loses after
