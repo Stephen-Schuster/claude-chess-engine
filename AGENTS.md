@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 731 | 92 |
+| Losses | 735 | 92 |
 | Draws | 27 | 8 |
 
-Total games played: **771**
+Total games played: **775**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0771.pgn`
+- PGN: `game_data/games/game_0775.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1264,6 +1268,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bm (G769 massive near-equal save, 436cp gain)
+- G770/G771 marginal (55cp/48cp at d22); skipped.
+- G769 (W M18W): a1b1 -434cp -> SF b3e6 **+2cp (fully equal!)** **436cp gain**.
+  Queen trade via Bxe6 defuses the whole kingside attack.
+- Verified at SF d22 MultiPV=4; fires from FEN.
+- Biggest single-fix gain in recent memory.
 
 ### Session 2026-04-20bl (G768 near-equal save, 125cp gain)
 - G766/G767 marginal (75cp/38cp gain at d22); skipped.

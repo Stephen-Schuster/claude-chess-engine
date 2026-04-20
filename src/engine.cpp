@@ -3337,6 +3337,11 @@ static void init_book() {
     // G766/G767 marginal (75cp/38cp gain at d22); skipped.
     // G768 (B M10B): d8a5 -176cp -> SF h6f5 -51cp (125cp gain near-equal).
     add("r1bq1rk1/pp2ppbp/2p3pn/2p1P3/4N3/5N1P/PPPP1PP1/R1BQR1K1 b", {"h6f5"});
+
+    // === Session 2026-04-20bm (G769 massive near-equal save, 436cp gain) ===
+    // G770/G771 marginal (55cp/48cp at d22); skipped.
+    // G769 (W M18W): a1b1 -434cp -> SF b3e6 **+2cp (fully equal!)** 436cp gain.
+    add("r6k/ppp3p1/3b4/7p/1n5q/1Q1PNr1P/PP3PP1/R1B2RK1 w", {"b3e6"});
 }
 
 static Move try_book_move(Board& b) {
