@@ -1801,6 +1801,14 @@ static void init_book() {
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/5N2/PP2PPPP/RNBQKB1R b", {"b7b6", "d7d5", "f8b4"});
     // 1.d4 Nf6 2.c4 e6 3.g3 -> 3...d5 (Catalan main) or 3...Bb4+
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/6P1/PP2PP1P/RNBQKBNR b", {"d7d5", "f8b4", "c7c5"});
+    // Catalan: 1.d4 Nf6 2.c4 e6 3.g3 d5 -> 4.Bg2 (main)
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w", {"f1g2", "g1f3"});
+    // 4.Bg2 -> 4...Be7 (Closed Catalan) or 4...dxc4 (Open Catalan)
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR b", {"f8e7", "d5c4"});
+    // 4.Bg2 Be7 -> 5.Nf3 (main)
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3"});
+    // 4.Bg2 dxc4 -> 5.Nf3 (regain pawn later)
+    add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3", "d1a4"});
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2", "a2a3"});
     // Queens Gambit Declined: 1.d4 d5 2.c4 e6
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
@@ -1887,6 +1895,14 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/5n2/3p4/3P4/2N5/PPP2PPP/R1BQKBNR w", {"g1f3", "c1g5", "f1d3"});
     // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4
     add("rnbqkbnr/ppp2ppp/4p3/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"b8d7", "g8f6"});
+    // French Rubinstein 4...Nf6 5.Nxf6+ -> 5...gxf6 (ugly) or 5...Qxf6 (main)
+    add("rnbqkb1r/ppp2ppp/4pn2/8/3PN3/8/PPP2PPP/R1BQKBNR w", {"e4f6", "c1g5"});
+    // 5.Nxf6+ Qxf6 (main)
+    add("rnbqkb1r/ppp2ppp/4pN2/8/3P4/8/PPP2PPP/R1BQKBNR b", {"d8f6"});
+    // 5...Qxf6 -> 6.Nf3 (main) or 6.c3 (solid)
+    add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/8/PPP2PPP/R1BQKBNR w", {"g1f3", "c2c3"});
+    // 5...Qxf6 6.Nf3 -> Black develops: ...h6, ...Nc6, ...Bd7
+    add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"b8c6", "c8d7", "h7h6"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
 
