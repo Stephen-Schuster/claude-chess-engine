@@ -1775,6 +1775,12 @@ static void init_book() {
     add("r1bq1rk1/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQ1RK1 w", {"d2d3"});
     // After 9.d3: Black plays Bg4 (SF +15 for Black) or Ne7. Either is fine.
     add("r1bq1rk1/ppp2ppp/2nb4/4p3/4B3/3P1N2/PPP2PPP/R1BQ1RK1 b", {"c8g4", "c6e7"});
+    // G419 (White): after 9...Bg4 engine played 10.h3?! (SF #4 -43cp) losing
+    //   a bit; engine then played 11.Bxc6 bxc6 12.Qe2 f5 13.Bd2 -- passive
+    //   drift to endgame loss. SF top 10.Qe1 (-21cp, holds equal).
+    add("r2q1rk1/ppp2ppp/2nb4/4p3/4B1b1/3P1N2/PPP2PPP/R1BQ1RK1 w", {"d1e1"});
+    // 10.Qe1 -> Black: Qe8 (SF top +16 for White), Qe7 (+13) or Qd7 (+10).
+    add("r2q1rk1/ppp2ppp/2nb4/4p3/4B1b1/3P1N2/PPP2PPP/R1B1QRK1 b", {"d8e8", "d8e7"});
     // 3.Bc4 Bc5 -> 4.Nf3 (transposes to Italian)
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)
