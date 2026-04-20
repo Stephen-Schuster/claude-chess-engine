@@ -1757,6 +1757,20 @@ static void init_book() {
     // Italian
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b", {"g8f6", "f8c5"});
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w", {"e1g1", "c2c3", "b1c3"});
+    // 3...Nf6 (Two Knights / Giuoco quieto) -> 4.d3 (slow Italian, main modern) or 4.Ng5 (Fried Liver) or 4.O-O
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w", {"d2d3", "e1g1", "b1c3"});
+    // 4.d3 -> Black typically ...Bc5 (Giuoco Pianissimo) or ...Be7
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R b", {"f8c5", "f8e7"});
+    // 4.d3 Bc5 -> 5.c3 (main, prep d4) or 5.Nc3 (solid) or 5.O-O
+    add("r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w", {"c2c3", "b1c3", "e1g1"});
+    // 5.Nc3 d6 6.O-O (game 271 path) -> Black often Na5 trading LSB; we prepare Bb3 defense
+    add("r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQK2R b", {"d7d6", "a7a6", "e8g8"});
+    // 5.Nc3 d6 6.O-O (Black to move)
+    add("r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 b", {"e8g8", "a7a6", "c6a5"});
+    // 6.O-O Na5 (game 271) -> 7.Bb3! preserving bishop, NOT letting 7.Bg5 Nxc4 (we get c4 doubled pawns + hole)
+    add("r1bqk2r/ppp2ppp/3p1n2/n1b1p3/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1 w", {"c4b3"});
+    // 7.Bb3 Nxb3 8.axb3 -> Black O-O or Be6
+    add("r1bqk2r/ppp2ppp/3p1n2/n1b1p3/4P3/1BNP1N2/PPP2PPP/R1BQ1RK1 b", {"a5b3", "e8g8"});
 
     // 1.e4 c5 (Sicilian)
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
