@@ -2777,9 +2777,9 @@ static void init_book() {
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/8/PPP2PPP/R1BQKBNR w", {"g1f3", "c2c3"});
     // 5...Qxf6 6.Nf3 -> Black develops: ...h6, ...Nc6, ...Bd7
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"b8c6", "c8d7", "h7h6"});
-    // 6.Nf3 Bd7 7.Bd3 (game 266) -> continue development. NB: Bd6?? loses
-    //   queen to 8.Bg5! (forks Qf6, Nf3 defends g5). Force Nc6.
-    add("rn2kb1r/pppb1ppp/4pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"b8c6"});
+    // 6.Nf3 Bd7 7.Bd3 (game 266) -> force h7h6 (SF d22 top -84cp). Old entry
+    //   had b8c6 but d22 verification shows it's -562cp (G778). Removed.
+    //   See session bo fix below.
     // 6.Nf3 Nc6 7.Bd3 (G550): Bd6?? loses queen to 8.Bg5 (+569cp). Force
     //   h6 (SF top -81cp) instead.
     add("r1b1kb1r/ppp2ppp/2n1pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"h7h6", "c8d7"});
@@ -3349,6 +3349,14 @@ static void init_book() {
     add("r2qr1k1/pp3ppp/2n1b3/4P3/2n5/B1P3P1/P3NPBP/R2Q1RK1 w", {"a3c5"});
     // G774 (B M11B): g7g6 -264cp -> SF f7f6 -73cp (191cp gain, losing pos).
     add("rnbq1rk1/pp2npp1/4p3/3pP2Q/2pP3P/P1P4N/2P2PP1/R1B1K2R b", {"f7f6"});
+
+    // === Session 2026-04-20bo (G776/G777/G778 batch: 3 fixes, ~665cp gain) ===
+    // G778 (B M7B): b8c6 -562cp -> SF h7h6 -84cp (**478cp massive near-equal save**).
+    add("rn2kb1r/pppb1ppp/4pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"h7h6"});
+    // G776 (B M16B): d8c8 -221cp -> SF a7a6 -128cp (93cp gain).
+    add("3r1rk1/pp1np1bp/4p1p1/2P5/Pqp1P3/2N1B2P/1PP1QPP1/R3R1K1 b", {"a7a6"});
+    // G777 (W M16W): c2b3 -176cp -> SF c2b2 -82cp (94cp gain).
+    add("2rq1rk1/pb3ppp/1p2pn2/4Nn2/3P4/P1PB4/2Q2PPP/1RB2RK1 w", {"c2b2"});
 }
 
 static Move try_book_move(Board& b) {

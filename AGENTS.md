@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 738 | 93 |
-| Draws | 27 | 7 |
+| Losses | 741 | 94 |
+| Draws | 27 | 6 |
 
-Total games played: **778**
+Total games played: **781**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0778.pgn`
+- PGN: `game_data/games/game_0781.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1271,6 +1274,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bo (G776/G777/G778 batch: 3 fixes, ~665cp gain!)
+- G778 (B M7B): b8c6 -562cp -> SF h7h6 -84cp (**478cp massive near-equal save**).
+  Caught dup entry at line 2782 forcing the losing b8c6 (same pattern as
+  G518/G704 dedup bugs). Removed old entry.
+- G776 (B M16B): d8c8 -221cp -> SF a7a6 -128cp (93cp gain).
+- G777 (W M16W): c2b3 -176cp -> SF c2b2 -82cp (94cp gain).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20bn (G773/G774 batch: 2 fixes, ~270cp gain)
 - G772 marginal (63cp); G775 skipped (d22 rerank showed 45cp gain).
