@@ -1751,6 +1751,11 @@ static void init_book() {
     // 2.Nf3 Nc6 3.Bb5 (Ruy Lopez)
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6", "f7f5"});
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f1b5", "f1c4", "b1c3"});
+    // Scotch Gambit defense: 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 (game 276): NEVER 4...Qh4?? (Nb5 wins c7/queen)
+    //   Main: 4...Nf6 (Schmidt) or 4...Bc5 (Classical). Both solid.
+    add("r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "f8c5"});
+    // 4...Nf6 5.Nc3 (Four Knights Scotch) -> ...Bb4 main, or ...Bc5
+    add("r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"f8b4", "f8c5"});
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
@@ -1870,6 +1875,8 @@ static void init_book() {
     // Slav: 1.d4 d5 2.c4 c6
     add("rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"g1f3", "b1c3"});
     add("rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b", {"g8f6", "e7e6"});
+    // 2.Nf3 d5 3.c4 c6 (Slav via ...Nf6 move order, game 275): 4.Nc3 (main) or 4.cxd5, NOT 4.e3 passive
+    add("rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w", {"b1c3", "c4d5"});
     // Grünfeld: 1.d4 Nf6 2.c4 g6 3.Nc3 d5
     add("rnbqkb1r/pppppp1p/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"d7d5", "f8g7"});
     add("rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w", {"c4d5", "g1f3", "c1f4"});
@@ -1880,6 +1887,8 @@ static void init_book() {
     // 1.c4 e5 2.Nc3 Nf6 -> 3.Nf3 (main), 3.g3 (fianchetto), 3.e4 (Kingscrusher)
     //   AVOID 3.Nd5? which just loses tempo (game 245).
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g1f3", "g2g3"});
+    // English 2.Nc3 Nf6 3.g3 c6 (game 277): 4.Nf3 (main, do NOT play 4.d4?? which drops tempo after exd4 Qxd4 d5!)
+    add("rnbqkb1r/pp1p1ppp/2p2n2/4p3/2P5/2N3P1/PP1PPP1P/R1BQKBNR w", {"g1f3", "f1g2"});
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (main Four Knights English)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R b", {"b8c6", "e5e4"});
     // 1.c4 e5 2.Nf3 (reversed Alapin) -> 2...Nc6 (main) or 2...e4 (sharp, game 255/259)
