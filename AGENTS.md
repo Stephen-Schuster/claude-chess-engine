@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 596 | 97 |
+| Losses | 598 | 97 |
 | Draws | 18 | 3 |
 
-Total games played: **627**
+Total games played: **629**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0627.pgn`
+- PGN: `game_data/games/game_0629.pgn`
 
 ---
 
@@ -182,6 +182,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
 
 
 
@@ -1095,6 +1097,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G624 (Black, French Advance with Qxb2 grabbed M14B): a7a5 -141cp ->
   SF h7h6 0cp completely equal! Force luft to defuse h5.
 - G623 (White, M19W already-losing): Rd4 -199cp -> SF Nd4 (b3d4) -106cp.
+
+### Session 2026-04-20ad20 (G625/G626/G627 batch)
+- G625 (White, central tactical mess M15W): Nxc6 -205cp -> SF Re1 (f1e1)
+  -57cp keeps tension.
+- G626 (Black, CK Advance Qg4 attack M10B): O-O +125cp into king attack
+  -> SF Bd7 (c8d7) +52cp delays castling.
+- G627 (White, M15W already-losing): Qxb7 -355cp -> SF Qc2 (b3c2) -204cp
+  retreat.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

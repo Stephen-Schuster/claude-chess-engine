@@ -2922,6 +2922,17 @@ static void init_book() {
     //   SF d22 #1: Nd4 (b3d4) -106cp (better in losing pos).
     add("r4rk1/pp1b1ppp/3P1b2/8/n7/1N4P1/P2R1PBP/R1B3K1 w", {"b3d4"});
 
+    // === Session 2026-04-20ad20 (G625/G626/G627 batch) ===
+    // G625 (White, Center fork tactical mess M15W): engine Nxc6 -205cp.
+    //   SF d22 #1: Re1 (f1e1) -57cp keeps tension, defends pieces.
+    add("3r1rk1/ppp2ppp/2n2q2/2Q1N3/3Pp3/4P3/PP2bPPP/R1B2RK1 w", {"f1e1"});
+    // G626 (Black, CK Advance Qg4 attack M10B): engine O-O +125cp into
+    //   king attack. SF d22 #1: Bd7 (c8d7) +52cp delays castling.
+    add("r1b1k2r/ppq1nppp/2n1p3/2ppP2P/3P2Q1/P1P5/2PB1PP1/R3KBNR b", {"c8d7"});
+    // G627 (White, M15W already-losing): engine Qxb7 -355cp pawn-grab.
+    //   SF d22 #1: Qc2 (b3c2) -204cp queen retreat (better in losing pos).
+    add("r2qr1k1/pp3pp1/2pb1n1p/3p4/P2Pn1bP/1QNBPN2/1P3PP1/R1B2RK1 w", {"b3c2"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
