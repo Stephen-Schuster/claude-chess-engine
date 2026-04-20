@@ -3472,6 +3472,13 @@ static void init_book() {
     // G829 71cp in deep-losing pos; skipped.
     // G830 (B M13B): d8d5 -154cp -> SF f6e4 -30cp (**124cp near-equal save**).
     add("r2q1rk1/pbp1bppp/1p2pn2/4N3/3PN2P/3B4/PPP1QPP1/2KR3R b", {"f6e4"});
+
+    // === Session 2026-04-20ch (G831/G832 batch: 2 fixes, ~277cp gain) ===
+    // G833 only 65cp in deep-lost pos; skipped.
+    // G831 (W M46W KR endgame): g2f1 -353cp -> SF g2h1 -168cp (185cp gain, forced).
+    add("8/p1b5/P3R2p/1P4pP/6P1/2k2P2/2r3K1/8 w", {"g2h1"});
+    // G832 (B M13B): e6h3?? -141cp -> SF d5c7 -49cp (92cp near-equal save).
+    add("r2r2k1/pp1qppbp/2p1b1p1/2pnP3/P7/1P1P1N1P/2PB1PP1/RNQ1R1K1 b", {"d5c7"});
 }
 
 static Move try_book_move(Board& b) {
