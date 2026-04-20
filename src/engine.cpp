@@ -1897,6 +1897,10 @@ static void init_book() {
 
     // 1.e4 e6 French
     add("rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
+    // Black's 2nd in French: force d5! (SF top -34cp). Games 386/392/394 engine
+    //   drifted into 2...Nf6 3.e5 Nd5 4.c4 Bb4+/Nb6 Alekhine-like positions that
+    //   are structurally losing for Black (-170 to -210cp). 2...d5 is main French.
+    add("rnbqkbnr/pppp1ppp/4p3/8/3PP3/8/PPP2PPP/RNBQKBNR b", {"d7d5"});
     add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w", {"b1c3", "e4e5", "b1d2"});
     // 1.e4 c6 Caro-Kann
     add("rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
@@ -2173,6 +2177,9 @@ static void init_book() {
     //   disaster after 5...d6 6.d4 a5 7.d5?? Bxc3+ losing).
     //   After 5.Qc2 main Black is 5...Bxc3 6.Qxc3 or 5...O-O 6.a3.
     add("r1bqk2r/pppp1ppp/2n2n2/4p3/1bP5/2N1PN2/PP1P1PPP/R1BQKB1R w", {"d1c2", "f1e2"});
+    // After 5.Qc2 Bxc3 (game 393): force 6.Qxc3! (SF top +10cp) NOT 6.dxc3
+    //   (-53cp, game 393 lost after weakening center structure).
+    add("r1bqk2r/pppp1ppp/2n2n2/4p3/2P5/2b1PN2/PPQP1PPP/R1B1KB1R w", {"c2c3"});
     // If 5.Qb3 reached via search anyway, after 5...d6 force 6.Be2 (SF top -2cp)
     //   not 6.d4 (-15cp) which led to the d5?? collapse in game 385.
     add("r1bqk2r/ppp2ppp/2np1n2/4p3/1bP5/1QN1PN2/PP1P1PPP/R1B1KB1R w", {"f1e2"});
@@ -2183,6 +2190,10 @@ static void init_book() {
     add("rnbqk2r/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2"});
     // After 4.Bg2 O-O -> 5.Nf3 (main)
     add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"g1f3"});
+    // 4.Bg2 a5 (game 391 Codex sideline): 5.e4! (SF top +32cp) keeps bishop pair
+    //   and central grip; NOT 5.d4 exd4 6.Qxd4 which trades queens into dead-
+    //   equal endgame (game 391 lost on technique).
+    add("rnbqk2r/1ppp1ppp/5n2/p3p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"e2e4"});
     // 4.g3 Bb4 -> 5.Nd5! (main: attacks Bb4, kick or trade favorably) or 5.Bg2.
     // NEVER allow ...e4 and ...Bxc3 doubled pawns (game 289 disaster).
     add("r1bqk2r/pppp1ppp/2n2n2/4p3/1bP5/2N2NP1/PP1PPP1P/R1BQKB1R w", {"c3d5"});

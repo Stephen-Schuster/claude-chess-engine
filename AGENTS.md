@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 370 | 97 |
+| Losses | 375 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **395**
+Total games played: **400**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0395.pgn`
+- PGN: `game_data/games/game_0400.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -550,6 +555,22 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20y (games 391-395)
+- **Biggest fix**: 1.e4 e6 French, Black's move 2 was unbooked and engine's
+  search picked 2...Nf6?! (games 386/392/394 all reached 3.e5 Nd5 4.c4 ...
+  structurally losing -170cp Alekhine-like positions). Force 2...d5 (SF top
+  -34cp), prevents all three disasters going forward.
+- Game 391 (English 3.g3 Bb4 4.Bg2 a5, White): engine played 5.d4 exd4
+  6.Qxd4 trade-queens endgame, lost on technique. Fix: book 5.e4! (SF
+  top +32cp) keeping bishop pair and central grip.
+- Game 393 (English 4.e3 Bb4 5.Qc2 Bxc3, White): my session-w 5.Qc2 fix
+  fired but engine then chose 6.dxc3?? (-53cp) instead of 6.Qxc3 (+10cp).
+  Fix: book 6.Qxc3.
+- Game 394 (Alekhine 4 Pawns Black): out of book at move 8, Bh4+/Be7
+  tempo waste then Bxa3?? loses piece. Auto-fixed by 2...d5 change above.
+- Game 395 (Italian 4-Kts White): post-book tactical mess, not cleanly
+  book-fixable.
 
 ### Session 2026-04-20x (games 386-390)
 - Game 387 (English 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 4.e3 d5, White): engine played
