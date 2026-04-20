@@ -3407,6 +3407,13 @@ static void init_book() {
     add("4rr2/2p4k/1p1p1q1p/2nPpp2/p1P5/P1R4P/1P2QPP1/3R1NK1 w", {"f1d2"});
     // G800 (B M30B): g8f8 -683cp -> SF a8a6 -489cp (194cp gain, deep lost).
     add("r1b3k1/1p1q2p1/6Qp/8/8/p1BB3P/P4PP1/6K1 b", {"a8a6"});
+
+    // === Session 2026-04-20bw (G802/G803 batch: 2 fixes, ~200cp gain) ===
+    // G801 d22 only 8cp loss (d16 misranked); skipped.
+    // G802 (B M19B): e6f5 -296cp -> SF a8f8 -213cp (83cp gain, losing pos).
+    add("r5k1/pppqbr1p/2n1bp2/2Pp4/3P4/2P2NB1/P3B1PP/R2Q1RK1 b", {"a8f8"});
+    // G803 (W M19W): e2c4 -306cp -> SF e2g4 -189cp (117cp gain, losing pos).
+    add("r5k1/p1p2ppp/2p1q3/3n2P1/2pPp3/PrB1P2P/1P2QP2/R3K2R w", {"e2g4"});
 }
 
 static Move try_book_move(Board& b) {

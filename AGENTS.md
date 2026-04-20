@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 763 | 95 |
+| Losses | 765 | 95 |
 | Draws | 27 | 5 |
 
-Total games played: **803**
+Total games played: **805**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0803.pgn`
+- PGN: `game_data/games/game_0805.pgn`
 
 ---
 
@@ -182,6 +182,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
 
 
 
@@ -1296,6 +1298,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bw (G802/G803 batch: 2 fixes, ~200cp gain)
+- G801 d22 only 8cp loss (d16 misranked); skipped.
+- G802 (B M19B): e6f5 -296cp -> SF a8f8 -213cp (83cp gain, losing pos).
+- G803 (W M19W): e2c4 -306cp -> SF e2g4 -189cp (117cp gain, losing pos).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20bv (G799/G800 batch: 2 fixes, ~276cp gain)
 - G798 d22 only 11cp loss (d16 misranked); skipped. **Lesson again**: d16 unreliable.
