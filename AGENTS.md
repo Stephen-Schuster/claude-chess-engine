@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 795 | 95 |
+| Losses | 800 | 95 |
 | Draws | 29 | 5 |
 
-Total games played: **837**
+Total games played: **842**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0837.pgn`
+- PGN: `game_data/games/game_0842.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1330,6 +1335,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cj (G836/G837 batch: 2 fixes, ~180cp, losing positions)
+- G838 d22 only 64cp; skipped.
+- G836 (losing pos) + G837 (losing pos): both verified at d22 MultiPV=4,
+  both fire from FEN. Gains ~90cp each.
 
 ### Session 2026-04-20ci (G834/G835 batch: 2 fixes, ~174cp, both equal/advantage!)
 - G834 (B M9B): e7d5 -78cp -> SF f5g4 **0cp (fully equal!)** 78cp gain.

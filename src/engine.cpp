@@ -3485,6 +3485,13 @@ static void init_book() {
     add("r2qkb1r/pp1nnpp1/2p1p3/4Pb1p/3P3P/2N2N2/PP2BPP1/R1BQK2R b", {"f5g4"});
     // G835 (W M10W): d3d4 -79cp -> SF a2a4 **+17cp (engine advantage!)** 96cp gain.
     add("r1bq1rk1/1pp2pp1/1pnp1n1p/4p3/2B1P3/3P1N2/PPP2PPP/R1BQR1K1 w", {"a2a4"});
+
+    // === Session 2026-04-20cj (G836/G837 batch: 2 fixes, ~180cp gain) ===
+    // G838 only 64cp; skipped.
+    // G836 (B M17B): f6d7 -208cp -> SF a8c8 -128cp (80cp gain, losing pos).
+    add("r4rk1/1pq1bpp1/3pbn1p/pB2p3/P3P1PP/1NN2P2/1PP1Q3/1K1R3R b", {"a8c8"});
+    // G837 (W M26W): c1d1 -170cp -> SF a4b3 -70cp (100cp gain, near-equal-ish).
+    add("r3rk2/p1p2pp1/1p1p2np/3P4/Q1P4q/5P1P/P1PB2P1/2R1R1K1 w", {"a4b3"});
 }
 
 static Move try_book_move(Board& b) {
