@@ -3241,6 +3241,14 @@ static void init_book() {
     // G719 deep loss skipped; G718 high value (398cp gain to near-equal).
     // G718 (B M14B): SF #1 Nxd2! -34cp (near-equal!) vs Ng3?? -432 (398cp gain).
     add("r3k2r/p1pp1ppp/b1p5/4P3/2P1n2q/1P4P1/PB1Q1P1P/R3KB1R b", {"e4d2"});
+
+    // === Session 2026-04-20ax (G721/G722 batch: 2 fixes, ~349cp gain) ===
+    // G719 (W M20W): only 66cp gain in losing pos; skipped.
+    // G720 (B M13B): only 61cp gain; skipped.
+    // G721 (W M15W): SF #1 a1c1 -63cp (near-equal!) vs ours h3h4 -177cp (~110cp gain).
+    add("r4rk1/p1pq1pp1/2p1bn2/7p/2pPp3/P3P1PP/1PQB1P2/R3KB1R w", {"a1c1"});
+    // G722 (B M15B): SF #1 d4e5 -78cp vs ours d7e5 (#4!) -317cp (239cp gain).
+    add("r3kb1r/pp1n1pp1/2p1p3/P3PnBp/2BqN2P/1Q3P2/5P2/R4RK1 b", {"d4e5"});
 }
 
 static Move try_book_move(Board& b) {
