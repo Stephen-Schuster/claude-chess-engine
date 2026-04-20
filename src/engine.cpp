@@ -3299,6 +3299,12 @@ static void init_book() {
     // G747 marginal (55cp gain at d22); skipped.
     // G748 (B M16B): e6e5 -461cp -> SF h7h6 -150cp (311cp gain).
     add("r3r1k1/pppb1qpp/2nbp3/5p2/3P1N2/2PB1N2/PP1Q1PPP/1K1RR3 b", {"h7h6"});
+
+    // === Session 2026-04-20bg (G751 fix, 145cp near-equal save) ===
+    // G749/G750 marginal (61/70cp gain); skipped.
+    // G751 (W M16W): f1g2 -199cp -> SF f1c4 -54cp (145cp gain near-equal).
+    // Very similar position to G721 but Rc1 already played; different FEN.
+    add("rr4k1/p1pq1pp1/2p1bn2/7p/2pPp3/P3P1PP/1PQB1P2/2R1KB1R w", {"f1c4"});
 }
 
 static Move try_book_move(Board& b) {
