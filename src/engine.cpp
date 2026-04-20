@@ -3462,6 +3462,11 @@ static void init_book() {
     // G824 55cp skip; G825 same FEN as G823 (already fixed). Data confirms cd fix.
     // G826 (B M14B): g7g5 -167cp -> SF c7c5 -82cp (85cp gain, losing pos).
     add("r2q1rk1/p1p2pp1/1p1bpn1p/1b6/3P3B/2P2N2/PPB2PPP/R2QR1K1 b", {"c7c5"});
+
+    // === Session 2026-04-20cf (G827 near-equal save, 75cp; G828 DRAW) ===
+    // G828 DRAW by threefold repetition as Black - 6th draw in last 100!
+    // G827 (W M12W): c4d5 -102cp -> SF f1e2 -27cp (75cp near-equal save).
+    add("2kr3r/ppp1qppp/4b3/3pP3/2PQn3/4P3/PP3PPP/R1B1KB1R w", {"f1e2"});
 }
 
 static Move try_book_move(Board& b) {
