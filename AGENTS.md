@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 322 | 99 |
+| Losses | 328 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **345**
+Total games played: **351**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0345.pgn`
+- PGN: `game_data/games/game_0351.pgn`
 
 ---
 
@@ -182,6 +182,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
 
 
 
@@ -453,6 +459,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Fix: booked Catalan Open 5...Nc6 mainline through move 9:
   * 6.Qa4! (SF +48), then Black Bb4+/Bd7/a6
   * 6...Bb4+ 7.Bd2 Nd5 8.Bxb4 Nxb4 9.Nc3! (forcing the SF top choice)
+
+### Session 2026-04-20p (game 349 Four Knights Scotch 8...O-O sideline)
+- Game 349 (Four Knights Scotch White, `7.Bd3 d5 8.exd5 O-O`): opponent
+  deviated from book mainline 8...cxd5. Engine chose 9.dxc6?? (SF -4cp,
+  grabs pawn but opens diagonals); Black played Bg4/Re8+ chasing king to
+  f1, slow collapse, mated move 76.
+- Fix: booked 8...O-O -> 9.O-O (SF +16cp main). Then 9...cxd5 10.h3 to
+  prevent ...Bg4 pin.
 
 ### Session 2026-04-20o (games 338-344 queen-grab pattern + English 3.g3 d5)
 - **Recurring pattern (games 338, 340, 341, 342)**: Black's queen grabs b2

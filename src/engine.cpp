@@ -1775,6 +1775,13 @@ static void init_book() {
     add("r1bqk2r/p1p2ppp/2p2n2/3P4/1b6/2NB4/PPP2PPP/R1BQK2R b", {"c6d5"});
     add("r1bqk2r/p1p2ppp/5n2/3p4/1b6/2NB4/PPP2PPP/R1BQK2R w", {"e1g1"});
     add("r1bqk2r/p1p2ppp/5n2/3p4/1b6/2NB4/PPP2PPP/R1BQ1RK1 b", {"e8g8"});
+    // Game 349: after 7.Bd3 d5 8.exd5, Black played 8...O-O (not 8...cxd5).
+    //   Engine chose 9.dxc6?? (-4cp per SF), opened diagonals and lost to Bg4/Re8+.
+    //   Force 9.O-O (SF +16cp main): keeps king safe, let Black recapture on d5 later.
+    add("r1bq1rk1/p1p2ppp/2p2n2/3P4/1b6/2NB4/PPP2PPP/R1BQK2R w", {"e1g1"});
+    // After 9.O-O cxd5 10.h3 (SF main, prevents ...Bg4 pins)
+    add("r1bq1rk1/p1p2ppp/2p2n2/3P4/1b6/2NB4/PPP2PPP/R1BQ1RK1 b", {"c6d5"});
+    add("r1bq1rk1/p4ppp/2p2n2/3p4/1b6/2NB4/PPP2PPP/R1BQ1RK1 w", {"h2h3"});
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
