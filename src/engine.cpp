@@ -1873,6 +1873,18 @@ static void init_book() {
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkb1r/1ppp1ppp/p1n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w", {"b5a4", "b5c6"});
+    // Ruy Exchange 4.Bxc6 dxc6 -> 5.O-O (main) or 5.Nc3 or 5.d4. Black's main: 5...Bg4, 5...f6, 5...Qd6.
+    //   G435: 5.O-O Bg4 6.h3 h5 and opponent went kingside-pawn-storm; engine
+    //   played 9.d4?! (SF #8) and 10.e5? allowing Qh5 mate net. Book 9.Nc4 (SF top +36cp)
+    //   which exchanges on f3 in orderly fashion.
+    add("r1bqkbnr/1pp2ppp/p1p5/4p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"c8g4", "f7f6", "d8d6"});
+    // 5...Bg4 6.h3 (main) -> 6...h5 (challenging) or 6...Bxf3 (simplify)
+    add("r2qkbnr/1pp2ppp/p1p5/4p3/4P1b1/5N1P/PPPP1PP1/RNBQ1RK1 b", {"h7h5", "g4f3"});
+    // 6.h3 h5 7.d3 (solid, SF top +35cp); Black develops Qf6 Nbd2 g5 -> force 9.Nc4!
+    add("r2qkbnr/1pp2pp1/p1p5/4p2p/4P1b1/5N1P/PPPP1PP1/RNBQ1RK1 w", {"d2d3"});
+    // After 7.d3 Qf6 8.Nbd2 g5 -> force 9.Nc4 (SF top +36cp). Engine's 9.d4?
+    //   allows 10.e5 Qg6 11.hxg4 hxg4 12.Nxd4 Qh6 13.f4?? Qh5 mate net.
+    add("r3kbnr/1pp2p2/p1p2q2/4p1pp/4P1b1/3P1N1P/PPPN1PP1/R1BQ1RK1 w", {"d2c4"});
     // Berlin Defense: 3...Nf6 -> 4.O-O (main) -- Black plays 4...Nxe4 (Berlin main)
     //   not 4...Bb4?! (game 302) or 4...Bc5 (Classical Deferred gives +57cp to White,
     //   game 310 lost after 5.Nxe5 Nxe5 6.d4). Main: 4...Nxe4 or solid 4...Be7.
@@ -1992,8 +2004,17 @@ static void init_book() {
     add("r2qkbnr/pp1n1pp1/2p1p3/4P1Bp/2BP2bP/2N2N2/PP3PP1/R2QK2R b", {"f8e7"});
     // After 9...Be7 10.O-O (game 400) -> 10...Nh6! (SF top -7cp, develops
     //   stranded g8 knight). NOT 10...Bxg5 (-21, game 400 gave up bishop pair,
-    //   allowed h-file pressure and lost).
+    //   allowed h-file pressure and lost). G438/G440 via alt move order
+    //   (dxc4/Nc3/Bxc4) also transpose here -- engine plays Nh6 naturally.
     add("r2qk1nr/pp1nbpp1/2p1p3/4P1Bp/2BP2bP/2N2N2/PP3PP1/R2Q1RK1 b", {"g8h6"});
+    // G438/G440: 10.O-O Nh6 11.Bd3 -> 11...Nb6! (SF top -7cp, near equal).
+    //   Engine played 11...Bxg5 (#3 -16cp) then hxg5 Nf5 Bxf5 -- loses tempo,
+    //   White h-file pressure built up. Nb6 attacks Bc4 while rerouting knight.
+    add("r2qk2r/pp1nbpp1/2p1p2n/4P1Bp/3P2bP/2NB1N2/PP3PP1/R2Q1RK1 b", {"d7b6"});
+    // G434: same structure with bishop retreat 10.Be2 (instead of O-O or Bd3).
+    //   Engine played 10...Qb6?? (not in SF top-5, lets 11.Ne4 +589cp).
+    //   Force 10...Nh6 (SF top +3cp, equal).
+    add("r2qk1nr/pp1nbpp1/2p1p3/4P1Bp/3P2bP/2N2N2/PP2BPP1/R2QK2R b", {"g8h6"});
     // CK Advance 5.c4 e6 move-order variant (game 396): 6.Nc3 dxc4 7.Bxc4 Nd7
     //   8.Bg5 (instead of 8.Nf3) -> 8...Be7 (SF top +2cp, equal) then 9.Qd2 Qb6!
     //   (SF top 0cp). NOT 9...Bxg5 (-21cp) which game 396 played (gave up bishop
@@ -2552,8 +2573,9 @@ static void init_book() {
     add("r1bqk2r/ppp1bppp/8/3P4/1n1Pn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"b4d3"});
     // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
     add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8", "b8c6"});
-    // 7.O-O O-O 8.c4 -> 8...c6 (main, support d5) or 8...Nc6
-    add("rnbq1rk1/ppp2ppp/3b4/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c7c6", "b8c6"});
+    // 7.O-O O-O 8.c4 -> 8...c6 FORCED. G436: engine played 8...Nc6?? (not in SF top-5)
+    //   and after 9.cxd5 every Black move loses 400+cp. SF top 8...c6 (-38cp, equal-ish).
+    add("rnbq1rk1/ppp2ppp/3b4/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c7c6"});
     // Petroff Four Knights transposition: 3.Nc3 Nc6 (sane development)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
 
