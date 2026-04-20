@@ -1765,8 +1765,16 @@ static void init_book() {
     add("r1bqkb1r/ppp2ppp/2n5/4p3/4p3/3B1N2/PPPP1PPP/R1BQK2R w", {"d3e4"});
     // 7...Bd6 main (SF +15)
     add("r1bqkb1r/ppp2ppp/2n5/4p3/4B3/5N2/PPPP1PPP/R1BQK2R b", {"f8d6"});
-    // 8.d4 (SF -7, main). NEVER Bxc6+ (game 359 loss).
-    add("r1bqk2r/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQK2R w", {"d2d4", "d2d3", "e1g1"});
+    // Move 8: SF top is d4 (-6cp) but after 8.d4 O-O?? 9.O-O Nxd4! Black wins +73cp.
+    //   Safer: 8.O-O O-O 9.d3 (equal, -15cp). NEVER 8.Bxc6+ (game 359) or 9.Bxc6 (game 361 loss).
+    //   Force 8.O-O path only - search into d4 lines is unreliable at our depth.
+    add("r1bqk2r/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQK2R w", {"e1g1"});
+    // 8.O-O -> Black: Bg4 (SF top 0cp) or O-O (-3cp). Both equal.
+    add("r1bqk2r/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQ1RK1 b", {"e8g8", "c8g4"});
+    // 8.O-O O-O -> 9.d3 (SF top -15cp, solid). NEVER 9.Bxc6 (-36cp game 361) or 9.d4 (-78cp!).
+    add("r1bq1rk1/ppp2ppp/2nb4/4p3/4B3/5N2/PPPP1PPP/R1BQ1RK1 w", {"d2d3"});
+    // After 9.d3: Black plays Bg4 (SF +15 for Black) or Ne7. Either is fine.
+    add("r1bq1rk1/ppp2ppp/2nb4/4p3/4B3/3P1N2/PPP2PPP/R1BQ1RK1 b", {"c8g4", "c6e7"});
     // 3.Bc4 Bc5 -> 4.Nf3 (transposes to Italian)
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)
@@ -1910,7 +1918,9 @@ static void init_book() {
     //   Force 6...dxc4 (SF main, -17cp) then 7.Bxc4 Nd7.
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/2N5/PP3PP1/R1BQKBNR b", {"d5c4"});
     add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2pP3P/2N5/PP3PP1/R1BQKBNR w", {"f1c4"});
-    add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2BP3P/2N5/PP3PP1/R1BQK1NR b", {"b8d7", "f8e7"});
+    // After 7.Bxc4: force 7...Nd7 (-18cp main). Game 360: engine picked 7...Be7
+    //   then 8.Be2 c5?? 9.Bb5+ Nd7 10.d5! crushing (-42cp forced). Nd7 avoids this entirely.
+    add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2BP3P/2N5/PP3PP1/R1BQK1NR b", {"b8d7"});
     // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
@@ -2209,6 +2219,10 @@ static void init_book() {
     add("rnbqk1nr/pp2ppbp/3p2p1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2"});
     add("rnbqk1nr/pp2ppbp/3p2p1/8/3NP3/2N1B3/PPP2PPP/R2QKB1R b", {"g8f6"});
     add("rnbqk2r/pp2ppbp/3p1np1/8/3NP3/2N1B3/PPP2PPP/R2QKB1R w", {"f2f3", "f1e2"});
+    // Hyper-accelerated Dragon move order: 4...g6 5.Nc3 Nf6 6.Be3 (no Bg7 yet).
+    //   Game 362: engine chose 6...e5?! (not SF top-4), led to Ng4/Qb6/Qxb2?? disaster.
+    //   Force 6...Bg7 (transposes to main Dragon, -78cp, balanced).
+    add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N1B3/PPP2PPP/R2QKB1R b", {"f8g7"});
     // French: 1.e4 e6 2.d4 d5 3.Nc3 -- Black choices: Nf6 (Classical), Bb4 (Winawer), dxe4 (Rubinstein)
     // AVOID any knight-to-edge nonsense; Classical main is 3...Nf6 4.e5 Nfd7 (NOT Ne4).
     // French 3.Nc3: prefer 3...Nf6 (Classical/Steinitz) over 3...Bb4 (Winawer)

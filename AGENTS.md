@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 340 | 99 |
-| Draws | 10 | 1 |
+| Losses | 351 | 98 |
+| Draws | 11 | 2 |
 
-Total games played: **363**
+Total games played: **375**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0363.pgn`
+- PGN: `game_data/games/game_0375.pgn`
 
 ---
 
@@ -182,6 +182,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -499,6 +511,25 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Fix: booked the entire forced gambit line 4...Nxe4 5.Nxe4 d5 6.Bd3
   dxe4 7.Bxe4 Bd6 8.d4 (SF main -7cp). Heavy weight on Nxe4 vs Bc5
   (80/20), dropped Be7 which was -34cp.
+
+### Session 2026-04-20t (games 360-363)
+- Game 360 (CK Advance Black): engine at `7.Bxc4` picked 7...Be7 from book
+  options, then opponent 8.Be2 and engine played 8...c5?? leading to
+  9.Bb5+ Nd7 10.d5! crushing (-42cp forced). Fix: force 7...Nd7 only
+  (drop Be7 which led to the losing 8.Be2 c5 line).
+- Game 361 (Italian 4-Kts White, my own book from session s!): book had
+  `{d2d4, d2d3, e1g1}` at move 8 after Bd6. Engine picked 8.O-O, opponent
+  played 8...O-O, then **engine was out of book at move 9** and chose
+  9.Bxc6?? (SF -36cp, gives up bishop pair). Then 10.d4 (SF -78cp WORST!).
+  Also found 8.d4 loses to 9...Nxd4! (+73cp Black). Fix: force 8.O-O only,
+  book 8...O-O 9.d3 (SF top -15cp) and 9...Bg4/Ne7 continuations.
+- Game 362 (Sicilian Dragon hyper-accelerated move order): engine as Black
+  played `4...g6 5.Nc3 Nf6 6.Be3` and was out of book. Existing book only
+  covered the Bg7-first move order. Engine chose 6...e5?! then 7.Nf3 Ng4
+  8.Bg5 Qb6 9.Bh4 Be6 10.h3 Qxb2?? queen-grab disaster. Fix: book 6...Bg7
+  (Dragon transposition, -78cp).
+- Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
+  games 351/353/333. Structural endgame loss, not cleanly book-fixable.
 
 ### Session 2026-04-20q (eval: uncastled-king penalty boosted)
 - Discovered eval systematically underestimates queen-grab/king-in-center
