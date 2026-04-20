@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 296 | 99 |
-| Draws | 9 | 1 |
+| Losses | 302 | 99 |
+| Draws | 10 | 1 |
 
-Total games played: **318**
+Total games played: **325**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0318.pgn`
+- PGN: `game_data/games/game_0325.pgn`
 
 ---
 
@@ -259,6 +259,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
+
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -347,6 +354,32 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Fix: removed 5...b5 (Norwegian) from Closed Ruy -- not main, engine drifts.
   Added Closed main line through 8.c3.
 
+### Session 2026-04-20h (games 316-322: Petroff/Catalan/English/Panov + first DRAW)
+- Game 322: **DRAW** by threefold repetition in Ruy Lopez as Black -- first
+  non-loss in a while. Opponent Qg4+/Qf5 shuffled and engine correctly
+  repeated.
+- Fix game 316 (Petroff Black, 6...Nc6 7.O-O Bf5?? 8.Nbd2 Bb4): book 7...Be7
+  after 6.Bd3 Nc6 7.O-O (solid) instead of Bf5 which search chose.
+- Fix game 317 (Sveshnikov): 5.Nb5 mainline + 6.N1c3 + 7.Na3 (was 5.Nxc6??).
+- Fix game 319 (Catalan White, 3.Nf3 move order transposition): added book
+  for `d4 Nf6 c4 e6 Nf3 d5 g3 dxc4` -> 5.Bg2 (Open Catalan). Was 5.Qa4+??
+  Nbd7 queen chased. Also booked 4...Be7 -> 5.Bg2.
+- Fix game 320 (CK Accel Panov Black): removed 2...e5 response, force 2...d5
+  only (Panov main). 2...e5 lost pawn to 5.Nxe5.
+- Fix game 321 (Four Knights English White): removed 4.d4 from
+  `c4 e5 Nc3 Nf6 Nf3 Nc6` -- after 4.d4 exd4 5.Nxd4 Bb4 6.Nxc6 bxc6 7.bxc3
+  Black has strong Qd4 attack. Keep only 4.g3 and 4.e3.
+- Game 318 (Najdorf Maroczy White): long endgame technique loss, not
+  cleanly book-fixable.
+
+### Ideas not yet tried
+- Tapered PSTs (separate mg/eg tables for each piece).
+- Probcut at high depth (~depth 5+, margin ~100).
+- Countermove history (piece+to keyed on prev move).
+- Singular extensions.
+- Incremental eval updates on make/undo (big refactor).
+- Backward-pawn detection, bishop-outpost bonus.
+
 ### Session 2026-04-20f (English 3.g3 Bb4 tactical fix, game 301)
 - Game 301: 1.c4 e5 2.Nc3 Nf6 3.g3 Bb4 4.Nd5?? Nxd5 5.cxd5 O-O 6.a3 Ba5
   7.Nf3 e4! 8.Qa4 exf3 9.Qxa5 fxe2 -- engine lost a piece to tactics.
@@ -417,14 +450,3 @@ git add -A && git commit -m "improve engine: ..." && git push
   informative.
 - Games 266/270 (French Rubinstein Black) + 268 (Steinitz ...c4??) + 244
   (Winawer Greek gift 9...c4?? Bxh7+) now covered as of commit below.
-
-### Ideas not yet tried
-- Tapered PSTs (separate mg/eg tables for each piece).
-- Probcut at high depth (~depth 5+, margin ~100).
-- Countermove history (piece+to keyed on prev move).
-- Singular extensions (extend TT move if no other move beats a reduced-depth
-  search by some margin).
-- Incremental eval updates on make/undo (big refactor, major speedup).
-- Opening book expansion with more theory.
-- Backward-pawn detection, bishop-outpost bonus.
-- Eval tuning by automated self-play tournament.

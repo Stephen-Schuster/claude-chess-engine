@@ -1826,6 +1826,11 @@ static void init_book() {
     // surrenders bishop pair. After 5.Nb5 a6 6.Nd6+ Bxd6 7.Qxd6 Qe7 +/=.
     add("rnbqkbnr/pp3ppp/3p4/4p3/3NP3/8/PPP2PPP/RNBQKB1R w", {"d4b5"});
     add("rnbqkbnr/1p3ppp/p2p4/1N2p3/4P3/8/PPP2PPP/RNBQKB1R w", {"b5d6"});
+    // Sveshnikov proper: 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 e5 (game 317 played 5.Nxc6?? loss).
+    // Main is 5.Nb5! (threatens Nd6+), then after 5...d6 6.N1c3 a6 7.Na3 (classical main).
+    add("r1bqkbnr/pp1p1ppp/2n5/4p3/3NP3/8/PPP2PPP/RNBQKB1R w", {"d4b5"});
+    add("r1bqkbnr/pp3ppp/2np4/1N2p3/4P3/8/PPP2PPP/RNBQKB1R w", {"b1c3"});
+    add("r1bqkbnr/1p3ppp/p1np4/1N2p3/4P3/2N5/PPP2PPP/R1BQKB1R w", {"b5a3"});
 
     // 1.e4 e6 French
     add("rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w", {"d2d4"});
@@ -1835,7 +1840,8 @@ static void init_book() {
     // 1.e4 c6 2.c4 (Accelerated Panov, game 296): 2...d5 main, then 3.cxd5 cxd5 4.exd5 Nf6!
     //   (NOT 4...Qxd5?! which game 296 played -- queen gets harassed by Nc3, Be2, d4 etc).
     //   After 4...Nf6 5.Nc3 Nxd5 6.d4 transposes to Panov-Botvinnik, equal.
-    add("rnbqkbnr/pp1ppppp/2p5/8/2P1P3/8/PP1P1PPP/RNBQKBNR b", {"d7d5", "e7e5"});
+    // Game 320: 2...e5?! 3.Nf3 Nf6 4.Nc3 Bb4? 5.Nxe5! lost a pawn. Force 2...d5 main.
+    add("rnbqkbnr/pp1ppppp/2p5/8/2P1P3/8/PP1P1PPP/RNBQKBNR b", {"d7d5"});
     add("rnbqkbnr/pp2pppp/2p5/3p4/2P1P3/8/PP1P1PPP/RNBQKBNR w", {"c4d5", "e4d5", "e4e5"});
     add("rnbqkbnr/pp2pppp/2p5/3P4/4P3/8/PP1P1PPP/RNBQKBNR b", {"c6d5"});
     add("rnbqkbnr/pp2pppp/8/3p4/4P3/8/PP1P1PPP/RNBQKBNR w", {"e4d5"});
@@ -1922,6 +1928,15 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w", {"b1c3", "g2g3"});
     // After 4.Nc3 -> 4...Be7 (QGD main) or 4...Bb4 (Ragozin) or 4...c5 (Semi-Tarrasch)
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b", {"f8e7", "f8b4", "c7c5"});
+    // 1.d4 Nf6 2.c4 e6 3.Nf3 d5 4.g3 (Catalan via Nf3 move order). Black's main replies:
+    // 4...dxc4 (Open Catalan) or 4...Be7 (Closed). Game 319 had no book entry for this
+    // transposition -- engine as Black chose dxc4, as White then played 5.Qa4+?? disaster.
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/5NP1/PP2PP1P/RNBQKB1R b", {"d5c4", "f8e7", "f8b4"});
+    // 4.Nf3 d5 5.g3 dxc4 -> 5.Bg2! (main Open Catalan, regain pawn later with Qa4+ or Ne5).
+    // ABSOLUTELY NOT 5.Qa4+?? Nbd7 6.Nc3 a6 7.Qxc4 b5 queen chased (game 319).
+    add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
+    // 4.Nf3 d5 5.g3 Be7 -> 5.Bg2 (main Closed Catalan)
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
     // Semi-Tarrasch 4...c5 -> 5.cxd5 (main) or 5.e3. Game 311 played 5.cxd5 cxd4 6.dxe6?? disaster.
     add("rnbqkb1r/pp3ppp/4pn2/2pp4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c4d5", "e2e3"});
     // After 5.cxd5 Black's main: 5...Nxd5 (main Semi-Tarrasch); 5...cxd4 is side line that engine
@@ -2009,9 +2024,9 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/8/2PNp3/8/PP1PPPPP/RNBQKB1R w", {"d4c2", "e2e3", "b1c3"});
     // 1.c4 e5 2.Nf3 Nc6 -> 3.Nc3 (transpose to Four Knights) or 3.d4
     add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/5N2/PP1PPPPP/RNBQKB1R w", {"b1c3", "d2d4", "e2e3"});
-    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3 or 4.d4
-    //   After 4.g3, common Black reply ...d5
-    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "d2d4", "e2e3"});
+    // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3. AVOID 4.d4 exd4 5.Nxd4 Bb4
+    //   6.Nxc6 bxc6 which gave Black strong Qd4 attack (game 321 lost).
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "e2e3"});
     // 4.g3 -> Black: d5 (main central challenge), Bc5, Bb4 (pin, game 289), g6
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2NP1/PP1PPP1P/R1BQKB1R b", {"d7d5", "f8c5", "f8b4", "g7g6"});
     // English 2.Nc3 Nf6 3.g3 Bb4 (no ...Nc6) -> 4.Bg2! NOT 4.Nd5?? which loses after
@@ -2228,8 +2243,13 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/3p4/8/3Pn3/5N2/PPP2PPP/RNBQKB1R b", {"d6d5"});
     // After 5...d5 -> 6.Bd3 (main line)
     add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/5N2/PPP2PPP/RNBQKB1R w", {"f1d3"});
-    // After 6.Bd3 -> 6...Nc6 or 6...Bd6
-    add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b", {"b8c6", "f8d6"});
+    // After 6.Bd3 -> 6...Be7 (main, solid) or 6...Bd6 or 6...Nc6
+    add("rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b", {"f8e7", "b8c6", "f8d6"});
+    // Petroff 6.Bd3 Nc6 7.O-O -> 7...Be7 (main, solid) NOT 7...Bf5 which allowed 8.Nbd2 Bb4
+    // and lost after 10.Nxe4 dxe4 11.Bc2 exf3 12.Bxf5 (game 316 disaster).
+    add("r1bqkb1r/ppp2ppp/2n5/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"f8e7"});
+    // Petroff 6.Bd3 Be7 7.O-O -> 7...Nc6 (main)
+    add("rnbqk2r/ppp1bppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"b8c6"});
     // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
     add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8", "b8c6"});
     // 7.O-O O-O 8.c4 -> 8...c6 (main, support d5) or 8...Nc6
