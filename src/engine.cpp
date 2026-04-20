@@ -3534,6 +3534,11 @@ static void init_book() {
     // G858 only 68cp at d22 (d16 misranked); skipped.
     // G857 (W M19W): h2h3 -105cp -> SF e1e4 -27cp (78cp near-equal save).
     add("3r2k1/p1p1qppp/1p2b3/7r/2PB4/5P2/PQP3PP/R3R1K1 w", {"e1e4"});
+
+    // === Session 2026-04-20cq (G860 near-equal save, 190cp gain) ===
+    // G859 only 72cp in deep-losing pos; skipped.
+    // G860 (B M15B): d8b6 -231cp -> SF d8e8 -41cp (**190cp near-equal save**).
+    add("r2q1k1r/pp2bppp/5n2/2p5/Q1Bn4/8/PP2NPPP/R1B1R1K1 b", {"d8e8"});
 }
 
 static Move try_book_move(Board& b) {
