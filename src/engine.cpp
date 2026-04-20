@@ -1962,7 +1962,10 @@ static void init_book() {
     add("rnbqkb1r/pp2pp1p/3p1np1/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "f2f3"});
     // French: 1.e4 e6 2.d4 d5 3.Nc3 -- Black choices: Nf6 (Classical), Bb4 (Winawer), dxe4 (Rubinstein)
     // AVOID any knight-to-edge nonsense; Classical main is 3...Nf6 4.e5 Nfd7 (NOT Ne4).
-    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"g8f6", "f8b4", "d5e4"});
+    // French 3.Nc3: prefer 3...Nf6 (Classical/Steinitz) over 3...Bb4 (Winawer)
+    // and 3...dxe4 (Rubinstein). Weight Nf6 3x (games 280/284: Rubinstein Qxf6
+    // led to disastrous queenside castling + pawn storm losses).
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"g8f6", "g8f6", "g8f6", "f8b4", "d5e4"});
     // French Tarrasch: 3.Nd2 -> 3...Nf6 (main) or 3...c5 (sharp)
     add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPPN1PPP/R1BQKBNR b", {"g8f6", "c7c5", "b8c6"});
     // French Tarrasch 3...Nf6 -> 4.e5 Nfd7 (main) -- same structure as Classical Steinitz
@@ -2017,8 +2020,10 @@ static void init_book() {
     add("r1bqk2r/pp2nppp/2n1p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR w", {"h4h5", "g1f3", "d1g4"});
     // French Exchange: 3...Nf6 4.exd5 exd5 5.Nf3
     add("rnbqkb1r/ppp2ppp/5n2/3p4/3P4/2N5/PPP2PPP/R1BQKBNR w", {"g1f3", "c1g5", "f1d3"});
-    // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4
-    add("rnbqkbnr/ppp2ppp/4p3/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"b8d7", "g8f6"});
+    // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4 -> prefer 4...Nd7 Smyslov over 4...Nf6
+    // (5.Nxf6+ Qxf6 games 280/284 had Black castle queenside and get crushed by
+    // b4-b5-a4-a5-a6 pawn storm). Nd7 keeps queen on d8.
+    add("rnbqkbnr/ppp2ppp/4p3/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"b8d7", "b8d7", "g8f6"});
     // French Rubinstein 4...Nf6 5.Nxf6+ -> 5...gxf6 (ugly) or 5...Qxf6 (main)
     add("rnbqkb1r/ppp2ppp/4pn2/8/3PN3/8/PPP2PPP/R1BQKBNR w", {"e4f6", "c1g5"});
     // 5.Nxf6+ Qxf6 (main)
