@@ -1855,9 +1855,9 @@ static void init_book() {
     add("rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b", {"c8f5", "c7c5"});
     // After 3...Bf5 4.Nf3 (main) or 4.Nc3 or 4.h4
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP2PPP/RNBQKBNR w", {"g1f3", "b1c3", "h2h4", "c2c3"});
-    // Caro-Kann Advance 4.h4 (Bayonet/Shirov) -> 4...h5!? or 4...h6 (avoid 4...e6 5.g4 disaster)
-    //   Main line is 4...h5 stopping g4; alternatives 4...h6, 4...Nd7.
-    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P3P/8/PPP2PP1/RNBQKBNR b", {"h7h5", "h7h6"});
+    // Caro-Kann Advance 4.h4 (Bayonet/Shirov) -> 4...h5! (main, -32cp) FORCED.
+    //   Avoid 4...h6 5.g4 Bh7 6.e6! fxe6 crushing (game 332); avoid 4...e6 5.g4 disaster.
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P3P/8/PPP2PP1/RNBQKBNR b", {"h7h5"});
     // 4.h4 h5 -> 5.c4 (main), 5.Bd3 Bxd3, 5.Nf3
     add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/3P3P/8/PPP2PP1/RNBQKBNR w", {"c2c4", "f1d3", "g1f3"});
     // 4.h4 h5 5.c4 (black to move) -> 5...e6 main (-17cp) or 5...dxc4 (-27cp). Game 328 played
@@ -1942,6 +1942,11 @@ static void init_book() {
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP2PP1P/RNBQKB1R w", {"f1g2"});
     // 4.Nf3 d5 5.g3 Bb4+ (Bogo-Catalan) -> 5.Bd2 (main; also Nbd2 possible)
     add("rnbqk2r/ppp2ppp/4pn2/3p4/1bPP4/5NP1/PP2PP1P/RNBQKB1R w", {"c1d2"});
+    // 3.g3 d5 4.Bg2 dxc4 5.Nf3 c5 (game 331): 6.O-O! (SF best +37cp). Engine chose 6.Qa4+
+    // and after 6...Bd7 7.Qxc4 b5 8.Qd3?? queen chased badly (lost).
+    add("rnbqkb1r/pp3ppp/4pn2/2p5/2pP4/5NP1/PP2PPBP/RNBQK2R w", {"e1g1"});
+    // 3.g3 d5 4.Bg2 dxc4 5.Nf3 c5 6.O-O -> Black's main: Nc6 or Be7
+    add("rnbqkb1r/pp3ppp/4pn2/2p5/2pP4/5NP1/PP2PPBP/RN1Q1RK1 b", {"b8c6", "f8e7"});
     // After 5.Bd2 -> 5...Be7 (retreat, main) or Bxd2+ or a5.
     // 5...Be7 -> 6.Bg2 (main Catalan development). NOT 6.Nc3 which after c5 gave Black
     // comfortable counterplay (game 325 lost).
@@ -1963,8 +1968,9 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR b", {"f8e7", "d5c4"});
     // 4.Bg2 Be7 -> 5.Nf3 (main)
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3"});
-    // 4.Bg2 dxc4 -> 5.Nf3 (regain pawn later)
-    add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3", "d1a4"});
+    // 4.Bg2 dxc4 -> 5.Nf3! (main Open Catalan, regain pawn later) -- SF +36cp.
+    // Dropped 5.Qa4+ (+18cp, worse; also related to game 319/331 Qa4+ disasters).
+    add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3"});
     // Move 4 for White: drop 4.a3 (Saemisch) -- doubles c-pawns and engine
     // drifts in the imbalanced middlegame (games 313/315).
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2"});
@@ -2149,8 +2155,9 @@ static void init_book() {
     add("rnbqkb1r/pppn1ppp/4p3/3pP3/3P1P2/2N5/PPP3PP/R1BQKBNR b", {"c7c5"});
     // French Classical 4.Bg5 (Burn gateway, game 286) -> 4...dxe4 (Burn main) or 4...Be7
     add("rnbqkb1r/ppp2ppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R2QKBNR b", {"d5e4", "f8e7"});
-    // 4.Bg5 dxe4 5.Nxe4 -> 5...Be7 (Burn main) or 5...Nbd7
-    add("rnbqkb1r/ppp2ppp/4pn2/6B1/3PN3/8/PPP2PPP/R2QKBNR b", {"f8e7", "b8d7"});
+    // 4.Bg5 dxe4 5.Nxe4 -> 5...Be7 (Burn main, heavily weighted) vs 5...Nbd7
+    // Game 334 lost with 5...Nbd7 (post-book disaster Qxg2 pawn-grab). Be7 is safer.
+    add("rnbqkb1r/ppp2ppp/4pn2/6B1/3PN3/8/PPP2PPP/R2QKBNR b", {"f8e7", "f8e7", "f8e7", "b8d7"});
     // 5.Nxe4 Be7 6.Bxf6 Bxf6 (recapture with bishop)
     add("rnbqk2r/ppp1bppp/4pB2/8/3PN3/8/PPP2PPP/R2QKBNR b", {"e7f6"});
     // 6.Bxf6 Bxf6 7.Nf3 -> 7...O-O main (strongly prefer over Nd7 which led to game 292 loss)

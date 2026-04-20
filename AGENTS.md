@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 309 | 99 |
+| Losses | 312 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **332**
+Total games played: **335**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0332.pgn`
+- PGN: `game_data/games/game_0335.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -410,6 +413,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Game 330 (French Winawer Poisoned Pawn 7.h4): Removed Qa5 from move-7 book
   (engine chose Qa5 then Qxa3 poison-pawn grab, lost slowly). Force Nbc6
   main (2x weighted) or Qc7.
+
+### Session 2026-04-20l (games 331-334)
+- Game 331 (Catalan White, `d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 c5`): engine played
+  6.Qa4+?? Bd7 7.Qxc4 b5 8.Qd3 queen chased, lost middlegame. Fix: book
+  6.O-O (SF +37cp), and `4.Bg2 dxc4` -> drop Qa4+ keep only Nf3 (SF +36 vs +18).
+- Game 332 (CK Advance Black, 4.h4 h6?? 5.g4 Bh7 6.e6! fxe6 crushed in 30
+  moves). Fix: force 4...h5 ONLY (drop 4...h6 which gives White +150+).
+- Game 333 (Four Knights endgame loss): engine reached rook endgame via
+  4.Bb5 Nd4 5.Nxd4 exd4 6.Nd5 and lost technique. Not book-fixable.
+- Game 334 (French Burn Black, 5...Nbd7): post-book disaster at move 14
+  Qxg2?? pawn-grab. Weight 5...Be7 3x over 5...Nbd7 to reduce reaching the
+  Nbd7 structure.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
