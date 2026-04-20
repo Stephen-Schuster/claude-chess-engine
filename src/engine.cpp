@@ -3553,6 +3553,11 @@ static void init_book() {
     add("r1bq1rk1/ppp1bppp/2n1p3/1B6/3PN2P/5N2/PPPQ1PP1/R3K2R b", {"d8d5"});
     // G865 (W M45W endgame): e3d4 -551cp -> SF e2d3 -280cp (271cp gain, deep lost KR EG).
     add("8/2R5/P3pkp1/5p2/4n3/r3K1P1/4B3/8 w", {"e2d3"});
+
+    // === Session 2026-04-20ct (G867 losing-pos fix, 139cp gain) + G866 DRAW ===
+    // G866 was DRAW (Black); G868 only 64cp; skipped.
+    // G867 (W M20W): c3b4 -234cp -> SF a3a4 -95cp (139cp gain, losing pos).
+    add("1r1q1rk1/5ppp/B4n2/1p1p1b2/2pP4/P1B1P3/1P3PPP/R2Q1RK1 w", {"a3a4"});
 }
 
 static Move try_book_move(Board& b) {
