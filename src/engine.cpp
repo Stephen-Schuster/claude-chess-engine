@@ -1767,6 +1767,12 @@ static void init_book() {
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2P5/PP3PPP/RNBQKBNR b", {"e7e6", "h7h6"});
     // Caro-Kann Advance 4.Nf3 -> 4...e6 (main) or 4...Nd7
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7"});
+    // Caro-Kann Advance 4.Nd2 (rare; game 256 loss) -> 4...e6 main
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPPN1PPP/R1BQKBNR b", {"e7e6", "b8d7"});
+    // Caro-Kann Advance 4.Be2 -> 4...e6 or 4...Nd7
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPP1BPPP/RNBQK1NR b", {"e7e6", "b8d7"});
+    // Caro-Kann Advance 4.Bd3 (exchanges) -> 4...Bxd3 5.Qxd3 e6
+    add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/3B4/PPP2PPP/RNBQK1NR b", {"f5d3"});
     // Caro-Kann Exchange: 3.exd5 cxd5
     add("rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PPP2PPP/RNBQKBNR b", {"c6d5"});
 
@@ -1799,6 +1805,12 @@ static void init_book() {
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3", "g2g3"});
     // 1.d4 Nf6 2.c4 e6 3.Nf3 -> 3...b6 (Queen's Indian) or 3...d5 (QGD via transpo) or 3...Bb4+ (Bogo)
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/5N2/PP2PPPP/RNBQKB1R b", {"b7b6", "d7d5", "f8b4"});
+    // 1.d4 Nf6 2.c4 e6 3.Nf3 d5 -> 4.Nc3 (classical) or 4.g3 (Catalan) -- NOT 4.e3 (game 257 passive).
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w", {"b1c3", "g2g3"});
+    // After 4.Nc3 -> 4...Be7 (QGD main) or 4...Bb4 (Ragozin) or 4...c5 (Semi-Tarrasch)
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b", {"f8e7", "f8b4", "c7c5"});
+    // QGD 4.Nc3 Be7 5.Bg5 (main) or 5.Bf4
+    add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w", {"c1g5", "c1f4"});
     // 1.d4 Nf6 2.c4 e6 3.g3 -> 3...d5 (Catalan main) or 3...Bb4+
     add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/6P1/PP2PP1P/RNBQKBNR b", {"d7d5", "f8b4", "c7c5"});
     // Catalan: 1.d4 Nf6 2.c4 e6 3.g3 d5 -> 4.Bg2 (main)
@@ -1829,6 +1841,17 @@ static void init_book() {
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g1f3", "g2g3"});
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (main Four Knights English)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R b", {"b8c6", "e5e4"});
+    // 1.c4 e5 2.Nf3 (reversed Alapin) -> 2...Nc6 (main) or 2...e4 (sharp, game 255/259)
+    add("rnbqkbnr/pppp1ppp/8/4p3/2P5/5N2/PP1PPPPP/RNBQKB1R b", {"b8c6", "g8f6", "e5e4"});
+    // 1.c4 e5 2.Nf3 e4 -> 3.Nd4 (main) or 3.Ng5
+    add("rnbqkbnr/pppp1ppp/8/8/2P1p3/5N2/PP1PPPPP/RNBQKB1R w", {"f3d4", "f3g5"});
+    // 1.c4 e5 2.Nf3 e4 3.Nd4 -> 3...Nc6 (main) or 3...d5 (sharp)
+    add("rnbqkbnr/pppp1ppp/8/8/2PNp3/8/PP1PPPPP/RNBQKB1R b", {"b8c6", "d7d5", "g8f6"});
+    // 1.c4 e5 2.Nf3 e4 3.Nd4 Nc6 -> 4.Nc2 (best, not Nxc6 giving Black a center)
+    //   AVOID 4.Nxc6 dxc6 (games 255 and 259 both went into this structure and lost).
+    add("r1bqkbnr/pppp1ppp/2n5/8/2PNp3/8/PP1PPPPP/RNBQKB1R w", {"d4c2", "e2e3", "b1c3"});
+    // 1.c4 e5 2.Nf3 Nc6 -> 3.Nc3 (transpose to Four Knights) or 3.d4
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/2P5/5N2/PP1PPPPP/RNBQKB1R w", {"b1c3", "d2d4", "e2e3"});
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 -> 4.g3 (main) or 4.e3 or 4.d4
     //   After 4.g3, common Black reply ...d5
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "d2d4", "e2e3"});
@@ -1873,6 +1896,17 @@ static void init_book() {
     // French: 1.e4 e6 2.d4 d5 3.Nc3 -- Black choices: Nf6 (Classical), Bb4 (Winawer), dxe4 (Rubinstein)
     // AVOID any knight-to-edge nonsense; Classical main is 3...Nf6 4.e5 Nfd7 (NOT Ne4).
     add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"g8f6", "f8b4", "d5e4"});
+    // French Tarrasch: 3.Nd2 -> 3...Nf6 (main) or 3...c5 (sharp)
+    add("rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPPN1PPP/R1BQKBNR b", {"g8f6", "c7c5", "b8c6"});
+    // French Tarrasch 3...Nf6 -> 4.e5 Nfd7 (main) -- same structure as Classical Steinitz
+    add("rnbqkb1r/ppp2ppp/4pn2/3p4/3PP3/8/PPPN1PPP/R1BQKBNR w", {"e4e5"});
+    add("rnbqkb1r/ppp2ppp/4pn2/3pP3/3P4/8/PPPN1PPP/R1BQKBNR b", {"f6d7"});
+    // 3...c5 (open Tarrasch) 4.exd5 exd5 (IQP variation, simpler than 4...Qxd5 which we blundered in game 260)
+    add("rnbqkbnr/pp3ppp/4p3/2pp4/3PP3/8/PPPN1PPP/R1BQKBNR w", {"e4d5", "g1f3"});
+    // 3...c5 4.exd5 -> 4...exd5 (recommended over Qxd5) or 4...Qxd5
+    add("rnbqkbnr/pp3ppp/8/2ppP3/3P4/8/PPPN1PPP/R1BQKBNR b", {"e6d5"});
+    // After 4...exd5 5.Ngf3 (main) -> ...Nf6 or ...Nc6
+    add("rnbqkbnr/pp3ppp/8/2pp4/3P4/5N2/PPPN1PPP/R1BQKB1R b", {"g8f6", "b8c6"});
     // French Classical: 3...Nf6 -> 4.e5 (Steinitz) or 4.Bg5 (Classical main) or 4.exd5
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR w", {"e4e5", "c1g5", "e4d5"});
     // 3...Nf6 4.e5 -> 4...Nfd7 (FORCED best; prevents Ne4?? game 20 disaster)
