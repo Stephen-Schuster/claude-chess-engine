@@ -1965,6 +1965,10 @@ static void init_book() {
     //   pair, lost kingside after hxg5 and king-walk).
     add("r2qkbnr/pp1n1pp1/2p1p3/4PbBp/2BP3P/2N5/PP3PP1/R2QK1NR b", {"f8e7"});
     add("r2qk1nr/pp1nbpp1/2p1p3/4PbBp/2BP3P/2N5/PP1Q1PP1/R3K1NR b", {"d8b6"});
+    // Game 402: same 8.Bg5 Be7 structure but Codex played 9.Nf3 (not 9.Qd2).
+    //   Engine picked 9...Qb6?? (poisoned pawn -- 10.O-O Qxb2 11.Rc1 and crushed).
+    //   SF top: 9...Bg4 (-2cp, near equal, pins the knight).
+    add("r2qk1nr/pp1nbpp1/2p1p3/4PbBp/2BP3P/2N2N2/PP3PP1/R2QK2R b", {"f5g4"});
     // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
@@ -2049,6 +2053,14 @@ static void init_book() {
     add("rnbqkb1r/pp3ppp/4pn2/2p5/2pP4/5NP1/PP2PPBP/RNBQK2R w", {"e1g1"});
     // 3.g3 d5 4.Bg2 dxc4 5.Nf3 c5 6.O-O -> Black's main: Nc6 or Be7
     add("rnbqkb1r/pp3ppp/4pn2/2p5/2pP4/5NP1/PP2PPBP/RN1Q1RK1 b", {"b8c6", "f8e7"});
+    // Catalan Open 6.O-O Nc6 7.Ne5 Bd7 (game 405): engine played 15/move7 7.Ne5 (SF top +38cp)
+    // then 8.e3?? (SF not top3) losing the c4 pawn and drifting to loss. Book SF main:
+    // 7.Ne5 Bd7 8.Na3! (SF +29cp) cxd4 9.Naxc4 Rc8 10.Bf4 Be7 11.Nxd7 Qxd7
+    add("r2qkb1r/pp1b1ppp/2n1pn2/2p1N3/2pP4/6P1/PP2PPBP/RNBQ1RK1 w", {"b1a3"});
+    add("r2qkb1r/pp1b1ppp/2n1pn2/2p1N3/2pP4/N5P1/PP2PPBP/R1BQ1RK1 b", {"c5d4"});
+    add("r2qkb1r/pp1b1ppp/2n1pn2/4N3/2pp4/N5P1/PP2PPBP/R1BQ1RK1 w", {"a3c4"});
+    add("2rqkb1r/pp1b1ppp/2n1pn2/4N3/2Np4/6P1/PP2PPBP/R1BQ1RK1 w", {"c1f4"});
+    add("2rqk2r/pp1bbppp/2n1pn2/4N3/2Np1B2/6P1/PP2PPBP/R2Q1RK1 w", {"e5d7"});
     // After 5.Bd2 -> 5...Be7 (retreat, main) or Bxd2+ or a5.
     // 5...Be7 -> 6.Bg2 (main Catalan development). NOT 6.Nc3 which after c5 gave Black
     // comfortable counterplay (game 325 lost).
