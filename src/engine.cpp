@@ -1756,8 +1756,9 @@ static void init_book() {
     add("r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8c5", "d4f3", "b7b5"});
     // 4.Bb5 Bb4 -> 5.O-O (main symmetric Four Knights)
     add("r1bqk2r/pppp1ppp/2n2n2/1B2p3/1b2P3/2N2N2/PPPP1PPP/R1BQK2R w", {"e1g1", "d2d3"});
-    // 2.Nf3 Nc6 3.Bb5 (Ruy Lopez)
-    add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6", "f7f5"});
+    // 2.Nf3 Nc6 3.Bb5 (Ruy Lopez) - Morphy 3...a6 (main) or Berlin 3...Nf6.
+    // NEVER 3...f5 Schliemann (game 288: engine-level refuted, lost horribly).
+    add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f1b5", "f1c4", "b1c3"});
     // Scotch Gambit defense: 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 (game 276): NEVER 4...Qh4?? (Nb5 wins c7/queen)
     //   Main: 4...Nf6 (Schmidt) or 4...Bc5 (Classical). Both solid.
