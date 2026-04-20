@@ -3260,6 +3260,12 @@ static void init_book() {
     add("r2q1rk1/pp3ppb/1np1p3/4P1Pp/3P3N/8/PP1QNPP1/2R2RK1 b", {"a8c8"});
     // G727 (W M32W): d1c1 -174cp (#4!) -> SF g5e5 -76cp, 98cp gain.
     add("8/1k3r1p/1p4p1/p1pP2R1/2P1r3/3N3P/1Pn3P1/3R2K1 w", {"g5e5"});
+
+    // === Session 2026-04-20ba (G729 fix, 124cp gain) ===
+    // G728 d22 reanalysis showed only 66cp gain (d16 misranked); skipped.
+    // G730 d22 reanalysis showed only 18cp gain; skipped.
+    // G729 (W M37W endgame): g3h4 -258cp -> SF d2e2 -134cp (124cp gain).
+    add("4r3/1k6/1pp5/p3P2p/5B2/1bP3KP/3R2P1/8 w", {"d2e2"});
 }
 
 static Move try_book_move(Board& b) {

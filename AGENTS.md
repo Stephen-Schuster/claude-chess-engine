@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 693 | 94 |
+| Losses | 696 | 94 |
 | Draws | 24 | 6 |
 
-Total games played: **730**
+Total games played: **733**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0730.pgn`
+- PGN: `game_data/games/game_0733.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1223,6 +1226,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ba (G729 fix, 124cp gain)
+- G728/G730: d22 reanalysis showed only 66cp/18cp gain (d16 misranked); skipped.
+- G729 (W M37W endgame): g3h4 -258cp -> SF d2e2 -134cp (124cp gain).
+- Verified at SF d22 MultiPV=4; fires from FEN.
+- **Lesson**: d16 from analyze.py can misrank moves vs d22 verification.
+  G728 d16 ranked d6e7 #1 -128, but d22 ranks f5h7 #1 -168 (d6e7 #2 -175).
 
 ### Session 2026-04-20az (G726/G727 batch: 2 fixes, ~242cp gain)
 - G726 (B M17B): d8d5 -175cp -> SF a8c8 -31cp (near-equal!), 144cp gain.
