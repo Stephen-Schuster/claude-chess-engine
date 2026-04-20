@@ -2173,6 +2173,15 @@ static void init_book() {
     add("rnbqkb1r/ppp2ppp/5n2/3Pp3/8/2N3P1/PP1PPP1P/R1BQKBNR b", {"f6d5"});
     // 4.cxd5 Nxd5 -> 5.Bg2! (SF +26, main), or Nf3 (+24), d3 (+9). NOT Qa4+/Qb3.
     add("rnbqkb1r/ppp2ppp/8/3np3/8/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2", "g1f3"});
+    // G403 continuation: 5.Bg2 Nb6 6.d3 Nc6 -> book 7.Nf3! (SF top +25cp).
+    //   Engine chose 7.Bxc6+?? (SF not top3, -2cp) giving up bishop pair for
+    //   doubled pawns; slow grind loss after opponent's kingside attack.
+    //   Continue: 7.Nf3 Be7 8.a3 O-O 9.O-O.
+    add("r1bqkb1r/ppp2ppp/1nn5/4p3/8/2NP2P1/PP2PPBP/R1BQK1NR w", {"g1f3"});
+    add("r1bqkb1r/ppp2ppp/1nn5/4p3/8/2NP1NP1/PP2PPBP/R1BQK2R b", {"f8e7"});
+    add("r1bqk2r/ppp1bppp/1nn5/4p3/8/2NP1NP1/PP2PPBP/R1BQK2R w", {"a2a3"});
+    add("r1bqk2r/ppp1bppp/1nn5/4p3/8/P1NP1NP1/1P2PPBP/R1BQK2R b", {"e8g8"});
+    add("r1bq1rk1/ppp1bppp/1nn5/4p3/8/P1NP1NP1/1P2PPBP/R1BQK2R w", {"e1g1"});
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (main Four Knights English)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R b", {"b8c6", "e5e4"});
     // 1.c4 e5 2.Nf3 (reversed Alapin) -> 2...Nc6 (main) or 2...e4 (sharp, game 255/259)
@@ -2387,6 +2396,11 @@ static void init_book() {
     add("rnbqk2r/pp2nppp/4p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR b", {"b8c6", "b8c6", "d8c7"});
     // 7.h4 Nbc6 -> 8.h5/Nf3/Qg4 -- Black continues development
     add("r1bqk2r/pp2nppp/2n1p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR w", {"h4h5", "g1f3", "d1g4"});
+    // Game 404: after 7.h4 Nbc6 8.h5 Qa5 9.Bd2, engine played 9...Qa4?? (not in
+    //   SF top-3, led to 10.h6 gxh6 Rxh6 pawn-grab-after-Qxa3 then Rh6 Nf5 disaster,
+    //   mated move 30). Force 9...Qc7 (SF top -41cp); SF prefers retreating queen
+    //   to c7 over the Qa4 pawn-grab which is tactically lost here.
+    add("r1b1k2r/pp2nppp/2n1p3/q1ppP2P/3P4/P1P5/2PB1PP1/R2QKBNR b", {"a5c7"});
     // French Exchange: 3...Nf6 4.exd5 exd5 5.Nf3
     add("rnbqkb1r/ppp2ppp/5n2/3p4/3P4/2N5/PPP2PPP/R1BQKBNR w", {"g1f3", "c1g5", "f1d3"});
     // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4 -> prefer 4...Nd7 Smyslov over 4...Nf6
