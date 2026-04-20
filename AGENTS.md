@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 306 | 99 |
+| Losses | 309 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **329**
+Total games played: **332**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0329.pgn`
+- PGN: `game_data/games/game_0332.pgn`
 
 ---
 
@@ -270,6 +270,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -394,6 +397,19 @@ git add -A && git commit -m "improve engine: ..." && git push
   toward Nb4 which has cleaner concrete line).
 - Fix: book `8...Nb4 9.cxd5` -> 9...Nxd3 10.Qxd3 Qxd5 (simplifying line
   that reaches roughly -30cp, very drawable in practice).
+
+### Session 2026-04-20k (games 327-330)
+- Game 327 (Nimzo White 4.Nf3 b6 5.Bf4 line): middlegame kingside collapse
+  after 8.Bd3 f5 9.c5 g5 - hard book fix, search/eval issue.
+- Game 328 (CK Advance Black, 4.h4 h5 5.c4): book ended at move 5, engine
+  chose 5...Nd7 (not in SF top-3) then drifted to 11...Bxc3?! blunder. Fix:
+  book `5.c4` -> {e6, dxc4} per SF top-2 (-17cp, -27cp).
+- Game 329 (Italian White, 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.O-O Nf6 5.Nc3 d6
+  6.d3 Na5 7.Bb3 a6 8.Bg5?!): engine out of book at move 8, chose Bg5 then
+  9.Bxf6 giving up bishop pair. Middlegame issue, not cleanly book-fixable.
+- Game 330 (French Winawer Poisoned Pawn 7.h4): Removed Qa5 from move-7 book
+  (engine chose Qa5 then Qxa3 poison-pawn grab, lost slowly). Force Nbc6
+  main (2x weighted) or Qc7.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).

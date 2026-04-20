@@ -1860,7 +1860,10 @@ static void init_book() {
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P3P/8/PPP2PP1/RNBQKBNR b", {"h7h5", "h7h6"});
     // 4.h4 h5 -> 5.c4 (main), 5.Bd3 Bxd3, 5.Nf3
     add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/3P3P/8/PPP2PP1/RNBQKBNR w", {"c2c4", "f1d3", "g1f3"});
-    // 4.h4 h5 5.c4 -> 5...e6 (solid) or 5...Nd7
+    // 4.h4 h5 5.c4 (black to move) -> 5...e6 main (-17cp) or 5...dxc4 (-27cp). Game 328 played
+    // 5...Nd7?! (not in SF top-3) then drifted to middlegame blunder 11...Bxc3.
+    add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR b", {"e7e6", "d5c4"});
+    // 4.h4 h5 5.c4 e6 -> 6.Nc3 or 6.Nf3 (both playable)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR w", {"b1c3", "g1f3"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2N5/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7", "a7a6"});
@@ -2195,9 +2198,11 @@ static void init_book() {
     // 7.Qg4 O-O 8.Bd3 Qa5 9.Bd2 (game 244) -> AVOID 9...c4?? (Bxh7+ Greek gift).
     //   Play 9...Nbc6 (develop + support c5) or 9...Qa4 (trade queens to relieve kingside pressure).
     add("rnb2rk1/pp2nppp/4p3/q1ppP3/3P2Q1/P1PB4/2PB1PPP/R3K1NR b", {"b8c6", "a5a4", "f7f5"});
-    // 7.h4 (Poisoned Pawn): respond with 7...Nbc6 (main, NOT 7...Qa5?? game 250 disaster).
-    //   Black should NOT take on h4 and should finish development.
-    add("rnbqk2r/pp2nppp/4p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR b", {"b8c6", "d8a5", "d8c7"});
+    // 7.h4 (Poisoned Pawn): respond with 7...Nbc6 (main, develop) or 7...Qa5 (SF -47cp
+    //   but leads to sharp b7/a3 pawn-racing line engine mishandles; prefer Nbc6).
+    //   NEVER 7...Qa5 9.Bd2 Qxa3?? if possible, but even that is SF -47cp; losses are
+    //   from slow drift (games 250 and 330).
+    add("rnbqk2r/pp2nppp/4p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR b", {"b8c6", "b8c6", "d8c7"});
     // 7.h4 Nbc6 -> 8.h5/Nf3/Qg4 -- Black continues development
     add("r1bqk2r/pp2nppp/2n1p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR w", {"h4h5", "g1f3", "d1g4"});
     // French Exchange: 3...Nf6 4.exd5 exd5 5.Nf3
