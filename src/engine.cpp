@@ -3479,6 +3479,12 @@ static void init_book() {
     add("8/p1b5/P3R2p/1P4pP/6P1/2k2P2/2r3K1/8 w", {"g2h1"});
     // G832 (B M13B): e6h3?? -141cp -> SF d5c7 -49cp (92cp near-equal save).
     add("r2r2k1/pp1qppbp/2p1b1p1/2pnP3/P7/1P1P1N1P/2PB1PP1/RNQ1R1K1 b", {"d5c7"});
+
+    // === Session 2026-04-20ci (G834/G835 batch: 2 near-equal-advantage saves, ~174cp gain) ===
+    // G834 (B M9B): e7d5 -78cp -> SF f5g4 **0cp (fully equal!)** 78cp gain.
+    add("r2qkb1r/pp1nnpp1/2p1p3/4Pb1p/3P3P/2N2N2/PP2BPP1/R1BQK2R b", {"f5g4"});
+    // G835 (W M10W): d3d4 -79cp -> SF a2a4 **+17cp (engine advantage!)** 96cp gain.
+    add("r1bq1rk1/1pp2pp1/1pnp1n1p/4p3/2B1P3/3P1N2/PPP2PPP/R1BQR1K1 w", {"a2a4"});
 }
 
 static Move try_book_move(Board& b) {
