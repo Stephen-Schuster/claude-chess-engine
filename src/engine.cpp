@@ -3197,6 +3197,14 @@ static void init_book() {
     add("r2k1b1r/pp1n2p1/2p1p1Q1/3p3p/1q1P3P/4B2N/PP3PP1/R4K1R b", {"d8c7"});
     // G693 (W M15W): SF #1 a1c1 -79cp vs Bc3 -169 (90cp gain).
     add("rr4k1/p1pq1ppp/2p1bn2/8/2pPp3/P3P1PP/1PQB1P2/R3KB1R w", {"a1c1"});
+
+    // === Session 2026-04-20ap (G697/G698/G699 batch) ===
+    // G697 (W M19W): SF #1 a1b1 -19cp vs Rad1 ~-107 (~88cp gain, near-equal).
+    add("1r5r/1p1k1ppp/2ppb3/P7/P7/2P1RB2/2P2PPP/R5K1 w", {"a1b1"});
+    // G698 (B M20B): SF #1 b7b6 -95cp vs Bxf3 ~-192 (~97cp gain).
+    add("1r1q1rk1/pp3pp1/2p1p3/P2nP2p/3PN1bP/1R3N2/1P1Q1PP1/4R1K1 b", {"b7b6"});
+    // G699 (W M25W): SF #1 c1d1 -53cp vs Bxd5 ~-130 (~77cp gain).
+    add("r4k2/1Qpq1p1p/1p1p1p2/8/2P1P3/3R1P2/r1P3PP/2R3K1 w", {"c1d1"});
 }
 
 static Move try_book_move(Board& b) {
