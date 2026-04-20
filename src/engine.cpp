@@ -2399,14 +2399,16 @@ int main() {
                 long long myinc = (board.side == WHITE) ? winc : binc;
                 if (mytime > 0) {
                     // Adaptive time allocation
-                    int mtg = movestogo > 0 ? movestogo : 25;
+                    // mtg=40 distributes time for longer games (avoids forfeits in 80+ move grinds).
+                    int mtg = movestogo > 0 ? movestogo : 40;
                     // Use 1/mtg of remaining time plus ~80% of increment.
                     ttime = mytime / mtg + (myinc * 4) / 5;
-                    // Don't use more than 1/3 of time on one move, with a buffer.
-                    long long max_use = mytime / 3;
+                    // Don't use more than 1/4 of time on one move (more conservative).
+                    long long max_use = mytime / 4;
                     if (ttime > max_use) ttime = max_use;
-                    // Emergency: if very low on time, play fast.
-                    if (mytime < 2000) ttime = mytime / 10;
+                    // Emergency: if very low on time, play very fast.
+                    if (mytime < 3000) ttime = mytime / 20;
+                    if (mytime < 1000) ttime = mytime / 40;
                     ttime -= 30; // safety margin for communication
                     if (ttime < 20) ttime = 20;
                 }

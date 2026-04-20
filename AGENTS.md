@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 2 |
-| Losses | 268 | 97 |
+| Losses | 270 | 97 |
 | Draws | 9 | 1 |
 
-Total games played: **290**
+Total games played: **292**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0290.pgn`
+- PGN: `game_data/games/game_0292.pgn`
 
 ---
 
@@ -231,6 +231,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -310,7 +312,6 @@ git add -A && git commit -m "improve engine: ..." && git push
   game 288 disaster).
 - Game 281 was `engine_failure` (illegal move e7e5 for White) but current
   binary plays d4c6 deterministically; non-reproducible orchestrator/IO glitch.
-- Game 283 was a WIN (our 13th lifetime) - Four Knights endgame grind.
 - Game 287 time forfeit from positional shuffling (Rbb1-b5-b3 loop) - eval
   issue that's hard to address without tuning infrastructure.
 - Engine tactical smoke test: finds Greek gift Bxh7 at depth 6 in 4ms.
