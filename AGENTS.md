@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 670 | 96 |
-| Draws | 22 | 4 |
+| Losses | 672 | 95 |
+| Draws | 23 | 5 |
 
-Total games played: **705**
+Total games played: **708**
 
 ## Last game
 
-- Result: **Loss**
-- PGN: `game_data/games/game_0705.pgn`
+- Result: **Draw**
+- PGN: `game_data/games/game_0708.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1198,6 +1201,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ar (G704 Petroff dedup fix)
+- G704 (B M7B Petroff Classical 6.Bd3 Bd6 7.O-O): existing book entry at
+  line 2841 had `{e8g8, b8c6}`. RNG picked losing b8c6 (-113cp) vs SF top
+  e8g8 (-44cp, 70cp gain). Removed b8c6 -- force O-O only.
+- Same pattern as G518 dedup bug. **Lesson reinforced**: always check for
+  existing duplicate FEN entries before appending; `add()` appends, doesn't
+  replace.
+- G705 deep losing endgame -815cp; not booked.
 
 ### Session 2026-04-20aq (G701 fix + G703 DRAW)
 - **G703 DRAW** by threefold repetition (Catalan Open as White) -- 4th draw

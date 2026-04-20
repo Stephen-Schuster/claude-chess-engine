@@ -2838,7 +2838,7 @@ static void init_book() {
     // After 8...Nb4 -> 9.cxd5 Nxd3 (capture bishop, main)
     add("r1bqk2r/ppp1bppp/8/3P4/1n1Pn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"b4d3"});
     // Petroff 6...Bd6 7.O-O (game 272): castle ASAP, NEVER 7...Nd7?? (game 272: Nd7 then Ndf6 wastes 2 tempi, lost)
-    add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8", "b8c6"});
+    add("rnbqk2r/ppp2ppp/3b4/3p4/3Pn3/3B1N2/PPP2PPP/RNBQ1RK1 b", {"e8g8"});
     // 7.O-O O-O 8.c4 -> 8...c6 FORCED. G436: engine played 8...Nc6?? (not in SF top-5)
     //   and after 9.cxd5 every Black move loses 400+cp. SF top 8...c6 (-38cp, equal-ish).
     add("rnbq1rk1/ppp2ppp/3b4/3p4/2PPn3/3B1N2/PP3PPP/RNBQ1RK1 b", {"c7c6"});
@@ -3210,6 +3210,11 @@ static void init_book() {
     // G700 deep -700+cp loss; G702 marginal 62cp; G703 was DRAW (Catalan Open).
     // G701 (W M23W): SF #1 f2f3 -141cp vs Qc2 -230 (89cp gain).
     add("4r3/ppp2k2/2q2p2/6pp/2P5/P2PB1P1/1P2RPP1/4R1K1 w", {"f2f3"});
+
+    // === Session 2026-04-20ar (G704 Petroff opening fix) ===
+    // G704 (B M7B Petroff): SF #1 O-O -44cp vs Nc6 -113 (~70cp gain).
+    // Pre-existing entry at line 2841 had {e8g8, b8c6}; RNG picked losing b8c6.
+    // Removed b8c6 from that entry (force O-O only). No new add needed here.
 }
 
 static Move try_book_move(Board& b) {
