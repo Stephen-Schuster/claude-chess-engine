@@ -3190,6 +3190,13 @@ static void init_book() {
     add("r1bq1rk1/pp3ppp/2n2n2/2Pp4/1b6/1QN1BN2/PP2PPPP/R3KB1R w", {"f3d4"});
     // G690 (B M11B): SF #1 g8h6 +11cp -- engine has advantage! vs Qb6 -72 (83cp gain).
     add("r3k1nr/pp1nbpp1/2p1p3/q3P1Bp/2BPN1bP/5N2/PP3PP1/R2Q1K1R b", {"g8h6"});
+
+    // === Session 2026-04-20ao (G692/G693 batch) ===
+    // (G694/G695 marginal; G696 ours is SF #3 already.)
+    // G692 (B M16B): SF #1 d8c7 -134cp vs Qb2 ~-245 (~111cp gain).
+    add("r2k1b1r/pp1n2p1/2p1p1Q1/3p3p/1q1P3P/4B2N/PP3PP1/R4K1R b", {"d8c7"});
+    // G693 (W M15W): SF #1 a1c1 -79cp vs Bc3 -169 (90cp gain).
+    add("rr4k1/p1pq1ppp/2p1bn2/8/2pPp3/P3P1PP/1PQB1P2/R3KB1R w", {"a1c1"});
 }
 
 static Move try_book_move(Board& b) {

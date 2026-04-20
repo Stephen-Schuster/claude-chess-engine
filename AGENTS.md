@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 662 | 97 |
+| Losses | 665 | 97 |
 | Draws | 21 | 3 |
 
-Total games played: **696**
+Total games played: **699**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0696.pgn`
+- PGN: `game_data/games/game_0699.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1189,6 +1192,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ao (G692/G693 batch: 2 book fixes, ~200cp gain)
+- G694/G695 marginal (<80cp); G696 ours was already SF #3.
+- G692 (B M16B): Qb2?? -245cp queen sortie -> SF d8c7 (-134cp) king tuck.
+- G693 (W M15W): Bc3 -169cp -> SF a1c1 (-79cp) rook to open file.
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20an (G688/G689/G690 batch: 3 book fixes, 390cp total)
 - G686/G687 marginal (<80cp); G691 already lost; not booked.
