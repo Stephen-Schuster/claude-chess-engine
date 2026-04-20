@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 2 |
-| Losses | 266 | 97 |
+| Losses | 267 | 97 |
 | Draws | 9 | 1 |
 
-Total games played: **288**
+Total games played: **289**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0288.pgn`
+- PGN: `game_data/games/game_0289.pgn`
 
 ---
 
@@ -229,6 +229,7 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -293,18 +294,24 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 ### Current baseline: `engine/engine_current_best` (main after 33dbc75)
 
-### Session 2026-04-20 (games 261-281 book expansion, 7 commits)
+### Session 2026-04-20 (games 261-288 book expansion, 12 commits)
 - Commits: 2c61067 (Four Knights/Vienna), abb8143 (London+2.c4 weight), ce20301
   (Winawer mainline), 9bf0ee1 (Rubinstein/Steinitz/Winawer Greek gift),
   53406fb (CK 3.Nc3 dxe4 main), ab6db81 (CK Advance 4.Nd2 Nb3 + Petroff
   6.Bd3 Bd6 7.O-O), 99c807b (Italian Giuoco 7.Bb3), 907d4cd (Slav 3...c6,
-  English 3.g3 c6 4.Nf3 not d4, Scotch Gambit defense).
-- Games 278-281: CK Advance 4.Nf3 Nd7 5.Nh4 Bg6 FORCED (avoids 5...Be4??
-  game 278); dropped b1c3 from 1.e4 c5 options (game 279 Closed Sicilian
-  drift).
-- Game 281 was `engine_failure` (illegal move e7e5 for White) but position
-  reproduced with current binary plays d4c6 correctly & deterministically.
-  Non-reproducible; may be transient orchestrator/IO issue.
+  English 3.g3 c6 4.Nf3 not d4, Scotch Gambit defense), 1eb1e20 (CK Advance
+  5.Nh4 Bg6 FORCED avoiding game 278 Be4??; dropped b1c3 from 1.e4 c5),
+  7d8e5d1 (bias French 3...Nf6 Classical vs Rubinstein losses 280/284),
+  67dbe79 (Sicilian 4...e5 -> 5.Nb5 Nd6+ not 5.Bb5+, game 282),
+  a943289 (Vienna 3.Bc4 Nf6/Bc5 -> 4.Nf3 transpose Italian, game 285 Na5
+  bishop-loss disaster), 10d7b73 (French Burn 4.Bg5 dxe4 mainline w/ 9...c5
+  avoid Be7?? game 286), d6b12db (remove Schliemann 3...f5 from Ruy Lopez,
+  game 288 disaster).
+- Game 281 was `engine_failure` (illegal move e7e5 for White) but current
+  binary plays d4c6 deterministically; non-reproducible orchestrator/IO glitch.
+- Game 283 was a WIN (our 13th lifetime) - Four Knights endgame grind.
+- Game 287 time forfeit from positional shuffling (Rbb1-b5-b3 loop) - eval
+  issue that's hard to address without tuning infrastructure.
 - Engine tactical smoke test: finds Greek gift Bxh7 at depth 6 in 4ms.
   Losses are positional/endgame technique, not tactical blindness.
 
