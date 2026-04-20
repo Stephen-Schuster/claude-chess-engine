@@ -1870,7 +1870,7 @@ static void init_book() {
     // 5...Bb4: White's main is 6.Nxc6 bxc6 7.Bd3 d5 8.exd5 cxd5 9.O-O (equal).
     //   Games 291/293: engine drifted into 7.Bg5/7.Qd4 losing plans. Book the mainline.
     add("r1bqk2r/pppp1ppp/2n2n2/8/1b1NP3/2N5/PPP2PPP/R1BQKB1R w", {"d4c6"});
-    add("r1bqk2r/p1pp1ppp/2p2n2/8/1b2P3/2N5/PPP2PPP/R1BQKB1R w", {"f1d3", "f1d3", "f1d3", "d1d3"});
+    add("r1bqk2r/p1pp1ppp/2p2n2/8/1b2P3/2N5/PPP2PPP/R1BQKB1R w", {"f1d3"});
     // After 7.Bd3 -> Black's main: 7...d5 8.exd5 cxd5 9.O-O O-O (symmetric, equal).
     add("r1bqk2r/p1pp1ppp/2p2n2/8/1b2P3/2NB4/PPP2PPP/R1BQK2R b", {"d7d5", "e8g8"});
     add("r1bqk2r/p1p2ppp/2p2n2/3p4/1b2P3/2NB4/PPP2PPP/R1BQK2R w", {"e4d5"});
@@ -2801,6 +2801,15 @@ static void init_book() {
     // G568 (Black, French Burn 4.Bg5 dxe4 5.Nxe4 Nbd7 6.Nf3 h6 7.Bh4):
     //   engine played 7...g5?! (-83cp) vs SF top 7...Be7 (-20cp). Force Be7.
     add("r1bqkb1r/pppn1pp1/4pn1p/8/3PN2B/5N2/PPP2PPP/R2QKB1R b", {"f8e7"});
+
+    // === Session 2026-04-20ad8 (G573 Bd3-only, G583 English Nd5 e4 axb4) ===
+    // G573: removed Qd3 from Four Knights Scotch 7.Bb4 line book (above
+    //   line 1873). Bd3 is +16cp d22, Qd3 not in SF top-4.
+    // G583 (White, English 1.c4 e5 2.Nc3 Nf6 3.Nf3 Nc6 4.g3 Bb4 5.Nd5 e4
+    //   6.Nxb4 Nxb4 7.Nd4 O-O 8.a3 c5 9.??): engine played 9.Nb3 (-84cp)
+    //   then 10.Nxc5?? gambit. SF top is 9.axb4! (-47cp), accepts equal
+    //   exchange and avoids the dubious Nb3-Nxc5 line. Force axb4.
+    add("r1bq1rk1/pp1p1ppp/5n2/2p5/1nPNp3/P5P1/1P1PPP1P/R1BQKB1R w", {"a3b4"});
 
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
