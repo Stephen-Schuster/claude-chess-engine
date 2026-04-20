@@ -2786,6 +2786,14 @@ static void init_book() {
     //   from M7 to M13), so this position recurs. Force Bxd7.
     add("rn1qr1k1/3b1ppp/pp1b1n2/1B1p4/Q1pP4/PPN1P3/4NPPP/R1B2RK1 w", {"b5d7"});
 
+    // === Session 2026-04-20ad6 (G559 English Bxc3 c6 d5 line M11W Bb2) ===
+    // G559 (White, English 1.c4 e5 2.Nc3 Nf6 3.g3 Bb4 4.Bg2 O-O 5.e4 Bxc3
+    //   6.bxc3 c6 7.Ne2 d5 8.exd5 cxd5 9.cxd5 Nxd5 10.O-O Nc6): engine
+    //   played 11.Ba3?! (-24cp) developing into a passive Q-side, then
+    //   later blundered M14W Qb3?? (-136cp). Force 11.Bb2 (SF top -12cp),
+    //   which keeps fianchetto and avoids the Ba3-Re1-d4-Qb3 plan.
+    add("r1bq1rk1/pp3ppp/2n5/3np3/8/2P3P1/P2PNPBP/R1BQ1RK1 w", {"c1b2"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
