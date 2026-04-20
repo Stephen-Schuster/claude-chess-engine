@@ -1998,6 +1998,20 @@ static void init_book() {
     add("rnbqkb1r/pppn1ppp/4p3/3pP3/3P4/2N5/PPP2PPP/R1BQKBNR w", {"f2f4", "b1e2", "g1f3"});
     // 5.f4 c5 (main response)
     add("rnbqkb1r/pppn1ppp/4p3/3pP3/3P1P2/2N5/PPP3PP/R1BQKBNR b", {"c7c5"});
+    // French Classical 4.Bg5 (Burn gateway, game 286) -> 4...dxe4 (Burn main) or 4...Be7
+    add("rnbqkb1r/ppp2ppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R2QKBNR b", {"d5e4", "f8e7"});
+    // 4.Bg5 dxe4 5.Nxe4 -> 5...Be7 (Burn main) or 5...Nbd7
+    add("rnbqkb1r/ppp2ppp/4pn2/6B1/3PN3/8/PPP2PPP/R2QKBNR b", {"f8e7", "b8d7"});
+    // 5.Nxe4 Be7 6.Bxf6 Bxf6 (recapture with bishop)
+    add("rnbqk2r/ppp1bppp/4pB2/8/3PN3/8/PPP2PPP/R2QKBNR b", {"e7f6"});
+    // 6.Bxf6 Bxf6 7.Nf3 -> 7...O-O main
+    add("rnbqk2r/ppp2ppp/4pb2/8/3PN3/5N2/PPP2PPP/R2QKB1R b", {"e8g8", "b8d7"});
+    // 7.Nf3 O-O 8.Qd2 (game 286) or 8.Bd3 or 8.c3 -> 8...b6 fianchetto main, or 8...Nd7 9.c3 c5
+    add("rnbq1rk1/ppp2ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/R3KB1R b", {"b7b6", "b8d7"});
+    // 8.Qd2 Nd7 9.O-O-O -> 9...c5! challenge center. NEVER 9...Be7?? retreating (game 286).
+    add("r1bq1rk1/pppn1ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/2KR1B1R b", {"c7c5"});
+    // 4.Bg5 Be7 -> 5.e5 Nfd7 (Classical Steinitz transposition)
+    add("rnbqk2r/ppp1bppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R2QKBNR w", {"e4e5"});
     // 5.f4 c5 6.Nf3 (main)
     add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N5/PPP3PP/R1BQKBNR w", {"g1f3"});
     // 6.Nf3 Nc6 (develop)
