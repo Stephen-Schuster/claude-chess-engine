@@ -3467,6 +3467,11 @@ static void init_book() {
     // G828 DRAW by threefold repetition as Black - 6th draw in last 100!
     // G827 (W M12W): c4d5 -102cp -> SF f1e2 -27cp (75cp near-equal save).
     add("2kr3r/ppp1qppp/4b3/3pP3/2PQn3/4P3/PP3PPP/R1B1KB1R w", {"f1e2"});
+
+    // === Session 2026-04-20cg (G830 near-equal save, 124cp) ===
+    // G829 71cp in deep-losing pos; skipped.
+    // G830 (B M13B): d8d5 -154cp -> SF f6e4 -30cp (**124cp near-equal save**).
+    add("r2q1rk1/pbp1bppp/1p2pn2/4N3/3PN2P/3B4/PPP1QPP1/2KR3R b", {"f6e4"});
 }
 
 static Move try_book_move(Board& b) {
