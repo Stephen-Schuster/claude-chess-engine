@@ -2794,6 +2794,14 @@ static void init_book() {
     //   which keeps fianchetto and avoids the Ba3-Re1-d4-Qb3 plan.
     add("r1bq1rk1/pp3ppp/2n5/3np3/8/2P3P1/P2PNPBP/R1BQ1RK1 w", {"c1b2"});
 
+    // === Session 2026-04-20ad7 (G564 Yugoslav, G568 French Burn 7.Bh4) ===
+    // G564 (Black, Sicilian Yugoslav 6.Be3 Bg7 7.f3 O-O 8.Qd2): engine
+    //   played 8...Nbd7?! (-134cp d22) vs SF top 8...Nc6 (-56cp). Force Nc6.
+    add("rnbq1rk1/pp2ppbp/3p1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R b", {"b8c6"});
+    // G568 (Black, French Burn 4.Bg5 dxe4 5.Nxe4 Nbd7 6.Nf3 h6 7.Bh4):
+    //   engine played 7...g5?! (-83cp) vs SF top 7...Be7 (-20cp). Force Be7.
+    add("r1bqkb1r/pppn1pp1/4pn1p/8/3PN2B/5N2/PPP2PPP/R2QKB1R b", {"f8e7"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.
