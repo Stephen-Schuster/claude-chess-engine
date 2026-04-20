@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 375 | 97 |
+| Losses | 379 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **400**
+Total games played: **404**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0400.pgn`
+- PGN: `game_data/games/game_0404.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -555,6 +559,19 @@ git add -A && git commit -m "improve engine: ..." && git push
   (Dragon transposition, -78cp).
 - Game 363 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame): similar to
   games 351/353/333. Structural endgame loss, not cleanly book-fixable.
+
+### Session 2026-04-20z (games 396-400 + Taimanov backfix)
+- **Taimanov backfix**: finally added book for g382 Taimanov Sicilian 5...a6
+  6.Nxc6 bxc6 7.Bd3 d5 8.O-O Nf6 9.Re1 -> force 9...Be7 (SF top -34cp).
+- Game 396 (CK Advance 5.c4 e6 move-order): engine went 6.Nc3 dxc4 7.Bxc4
+  Nd7 8.Bg5 Be7 9.Qd2 Bxg5?! (-21cp, gave up bishop pair, lost kingside).
+  Fix: book 8...Be7 (SF +2cp, equal!) and 9...Qb6 (SF top 0cp).
+- Game 400 (CK Advance same position via dxc4-first move order): reached
+  9.Bg5 Be7 10.O-O where engine played 10...Bxg5?! (-21cp). Fix: book
+  10...Nh6 (SF top -7cp, develops stranded g8 knight).
+- G397 time-forfeit (engine crashed at move 16 after bad 14.Qxh6?? sac),
+  G398 was French pre-fix disaster (already fixed by session-y 2...d5),
+  G399 Ruy Exchange post-book tactical collapse (no book fix possible).
 
 ### Session 2026-04-20y (games 391-395)
 - **Biggest fix**: 1.e4 e6 French, Black's move 2 was unbooked and engine's

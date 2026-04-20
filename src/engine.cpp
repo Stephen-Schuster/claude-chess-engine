@@ -1955,6 +1955,16 @@ static void init_book() {
     //   NOT 9...Qb6 (-47cp, led to 10.O-O Bxf3 11.Qxf3 Ne7 12.Rad1 Nf5 13.Rfe1
     //   Qxb2 poisoned pawn disaster).
     add("r2qkbnr/pp1n1pp1/2p1p3/4P1Bp/2BP2bP/2N2N2/PP3PP1/R2QK2R b", {"f8e7"});
+    // After 9...Be7 10.O-O (game 400) -> 10...Nh6! (SF top -7cp, develops
+    //   stranded g8 knight). NOT 10...Bxg5 (-21, game 400 gave up bishop pair,
+    //   allowed h-file pressure and lost).
+    add("r2qk1nr/pp1nbpp1/2p1p3/4P1Bp/2BP2bP/2N2N2/PP3PP1/R2Q1RK1 b", {"g8h6"});
+    // CK Advance 5.c4 e6 move-order variant (game 396): 6.Nc3 dxc4 7.Bxc4 Nd7
+    //   8.Bg5 (instead of 8.Nf3) -> 8...Be7 (SF top +2cp, equal) then 9.Qd2 Qb6!
+    //   (SF top 0cp). NOT 9...Bxg5 (-21cp) which game 396 played (gave up bishop
+    //   pair, lost kingside after hxg5 and king-walk).
+    add("r2qkbnr/pp1n1pp1/2p1p3/4PbBp/2BP3P/2N5/PP3PP1/R2QK1NR b", {"f8e7"});
+    add("r2qk1nr/pp1nbpp1/2p1p3/4PbBp/2BP3P/2N5/PP1Q1PP1/R3K1NR b", {"d8b6"});
     // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
@@ -2456,6 +2466,10 @@ static void init_book() {
     add("r1bqkbnr/pp1p1ppp/2n1p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d8c7", "g8f6", "a7a6"});
     // Taimanov 5...Qc7 6.Be3 / 6.Be2 / 6.g3
     add("r1b1kbnr/ppqp1ppp/2n1p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"c1e3", "f1e2", "g2g3"});
+    // Taimanov 5...a6 (Kan-Taimanov transposition) 6.Nxc6 bxc6 7.Bd3 d5 8.O-O Nf6 9.Re1
+    //   (game 382 path). Force 9...Be7 (SF top -34cp, solid) NOT 9...d4 (engine's
+    //   choice, not in SF top-4, structurally bad).
+    add("r1bqkb1r/5ppp/p1p1pn2/3p4/4P3/2NB4/PPP2PPP/R1BQR1K1 b", {"f8e7"});
 }
 
 static Move try_book_move(Board& b) {
