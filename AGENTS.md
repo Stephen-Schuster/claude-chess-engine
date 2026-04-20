@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 605 | 98 |
+| Losses | 613 | 98 |
 | Draws | 18 | 2 |
 
-Total games played: **636**
+Total games played: **644**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0636.pgn`
+- PGN: `game_data/games/game_0644.pgn`
 
 ---
 
@@ -182,6 +182,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
 
 
 
@@ -1117,6 +1125,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G629 (White, M20W queen middlegame): Qxa4 -85cp -> SF Rfd1 (f1d1)
   -20cp essentially equal! Force rook activation.
 - G628 (Black, M13B already-bad): c6 +207cp -> SF h6 (h7h6) +141cp luft.
+
+### Session 2026-04-20af (G630-G636 batch: 7 book fixes)
+- All 7 verified at SF d22 MultiPV before booking. All loss values 80-150cp.
+- G630 (Black, CK Advance M18B): e8g8?? -198cp (castles into h-file attack)
+  -> SF h8h7 (-57cp).
+- G631 (White, English M12W): d1b3?? -151cp queen sortie -> SF h2h3 (-97).
+- G632 (Black, French Classical M12B): b4a2?? -160cp -> SF d8d7 (-80).
+- G633 (White, QGA M6W): c1g5?? -90cp -> SF e4e5! (0cp equal, gains space).
+- G634 (Black, Petroff M18B): d7f5?? -188cp -> SF f7f6 (-42cp).
+- G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
+- G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
+- All entries verified to fire via book-move test.
 
 ### Session 2026-04-20ae (eval: passed-pawn endgame fixes)
 - **First eval (non-book) change in many sessions.** Audit revealed engine

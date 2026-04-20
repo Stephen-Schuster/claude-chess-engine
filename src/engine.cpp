@@ -3071,6 +3071,31 @@ static void init_book() {
     add("rnbq1rk1/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1"});
     // 6...Nbd7 7.O-O similarly main
     add("r1bqk2r/pppnbppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1"});
+
+    // === Session 2026-04-20af (G630-G636 batch) ===
+    // G630 (Black, M18B post-CK Advance middlegame after Qf3): engine
+    //   e8g8?? -198cp castling INTO attack (h-file open). SF top h8h7
+    //   (-57cp) sidestep, defends g6.
+    add("r3k2r/pp1n1p2/1qp1p1p1/4P1Pp/3P4/2B2QP1/PP4P1/R4RK1 b", {"h8h7"});
+    // G631 (White, English M12W post Be2-Bg2): engine d1b3?? -151cp queen
+    //   sortie eventually loses bishop. SF top h2h3 (-97) kicks Bg4.
+    add("r4rk1/pppq1ppp/2p1bn2/8/2PPp3/P3P1P1/1P3P1P/R1BQKB1R w", {"h2h3"});
+    // G632 (Black, French Classical M12B): engine b4a2?? -160cp knight
+    //   sortie. SF top d8d7 (-80) connects rooks safely.
+    add("r2q1rk1/pppBbppp/4p3/8/1n1PN2P/5N2/PPPQ1PP1/2KR3R b", {"d8d7"});
+    // G633 (White, QGA M6W after b5+Bb7): engine c1g5?? -90cp pinning
+    //   nothing useful. SF top e4e5! (0cp equal) gains space, kicks Nf6.
+    add("rnbqkb1r/2p1pppp/p4n2/1p6/2pPP3/2N2N2/PP3PPP/R1BQKB1R w", {"e4e5"});
+    // G634 (Black, Petroff M18B): engine d7f5?? -188cp leaves c-file weak.
+    //   SF top f7f6 (-42) solidifies and prepares king activity.
+    add("5rk1/1ppqbppp/p1n5/3p3P/3P1B2/2P2N2/PP2QPP1/4R1K1 b", {"f7f6"});
+    // G635 (White, QGD M13W post 12.Bxc6): engine d1a4?? -150cp queen
+    //   sortie. SF top e1g1 (+1cp essentially equal!) just castle.
+    add("1rbq1rk1/p4ppp/2B2b2/3p4/8/2N1P3/PP3PPP/R2QK2R w", {"e1g1"});
+    // G636 (Black, Sicilian Classical Richter-Rauzer M15B): engine e6g4??
+    //   -208cp bishop trade gives White attack. SF top a8c8 (-121) keeps
+    //   pieces, contests c-file.
+    add("r2qk2r/1p2bpp1/p2pbn1p/4p3/4P1PP/2N2P2/PPPB1Q1R/2KR1B2 b", {"a8c8"});
 }
 
 static Move try_book_move(Board& b) {
