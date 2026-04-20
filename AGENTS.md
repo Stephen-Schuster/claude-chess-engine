@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 14 | 1 |
-| Losses | 825 | 94 |
+| Losses | 828 | 94 |
 | Draws | 32 | 5 |
 
-Total games played: **871**
+Total games played: **874**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0871.pgn`
+- PGN: `game_data/games/game_0874.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1364,6 +1367,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cu (G869/G870/G871 batch: 3 fixes, ~248cp gain)
+- G869 (W M19W): c1c2 -77cp -> SF e2d1 -11cp (66cp near-equal save, borderline).
+- G870 (B M14B): c8d7 -243cp -> SF b6c4 -155cp (88cp gain, losing pos).
+- G871 (W M22W): h1g1 -206cp -> SF a1e1 -112cp (94cp gain, losing pos).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20ct (G867 fix + G866 DRAW, 139cp gain)
 - **G866 DRAW** as Black -- rolling draw counter.

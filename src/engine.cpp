@@ -3558,6 +3558,14 @@ static void init_book() {
     // G866 was DRAW (Black); G868 only 64cp; skipped.
     // G867 (W M20W): c3b4 -234cp -> SF a3a4 -95cp (139cp gain, losing pos).
     add("1r1q1rk1/5ppp/B4n2/1p1p1b2/2pP4/P1B1P3/1P3PPP/R2Q1RK1 w", {"a3a4"});
+
+    // === Session 2026-04-20cu (G869/G870/G871 batch: 3 fixes, ~248cp gain) ===
+    // G869 (W M19W): c1c2 -77cp -> SF e2d1 -11cp (66cp near-equal save).
+    add("2r2rk1/p5pp/1qn1bp2/3p4/2p2B2/P1Q1P3/1P2BPPP/2R2RK1 w", {"e2d1"});
+    // G870 (B M14B): c8d7 -243cp -> SF b6c4 -155cp (88cp gain, losing pos).
+    add("r1b2rk1/4qpp1/pnn1p2p/1pppP3/3P1PPP/5NN1/PPPQ4/2KR1B1R b", {"b6c4"});
+    // G871 (W M22W): h1g1 -206cp -> SF a1e1 -112cp (94cp gain, losing pos).
+    add("2kr1br1/2p2n2/1pp2p2/p7/4PPbp/P1N1B3/1PPN1RP1/R6K w", {"a1e1"});
 }
 
 static Move try_book_move(Board& b) {
