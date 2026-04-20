@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 622 | 98 |
+| Losses | 627 | 98 |
 | Draws | 18 | 2 |
 
-Total games played: **653**
+Total games played: **658**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0653.pgn`
+- PGN: `game_data/games/game_0658.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -1146,6 +1151,16 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ai (G650-G652 batch: 3 book fixes)
+- G653 already losing -304cp at all options, not booked.
+- G650 (B M11B endgame entry): f8e7?? -146cp -> SF b2a3 (-51cp) keeps queen
+  active on a-file, 95cp better.
+- G651 (W M25W middlegame): f2f3 -185cp -> SF c1f4 (-96cp) develops bishop
+  with tempo.
+- G652 (B M39B rook EG): e4a4 -100cp -> SF e4e7 (-25cp) defends 7th rank,
+  near-equal practical hold.
+- All verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20ah (G646-G649 batch: 4 book fixes)
 - G645 already losing -300+cp at all options, not booked.

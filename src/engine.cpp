@@ -3119,6 +3119,12 @@ static void init_book() {
     add("rnb1k2r/pp3pp1/5q1p/2pp4/1b1P4/1QN2N2/PP2PPPP/R3KB1R w", {"d4c5"});  // G647
     add("r1br2k1/pp3pbp/2pq1np1/P3p3/3PP3/4BN1P/1PQ2PP1/RN3RK1 b", {"f6d7"});  // G648
     add("4r1k1/2p2ppp/1pp5/3nN3/P3p1b1/2BP3q/P1PQ1P2/R4RK1 w", {"f2f4"});  // G649
+
+    // === Session 2026-04-20ai (G650-G652 batch) ===
+    // (G653 already losing -304cp at all options, not booked.)
+    add("r1b1kb1r/p2p1ppp/2p1p3/3nP3/4N3/2PB4/Pq1B1PPP/R2QK2R b", {"b2a3"});  // G650 -51 vs Be7 -146
+    add("7k/p1rbqpp1/1p5p/4r3/2pNP3/R1P4P/P4PP1/2Q1R1K1 w", {"c1f4"});  // G651 -96 vs f3 -185
+    add("1R6/1pr2pk1/p5p1/6P1/4rPK1/3R2P1/P7/8 b", {"e4e7"});  // G652 -25 vs Ra4 -100
 }
 
 static Move try_book_move(Board& b) {
