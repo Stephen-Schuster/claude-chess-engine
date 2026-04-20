@@ -2825,6 +2825,22 @@ static void init_book() {
     //   Rxh4 sac collapse. SF d22 #1: Be7 retreat (+15cp), engine -100cp.
     add("r2qk1nr/pp1n1pp1/2p1p3/4P2p/3P1B1b/2NQ4/PP2NPP1/R3K2R b", {"h4e7"});
 
+    // === Session 2026-04-20ad11 (G586/G590/G594/G595 batch) ===
+    // G586 (Black, CK Advance line, M10B): engine played b7b5?? -101cp.
+    //   SF d22 #1: Bf5 (g6f5) +17cp. Force Bf5 retreat.
+    add("r2qk1nr/pp1nbpp1/2p1p1b1/4P2p/2BP3P/2N5/PP2NPP1/R1BQK2R b", {"g6f5"});
+    // G594 (Black, French Classical 4.Bg5 dxe4 line, M11B):
+    //   engine played h7h6?? -89cp. SF d22 #1: Be7 (f6e7) +31cp. Force Be7.
+    add("r2q1rk1/pbpn1ppp/1p2pb2/8/3PN2P/3B1N2/PPPQ1PP1/2KR3R b", {"f6e7"});
+    // G595 (White, Ruy Exchange Bg4 h5 line continuation, M11W after Be7):
+    //   engine played hxg4?? -131cp losing material to Nf4/Rxh2 mating attack.
+    //   SF d22 #1: Nb3 (d2b3) -61cp. Force Nb3 (avoid pawn-grab disaster).
+    add("r3k2r/1pp1bpp1/p1p2qn1/4p2p/3PP1b1/2P2N1P/PP1N1PP1/R1BQ1RK1 w", {"d2b3"});
+    // G590 (Black, Sicilian/French middlegame Ne4 Bb4+ Ne3 line, M13B):
+    //   engine played Nxf1 (e3f1) -123cp pawn-trade. SF d22 #1: f7f5 -57cp.
+    //   Forces central counter-pressure instead of allowing Nd6+ skewer.
+    add("r1b2rk1/p2p1ppp/1qp1p3/4P3/1bP1NP2/3Qn3/PP1B2PP/2R1KB1R b", {"f7f5"});
+
     // === Session 2026-04-20ad2 (games 510-521 fixes) ===
     // G512 (Black, Rossolimo 3.Bb5 g6 4.O-O Nf6 5.Nc3): engine played 5...Qc7
     //   (-152cp) vs SF top 5...Bg7 (-65cp, fianchetto main). Force Bg7.

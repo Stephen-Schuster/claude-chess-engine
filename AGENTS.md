@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 566 | 96 |
+| Losses | 572 | 96 |
 | Draws | 18 | 4 |
 
-Total games played: **597**
+Total games played: **603**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0597.pgn`
+- PGN: `game_data/games/game_0603.pgn`
 
 ---
 
@@ -182,6 +182,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
 
 
 
@@ -1005,6 +1011,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - **G580** (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7
   8.Nge2 Be7 9.Bf4 Bxh4 10.Bd3 Bxd3 11.Qxd3): engine played 11...g5??
   -100cp then Rxh4 sac collapse. SF d22 #1: Be7 retreat (+15cp). Booked.
+
+### Session 2026-04-20ad11 (G586/G590/G594/G595 batch)
+- G586 (Black, CK Advance M10B): b7b5?? -101cp -> SF Bf5 (g6f5) +17cp.
+- G594 (Black, French Classical 4.Bg5 dxe4 M11B): h7h6?? -89cp -> SF Be7
+  (f6e7) +31cp.
+- G595 (White, Ruy Exchange Bg4-h5 line M11W after Be7): hxg4?? -131cp
+  losing to Nf4/Rxh2 mate -> SF Nb3 (d2b3) -61cp. Avoids pawn-grab disaster.
+- G590 (Black, Sicilian Taimanov-like Ne4/Bb4+/Ne3 M13B): Nxf1?? -123cp ->
+  SF f7f5 -57cp central counter.
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame
