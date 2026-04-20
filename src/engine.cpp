@@ -1728,6 +1728,28 @@ static void init_book() {
     // 1.e4 e5
     add("rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
     add("rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"b8c6", "g8f6"});
+    // Vienna: 1.e4 e5 2.Nc3 -> 2...Nf6 (main) or 2...Nc6
+    add("rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b", {"g8f6", "b8c6"});
+    // 2.Nc3 Nf6 -> 3.Nf3 (Four Knights) or 3.f4 (Vienna Gambit) or 3.Bc4
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w", {"g1f3", "f1c4", "g2g3"});
+    // 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (Four Knights main)
+    add("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"b8c6"});
+    // 2.Nc3 Nc6 -> 3.Nf3 (Four Knights) or 3.f4 or 3.Bc4
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w", {"g1f3", "f1c4"});
+    // 2.Nc3 Nc6 3.Nf3 -> 3...Nf6 transposing
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"g8f6"});
+    // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w", {"f1b5", "d2d4"});
+    // 4.Bb5 -> 4...Nd4 (Rubinstein, game 261) or 4...Bb4 (symmetrical) or 4...Bc5
+    add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8b4", "c6d4", "f8c5"});
+    // 4.Bb5 Nd4 -> 5.Bc4 (main, NOT 5.O-O which got us into passive 6.Be2 game 261)
+    add("r1bqkb1r/pppp1ppp/5n2/1B2p3/3nP3/2N2N2/PPPP1PPP/R1BQK2R w", {"f1c4", "f3d4", "b5a4"});
+    // 4.Bb5 Nd4 5.Bc4 -> 5...Bc5 (main) or 5...Nxf3+
+    add("r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8c5", "d4f3", "b7b5"});
+    // 4.Bb5 Bb4 -> 5.O-O (main symmetric Four Knights)
+    add("r1bqk2r/pppp1ppp/2n2n2/1B2p3/1b2P3/2N2N2/PPPP1PPP/R1BQK2R w", {"e1g1", "d2d3"});
+    // 2.Nf3 Nc6 3.Bb5 (Ruy Lopez)
+    add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6", "f7f5"});
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w", {"f1b5", "f1c4", "b1c3"});
     // Ruy Lopez
     add("r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b", {"a7a6", "g8f6"});
