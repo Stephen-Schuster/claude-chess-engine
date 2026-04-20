@@ -1738,6 +1738,14 @@ static void init_book() {
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w", {"g1f3", "f1c4"});
     // 2.Nc3 Nc6 3.Nf3 -> 3...Nf6 transposing
     add("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R b", {"g8f6"});
+    // Vienna 2.Nc3 Nc6 3.Bc4 -> 3...Nf6 (main) or 3...Bc5; after 3...Nf6 our
+    // sensible move is 4.Nf3 transposing to Italian Four Knights (avoids
+    // 4.d3 Na5?! 5.Bg5 disaster of game 285 where Na5xBb3 cost the bishop).
+    add("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR b", {"g8f6", "f8c5"});
+    add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
+    // 3.Bc4 Nf6 4.Nf3 -> transposes to Italian (handled by Italian book)
+    // 3.Bc4 Bc5 -> 4.Nf3 (transposes to Italian)
+    add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w", {"f1b5", "d2d4"});
     // 4.Bb5 -> 4...Nd4 (Rubinstein, game 261) or 4...Bb4 (symmetrical) or 4...Bc5
