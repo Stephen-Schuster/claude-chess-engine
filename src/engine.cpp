@@ -1777,8 +1777,9 @@ static void init_book() {
     // 7.Bb3 Nxb3 8.axb3 -> Black O-O or Be6
     add("r1bqk2r/ppp2ppp/3p1n2/n1b1p3/4P3/1BNP1N2/PPP2PPP/R1BQ1RK1 b", {"a5b3", "e8g8"});
 
-    // 1.e4 c5 (Sicilian)
-    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3", "b1c3"});
+    // 1.e4 c5 (Sicilian): prefer Open 2.Nf3 - our 2.Nc3 Closed Sicilian coverage
+    // is thin (game 279 loss after 2.Nc3 Nc6 3.Nf3 e5 4.Bc4 drift).
+    add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w", {"g1f3"});
     // Drop g7g6 (Hyperaccelerated) - we lack Accelerated Dragon theory coverage (game 242 disaster)
     add("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b", {"d7d6", "b8c6", "e7e6"});
     // Open Sicilian: 1.e4 c5 2.Nf3 d6 3.d4
@@ -1809,6 +1810,10 @@ static void init_book() {
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2P5/PP3PPP/RNBQKBNR b", {"e7e6", "h7h6"});
     // Caro-Kann Advance 4.Nf3 -> 4...e6 (main) or 4...Nd7
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/5N2/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7"});
+    // 4.Nf3 Nd7 5.Nh4 (attacking Bf5) -> 5...Bg6 FORCED (5...Be4?? game 278 disaster, 5...Bxb1? loses bishop pair).
+    add("r2qkbnr/pp1npppp/2p5/3pPb2/3P3N/8/PPP2PPP/RNBQKB1R b", {"f5g6"});
+    // 5.Nh4 Bg6 6.Nxg6 hxg6 (main recapture) or 6.h4 (poking)
+    add("r2qkbnr/pp1npppp/2p3N1/3pP3/3P4/8/PPP2PPP/RNBQKB1R b", {"h7g6"});
     // Caro-Kann Advance 4.Nd2 (rare; game 256 loss) -> 4...e6 main
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/8/PPPN1PPP/R1BQKBNR b", {"e7e6", "b8d7"});
     // 4.Nd2 e6 5.Nb3 (game 274) -> 5...Nd7 (main, support e6; avoid 5...a5?? drift)

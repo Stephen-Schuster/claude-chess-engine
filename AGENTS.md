@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 3 |
-| Losses | 256 | 96 |
+| Losses | 262 | 96 |
 | Draws | 9 | 1 |
 
-Total games played: **278**
+Total games played: **284**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0278.pgn`
+- PGN: `game_data/games/game_0284.pgn`
 
 ---
 
@@ -219,6 +219,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -282,6 +288,21 @@ git add -A && git commit -m "improve engine: ..." && git push
   italian -61%, kid -23%. A/B 40g@500ms: 20-20 neutral but big speedup.
 
 ### Current baseline: `engine/engine_current_best` (main after 33dbc75)
+
+### Session 2026-04-20 (games 261-281 book expansion, 7 commits)
+- Commits: 2c61067 (Four Knights/Vienna), abb8143 (London+2.c4 weight), ce20301
+  (Winawer mainline), 9bf0ee1 (Rubinstein/Steinitz/Winawer Greek gift),
+  53406fb (CK 3.Nc3 dxe4 main), ab6db81 (CK Advance 4.Nd2 Nb3 + Petroff
+  6.Bd3 Bd6 7.O-O), 99c807b (Italian Giuoco 7.Bb3), 907d4cd (Slav 3...c6,
+  English 3.g3 c6 4.Nf3 not d4, Scotch Gambit defense).
+- Games 278-281: CK Advance 4.Nf3 Nd7 5.Nh4 Bg6 FORCED (avoids 5...Be4??
+  game 278); dropped b1c3 from 1.e4 c5 options (game 279 Closed Sicilian
+  drift).
+- Game 281 was `engine_failure` (illegal move e7e5 for White) but position
+  reproduced with current binary plays d4c6 correctly & deterministically.
+  Non-reproducible; may be transient orchestrator/IO issue.
+- Engine tactical smoke test: finds Greek gift Bxh7 at depth 6 in 4ms.
+  Losses are positional/endgame technique, not tactical blindness.
 
 ### Session 2026-04-20 improvements (commits d1462b7, 4868ff5, 759927d, 000cc69, abbb81b)
 - Expanded English book: 1.c4 e5 Four Knights main, 1.c4 c5 Symmetrical,
