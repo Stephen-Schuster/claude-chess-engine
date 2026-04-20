@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 598 | 97 |
-| Draws | 18 | 3 |
+| Losses | 605 | 98 |
+| Draws | 18 | 2 |
 
-Total games played: **629**
+Total games played: **636**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0629.pgn`
+- PGN: `game_data/games/game_0636.pgn`
 
 ---
 
@@ -182,6 +182,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
 
 
 
@@ -1110,6 +1117,33 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G629 (White, M20W queen middlegame): Qxa4 -85cp -> SF Rfd1 (f1d1)
   -20cp essentially equal! Force rook activation.
 - G628 (Black, M13B already-bad): c6 +207cp -> SF h6 (h7h6) +141cp luft.
+
+### Session 2026-04-20ae (eval: passed-pawn endgame fixes)
+- **First eval (non-book) change in many sessions.** Audit revealed engine
+  systematically underestimated K+P endgames by 200-3000cp vs SF d18:
+  KP_passed_far (8/8/8/8/8/k1K5/4P3/8 w) gave +495 vs SF +3545.
+- **Added 4 passed-pawn endgame terms** in `evaluate()` passed-pawn block:
+  1. **King proximity**: `(en_dist - my_dist) * (rank * 3 + 6)` -- bonus
+     scales with pawn advancement and king-distance differential.
+  2. **Rule of the square**: in pure K+P endings (`b_npm == 0`/`w_npm == 0`),
+     if enemy king cannot catch pawn (Chebyshev distance > moves to queen,
+     +1 if enemy not to move), add `700 - moves_to_queen * 60`.
+  3. **Protected passed pawn** (defended by own pawn): +15+r*3 mg, +25+r*5 eg.
+  4. **Connected passed pawn** (friendly pawn on adjacent file ±1 rank):
+     +10+r*3 eg.
+- Computed `phase`, `w_npm`, `b_npm` (non-pawn material counts) early in
+  evaluate so they're available for passed-pawn logic.
+- Verification (12-position eval bench, OLD vs NEW vs SF d18):
+  * KP_passed_far: 495 -> 1129 (SF 3545) ✓ rule-of-square fires
+  * KP_d7 (about to queen): 1274 -> 1655 (SF 4285) ✓
+  * RP_lucena (winning rook EG): 484 -> 516 (SF 530) ✓ no false ROS trigger
+    thanks to `b_npm == 0` guard
+  * KP_caught (black K can catch pawn): 199 -> 181 ✓ correctly NOT inflated
+  * italian/middlegame/Najdorf/startpos: ≤8cp change ✓ middlegame untouched
+- Engine still under-eval in deep promotion races (depth 12 vs SF 18 horizon)
+  but is now directionally correct rather than blind.
+- Perft 197281 unchanged. Hopefully helps endgame technique loss pattern
+  (G363/G367/G374/G634 etc -- KP/RP grind losses).
 
 ### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
 - Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame

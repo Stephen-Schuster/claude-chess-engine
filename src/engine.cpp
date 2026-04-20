@@ -724,6 +724,21 @@ static int evaluate(const Board& b) {
     int mg_w = 0, mg_b = 0;
     int eg_w = 0, eg_b = 0;
 
+    // Phase calc (computed early so passed-pawn endgame logic can use it)
+    int phase = 0;
+    int w_npm = 0, b_npm = 0;  // non-pawn-material count for each side (knights+bishops+rooks+queens)
+    for (int r0 = 0; r0 < 8; r0++) for (int f0 = 0; f0 < 8; f0++) {
+        int sp = b.piece[sq_make(r0,f0)];
+        int p = abs(sp);
+        if (p == KNIGHT || p == BISHOP) phase += 1;
+        else if (p == ROOK) phase += 2;
+        else if (p == QUEEN) phase += 4;
+        if (p == KNIGHT || p == BISHOP || p == ROOK || p == QUEEN) {
+            if (sp > 0) w_npm++; else b_npm++;
+        }
+    }
+    if (phase > 24) phase = 24;
+
     // Pawn file counts and rank extremes for pawn-structure terms.
     // pawns_files[color][file] = count; w_most_advanced[file] = highest rank
     int pawns_files[2][8] = {{0}};
@@ -796,6 +811,55 @@ static int evaluate(const Board& b) {
                         static const int PP_MG[8] = {0, 5, 10, 20, 35, 60, 100, 0};
                         static const int PP_EG[8] = {0, 10, 20, 40, 70, 120, 200, 0};
                         mg_w += PP_MG[r]; eg_w += PP_EG[r];
+                        // King proximity in endgame (white pawn promoting on rank 7)
+                        // Bonus: enemy king far from promotion square; own king close in front.
+                        int promo_sq = sq_make(7, f);
+                        int my_k = b.king_sq[WHITE], en_k = b.king_sq[BLACK];
+                        if (my_k != -1 && en_k != -1) {
+                            int en_dist = max(abs(sq_rank(en_k) - 7), abs(sq_file(en_k) - f));
+                            int my_dist = max(abs(sq_rank(my_k) - 7), abs(sq_file(my_k) - f));
+                            // King proximity bonus only meaningful in endgame
+                            int kp_bonus = (en_dist - my_dist) * (r * 3 + 6);
+                            eg_w += kp_bonus;
+                            // Rule of the square: only when enemy has zero pieces (pure K+P).
+                            if (b_npm == 0) {
+                                bool path_clear = true;
+                                for (int rr = r + 1; rr <= 7; rr++) {
+                                    int pp_block = b.piece[sq_make(rr, f)];
+                                    if (pp_block == -PAWN) { path_clear = false; break; }
+                                }
+                                if (path_clear) {
+                                    int moves_to_queen = 7 - r;
+                                    if (r == 1) moves_to_queen = 5;
+                                    int en_to_promo = en_dist;
+                                    if (b.side == WHITE) en_to_promo += 1;
+                                    if (en_to_promo > moves_to_queen) {
+                                        // Pawn unstoppable by king alone -- worth ~queen value
+                                        eg_w += 700 - moves_to_queen * 60;
+                                    }
+                                }
+                            }
+                        }
+                        // Protected passed pawn (defended by own pawn)
+                        int def_l = sq_make(r - 1, f - 1);
+                        int def_r = sq_make(r - 1, f + 1);
+                        if ((f > 0 && b.piece[def_l] == PAWN) ||
+                            (f < 7 && b.piece[def_r] == PAWN)) {
+                            mg_w += 15 + r * 3; eg_w += 25 + r * 5;
+                        }
+                        // Connected passed pawn (adjacent file friendly pawn at same/adj rank)
+                        for (int df = -1; df <= 1; df += 2) {
+                            int ff = f + df;
+                            if (ff < 0 || ff > 7) continue;
+                            for (int rr = r - 1; rr <= r + 1; rr++) {
+                                if (rr < 0 || rr > 7) continue;
+                                if (b.piece[sq_make(rr, ff)] == PAWN) {
+                                    eg_w += 10 + r * 3;
+                                    goto w_conn_done;
+                                }
+                            }
+                        }
+                        w_conn_done: ;
                     }
                 } else {
                     for (int ff : files_to_check) {
@@ -806,6 +870,51 @@ static int evaluate(const Board& b) {
                         static const int PP_MG[8] = {0, 100, 60, 35, 20, 10, 5, 0};
                         static const int PP_EG[8] = {0, 200, 120, 70, 40, 20, 10, 0};
                         mg_b += PP_MG[r]; eg_b += PP_EG[r];
+                        int promo_sq = sq_make(0, f);
+                        int my_k = b.king_sq[BLACK], en_k = b.king_sq[WHITE];
+                        if (my_k != -1 && en_k != -1) {
+                            int en_dist = max(abs(sq_rank(en_k) - 0), abs(sq_file(en_k) - f));
+                            int my_dist = max(abs(sq_rank(my_k) - 0), abs(sq_file(my_k) - f));
+                            int rel_rank = 7 - r;  // black's "advancement"
+                            int kp_bonus = (en_dist - my_dist) * (rel_rank * 3 + 6);
+                            eg_b += kp_bonus;
+                            if (w_npm == 0) {
+                                bool path_clear = true;
+                                for (int rr = r - 1; rr >= 0; rr--) {
+                                    int pp_block = b.piece[sq_make(rr, f)];
+                                    if (pp_block == PAWN) { path_clear = false; break; }
+                                }
+                                if (path_clear) {
+                                    int moves_to_queen = r;
+                                    if (r == 6) moves_to_queen = 5;
+                                    int en_to_promo = en_dist;
+                                    if (b.side == BLACK) en_to_promo += 1;
+                                    if (en_to_promo > moves_to_queen) {
+                                        eg_b += 700 - moves_to_queen * 60;
+                                    }
+                                }
+                            }
+                        }
+                        int def_l = sq_make(r + 1, f - 1);
+                        int def_r = sq_make(r + 1, f + 1);
+                        if ((f > 0 && b.piece[def_l] == -PAWN) ||
+                            (f < 7 && b.piece[def_r] == -PAWN)) {
+                            int rel_rank = 7 - r;
+                            mg_b += 15 + rel_rank * 3; eg_b += 25 + rel_rank * 5;
+                        }
+                        for (int df = -1; df <= 1; df += 2) {
+                            int ff = f + df;
+                            if (ff < 0 || ff > 7) continue;
+                            for (int rr = r - 1; rr <= r + 1; rr++) {
+                                if (rr < 0 || rr > 7) continue;
+                                if (b.piece[sq_make(rr, ff)] == -PAWN) {
+                                    int rel_rank = 7 - r;
+                                    eg_b += 10 + rel_rank * 3;
+                                    goto b_conn_done;
+                                }
+                            }
+                        }
+                        b_conn_done: ;
                     }
                 }
             } else if (ap == KNIGHT) {
@@ -907,15 +1016,7 @@ static int evaluate(const Board& b) {
         }
     }
 
-    // Phase calc
-    int phase = 0;
-    for (int r = 0; r < 8; r++) for (int f = 0; f < 8; f++) {
-        int p = abs(b.piece[sq_make(r,f)]);
-        if (p == KNIGHT || p == BISHOP) phase += 1;
-        else if (p == ROOK) phase += 2;
-        else if (p == QUEEN) phase += 4;
-    }
-    if (phase > 24) phase = 24;
+    // Phase already computed above (early)
 
     // Bishop pair
     int wb = 0, bb = 0;
