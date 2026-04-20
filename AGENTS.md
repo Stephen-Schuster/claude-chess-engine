@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 800 | 95 |
+| Losses | 804 | 95 |
 | Draws | 29 | 5 |
 
-Total games played: **842**
+Total games played: **846**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0842.pgn`
+- PGN: `game_data/games/game_0846.pgn`
 
 ---
 
@@ -182,6 +182,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
 
 
 
@@ -1335,6 +1339,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20ck (G839/G840/G841 batch: 3 fixes, ~516cp gain)
+- G842 false positive (our e7h4 IS SF d22 #1); skipped.
+- G839 (W M24W): g5d2 -523cp -> SF a8d8 -353cp (170cp gain, deep lost pos).
+- G840 (B M14B): g5g2 -163cp -> SF g5f4 **+39cp (Black advantage!)** 202cp
+  near-equal save. d16 had flagged g5f4 = +41 but multipv=4 confirmed.
+- G841 (W M10W): c3a4 -144cp -> SF d1f3 **+1cp (fully equal!)** 144cp gain.
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
 
 ### Session 2026-04-20cj (G836/G837 batch: 2 fixes, ~180cp, losing positions)
 - G838 d22 only 64cp; skipped.

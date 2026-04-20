@@ -3492,6 +3492,15 @@ static void init_book() {
     add("r4rk1/1pq1bpp1/3pbn1p/pB2p3/P3P1PP/1NN2P2/1PP1Q3/1K1R3R b", {"a8c8"});
     // G837 (W M26W): c1d1 -170cp -> SF a4b3 -70cp (100cp gain, near-equal-ish).
     add("r3rk2/p1p2pp1/1p1p2np/3P4/Q1P4q/5P1P/P1PB2P1/2R1R1K1 w", {"a4b3"});
+
+    // === Session 2026-04-20ck (G839/G840/G841 batch: 3 fixes, ~516cp gain) ===
+    // G842 was false positive (our e7h4 is actually SF d22 #1); skipped.
+    // G839 (W M24W): g5d2 -523cp -> SF a8d8 -353cp (170cp gain, deep lost pos).
+    add("Q7/1pp2ppk/2p3r1/2Pn2Bp/3Pp3/P5Pq/1P2PP1P/5RK1 w", {"a8d8"});
+    // G840 (B M14B): g5g2 -163cp -> SF g5f4 **+39cp (Black advantage!)** 202cp near-equal save.
+    add("r3k1nr/pp3pp1/1np1p3/4P1qp/P2PN3/5P2/BP3P2/R2QK2R b", {"g5f4"});
+    // G841 (W M10W): c3a4 -144cp -> SF d1f3 **+1cp (fully equal!)** 144cp near-equal save.
+    add("r1bqr1k1/pppp1ppp/5n2/4b3/2B1P3/2N5/PPP2PPP/R1BQR1K1 w", {"d1f3"});
 }
 
 static Move try_book_move(Board& b) {
