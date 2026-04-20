@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 14 | 1 |
-| Losses | 821 | 96 |
-| Draws | 30 | 3 |
+| Losses | 823 | 95 |
+| Draws | 31 | 4 |
 
-Total games played: **865**
+Total games played: **868**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0865.pgn`
+- PGN: `game_data/games/game_0868.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1358,6 +1361,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cs (G863/G864/G865 batch: 3 fixes, ~486cp gain)
+- G863 (W M15W): f1e2 -213cp -> SF a2a3 -89cp (124cp gain, losing pos).
+- G864 (B M10B): e7b4 -138cp -> SF d8d5 -47cp (91cp near-equal-ish).
+- G865 (W M45W KR endgame): e3d4 -551cp -> SF e2d3 -280cp (271cp gain,
+  deep-lost endgame but saves significant cp).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
+- Last-100 draws dropped 6->3 (stats rolling; two old draws fell off window).
 
 ### Session 2026-04-20cr (G861/G862 batch: 2 fixes, ~211cp gain)
 - G861 (W M9W Italian-ish): e2e3 -71cp -> SF a2a3 **0cp (fully equal!)**

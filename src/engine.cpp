@@ -3545,6 +3545,14 @@ static void init_book() {
     add("r1bqk2r/pp3ppp/2n1pn2/2b5/2Np4/5NP1/PP2PPBP/R1BQ1RK1 w", {"a2a3"});
     // G862 (B M15B): e7f6 -265cp -> SF e6f5 -125cp (140cp gain, losing pos).
     add("1r1q1rk1/ppp1bp1p/2n1b3/2Pp2p1/3P4/2P2N1P/P3BPP1/R1BQ1RK1 b", {"e6f5"});
+
+    // === Session 2026-04-20cs (G863/G864/G865 batch: 3 fixes, ~486cp gain) ===
+    // G863 (W M15W): f1e2 -213cp -> SF a2a3 -89cp (124cp gain, losing pos).
+    add("r2q1rk1/pp3ppp/4b3/2Q1P3/8/5P2/PP3P1P/R3KB1R w", {"a2a3"});
+    // G864 (B M10B): e7b4 -138cp -> SF d8d5 -47cp (91cp gain, near-equal-ish).
+    add("r1bq1rk1/ppp1bppp/2n1p3/1B6/3PN2P/5N2/PPPQ1PP1/R3K2R b", {"d8d5"});
+    // G865 (W M45W endgame): e3d4 -551cp -> SF e2d3 -280cp (271cp gain, deep lost KR EG).
+    add("8/2R5/P3pkp1/5p2/4n3/r3K1P1/4B3/8 w", {"e2d3"});
 }
 
 static Move try_book_move(Board& b) {
