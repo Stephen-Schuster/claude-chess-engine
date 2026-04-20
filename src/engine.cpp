@@ -2084,6 +2084,13 @@ static void init_book() {
     add("rnbqk2r/ppppbppp/4pn2/8/2PP4/6P1/PP1BPP1P/RN1QKBNR w", {"f1g2"});
     // 5.Bg2 d5 -> 6.Nf3 main (transposes to Catalan main lines)
     add("rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/6P1/PP1BPPBP/RN1QK1NR w", {"g1f3"});
+    // Game 409 (White, Bogo-Catalan 6.Nf3 c6): engine played 7.c5?? b6 8.b4 a5
+    //   9.Qa4 Ba6 -- White's c5-b4 pawn storm overextended, knight on a3 tied
+    //   down, lost material quickly. SF top 7.O-O (+26cp) or 7.Qc2 (+20cp), c5
+    //   is SF #5 (-60cp, overextends). Book 7.O-O mainline.
+    add("rnbqk2r/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R w", {"e1g1", "d1c2"});
+    add("rnbqk2r/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1Q1RK1 b", {"e8g8"});
+    add("rnbq1rk1/pp2bppp/2p1pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1Q1RK1 w", {"d1c2", "b1c3"});
     // Catalan: 1.d4 Nf6 2.c4 e6 3.g3 d5 -> 4.Bg2 (main)
     add("rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w", {"f1g2", "g1f3"});
     // 4.Bg2 -> 4...Be7 (Closed Catalan) or 4...dxc4 (Open Catalan)
@@ -2221,6 +2228,13 @@ static void init_book() {
     add("rnbqk2r/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2"});
     // After 4.Bg2 O-O -> 5.Nf3 (main)
     add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"g1f3"});
+    // Game 411 (White): 4.Bg2 O-O 5.Nf3 Re8 6.O-O e4 7.Nd4 Nc6 -- engine played
+    //   8.Nxc6?? dxc6 9.Qb3 a5 10.Rd1 Bf5 11.a3 Bc5 12.Qxb7?? pawn-grab disaster,
+    //   lost in 45 moves. SF top 8.Nc2 (-22cp, roughly equal), retreating the
+    //   knight preserves tension. Also books 7...e4 position.
+    add("rnbqr1k1/pppp1ppp/5n2/4p3/1bP5/2N2NP1/PP1PPPBP/R1BQ1RK1 w", {"e1g1"});
+    add("r1bqr1k1/pppp1ppp/2n2n2/8/1bPNp3/2N3P1/PP1PPPBP/R1BQ1RK1 w", {"d4c2"});
+    // After 8.Nc2 SF top Bxc3 9.dxc3 d6 (equal around -15cp); branches common.
     // 4.Bg2 a5 (game 391 Codex sideline): 5.e4! (SF top +32cp) keeps bishop pair
     //   and central grip; NOT 5.d4 exd4 6.Qxd4 which trades queens into dead-
     //   equal endgame (game 391 lost on technique).

@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 386 | 97 |
+| Losses | 389 | 97 |
 | Draws | 12 | 3 |
 
-Total games played: **411**
+Total games played: **414**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0411.pgn`
+- PGN: `game_data/games/game_0414.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
