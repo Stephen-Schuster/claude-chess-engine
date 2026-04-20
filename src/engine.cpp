@@ -1959,6 +1959,22 @@ static void init_book() {
     add("rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w", {"e4e5", "a2a3", "e4d5"});
     // French Winawer 4.e5 c5 (classical)
     add("rnbqk1nr/ppp2ppp/4p3/3pP3/1b1P4/2N5/PPP2PPP/R1BQKBNR b", {"c7c5"});
+    // Winawer 4.e5 c5 -> 5.a3 (main) or 5.Qg4
+    add("rnbqk1nr/pp3ppp/4p3/2ppP3/1b1P4/2N5/PPP2PPP/R1BQKBNR w", {"a2a3", "d1g4"});
+    // Winawer 5.a3 -> 5...Bxc3+ (main) or 5...Ba5
+    add("rnbqk1nr/pp3ppp/4p3/2ppP3/1b1P4/P1N5/1PP2PPP/R1BQKBNR b", {"b4c3"});
+    // Winawer 5...Bxc3+ 6.bxc3 -> 6...Ne7 (main, NOT 6...Qa5+ which misplaces queen)
+    add("rnbqk1nr/pp3ppp/4p3/2ppP3/3P4/P1b5/1PP2PPP/R1BQKBNR w", {"b2c3"});
+    add("rnbqk1nr/pp3ppp/4p3/2ppP3/3P4/P1P5/2P2PPP/R1BQKBNR b", {"g8e7"});
+    // 6...Ne7 -> 7.Qg4 (main attacking) or 7.Nf3 (positional) or 7.h4 (Poisoned Pawn, game 250)
+    add("rnbqk2r/pp2nppp/4p3/2ppP3/3P4/P1P5/2P2PPP/R1BQKBNR w", {"d1g4", "g1f3", "h2h4"});
+    // 7.Qg4 -> 7...O-O (main, though 7...Qc7 is Qxg7 Rg8 Qxh7 main line) -- keep simple: 7...cxd4
+    add("rnbqk2r/pp2nppp/4p3/2ppP3/3P2Q1/P1P5/2P2PPP/R1B1KBNR b", {"d8c7", "e8g8", "c5d4"});
+    // 7.h4 (Poisoned Pawn): respond with 7...Nbc6 (main, NOT 7...Qa5?? game 250 disaster).
+    //   Black should NOT take on h4 and should finish development.
+    add("rnbqk2r/pp2nppp/4p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR b", {"b8c6", "d8a5", "d8c7"});
+    // 7.h4 Nbc6 -> 8.h5/Nf3/Qg4 -- Black continues development
+    add("r1bqk2r/pp2nppp/2n1p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR w", {"h4h5", "g1f3", "d1g4"});
     // French Exchange: 3...Nf6 4.exd5 exd5 5.Nf3
     add("rnbqkb1r/ppp2ppp/5n2/3p4/3P4/2N5/PPP2PPP/R1BQKBNR w", {"g1f3", "c1g5", "f1d3"});
     // After 3.Nc3 dxe4 (Rubinstein) 4.Nxe4
