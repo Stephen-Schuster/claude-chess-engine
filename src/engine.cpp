@@ -1780,7 +1780,17 @@ static void init_book() {
     //   drift to endgame loss. SF top 10.Qe1 (-21cp, holds equal).
     add("r2q1rk1/ppp2ppp/2nb4/4p3/4B1b1/3P1N2/PPP2PPP/R1BQ1RK1 w", {"d1e1"});
     // 10.Qe1 -> Black: Qe8 (SF top +16 for White), Qe7 (+13) or Qd7 (+10).
+    //   Also Nb4 (SF #1 for Black -25cp) -- covered below.
     add("r2q1rk1/ppp2ppp/2nb4/4p3/4B1b1/3P1N2/PPP2PPP/R1B1QRK1 b", {"d8e8", "d8e7"});
+    // G427 (White): Black plays 10...Nb4 (SF #1 -25cp) attacking c2/e4. Engine
+    //   in search picked 11.Qc3 (SF top +19cp, ONLY good move) then after
+    //   11...f5 played 12.Bxb7?? (SF #2, 0cp, drops back from +19 to eq)
+    //   leading to 12...Rb8 13.Qc4+ Kh8 14.h3 Bh5 15.Bd5 c6 16.Be6 Bxf3
+    //   and mated in 27 moves. Force 11.Qc3 and critically 12.Nxe5! (+25cp).
+    add("r2q1rk1/ppp2ppp/3b4/4p3/1n2B1b1/3P1N2/PPP2PPP/R1B1QRK1 w", {"e1c3"});
+    // 11.Qc3 -> Black: f5 (game line) or Qe7 (SF top for Black).
+    // 11...f5 -> 12.Nxe5! (SF top +25cp, NOT Bxb7 0cp).
+    add("r2q1rk1/ppp3pp/3b4/4pp2/1n2B1b1/2QP1N2/PPP2PPP/R1B2RK1 w", {"f3e5"});
     // 3.Bc4 Bc5 -> 4.Nf3 (transposes to Italian)
     add("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w", {"g1f3"});
     // Four Knights: 2.Nf3 Nc6 3.Nc3 Nf6 -> 4.Bb5 (main Spanish Four Knights) or 4.d4 (Scotch Four Knights)
@@ -1822,6 +1832,10 @@ static void init_book() {
     // White's 8th: SF prefers g3; all ~equal. Accept any.
     // After 8.g3 d6 9.c4 Nb6 10.Bg2 Bb7 11.O-O -> Black plays 11...dxe5 (SF -56cp)
     add("r3kb1r/pbp1qppp/1npp4/4P3/2P5/6P1/PP2QPBP/RNB2RK1 b", {"d6e5"});
+    // G426 path: 8.c4 Nb6 9.b3 (instead of g3). Engine played 9...d5?! (SF #5
+    //   -23cp) leading to exd5 cxd5 Nc3 Bg4 f3 Be6 -- structural IQP-ish mess
+    //   mated move 46. SF top 9...a5 (+4cp, healthy), 9...Qe6 (-8cp) acceptable.
+    add("r1b1kb1r/p1ppqppp/1np5/4P3/2P5/1P6/P3QPPP/RNB1KB1R b", {"a7a5", "a7a5", "e7e6"});
     // Scotch Mieses 5.Nxc6 bxc6 6.Bd3 (game 390 path, Black): NOT the 6.e5 Mieses
     //   main. Best is 6...d5 (SF -5cp) nearly equal. Engine played d5 naturally.
     //   Then 7.exd5 cxd5 8.O-O Be7 9.h3 O-O 10.Re1 -> force 10...c5! (SF -2cp)
@@ -2546,6 +2560,14 @@ static void init_book() {
     add("rnbqkb1r/pp3ppp/3ppn2/8/3NP3/2N5/PPP1BPPP/R1BQK2R b", {"f8e7", "a7a6"});
     // 4...a6 5.Nc3 (Kan)
     add("rnbqkbnr/1p1p1ppp/p3p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"d8c7", "g8f6", "b7b5"});
+    // G428: 5.Bd3 (sideline, not Nc3). Engine played 5...Nf6 6.O-O Bd6 (-63cp)
+    //   then 7.Re1 Qc7 8.Nf3 Nc6 9.h3 O-O 10.Qe2 Ne5 11.Nxe5 Bxe5 -- position
+    //   was already -71cp by move 8 when 6...Bd6 started drift. Force 5...Nf6
+    //   then 6...d6 (Scheveningen structure, SF #2 -58cp) instead of Bd6.
+    add("rnbqkbnr/1p1p1ppp/p3p3/8/3NP3/3B4/PPP2PPP/RNBQK2R b", {"g8f6"});
+    add("rnbqkb1r/1p1p1ppp/p3pn2/8/3NP3/3B4/PPP2PPP/RNBQ1RK1 b", {"d7d6", "e6e5"});
+    // 5.Bd3 Nf6 6.Nc3 -> 6...d6 SF top (-39cp).
+    add("rnbqkb1r/1p1p1ppp/p3pn2/8/3NP3/2NB4/PPP2PPP/R1BQK2R b", {"d7d6"});
     // Kan 5...Qc7 6.Bd3 (main)
     add("rnb1kbnr/1pqp1ppp/p3p3/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1d3", "f1e2", "g2g3"});
     // 4...Nc6 5.Nc3 (Taimanov)
