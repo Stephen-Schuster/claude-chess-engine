@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 722 | 92 |
-| Draws | 26 | 8 |
+| Losses | 724 | 92 |
+| Draws | 27 | 8 |
 
-Total games played: **761**
+Total games played: **764**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0761.pgn`
+- PGN: `game_data/games/game_0764.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1254,6 +1257,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20bj (G761 near-equal save, 245cp gain)
+- G759 skipped (80cp gain in deep -266cp losing pos); G760 skipped (d22 rerank
+  showed 64cp gain, below threshold).
+- G761 (W M11W): e1c3 -199cp -> SF e4b7 **+46cp (engine has advantage!)**,
+  **245cp gain near-equal save** -- bishop-takes-b7 pawn-grab was right move.
+- Verified at SF d22 MultiPV=4; fires from FEN.
 
 ### Session 2026-04-20bi (G755/G757 batch: 2 fixes, ~319cp gain)
 - G756 marginal (66cp gain); skipped.
