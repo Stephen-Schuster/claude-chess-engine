@@ -2052,6 +2052,13 @@ static void init_book() {
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w", {"g1f3", "g2g3"});
     // English 2.Nc3 Nf6 3.g3 c6 (game 277): 4.Nf3 (main, do NOT play 4.d4?? which drops tempo after exd4 Qxd4 d5!)
     add("rnbqkb1r/pp1p1ppp/2p2n2/4p3/2P5/2N3P1/PP1PPP1P/R1BQKBNR w", {"g1f3", "f1g2"});
+    // English 2.Nc3 Nf6 3.g3 d5 (game 343): 4.cxd5! (main, SF +15). Then 4...Nxd5 -> 5.Bg2! (SF +26);
+    // NEVER 5.Qa4+?? (game 343 disaster: queen sortie, 10.Kd1 losing castling).
+    add("rnbqkb1r/ppp2ppp/5n2/3pp3/2P5/2N3P1/PP1PPP1P/R1BQKBNR w", {"c4d5"});
+    // 4.cxd5 -> Black: Nxd5 (main) or e4? (not main, -84cp per SF)
+    add("rnbqkb1r/ppp2ppp/5n2/3Pp3/8/2N3P1/PP1PPP1P/R1BQKBNR b", {"f6d5"});
+    // 4.cxd5 Nxd5 -> 5.Bg2! (SF +26, main), or Nf3 (+24), d3 (+9). NOT Qa4+/Qb3.
+    add("rnbqkb1r/ppp2ppp/8/3np3/8/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2", "g1f3"});
     // 1.c4 e5 2.Nc3 Nf6 3.Nf3 -> 3...Nc6 (main Four Knights English)
     add("rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R b", {"b8c6", "e5e4"});
     // 1.c4 e5 2.Nf3 (reversed Alapin) -> 2...Nc6 (main) or 2...e4 (sharp, game 255/259)

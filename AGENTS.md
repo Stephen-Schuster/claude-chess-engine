@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 317 | 99 |
+| Losses | 322 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **340**
+Total games played: **345**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0340.pgn`
+- PGN: `game_data/games/game_0345.pgn`
 
 ---
 
@@ -182,6 +182,11 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
 
 
 
@@ -448,6 +453,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 - Fix: booked Catalan Open 5...Nc6 mainline through move 9:
   * 6.Qa4! (SF +48), then Black Bb4+/Bd7/a6
   * 6...Bb4+ 7.Bd2 Nd5 8.Bxb4 Nxb4 9.Nc3! (forcing the SF top choice)
+
+### Session 2026-04-20o (games 338-344 queen-grab pattern + English 3.g3 d5)
+- **Recurring pattern (games 338, 340, 341, 342)**: Black's queen grabs b2
+  then gets chased by rooks → opens files near own king → crushed.
+  Engine's eval underestimates positional cost of wing-pawn grabs by ~100cp
+  vs Stockfish. Not cleanly book-fixable (search/eval issue).
+- Game 343 (English White, `c4 e5 Nc3 Nf6 g3 d5 cxd5 Nxd5`): engine played
+  5.Qa4+?? Nc6 6.Nf3 Nb6 7.Qe4 f5 8.Qe3 -- queen sortie disaster, then
+  10.Kd1 lost castling. Fix: book 4.cxd5 Nxd5 -> 5.Bg2! (SF +26cp main),
+  drop Qa4+/Qb3/Nf3 alternatives that scored worse.
+- Game 344 (Rossolimo White endgame loss): opening was SF-optimal through
+  move 7 (a4 was +46cp). Middlegame technique loss, not book-fixable.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
