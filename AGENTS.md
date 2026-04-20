@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 333 | 99 |
+| Losses | 336 | 99 |
 | Draws | 10 | 1 |
 
-Total games played: **356**
+Total games played: **359**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0356.pgn`
+- PGN: `game_data/games/game_0359.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -472,6 +475,17 @@ git add -A && git commit -m "improve engine: ..." && git push
   f1, slow collapse, mated move 76.
 - Fix: booked 8...O-O -> 9.O-O (SF +16cp main). Then 9...cxd5 10.h3 to
   prevent ...Bg4 pin.
+
+### Session 2026-04-20r (games 350-356 book extensions)
+- CK Advance 6.Nc3 (games 352/354/356 as Black): all three reached same
+  position and had no book move. Added 6...dxc4 main line (SF -17cp),
+  then 7.Bxc4 Nd7 (-12cp). Also booked 6.Nf3 -> 6...Be7/Bg4.
+- Scotch Mieses 4.Nxd4 Nf6 5.Nxc6 bxc6 6.e5 (game 350 as Black): engine
+  reached 11.O-O and played 11...Qxe5?! (-89cp) leading to 13...Qxc4??
+  pawn-grab disaster. Booked 6...Qe7, 7.Qe2 Nd5, then the key 11...dxe5
+  (SF -56cp) to recapture cleanly instead of entering queen-in-center line.
+- Games 351, 353 (Four Knights Bb5 Nd4 Nxd4 exd4 endgame drift) not
+  book-fixable; game 355 (Catalan Bogo drift post move 13) same.
 
 ### Session 2026-04-20q (eval: uncastled-king penalty boosted)
 - Discovered eval systematically underestimates queen-grab/king-in-center

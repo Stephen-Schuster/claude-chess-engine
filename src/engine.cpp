@@ -1766,6 +1766,15 @@ static void init_book() {
     // Scotch Gambit defense: 1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4 (game 276): NEVER 4...Qh4?? (Nb5 wins c7/queen)
     //   Main: 4...Nf6 (Schmidt) or 4...Bc5 (Classical). Both solid.
     add("r1bqkbnr/pppp1ppp/2n5/8/3NP3/8/PPP2PPP/RNBQKB1R b", {"g8f6", "f8c5"});
+    // Scotch Mieses: 4.Nxd4 Nf6 5.Nxc6 bxc6 6.e5 (game 350 path as Black).
+    //   Main: 6...Qe7 (-12cp), forces 7.Qe2 Nd5 (main, -14cp).
+    // Game 350: engine reached 11.O-O then played 11...Qxe5?! (-89 vs dxe5 -56).
+    //   Book through 11...dxe5 to recapture the pawn cleanly.
+    add("r1bqkb1r/p1pp1ppp/2p2n2/4P3/8/8/PPP2PPP/RNBQKB1R b", {"d8e7"});
+    add("r1b1kb1r/p1ppqppp/2p2n2/4P3/8/8/PPP1QPPP/RNB1KB1R b", {"f6d5"});
+    // White's 8th: SF prefers g3; all ~equal. Accept any.
+    // After 8.g3 d6 9.c4 Nb6 10.Bg2 Bb7 11.O-O -> Black plays 11...dxe5 (SF -56cp)
+    add("r3kb1r/pbp1qppp/1npp4/4P3/2P5/6P1/PP2QPBP/RNB2RK1 b", {"d6e5"});
     // 4...Nf6 5.Nc3 (Four Knights Scotch) -> ...Bb4 main, or ...Bc5
     add("r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"f8b4", "f8c5"});
     // 5...Bb4: White's main is 6.Nxc6 bxc6 7.Bd3 d5 8.exd5 cxd5 9.O-O (equal).
@@ -1875,6 +1884,15 @@ static void init_book() {
     add("rn1qkbnr/pp2ppp1/2p5/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR b", {"e7e6", "d5c4"});
     // 4.h4 h5 5.c4 e6 -> 6.Nc3 or 6.Nf3 (both playable)
     add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/8/PP3PP1/RNBQKBNR w", {"b1c3", "g1f3"});
+    // Games 352/354/356: all reached 6.Nc3 and Black was out of book.
+    //   352 played 6...Bb4 (SF #2 -34cp) dropped bishop pair.
+    //   354/356 played 6...Nd7 (not in SF top-5) and were crushed.
+    //   Force 6...dxc4 (SF main, -17cp) then 7.Bxc4 Nd7.
+    add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/2N5/PP3PP1/R1BQKBNR b", {"d5c4"});
+    add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2pP3P/2N5/PP3PP1/R1BQKBNR w", {"f1c4"});
+    add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2BP3P/2N5/PP3PP1/R1BQK1NR b", {"b8d7", "f8e7"});
+    // 6.Nf3 Black's main: 6...Be7 (-2cp) or 6...Bg4 (-6cp)
+    add("rn1qkbnr/pp3pp1/2p1p3/3pPb1p/2PP3P/5N2/PP3PP1/RNBQKB1R b", {"f8e7", "f5g4"});
     // Caro-Kann Advance 4.Nc3 (Short variation) -> 4...e6 or 4...Nd7 or 4...a6
     add("rn1qkbnr/pp2pppp/2p5/3pPb2/3P4/2N5/PPP2PPP/RNBQKB1R b", {"e7e6", "b8d7", "a7a6"});
     // Caro-Kann Advance 4.c3 (Van der Wiel) -> 4...e6 main
