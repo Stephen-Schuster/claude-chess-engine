@@ -3205,6 +3205,11 @@ static void init_book() {
     add("1r1q1rk1/pp3pp1/2p1p3/P2nP2p/3PN1bP/1R3N2/1P1Q1PP1/4R1K1 b", {"b7b6"});
     // G699 (W M25W): SF #1 c1d1 -53cp vs Bxd5 ~-130 (~77cp gain).
     add("r4k2/1Qpq1p1p/1p1p1p2/8/2P1P3/3R1P2/r1P3PP/2R3K1 w", {"c1d1"});
+
+    // === Session 2026-04-20aq (G701 + DRAW G703) ===
+    // G700 deep -700+cp loss; G702 marginal 62cp; G703 was DRAW (Catalan Open).
+    // G701 (W M23W): SF #1 f2f3 -141cp vs Qc2 -230 (89cp gain).
+    add("4r3/ppp2k2/2q2p2/6pp/2P5/P2PB1P1/1P2RPP1/4R1K1 w", {"f2f3"});
 }
 
 static Move try_book_move(Board& b) {

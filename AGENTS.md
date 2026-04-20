@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 668 | 97 |
-| Draws | 21 | 3 |
+| Losses | 670 | 96 |
+| Draws | 22 | 4 |
 
-Total games played: **702**
+Total games played: **705**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0702.pgn`
+- PGN: `game_data/games/game_0705.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1195,6 +1198,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20aq (G701 fix + G703 DRAW)
+- **G703 DRAW** by threefold repetition (Catalan Open as White) -- 4th draw
+  in last 100. Engine correctly held perpetual-style position.
+- G700 already losing -700+cp; G702 marginal 62cp gain; not booked.
+- G701 (W M23W): Qc2 -230cp -> SF f2f3 (-141cp) 89cp gain (lost rook EG
+  but at least delays collapse).
 
 ### Session 2026-04-20ap (G697/G698/G699 batch: 3 book fixes, ~262cp gain)
 - All 3 verified at SF d22 MultiPV=4; all fire from FEN.
