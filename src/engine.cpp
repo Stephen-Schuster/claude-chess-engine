@@ -3419,6 +3419,11 @@ static void init_book() {
     // G805 deep lost endgame -3385cp; skipped.
     // G804 (B M10B): e7b4 -166cp -> SF d8d5 -39cp (**127cp near-equal save**).
     add("r1bq1rk1/ppp1bppp/2n1p3/8/3PN2P/5N2/PPPQ1PP1/2KR1B1R b", {"d8d5"});
+
+    // === Session 2026-04-20by (G807 fix + G808 DRAW, 140cp gain) ===
+    // G808 DRAW as Black (28th lifetime draw); G806 marginal 48cp skipped.
+    // G807 (W M21W): f4h6 -348cp -> SF f4h2 -208cp (140cp gain, losing pos).
+    add("1brqr1k1/pb3pp1/1p5p/4Np1n/3P1B2/2N4P/PP1Q1PP1/2RR2K1 w", {"f4h2"});
 }
 
 static Move try_book_move(Board& b) {
