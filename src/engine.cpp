@@ -1772,6 +1772,14 @@ static void init_book() {
     add("rnbqkb1r/pppppppp/5n2/8/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "g7g6", "c7c5"});
     // KID: 1.d4 Nf6 2.c4 g6
     add("rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
+    // 1.d4 Nf6 2.c4 g6 3.Nc3 -> 3...Bg7 (main KID) or 3...d5 (Grünfeld)
+    add("rnbqkb1r/pppppp1p/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"f8g7", "d7d5"});
+    // 1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 -> 4.e4 (main King's Indian)
+    add("rnbqk2r/ppppppbp/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e4", "g1f3"});
+    // 4.e4 d6 (main KID)
+    add("rnbqk2r/ppppppbp/5np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR b", {"d7d6", "e8g8"});
+    // 4.e4 d6 5.Nf3 (main)
+    add("rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w", {"g1f3", "f2f3", "f1e2"});
     // QG: 1.d4 d5 2.c4 e6 3.Nc3
     add("rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b", {"e7e6", "c7c6", "e7e5"});
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
@@ -1781,6 +1789,12 @@ static void init_book() {
     add("r1bqkb1r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQ1RK1 b", {"f8e7", "b7b5"});
     // Nimzo-Indian: 1.d4 Nf6 2.c4 e6 3.Nc3 Bb4
     add("rnbqkb1r/pppppppp/5n2/8/2PP4/2N5/PP2PPPP/R1BQKBNR b", {"e7e6", "g7g6", "c7c5"});
+    // 1.d4 Nf6 2.c4 e6 -> White's 3rd move (Nimzo 3.Nc3 / Queen's Indian 3.Nf3 / Catalan 3.g3)
+    add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3", "g2g3"});
+    // 1.d4 Nf6 2.c4 e6 3.Nf3 -> 3...b6 (Queen's Indian) or 3...d5 (QGD via transpo) or 3...Bb4+ (Bogo)
+    add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/5N2/PP2PPPP/RNBQKB1R b", {"b7b6", "d7d5", "f8b4"});
+    // 1.d4 Nf6 2.c4 e6 3.g3 -> 3...d5 (Catalan main) or 3...Bb4+
+    add("rnbqkb1r/pppp1ppp/4pn2/8/2PP4/6P1/PP2PP1P/RNBQKBNR b", {"d7d5", "f8b4", "c7c5"});
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2", "a2a3"});
     // Queens Gambit Declined: 1.d4 d5 2.c4 e6
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
