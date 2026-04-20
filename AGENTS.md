@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 470 | 98 |
+| Losses | 481 | 98 |
 | Draws | 14 | 2 |
 
-Total games played: **497**
+Total games played: **508**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0497.pgn`
+- PGN: `game_data/games/game_0508.pgn`
 
 ---
 
@@ -182,6 +182,17 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -854,3 +865,21 @@ git add -A && git commit -m "improve engine: ..." && git push
   informative.
 - Games 266/270 (French Rubinstein Black) + 268 (Steinitz ...c4??) + 244
   (Winawer Greek gift 9...c4?? Bxh7+) now covered as of commit below.
+
+### Session 2026-04-20ac (games 496-499)
+- G496 (French Rubinstein Black, 5.Nxf6+ Qxf6 6.Nf3 h6 7.Be3 Nd5 8.Bd2 c5
+  9.Bb5+ Bd7 10.Bxd7+ Qxd7 11.c4 Nb6 12.Rc1 cxd4??): -151cp blunder vs SF
+  top queen-retreat -51cp. Fix: book 12...Qd8 (SF #1 d22, -51cp) to avoid
+  13.Nxd4 tactical collapse.
+- G499 (Four Knights Rubinstein White, 4.Bb5 Nd4 5.Ba4??): existing book
+  entry at line 1801 had `{f1c4, f3d4, b5a4}` — random chose losing Ba4.
+  SF d22: Nxd4 +18cp, Bc4 +13cp, Ba4 not in top-4 (~-30cp). Fix: removed
+  Ba4 from entry, weighted Nxd4 2x over Bc4.
+- G497 (Italian 4-Kts Nxe4 gambit W, 11...e4 out of book, 12.Ng5?? -130cp):
+  SF d22 at M12W shows all moves lose 467+cp — inherent to 11...e4 pawn
+  push. Upstream moves 9-11 were all SF top/near-top. Not cleanly book-
+  fixable; would need to avoid the entire 8.O-O -> d3 -> d4 -> f5 sequence
+  but each individual move is SF-approved. Search/eval issue.
+- G498 (Petroff Black, Classical main line): every Black move from M4B
+  onward is -30 to -150cp; slow 75-move grind. Inherent to Petroff.
+  Not book-fixable.

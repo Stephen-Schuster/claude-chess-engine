@@ -1797,8 +1797,9 @@ static void init_book() {
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w", {"f1b5", "d2d4"});
     // 4.Bb5 -> 4...Nd4 (Rubinstein, game 261) or 4...Bb4 (symmetrical) or 4...Bc5
     add("r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/2N2N2/PPPP1PPP/R1BQK2R b", {"f8b4", "c6d4", "f8c5"});
-    // 4.Bb5 Nd4 -> 5.Bc4 (main, NOT 5.O-O which got us into passive 6.Be2 game 261)
-    add("r1bqkb1r/pppp1ppp/5n2/1B2p3/3nP3/2N2N2/PPPP1PPP/R1BQK2R w", {"f1c4", "f3d4", "b5a4"});
+    // 4.Bb5 Nd4 -> 5.Nxd4 (SF top +18cp d22) or 5.Bc4 (SF +13cp).
+    // DROPPED 5.Ba4 (G499: after 5...c6 6.Nxe5?? we lost quickly; Ba4 itself is -30+cp).
+    add("r1bqkb1r/pppp1ppp/5n2/1B2p3/3nP3/2N2N2/PPPP1PPP/R1BQK2R w", {"f3d4", "f3d4", "f1c4"});
     // G413 (White): 5.Nxd4 exd4 6.Nd5?! Nxd5 exd5 Qe7+ -> queen trade into
     //   losing endgame, engine drifted and lost. SF top 6.e5! (+8cp).
     //   Continues 6...dxc3 7.exf6 Qxf6 8.dxc3 (slightly better structure).
@@ -2625,6 +2626,10 @@ static void init_book() {
     add("r1bq1rk1/ppp1bppp/4pn2/8/3P1B2/2PB1N2/PP3PPP/R2QK2R b", {"c8d7", "c8d7", "c8d7", "c7c5"});
     // 9...Bd7 10.O-O c5 (natural main).
     add("r2q1rk1/pppbbppp/4pn2/8/3P1B2/2PB1N2/PP3PPP/R2Q1RK1 b", {"c7c5"});
+    // G496 (Black, French Rubinstein 5...Qxf6 6.Nf3 h6 7.Be3 Nd5 8.Bd2 c5 9.Bb5+ Bd7
+    //   10.Bxd7+ Qxd7 11.c4 Nb6 12.Rc1 cxd4?? -151cp vs queen retreat -51cp).
+    //   Force 12...Qd8 (SF top d22 -51cp) to avoid the 13.Nxd4 tactical collapse.
+    add("r3kb1r/pp1q1pp1/1n2p2p/2p5/2PP4/5N2/PP1B1PPP/2RQK2R b", {"d7d8"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
     // CK 3.Nc3 Black reply: 3...dxe4 (main) -- avoid 3...e6 drifty hybrid (game 246)
