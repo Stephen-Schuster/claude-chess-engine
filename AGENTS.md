@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 521 | 98 |
+| Losses | 530 | 98 |
 | Draws | 16 | 2 |
 
-Total games played: **550**
+Total games played: **559**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0550.pgn`
+- PGN: `game_data/games/game_0559.pgn`
 
 ---
 
@@ -182,6 +182,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -951,6 +960,23 @@ git add -A && git commit -m "improve engine: ..." && git push
 - **G507** (English 1.c4 e5 g3 Bb4): M25W blunder. Post our session-y/z/aa
   fixes, this opening cluster is mostly book-stable through M10; remaining
   losses are middlegame/endgame technique.
+
+### Session 2026-04-20ad4 (games 535-550 batch: G538/G550 book fixes)
+- Analyzed games 535-550 (16 losses, 0 wins). Most are deep middlegame
+  collapses (M11-M49); two clear book gaps found.
+- **G550** (Black, French Rubinstein 5.Nxf6+ Qxf6 6.Nf3 Nc6 7.Bd3):
+  engine played 7...Bd6?? (-565cp) which loses queen to **8.Bg5!**
+  (Qf6 has no escape, +569cp at d22). Book line 2655 had `{f8d6, c8d7,
+  h7h6}` — RNG picked the losing move. Removed Bd6, force `{h7h6, c8d7}`.
+- **Same trap exists at line 2653** (Bd7 instead of Nc6 path): post
+  6...Bd7 7.Bd3 Bd6?? also +574cp for White via 8.Bg5. Removed Bd6
+  there too, force Nc6 only.
+- **G538** (Black, Sicilian Classical Richter-Rauzer 6.Bg5): no book
+  entry. Engine played 6...e5?? (-115cp) when SF top is 6...e6 (-42cp)
+  or 6...Bd7 (-38cp). Booked `{e7e6, c8d7}`.
+- Other 14 losses are deep tactical/positional collapses, not cleanly
+  book-fixable: G535 (QID M8W), G536 (post-book M11B), G537 (M25W),
+  G539-549 (all M10+ deep middlegame), G547 (M49W KP endgame blunder).
 
 ### Session 2026-04-20ad3 (G528 CK Advance Bxg5 sacrifice)
 - **G528** (Black, CK Advance 4.h4 h5 5.c4 e6 6.Nc3 dxc4 7.Bxc4 Nd7 8.Bg5

@@ -1954,6 +1954,10 @@ static void init_book() {
     // 4.Nxd4 Nf6 5.Nc3 (main) -> Black's Najdorf/Dragon/Classical branching
     add("rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w", {"b1c3"});
     add("rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b", {"a7a6", "g7g6", "b8c6"});
+    // Classical Sicilian 5...Nc6 -> 6.Bg5 (Richter-Rauzer main, G538). Black
+    //   must play 6...e6 (SF top -42cp); 6...e5?? hangs the d6 pawn structure
+    //   to 7.Bxf6 gxf6 (-115cp, G538 disaster).
+    add("r1bqkb1r/pp2pppp/2np1n2/6B1/3NP3/2N5/PPP2PPP/R2QKB1R b", {"e7e6", "c8d7"});
     // Najdorf intro
     add("rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w", {"f1e2", "c1e3", "f2f3"});
     // Sicilian 2.Nf3 d6 3.d4 cxd4 4.Nxd4 e5 (rare Sveshnikov-ish sideline; game 282):
@@ -2649,10 +2653,12 @@ static void init_book() {
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/8/PPP2PPP/R1BQKBNR w", {"g1f3", "c2c3"});
     // 5...Qxf6 6.Nf3 -> Black develops: ...h6, ...Nc6, ...Bd7
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"b8c6", "c8d7", "h7h6"});
-    // 6.Nf3 Bd7 7.Bd3 (game 266) -> continue development with ...Nc6 or ...Bd6
-    add("rn2kb1r/pppb1ppp/4pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"b8c6", "f8d6"});
-    // 6.Nf3 Nc6 7.Bd3 -> ...Bd6 (natural) or ...Bd7
-    add("r1b1kb1r/ppp2ppp/2n1pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"f8d6", "c8d7", "h7h6"});
+    // 6.Nf3 Bd7 7.Bd3 (game 266) -> continue development. NB: Bd6?? loses
+    //   queen to 8.Bg5! (forks Qf6, Nf3 defends g5). Force Nc6.
+    add("rn2kb1r/pppb1ppp/4pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"b8c6"});
+    // 6.Nf3 Nc6 7.Bd3 (G550): Bd6?? loses queen to 8.Bg5 (+569cp). Force
+    //   h6 (SF top -81cp) instead.
+    add("r1b1kb1r/ppp2ppp/2n1pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"h7h6", "c8d7"});
     // 2.Nc3 move order (game 266 opener) -> 2...d5 transposes to main French
     add("rnbqkbnr/pppp1ppp/4p3/8/4P3/2N5/PPPP1PPP/R1BQKBNR b", {"d7d5"});
     // French Smyslov (Rubinstein 4...Nd7, game 270): 4...Nd7 5.Nf3 Ngf6
