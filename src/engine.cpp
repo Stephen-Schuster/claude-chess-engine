@@ -1953,6 +1953,8 @@ static void init_book() {
     add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N5/PPP3PP/R1BQKBNR w", {"g1f3"});
     // 6.Nf3 Nc6 (develop)
     add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N2N2/PPP3PP/R1BQKB1R b", {"b8c6"});
+    // Steinitz 6...Nc6 7.Be3 (game 268) -> 7...a6 or 7...Qb6 (solid). NEVER 7...c4 (cramps own position, hands White a3/b3).
+    add("r1bqkb1r/pp1n1ppp/2n1p3/2ppP3/3P1P2/2N1BN2/PPP3PP/R2QKB1R b", {"a7a6", "d8b6", "f8e7"});
     // French Classical 4.Bg5 -> 4...Be7 (main) or 4...dxe4 (Burn) or 4...Bb4 (MacCutcheon)
     add("rnbqkb1r/ppp2ppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R1BQKBNR b", {"f8e7", "d5e4", "f8b4"});
     // French Winawer: 3...Bb4
@@ -1970,6 +1972,11 @@ static void init_book() {
     add("rnbqk2r/pp2nppp/4p3/2ppP3/3P4/P1P5/2P2PPP/R1BQKBNR w", {"d1g4", "g1f3", "h2h4"});
     // 7.Qg4 -> 7...O-O (main, though 7...Qc7 is Qxg7 Rg8 Qxh7 main line) -- keep simple: 7...cxd4
     add("rnbqk2r/pp2nppp/4p3/2ppP3/3P2Q1/P1P5/2P2PPP/R1B1KBNR b", {"d8c7", "e8g8", "c5d4"});
+    // 7.Qg4 O-O 8.Bd3 (game 244) -> 8...Qa5 (main pin) or 8...Nbc6 (solid)
+    add("rnbq1rk1/pp2nppp/4p3/2ppP3/3P2Q1/P1PB4/2P2PPP/R1B1K1NR b", {"d8a5", "b8c6", "f7f5"});
+    // 7.Qg4 O-O 8.Bd3 Qa5 9.Bd2 (game 244) -> AVOID 9...c4?? (Bxh7+ Greek gift).
+    //   Play 9...Nbc6 (develop + support c5) or 9...Qa4 (trade queens to relieve kingside pressure).
+    add("rnb2rk1/pp2nppp/4p3/q1ppP3/3P2Q1/P1PB4/2PB1PPP/R3K1NR b", {"b8c6", "a5a4", "f7f5"});
     // 7.h4 (Poisoned Pawn): respond with 7...Nbc6 (main, NOT 7...Qa5?? game 250 disaster).
     //   Black should NOT take on h4 and should finish development.
     add("rnbqk2r/pp2nppp/4p3/2ppP3/3P3P/P1P5/2P2PPP/R1BQKBNR b", {"b8c6", "d8a5", "d8c7"});
@@ -1987,6 +1994,19 @@ static void init_book() {
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/8/PPP2PPP/R1BQKBNR w", {"g1f3", "c2c3"});
     // 5...Qxf6 6.Nf3 -> Black develops: ...h6, ...Nc6, ...Bd7
     add("rnb1kb1r/ppp2ppp/4pq2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"b8c6", "c8d7", "h7h6"});
+    // 6.Nf3 Bd7 7.Bd3 (game 266) -> continue development with ...Nc6 or ...Bd6
+    add("rn2kb1r/pppb1ppp/4pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"b8c6", "f8d6"});
+    // 6.Nf3 Nc6 7.Bd3 -> ...Bd6 (natural) or ...Bd7
+    add("r1b1kb1r/ppp2ppp/2n1pq2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b", {"f8d6", "c8d7", "h7h6"});
+    // 2.Nc3 move order (game 266 opener) -> 2...d5 transposes to main French
+    add("rnbqkbnr/pppp1ppp/4p3/8/4P3/2N5/PPPP1PPP/R1BQKBNR b", {"d7d5"});
+    // French Smyslov (Rubinstein 4...Nd7, game 270): 4...Nd7 5.Nf3 Ngf6
+    add("r1bqkbnr/pppn1ppp/4p3/8/3PN3/8/PPP2PPP/R1BQKBNR w", {"g1f3", "f1d3"});
+    add("r1bqkbnr/pppn1ppp/4p3/8/3PN3/5N2/PPP2PPP/R1BQKB1R b", {"g8f6"});
+    // 6.Nxf6+ Nxf6 (standard, avoid Ng4 which game 270 played and lost)
+    add("r1bqkb1r/pppn1ppp/4pN2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"d7f6"});
+    // 7.c3 (game 270) or 7.Bd3/Bg5 -> Black plays ...c5, ...Bd6, ...Be7. NEVER ...Ng4/Qxb2.
+    add("r1bqkb1r/ppp2ppp/4pn2/8/3P4/2P2N2/PP3PPP/R1BQKB1R b", {"c7c5", "f8e7", "f8d6", "b7b6"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
 

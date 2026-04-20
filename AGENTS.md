@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 3 |
-| Losses | 240 | 94 |
-| Draws | 9 | 3 |
+| Losses | 251 | 95 |
+| Draws | 9 | 2 |
 
-Total games played: **262**
+Total games played: **273**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0262.pgn`
+- PGN: `game_data/games/game_0273.pgn`
 
 ---
 
@@ -203,6 +203,17 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -285,10 +296,12 @@ git add -A && git commit -m "improve engine: ..." && git push
   passive 4.e3 (game 257).
 
 ### Recent game results
-- Games 255-260: 0W/6L (games 245-254 also losses). Opponent GPT-Codex
-  is materially stronger; focus has shifted to closing book gaps
-  (low-risk, directly preventable) since A/B self-play is near-
-  deterministic and Stockfish benchmarks aren't informative.
+- Games 255-270: 0W/16L. Opponent GPT-Codex is materially stronger; focus
+  has shifted to closing book gaps (low-risk, directly preventable) since
+  A/B self-play is near-deterministic and Stockfish benchmarks aren't
+  informative.
+- Games 266/270 (French Rubinstein Black) + 268 (Steinitz ...c4??) + 244
+  (Winawer Greek gift 9...c4?? Bxh7+) now covered as of commit below.
 
 ### Ideas not yet tried
 - Tapered PSTs (separate mg/eg tables for each piece).
