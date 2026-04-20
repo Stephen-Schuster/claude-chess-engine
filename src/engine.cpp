@@ -2062,6 +2062,13 @@ static void init_book() {
     // Upstream: reduce likelihood of reaching this position by strongly preferring 7.Nf3 O-O (line 2019).
     // 4.Bg5 Be7 -> 5.e5 Nfd7 (Classical Steinitz transposition)
     add("rnbqk2r/ppp1bppp/4pn2/3p2B1/3PP3/2N5/PPP2PPP/R2QKBNR w", {"e4e5"});
+    // After 5.e5: MUST play Nfd7 (game 304: 5...Ne4 6.Nxe4 dxe4 7.Be3 -- equal material
+    //   but positional disaster with bishop pair and weak e4). Nfd7 is the only main move.
+    add("rnbqk2r/ppp1bppp/4pn2/3pP1B1/3P4/2N5/PPP2PPP/R2QKBNR b", {"f6d7"});
+    // 5.e5 Nfd7 6.Bxe7 Qxe7 (Classical Steinitz)
+    add("rnbqk2r/pppnbppp/4p3/3pP1B1/3P4/2N5/PPP2PPP/R2QKBNR w", {"g5e7", "h2h4", "f2f4"});
+    add("rnbqk2r/pppnBppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR b", {"d8e7"});
+    add("rnb1k2r/pppnqppp/4p3/3pP3/3P4/2N5/PPP2PPP/R2QKBNR w", {"f2f4", "g1f3"});
     // 5.f4 c5 6.Nf3 (main)
     add("rnbqkb1r/pp1n1ppp/4p3/2ppP3/3P1P2/2N5/PPP3PP/R1BQKBNR w", {"g1f3"});
     // 6.Nf3 Nc6 (develop)
