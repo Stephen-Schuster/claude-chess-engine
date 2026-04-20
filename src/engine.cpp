@@ -3439,6 +3439,10 @@ static void init_book() {
     add("r1b1kb1r/p1pp1ppp/2p1q3/3nP3/8/6P1/PPP1QPBP/RNB1K2R b", {"f7f6"});
     // G813 (W M14W): c3a4 -109cp -> SF f1d1 -39cp (70cp near-equal save).
     add("r2qr1k1/1bpn1pp1/pp1b1n1p/3p4/3P4/1QNBPN1P/PP1B1PP1/R4RK1 w", {"f1d1"});
+
+    // === Session 2026-04-20cb (G815 near-equal save, 126cp gain) ===
+    // G815 (W M17W): d3h7?? -162cp -> SF b1e1 -36cp (126cp near-equal save).
+    add("rn2b1k1/p1p2pp1/1p1p1q1p/8/2PP4/3B1N2/P1Q2PPP/1R4K1 w", {"b1e1"});
 }
 
 static Move try_book_move(Board& b) {

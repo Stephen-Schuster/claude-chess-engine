@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 773 | 95 |
+| Losses | 776 | 95 |
 | Draws | 28 | 5 |
 
-Total games played: **814**
+Total games played: **817**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0814.pgn`
+- PGN: `game_data/games/game_0817.pgn`
 
 ---
 
@@ -182,6 +182,9 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
 
 
 
@@ -1307,6 +1310,13 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cb (G815 near-equal save, 126cp gain)
+- Recurring-blunder investigation dead-end: my `find_repeat_blunders.py`
+  report that a Scotch position was -492cp was a script bug (mixed
+  `r1bqkbnr` with `r1bqkb1r` keys). Real Scotch post-4.Nxd4 is -8cp at d22.
+- G815 (W M17W): d3h7?? -162cp -> SF b1e1 -36cp (**126cp near-equal save**).
+- Verified at SF d22 MultiPV=4; fires from FEN.
 
 ### Session 2026-04-20ca (G812/G813 batch: 2 fixes, ~151cp near-equal saves)
 - G814 d22 only 28cp gain (d16 misranked); skipped.
