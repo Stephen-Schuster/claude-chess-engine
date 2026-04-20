@@ -2075,6 +2075,14 @@ static void init_book() {
     add("r2qkb1r/pp1b1ppp/2n1pn2/4N3/2pp4/N5P1/PP2PPBP/R1BQ1RK1 w", {"a3c4"});
     add("2rqkb1r/pp1b1ppp/2n1pn2/4N3/2Np4/6P1/PP2PPBP/R1BQ1RK1 w", {"c1f4"});
     add("2rqk2r/pp1bbppp/2n1pn2/4N3/2Np1B2/6P1/PP2PPBP/R2Q1RK1 w", {"e5d7"});
+    // G421 (White, Catalan Open 5.Nc3 move order): position
+    //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
+    //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
+    //   leading to tactical mess (Nxd4! for Black), traded queens into lost
+    //   endgame. SF top 11.Qd1 (+21cp retreat) keeping structural advantage.
+    add("r2qk2r/1ppb1ppp/2n1p3/p7/QnpP4/2N2NP1/PP2PPBP/R4RK1 w", {"a4d1"});
+    // 11.Qd1 -> Black: O-O (-25cp for Black) or Nd5 (-26cp). Both keep us +.
+    add("r2qk2r/1ppb1ppp/2n1p3/p7/1npP4/2N2NP1/PP2PPBP/R2Q1RK1 b", {"e8g8", "b4d5"});
     // G415 (White, Catalan Open IQP via 4.g3 c5 5.cxd5 exd5 6.Nc3 Nc6 7.Bg2
     //   cxd4 8.Nxd4 Bc5): engine played 9.Nxc6?? (SF #2 +17cp) trading off
     //   active Nd4 -- opponent gained attack and mated move 38. Force 9.Nb3!
@@ -2385,8 +2393,11 @@ static void init_book() {
     add("rnbqk2r/ppp1bppp/4pB2/8/3PN3/8/PPP2PPP/R2QKBNR b", {"e7f6"});
     // 6.Bxf6 Bxf6 7.Nf3 -> 7...O-O main (strongly prefer over Nd7 which led to game 292 loss)
     add("rnbqk2r/ppp2ppp/4pb2/8/3PN3/5N2/PPP2PPP/R2QKB1R b", {"e8g8", "e8g8", "e8g8", "b8d7"});
-    // 7.Nf3 O-O 8.Qd2 (game 286) or 8.Bd3 or 8.c3 -> 8...b6 fianchetto main, or 8...Nd7 9.c3 c5
-    add("rnbq1rk1/ppp2ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/R3KB1R b", {"b7b6", "b8d7"});
+    // 7.Nf3 O-O 8.Qd2/Bd3/c3 -> force 8...Be7 (SF top -33cp, retreats bishop
+    //   preserving dark-square defender). G422 played 8...b6 (SF #4 -51cp)
+    //   leading to Nxf6+ Qxf6 9.Bd3 Bb7 10.Ng5! g6 11.O-O-O kingside attack
+    //   -- crushed in 36 moves. Nd7 (-38cp #2) acceptable backup.
+    add("rnbq1rk1/ppp2ppp/4pb2/8/3PN3/5N2/PPPQ1PPP/R3KB1R b", {"f6e7", "f6e7", "f6e7", "b8d7"});
     // 8.Qd2 Nd7 9.O-O-O (game 292): avoid 9...c5?? which allows 10.Nxf6+ Nxf6 11.dxc5 Qxd2+ 12.Nxd2
     //   Ng4 13.Ne4 f5 14.h3 fxe4 15.hxg4 losing the knight. Better: 9...b6 fianchetto, or 9...a6/Qe7.
     //   Leave this node unbooked so search picks (likely Qe7 keeping center tension).
@@ -2471,6 +2482,12 @@ static void init_book() {
     add("r1bqkb1r/pppn1ppp/4pN2/8/3P4/5N2/PPP2PPP/R1BQKB1R b", {"d7f6"});
     // 7.c3 (game 270) or 7.Bd3/Bg5 -> Black plays ...c5, ...Bd6, ...Be7. NEVER ...Ng4/Qxb2.
     add("r1bqkb1r/ppp2ppp/4pn2/8/3P4/2P2N2/PP3PPP/R1BQKB1R b", {"c7c5", "f8e7", "f8d6", "b7b6"});
+    // G424 deepening: 7...Be7 8.Bd3 O-O 9.Bf4 -- engine played 9...Nd5?! (-82cp)
+    //   then 10.Bg3 f5 11.Be5 positional bind, lost in 58 moves.
+    //   Force 9...Bd7 (SF top -46cp, prepares ...c5 break).
+    add("r1bq1rk1/ppp1bppp/4pn2/8/3P1B2/2PB1N2/PP3PPP/R2QK2R b", {"c8d7", "c8d7", "c8d7", "c7c5"});
+    // 9...Bd7 10.O-O c5 (natural main).
+    add("r2q1rk1/pppbbppp/4pn2/8/3P1B2/2PB1N2/PP3PPP/R2Q1RK1 b", {"c7c5"});
     // Caro-Kann Classical: 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4
     add("rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b", {"c8f5", "b8d7", "g8f6"});
     // CK 3.Nc3 Black reply: 3...dxe4 (main) -- avoid 3...e6 drifty hybrid (game 246)
