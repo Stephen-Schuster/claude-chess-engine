@@ -2162,6 +2162,27 @@ static void init_book() {
     //   9.g4): Engine castled 9...O-O (-181cp) vs SF top 9...b5 (-104cp). Book b5.
     //   (Position is already inferior; b5 is the accepted sharp defense.)
     add("r1bqk2r/1p1nppbp/p2p1np1/8/3NP1P1/2N1BP2/PPPQ3P/R3KB1R b", {"b7b5"});
+    // G478 (Black, Rossolimo 3.Bb5 g6 4.Bxc6 dxc6 5.d3 Bg7 6.a4 Nf6 7.h3 O-O
+    //   8.Nc3): Engine played 8...Qd6 (-114cp) vs SF top 8...a5 (-41cp).
+    //   Book a7a5 to stop White's queenside space expansion.
+    add("r1bq1rk1/pp2ppbp/2p2np1/2p5/P3P3/2NP1N1P/1PP2PP1/R1BQK2R b", {"a7a5"});
+    // G444 (Black, French Classical 4.Bg5 Be7 5.e5 Nfd7 6.h4 h6 7.Bxe7 Qxe7 8.f4):
+    //   Engine played 8...Bb4?? (-133cp, random check) vs SF top 8...a6 (-58cp).
+    //   Book a7a6 (prevents Nb5, main-line defense).
+    add("rnb1k2r/pppnqpp1/4p2p/3pP3/3P1P1P/2N5/PPP3P1/R2QKBNR b", {"a7a6"});
+    // G446 (Black, French Burn 4.Bg5 dxe4 5.Nxe4 Be7 6.Bxf6 Bxf6 7.Nf3 Nc6 8.Bc4 O-O
+    //   9.c3): Engine played 9...Be7 (-131cp, wastes tempo) vs SF top 9...e5 (-42cp).
+    //   Book e6e5 (central break freeing the position).
+    add("r1bq1rk1/ppp2ppp/2n1pb2/8/2BPN3/2P2N2/PP3PPP/R2QK2R b", {"e6e5"});
+    // G476 (Black, French Burn 7.Nf3 O-O 8.Qd2 Nbd7 9.O-O-O Be7 10.h4 Nf6
+    //   11.Nxf6+ Bxf6 12.Bd3): Engine played 12...Qd6 (-146cp) vs SF top 12...Bd7
+    //   (-72cp). Book Bd7.
+    add("r1bq1rk1/ppp2ppp/4pb2/8/3P3P/3B1N2/PPPQ1PP1/2KR3R b", {"c8d7"});
+    // G455/G457/G461/G475 (White, English 1.c4 e5 2.Nc3 Nf6 3.g3 Bb4 4.Bg2 O-O):
+    //   Engine has been choosing 5.Nf3?! allowing 5...e4 trapping the knight
+    //   (-21cp, sharp line where Black has the initiative; 4 straight losses).
+    //   SF top 5.e4! (+18cp, claiming the center). Force 5.e4.
+    add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"e2e4"});
     // G421 (White, Catalan Open 5.Nc3 move order): position
     //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
     //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
@@ -2347,8 +2368,9 @@ static void init_book() {
     // English 2.Nc3 Nf6 3.g3 Bb4 (no ...Nc6) -> 4.Bg2! NOT 4.Nd5?? which loses after
     // Nxd5 cxd5 O-O a3 Ba5 Nf3 e4! forking (game 301 disaster).
     add("rnbqk2r/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2"});
-    // After 4.Bg2 O-O -> 5.Nf3 (main)
-    add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"g1f3"});
+    // After 4.Bg2 O-O -> 5.e4 (replaces old 5.Nf3 which lost 4x in a row to 5...e4
+    // trapping the knight; SF confirms 5.e4 +18cp is only good move). See G455/457/461/475.
+    // NOTE: the actual add() for this position is further down (look for G455 block).
     // Game 411 (White): 4.Bg2 O-O 5.Nf3 Re8 6.O-O e4 7.Nd4 Nc6 -- engine played
     //   8.Nxc6?? dxc6 9.Qb3 a5 10.Rd1 Bf5 11.a3 Bc5 12.Qxb7?? pawn-grab disaster,
     //   lost in 45 moves. SF top 8.Nc2 (-22cp, roughly equal), retreating the
