@@ -1927,6 +1927,35 @@ static void init_book() {
     // 4.Bg2 dxc4 -> 5.Nf3 (regain pawn later)
     add("rnbqkb1r/ppp2ppp/4pn2/8/2pP4/6P1/PP2PPBP/RNBQK1NR w", {"g1f3", "d1a4"});
     add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PP2PPPP/R1BQKBNR w", {"e2e3", "g1f3", "d1c2", "a2a3"});
+    // Nimzo 4.e3 (Rubinstein) -> Black: O-O (main, game 305/307), c5 (Huebner), b6, d5
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N1P3/PP3PPP/R1BQKBNR b", {"e8g8", "c7c5", "b7b6", "d7d5"});
+    // Nimzo 4.e3 O-O -> 5.Nf3 (main) or 5.Bd3 (Reshevsky). Avoid 5.a3 Bxc3 bxc3 which doubles pawns.
+    add("rnbq1rk1/pppp1ppp/4pn2/8/1bPP4/2N1P3/PP3PPP/R1BQKBNR w", {"g1f3", "f1d3"});
+    // Nimzo 4.e3 O-O 5.Nf3 -> 5...d5 (classical, game 305 line), c5, b6, Re8
+    add("rnbq1rk1/pppp1ppp/4pn2/8/1bPP4/2N1PN2/PP3PPP/R1BQKB1R b", {"d7d5", "c7c5", "b7b6"});
+    // 5.Nf3 d5 -> 6.Bd3 (main) or 6.cxd5 exd5 7.Bd3
+    add("rnbq1rk1/ppp2ppp/4pn2/3p4/1bPP4/2N1PN2/PP3PPP/R1BQKB1R w", {"f1d3", "c4d5"});
+    // Nimzo 4.e3 O-O 5.Bd3 -> 5...d5 (main) or c5
+    add("rnbq1rk1/pppp1ppp/4pn2/8/1bPP4/2NBP3/PP3PPP/R1BQK1NR b", {"d7d5", "c7c5"});
+    // 5.Bd3 d5 -> 6.Nf3 (main, transpose) or 6.cxd5 exd5 7.Nge2
+    add("rnbq1rk1/ppp2ppp/4pn2/3p4/1bPP4/2NBP3/PP3PPP/R1BQK1NR w", {"g1f3", "c4d5"});
+    // Nimzo 4.e3 c5 (Huebner) -> 5.Bd3 (main) or 5.Nf3
+    add("rnbqk2r/pp1p1ppp/4pn2/2p5/1bPP4/2N1P3/PP3PPP/R1BQKBNR w", {"f1d3", "g1f3"});
+    // Nimzo 4.Qc2 (Classical/Capablanca, game 307) -> Black: O-O (main), d5, c5, Nc6
+    add("rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N5/PPQ1PPPP/R1B1KBNR b", {"e8g8", "d7d5", "c7c5", "b8c6"});
+    // Nimzo 4.Qc2 O-O -> 5.a3 (main, forces bishop trade) or 5.Nf3 or 5.e4
+    //   Avoid 5.Bd2?! (game 307 line) which is passive.
+    add("rnbq1rk1/pppp1ppp/4pn2/8/1bPP4/2N5/PPQ1PPPP/R1B1KBNR w", {"a2a3", "g1f3", "e2e4"});
+    // Nimzo 4.Qc2 O-O 5.a3 -> 5...Bxc3+ (main, forced essentially; 5...Be7 passive)
+    add("rnbq1rk1/pppp1ppp/4pn2/8/1bPP4/P1N5/1PQ1PPPP/R1B1KBNR b", {"b4c3"});
+    // Nimzo 4.Qc2 O-O 5.a3 Bxc3+ -> 6.Qxc3 (main, NOT 6.bxc3 which doubles pawns unnecessarily with queen already on c2)
+    add("rnbq1rk1/pppp1ppp/4pn2/8/2PP4/P1b5/1PQ1PPPP/R1B1KBNR w", {"c2c3"});
+    // Nimzo 4.Qc2 O-O 5.a3 Bxc3+ 6.Qxc3 -> 6...d5 (main, challenge center) or b6 or d6
+    add("rnbq1rk1/pppp1ppp/4pn2/8/2PP4/P1Q5/1P2PPPP/R1B1KBNR b", {"d7d5", "b7b6", "d7d6"});
+    // Nimzo 4.Qc2 d5 -> 5.cxd5 (Capablanca main) or 5.a3 Bxc3+ 6.Qxc3 or 5.e3
+    add("rnbqk2r/ppp2ppp/4pn2/3p4/1bPP4/2N5/PPQ1PPPP/R1B1KBNR w", {"c4d5", "a2a3", "e2e3"});
+    // Nimzo 4.Qc2 c5 -> 5.dxc5 (main) or 5.a3
+    add("rnbqk2r/pp1p1ppp/4pn2/2p5/1bPP4/2N5/PPQ1PPPP/R1B1KBNR w", {"d4c5", "a2a3"});
     // Queens Gambit Declined: 1.d4 d5 2.c4 e6
     add("rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w", {"b1c3", "g1f3"});
     // QGA: 1.d4 d5 2.c4 dxc4

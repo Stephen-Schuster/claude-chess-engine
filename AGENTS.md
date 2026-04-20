@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 287 | 99 |
+| Losses | 289 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **309**
+Total games played: **311**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0309.pgn`
+- PGN: `game_data/games/game_0311.pgn`
 
 ---
 
@@ -250,6 +250,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -325,6 +327,18 @@ git add -A && git commit -m "improve engine: ..." && git push
 - 6 more losses. 296 CK vs 2.c4 Qxd5?! queen harassed; 297 Sicilian positional squeeze; 298 French Burn with OLD binary before fix; 299/301 English middlegame blunders; 300 Rossolimo Black Qxb2?? piece trap.
 - Fix: added Caro-Kann Accelerated Panov book: 1.e4 c6 2.c4 d5 3.cxd5 cxd5 4.exd5 Nf6! (not Qxd5) 5.Nc3 Nxd5 6.d4 Nc6/g6/Bf5 (transpose to Panov-Botvinnik).
 - Games 297/299/300/301 are middlegame tactical blunders (queen grab b2, Nxc5 blunder, Nd5 trap) that book can't prevent.
+
+### Session 2026-04-20e (Nimzo-Indian book expansion, games 305/307/309)
+- Games 305/307/309 all Nimzo-Indian as White and all lost in middlegame drift.
+  Book ended after White's 4th move; Black moves and all deeper White choices
+  were left to search (which picked passive/inferior plans).
+- Fix: extended Nimzo 4.e3 and 4.Qc2 mainlines through move 6 for both sides:
+  * 4.e3 O-O 5.Nf3 d5 6.Bd3 / 5.Bd3 d5 6.Nf3 (classical Rubinstein)
+  * 4.Qc2 O-O 5.a3 Bxc3+ 6.Qxc3 d5 (Classical main)
+  * 4.Qc2 d5 5.cxd5 / 4.Qc2 c5 5.dxc5 (main responses)
+- Does not fix the underlying middlegame-drift issue (would need eval/search
+  work) but at least steers into balanced positions where practical chances
+  are even.
 
 ### Session 2026-04-20d (games 302-303 -- Sicilian Qxd4 and Berlin gaps)
 - 302 Black: Ruy Lopez 3...Nf6 4.O-O -> played Bb4?! then crushed kingside.
