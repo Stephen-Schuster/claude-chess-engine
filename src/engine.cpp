@@ -2183,6 +2183,12 @@ static void init_book() {
     //   (-21cp, sharp line where Black has the initiative; 4 straight losses).
     //   SF top 5.e4! (+18cp, claiming the center). Force 5.e4.
     add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"e2e4"});
+    // G493/G495 follow-up: after 4.Bg2 O-O 5.e4 Bxc3 6.bxc3 c6:
+    //   SF top 7.Nge2 (+0cp). Engine chose 7.d4 (-22cp worse). Book Nge2.
+    add("rnbq1rk1/pp1p1ppp/2p2n2/4p3/2P1P3/2P3P1/P2P1PBP/R1BQK1NR w", {"g1e2"});
+    // G493 line: 7.Nge2 d5 8.exd5 e4?! 9.Nd4 c5 (opp offbook), engine chose
+    //   10.Nb3 (-91cp) vs SF top 10.Ba3! (-29cp). Book Ba3.
+    add("rnbq1rk1/pp3ppp/5n2/2pP4/2PNp3/2P3P1/P2P1PBP/R1BQK2R w", {"c1a3"});
     // G421 (White, Catalan Open 5.Nc3 move order): position
     //   1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 Nc6 6.Qa4 Bb4+ 7.Bd2 Nd5
     //   8.Bxb4 Nxb4 9.Nc3 Bd7 10.O-O a5. Engine played 11.Qb5?! (SF #2 -4cp)
