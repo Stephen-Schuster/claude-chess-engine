@@ -1995,6 +1995,11 @@ static void init_book() {
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2N2/PP1PPPPP/R1BQKB1R w", {"g2g3", "d2d4", "e2e3"});
     // 4.g3 -> Black: d5 (main central challenge), Bc5, Bb4 (pin, game 289), g6
     add("r1bqkb1r/pppp1ppp/2n2n2/4p3/2P5/2N2NP1/PP1PPP1P/R1BQKB1R b", {"d7d5", "f8c5", "f8b4", "g7g6"});
+    // English 2.Nc3 Nf6 3.g3 Bb4 (no ...Nc6) -> 4.Bg2! NOT 4.Nd5?? which loses after
+    // Nxd5 cxd5 O-O a3 Ba5 Nf3 e4! forking (game 301 disaster).
+    add("rnbqk2r/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPP1P/R1BQKBNR w", {"f1g2"});
+    // After 4.Bg2 O-O -> 5.Nf3 (main)
+    add("rnbq1rk1/pppp1ppp/5n2/4p3/1bP5/2N3P1/PP1PPPBP/R1BQK1NR w", {"g1f3"});
     // 4.g3 Bb4 -> 5.Nd5! (main: attacks Bb4, kick or trade favorably) or 5.Bg2.
     // NEVER allow ...e4 and ...Bxc3 doubled pawns (game 289 disaster).
     add("r1bqk2r/pppp1ppp/2n2n2/4p3/1bP5/2N2NP1/PP1PPP1P/R1BQKB1R w", {"c3d5"});

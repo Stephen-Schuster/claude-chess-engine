@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 13 | 0 |
-| Losses | 289 | 99 |
+| Losses | 291 | 99 |
 | Draws | 9 | 1 |
 
-Total games played: **311**
+Total games played: **313**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0311.pgn`
+- PGN: `game_data/games/game_0313.pgn`
 
 ---
 
@@ -252,6 +252,8 @@ git add -A && git commit -m "improve engine: ..." && git push
 
 
 
+
+
 ## Claude notes
 
 ### Engine architecture (as of 2026-04-18)
@@ -327,6 +329,14 @@ git add -A && git commit -m "improve engine: ..." && git push
 - 6 more losses. 296 CK vs 2.c4 Qxd5?! queen harassed; 297 Sicilian positional squeeze; 298 French Burn with OLD binary before fix; 299/301 English middlegame blunders; 300 Rossolimo Black Qxb2?? piece trap.
 - Fix: added Caro-Kann Accelerated Panov book: 1.e4 c6 2.c4 d5 3.cxd5 cxd5 4.exd5 Nf6! (not Qxd5) 5.Nc3 Nxd5 6.d4 Nc6/g6/Bf5 (transpose to Panov-Botvinnik).
 - Games 297/299/300/301 are middlegame tactical blunders (queen grab b2, Nxc5 blunder, Nd5 trap) that book can't prevent.
+
+### Session 2026-04-20f (English 3.g3 Bb4 tactical fix, game 301)
+- Game 301: 1.c4 e5 2.Nc3 Nf6 3.g3 Bb4 4.Nd5?? Nxd5 5.cxd5 O-O 6.a3 Ba5
+  7.Nf3 e4! 8.Qa4 exf3 9.Qxa5 fxe2 -- engine lost a piece to tactics.
+- Distinct from already-booked 4.Nd5! line which requires BOTH sides to have
+  developed Nc6+Nf6 first. Without Nc6, 4.Nd5 loses because Black castles
+  gaining a free tempo and e4! forks.
+- Fix: book entry 3.g3 Bb4 -> 4.Bg2 (Stockfish +26cp). Stops the disaster.
 
 ### Session 2026-04-20e (Nimzo-Indian book expansion, games 305/307/309)
 - Games 305/307/309 all Nimzo-Indian as White and all lost in middlegame drift.
