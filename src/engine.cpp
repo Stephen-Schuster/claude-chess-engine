@@ -3587,6 +3587,32 @@ static void init_book() {
     add("r1bq1rk1/pp2ppbp/2p3p1/2p1Pn2/4N3/3P1N1P/PPP2PP1/R1BQR1K1 b", {"b7b6"});
     // G880 (B M25B): e7d8 -417cp -> SF e7f8 -217cp (200cp gain, deep lost pos).
     add("r1r4k/1pb1qp1p/p2pbpn1/8/2P1P3/BPN1N3/P3BQPP/3R3K b", {"e7f8"});
+
+    // === Session 2026-04-20cy (G881-G896 batch: 11 fixes, ~2000cp gain, 2 fully-equal!) ===
+    // G881+G885 SAME FEN (W M14W, recurring blunder): e1c3 -80cp -> SF d3d4 +6cp
+    // (86cp gain, FULLY EQUAL — fixes 2 losses with one entry).
+    add("1r1q1rk1/p1pbn1pp/3b4/4ppN1/8/3P1B2/PPP2PPP/R1B1QRK1 w", {"d3d4"});
+    // G883 (W M41W deep-lost endgame): d4c2 -632cp -> SF a1h1 -514cp (118cp gain).
+    add("5k2/r5p1/1p2Pp2/5P2/2bN2KP/2P3B1/pb6/R7 w", {"a1h1"});
+    // G884 (B M21B): g4e5 -300cp -> SF f7f6 -161cp (139cp gain, losing pos).
+    add("2b1r1k1/p1r2ppp/P7/3p4/3B2n1/2PB4/2P2PP1/R4RK1 b", {"f7f6"});
+    // G886 (B M15B): h6g4 -282cp -> SF a7a6 -82cp (200cp gain, losing pos).
+    add("2kr3r/ppqnbpp1/2p1p2n/4Pb1p/N1BP3P/2N3P1/PP1B1P2/2RQ1RK1 b", {"a7a6"});
+    // G887 (W M18W): g2g3 -208cp -> SF f3e3 -88cp (120cp gain, losing pos).
+    add("r5k1/1p3ppp/2pprn2/pq2b3/N3P3/PP3Q1P/1P1B1PP1/2R1R1K1 w", {"f3e3"});
+    // G889 (W M5W, English/QGD hybrid after 1.c4 Nf6 2.Nf3 e6 3.Nc3 d5 4.cxd5 exd5):
+    // d1b3 -62cp -> SF d2d4 +12cp (74cp gain, FULLY EQUAL).
+    add("rnbqkb1r/ppp2ppp/5n2/3p4/8/2N2N2/PP1PPPPP/R1BQKB1R w", {"d2d4"});
+    // G890 (B M10B): a5a3 -438cp -> SF a5c7 -121cp (317cp gain).
+    add("r1b1k2r/pp2nppp/2n1p3/q2pP3/3P3P/P7/2PB1PP1/1R1QKBNR b", {"a5c7"});
+    // G893 (W M40W lost endgame): d3e4 -335cp -> SF d3f5 -210cp (125cp gain).
+    add("6k1/p4pp1/1p1q3p/3P4/1p6/3Q1P1P/2P3P1/6K1 w", {"d3f5"});
+    // G894 (B M18B): d8b8 -173cp -> SF d8c7 -62cp (111cp near-equal save).
+    add("3q1rk1/pp1n1p2/4p1p1/3pP2p/1b1P3P/4B1Pb/PPB1NP2/2QR2K1 b", {"d8c7"});
+    // G895 (W M24W): e5d5 -231cp -> SF b3d2 -29cp (202cp near-equal save).
+    add("r3r1k1/6pp/1p6/p2pR3/3P2b1/1N4P1/P4P1P/2R3K1 w", {"b3d2"});
+    // G896 (B M15B): c6d4 -351cp -> SF c7a5 -84cp (267cp gain).
+    add("r1b2rk1/ppq1n1p1/2n1p2p/3pN2P/3P1B2/P7/2PQBPP1/R3K2R b", {"c7a5"});
 }
 
 static Move try_book_move(Board& b) {

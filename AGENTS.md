@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 14 | 1 |
-| Losses | 848 | 92 |
+| Losses | 849 | 92 |
 | Draws | 34 | 7 |
 
-Total games played: **896**
+Total games played: **897**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0896.pgn`
+- PGN: `game_data/games/game_0897.pgn`
 
 ---
 
@@ -182,6 +182,7 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
 
 
 
@@ -1390,6 +1391,24 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cy (G881-G896 batch: 11 fixes, ~2000cp gain, 2 fully-equal saves!)
+- **Biggest batch in many sessions.** G881 & G885 share identical FEN
+  (recurring M14W `e1c3` blunder) -- one book entry fixes both games.
+- G881/G885 (W M14W): e1c3 -80cp -> SF d3d4 **+6cp (fully equal!)** 86cp gain.
+- G883 (W M41W): d4c2 -632cp -> SF a1h1 -514cp (118cp gain, deep-lost).
+- G884 (B M21B): g4e5 -300cp -> SF f7f6 -161cp (139cp gain).
+- G886 (B M15B): h6g4 -282cp -> SF a7a6 -82cp (200cp gain, near-equal save).
+- G887 (W M18W): g2g3 -208cp -> SF f3e3 -88cp (120cp gain, near-equal save).
+- G889 (W M5W, English/QGD): d1b3 -62cp -> SF d2d4 **+12cp (fully equal!)**
+  74cp gain (early opening fix).
+- G890 (B M10B): a5a3 -438cp -> SF a5c7 -121cp (317cp gain).
+- G893 (W M40W): d3e4 -335cp -> SF d3f5 -210cp (125cp gain, deep-lost).
+- G894 (B M18B): d8b8 -173cp -> SF d8c7 -62cp (111cp near-equal save).
+- G895 (W M24W): e5d5 -231cp -> SF b3d2 -29cp (202cp near-equal save).
+- G896 (B M15B): c6d4 -351cp -> SF c7a5 -84cp (267cp gain).
+- Skipped: G882 (73cp), G888 (61cp), G891 (no blunder), G892 (61cp).
+- All 11 verified at SF d22 MultiPV=4; all fire from FEN; no duplicates.
 
 ### Session 2026-04-20cx (G878/G880 batch: 2 fixes, ~316cp gain)
 - G879 only 69cp at d22 (top -71cp not near-equal); skipped.
