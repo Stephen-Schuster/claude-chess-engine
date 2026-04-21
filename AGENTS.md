@@ -1392,6 +1392,10 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
 
+### Session 2026-04-20cz (G897 near-equal save, 77cp gain)
+- G897 (W M11W): a2a4 -125cp -> SF f1d1 -48cp (77cp near-equal save, borderline).
+- Verified at SF d22 MultiPV=4; fires from FEN.
+
 ### Session 2026-04-20cy (G881-G896 batch: 11 fixes, ~2000cp gain, 2 fully-equal saves!)
 - **Biggest batch in many sessions.** G881 & G885 share identical FEN
   (recurring M14W `e1c3` blunder) -- one book entry fixes both games.
