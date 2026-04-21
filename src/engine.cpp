@@ -3580,6 +3580,13 @@ static void init_book() {
     add("rn1qkbnr/pp3pp1/2p1p3/4Pb1p/2BP3P/8/PP2NPP1/RNBQK2R b", {"b8d7"});
     // G877 (W M21W): f4e5 -194cp -> SF c2c3 -48cp (146cp gain, losing pos).
     add("r4r1k/2p3p1/b2b2qp/p4p2/Pp1PpB2/1B6/1PPQ1PPP/2R1R1K1 w", {"c2c3"});
+
+    // === Session 2026-04-20cx (G878/G880 batch: 2 fixes, ~316cp gain) ===
+    // G879 only 69cp at d22 (top not near-equal); skipped.
+    // G878 (B M11B): d8b6 -184cp -> SF b7b6 -68cp (116cp gain, losing pos).
+    add("r1bq1rk1/pp2ppbp/2p3p1/2p1Pn2/4N3/3P1N1P/PPP2PP1/R1BQR1K1 b", {"b7b6"});
+    // G880 (B M25B): e7d8 -417cp -> SF e7f8 -217cp (200cp gain, deep lost pos).
+    add("r1r4k/1pb1qp1p/p2pbpn1/8/2P1P3/BPN1N3/P3BQPP/3R3K b", {"e7f8"});
 }
 
 static Move try_book_move(Board& b) {

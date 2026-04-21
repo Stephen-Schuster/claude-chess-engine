@@ -38,15 +38,15 @@ is forfeited and the failure reason is written to `game_data/last_game.json`.
 | | Lifetime | Last 100 games |
 |---|---|---|
 | Wins | 14 | 1 |
-| Losses | 834 | 94 |
-| Draws | 32 | 5 |
+| Losses | 848 | 92 |
+| Draws | 34 | 7 |
 
-Total games played: **880**
+Total games played: **896**
 
 ## Last game
 
 - Result: **Loss**
-- PGN: `game_data/games/game_0880.pgn`
+- PGN: `game_data/games/game_0896.pgn`
 
 ---
 
@@ -182,6 +182,23 @@ git add -A && git commit -m "improve engine: ..." && git push
 ```
 
 <!-- END PROLOGUE -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1373,6 +1390,12 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G635 (White, QGD M13W): d1a4?? -150cp -> SF e1g1 (+1cp equal!).
 - G636 (Black, Sicilian Richter-Rauzer M15B): e6g4?? -208cp -> SF a8c8 (-121).
 - All entries verified to fire via book-move test.
+
+### Session 2026-04-20cx (G878/G880 batch: 2 fixes, ~316cp gain)
+- G879 only 69cp at d22 (top -71cp not near-equal); skipped.
+- G878 (B M11B): d8b6 -184cp -> SF b7b6 -68cp (116cp gain, losing pos).
+- G880 (B M25B): e7d8 -417cp -> SF e7f8 -217cp (200cp gain, deep lost pos).
+- Both verified at SF d22 MultiPV=4; both fire from FEN.
 
 ### Session 2026-04-20cw (G876/G877 batch: 2 fixes, ~212cp gain)
 - G875 no big blunder.
