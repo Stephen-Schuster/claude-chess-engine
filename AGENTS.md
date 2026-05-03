@@ -1396,6 +1396,15 @@ git add -A && git commit -m "improve engine: ..." && git push
 - G897 (W M11W): a2a4 -125cp -> SF f1d1 -48cp (77cp near-equal save, borderline).
 - Verified at SF d22 MultiPV=4; fires from FEN.
 
+### Session 2026-04-20da (G882/G888/G892 re-verified at d22: 3 fixes, ~225cp gain)
+- Previously skipped as "marginal" in session cy; d22 MultiPV=4 re-analysis
+  showed all 3 are actually 67-87cp gains and our move was outside top-4.
+- G882 (B M31B rook EG): a5a4 -164cp -> SF g6g5 -77cp (87cp gain).
+- G888 (B M15B): d8d7 -125cp -> SF g4h5 -56cp (69cp gain).
+- G892 (B M8B): d8a5 -196cp -> SF f8e7 -127cp (69cp gain).
+- All 3 verified at SF d22 MultiPV=4; all fire from FEN.
+- **Lesson**: re-checking d16-skipped marginals at d22 yielded 3 free fixes.
+
 ### Session 2026-04-20cy (G881-G896 batch: 11 fixes, ~2000cp gain, 2 fully-equal saves!)
 - **Biggest batch in many sessions.** G881 & G885 share identical FEN
   (recurring M14W `e1c3` blunder) -- one book entry fixes both games.
